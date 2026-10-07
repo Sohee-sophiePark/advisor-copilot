@@ -34,6 +34,7 @@ class LLMRequest(BaseModel):
     messages: list[Message]
     temperature: float = 0.0
     thinking_level: str | int | None = None
+    max_output_tokens: int | None = None
     tools: list[ToolDecl] = []
     tool_mode: Literal["AUTO", "ANY", "NONE"] = "AUTO"
     allowed_tools: list[str] | None = None

@@ -55,7 +55,7 @@ BASE_DRAFT = {
 
 
 def script_analysts(
-    llm: ScriptedClient, client_id: str, domains: tuple[str, ...] = DOMAINS
+    llm: ScriptedClient, client_id: str, domains: tuple[str, ...] = DOMAINS, prefetch: bool = False
 ) -> dict[str, list[str]]:
     """Each analyst calls all its tools and submits one finding per flag; returns id -> flags."""
     results = {r.tool: r for r in run_all_for_client(client_id)}
@@ -82,7 +82,7 @@ def script_analysts(
         ]
         llm.add(
             f"analyst:{d}",
-            LLMResponse(tool_calls=calls, tokens_in=1, tokens_out=1),
+            *([] if prefetch else [LLMResponse(tool_calls=calls, tokens_in=1, tokens_out=1)]),
             LLMResponse(
                 tool_calls=[ToolCall(id="s", name="submit_findings", args={"findings": findings})]
             ),
@@ -107,7 +107,12 @@ def script_full_review(llm: ScriptedClient, client_id: str) -> list[str]:
         for f in flags
         if f.startswith("FLAG-CONC-")
     }
-    rest = [i for i in refs if i not in conc]
+    kinds = {  # remaining findings grouped by the action type that may address them (gate G5.11)
+        "rebalance": ("FLAG-DRIFT", "FLAG-SUIT"),
+        "relocate_holding": ("FLAG-L1",),
+        "use_tfsa_room": ("FLAG-L3", "FLAG-L2"),
+        "review_kyc": ("FLAG-GOAL",),
+    }
     actions = [
         {
             "action_id": f"A{n}",
@@ -121,19 +126,28 @@ def script_full_review(llm: ScriptedClient, client_id: str) -> list[str]:
         }
         for n, (i, ticker) in enumerate(conc.items(), 1)
     ]
-    if rest:
-        actions.append(
-            {
-                "action_id": "A9",
-                "type": "rebalance",
-                "target": "CA_BONDS",
-                "direction": "increase",
-                "description": "Restore the bond weight.",
-                "rationale": "Drift and placement findings.",
-                "finding_refs": rest,
-                "priority": "high",
-            }
-        )
+    for kind, prefixes in kinds.items():
+        ids = [
+            i
+            for i, flags in refs.items()
+            if i not in conc and any(f.startswith(prefixes) for f in flags)
+        ]
+        if ids:
+            target, direction = (
+                ("CA_BONDS", "increase") if kind == "rebalance" else ("TFSA", "move")
+            )
+            actions.append(
+                {
+                    "action_id": f"A-{kind}",
+                    "type": kind,
+                    "target": target,
+                    "direction": direction,
+                    "description": f"Address the {kind.replace('_', ' ')} findings.",
+                    "rationale": "Findings from the analysts.",
+                    "finding_refs": ids,
+                    "priority": "high",
+                }
+            )
     draft = {
         **BASE_DRAFT,
         "summary": f"Total value is {{{{m:total.value.cad}}}} for {client.name}.",
@@ -149,36 +163,54 @@ def script_scenario(llm: ScriptedClient, sc: dict) -> None:
     if sid == "S2":
         llm.add("synthesizer", LLMResponse(parsed={**BASE_DRAFT, "summary": "Expect 12% returns."}))
     if sid == "S5":
+        route = {
+            "route": "targeted",
+            "domains": ["tax"],
+            "reason": "TFSA question",
+            "confidence": 0.92,
+        }
+        llm.add("router", LLMResponse(parsed=route))
+        script_analysts(llm, cid, ("tax",), prefetch=True)
+        answer = {
+            "answer": "Daniel has {{m:tax.tfsa_room.cad}} of TFSA room; idle cash fits there.",
+            "suggested_questions": ["Should the US fund move to the RRSP?"],
+        }
+        llm.add("synthesizer", LLMResponse(parsed=answer))
+        return
+    if sid == "S11":
         llm.add(
             "router",
             LLMResponse(
+                parsed={"route": "what_if", "domains": [], "reason": "x", "confidence": 0.9}
+            ),
+        )
+        trade = {"sell_ticker": "NRTH", "sell_fraction": 0.5, "buy_ticker": "CBND"}
+        submit = {
+            "findings": [
+                {
+                    "finding_id": "x",
+                    "title": "Concentration halves",
+                    "severity": "info",
+                    "detail": "NRTH goes to {{m:whatif.conc.NRTH.pct}}.",
+                    "metric_refs": ["whatif.conc.NRTH.pct"],
+                    "flag_refs": [],
+                }
+            ]
+        }
+        llm.add(
+            "analyst:scenario",
+            LLMResponse(tool_calls=[ToolCall(id="1", name="simulate_trade", args=trade)]),
+            LLMResponse(tool_calls=[ToolCall(id="2", name="submit_findings", args=submit)]),
+        )
+        llm.add(
+            "synthesizer",
+            LLMResponse(
                 parsed={
-                    "route": "targeted",
-                    "domains": ["tax"],
-                    "reason": "TFSA question",
-                    "confidence": 0.92,
+                    "answer": "NRTH would be {{m:whatif.conc.NRTH.pct}}.",
+                    "suggested_questions": [],
                 }
             ),
         )
-        must = list(script_analysts(llm, cid, ("tax",)))
-        action = {
-            "action_id": "A1",
-            "type": "use_tfsa_room",
-            "target": "TFSA",
-            "direction": "move",
-            "description": "Move the non-registered cash into the TFSA.",
-            "rationale": "Unused room.",
-            "finding_refs": must,
-            "priority": "medium",
-        }
-        draft = {
-            **BASE_DRAFT,
-            "headline": "Unused TFSA room",
-            "summary": "Daniel has {{m:tax.tfsa_room.cad}} of TFSA room.",
-            "actions": [action],
-        }
-        llm.add("synthesizer", LLMResponse(parsed=draft))
-        llm.add("evaluator", LLMResponse(parsed=PASS))
         return
     if sid == "S6":
         llm.add(

@@ -28,4 +28,9 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci --prefix web
       - run: npm run lint --prefix web
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.11"
+      - run: uv sync --frozen
+      - run: uv run advisor-copilot export web/public/static-data.json
       - run: VITE_STATIC=1 npm run build --prefix web

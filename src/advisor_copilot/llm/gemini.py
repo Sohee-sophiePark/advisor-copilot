@@ -51,6 +51,8 @@ def to_config(req: LLMRequest) -> types.GenerateContentConfig:
         temperature=req.temperature,
         automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
     )
+    if req.max_output_tokens:
+        cfg.max_output_tokens = req.max_output_tokens
     if isinstance(req.thinking_level, int):
         cfg.thinking_config = types.ThinkingConfig(thinking_budget=req.thinking_level)
     elif req.thinking_level:

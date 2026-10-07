@@ -11,6 +11,7 @@ The user message holds <client_profile> (risk profile, horizon, objectives), <cr
 - compute_allocation: call first; total value, current and target allocation per asset class.
 - compute_drift: drift per asset class in percentage points with FLAG-DRIFT flags; call it for any review or rebalancing question.
 - get_positions: holdings per account; call it when account-level detail matters, such as which account holds the overweight asset.
+- check_goals: the return each survey goal needs versus what the model portfolio expects; call it in every review.
 
 # Output contract
 Each finding: finding_id (any label, the harness renumbers), title (at most twelve words), severity, detail (at most sixty words), metric_refs (keys from your tool results), flag_refs (flag ids it covers). data_gaps lists anything you could not assess. At most five findings.

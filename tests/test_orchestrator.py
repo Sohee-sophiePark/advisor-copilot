@@ -139,11 +139,13 @@ async def test_resume_skips_completed_analysts(deps: Deps, tmp_path: Path) -> No
 
 
 async def test_failed_analyst_degrades_only_that_domain(deps: Deps, tmp_path: Path) -> None:
-    must = script_full_review(deps.llm, "C001")
+    script_full_review(deps.llm, "C001")
     deps.llm.queues["analyst:tax"].clear()
     deps.llm.add("analyst:tax", FatalLLMError("503 overloaded"))
     draft = deps.llm.queues["synthesizer"].pop().parsed
-    draft["actions"][0]["finding_refs"] = [m for m in must if not m.startswith("TAX")]
+    draft["actions"] = [
+        a for a in draft["actions"] if not any(r.startswith("TAX") for r in a["finding_refs"])
+    ]
     deps.llm.add("synthesizer", LLMResponse(parsed=draft))
     state = await run_pipeline(state_for("C001"), deps, tmp_path)
     assert (

@@ -56,7 +56,11 @@ def compute_allocation(client_id: str, args: NoArgs | None = None) -> ToolResult
     if targets:
         metrics += [
             c.metric(
-                c.k_target(ac), targets[ac], "pct", f"{ac} target ({client.risk_profile})", tool
+                c.k_target(ac),
+                targets[ac],
+                "pct",
+                f"{c.ASSET_LABEL[ac]} target ({client.risk_profile})",
+                tool,
             )
             for ac in ASSET_CLASSES
         ]
@@ -68,8 +72,8 @@ def compute_allocation(client_id: str, args: NoArgs | None = None) -> ToolResult
     return c.tool_result(tool, metrics, data=data)
 
 
-def compute_drift(client_id: str, args: NoArgs | None = None) -> ToolResult:
-    client = get_client(client_id)
+def compute_drift(client_id: "str | Client", args: NoArgs | None = None) -> ToolResult:
+    client = c.resolve(client_id)
     tool = "compute_drift"
     if client.risk_profile is None:
         return c.tool_result(
@@ -84,7 +88,7 @@ def compute_drift(client_id: str, args: NoArgs | None = None) -> ToolResult:
     flags: list[Flag] = []
     for ac in ASSET_CLASSES:
         d = alloc[ac] - targets[ac]
-        metrics.append(c.metric(c.k_drift(ac), d, "pp", f"{ac} drift vs target", tool))
+        metrics.append(c.metric(c.k_drift(ac), d, "pp", f"{c.ASSET_LABEL[ac]} vs target", tool))
         if abs(d) > tol:
             severity = "critical" if abs(d) > critical_at else "warning"
             flags.append(
@@ -93,8 +97,46 @@ def compute_drift(client_id: str, args: NoArgs | None = None) -> ToolResult:
                     "DRIFT_BEYOND_TOLERANCE",
                     severity,
                     [c.k_drift(ac), c.K_DRIFT_TOL],
-                    f"{ac} is {abs(d):.1f} pp {'above' if d > 0 else 'below'} the "
-                    f"{client.risk_profile} target (tolerance {tol:.1f} pp)",
+                    f"{c.ASSET_LABEL[ac]} is {abs(d):.1f} points {'above' if d > 0 else 'below'} "
+                    f"target (tolerance {tol:.0f})",
                 )
             )
     return c.tool_result(tool, metrics, flags, data={"breaches": [f.flag_id for f in flags]})
+
+
+def check_goals(client_id: str, args: NoArgs | None = None) -> ToolResult:
+    """Required annual return per survey goal vs the model expected return; no contributions."""
+    from advisor_copilot.tools.risk import expected_return, target_weights
+
+    client = get_client(client_id)
+    tool = "check_goals"
+    if client.risk_profile is None or not client.goals:
+        return c.tool_result(tool, data={"skipped": "no risk profile or no goals on file"})
+    as_of = get_settings().rules.as_of
+    total, _ = allocation(client)
+    model = expected_return(target_weights(client.risk_profile))
+    metrics: list[Metric] = [
+        c.metric(c.K_GOAL_MODEL_RETURN, model, "pct", "Model-portfolio expected return", tool)
+    ]
+    flags: list[Flag] = []
+    for g in client.goals:
+        years = g.target_year - as_of.year
+        if years <= 0 or total <= 0:
+            continue
+        required = 100 * ((g.target_cad / total) ** (1 / years) - 1)
+        metrics.append(
+            c.metric(c.k_goal(g.goal_id), required, "pct", f"Return needed for {g.name}", tool)
+        )
+        if required > model:
+            flags.append(
+                c.flag(
+                    f"FLAG-GOAL-{g.goal_id}",
+                    "GOAL_NEEDS_MORE_RETURN_THAN_PROFILE",
+                    "warning",
+                    [c.k_goal(g.goal_id), c.K_GOAL_MODEL_RETURN],
+                    f"{g.name} needs {required:.1f}% a year; "
+                    f"the {client.risk_profile} model expects {model:.1f}%",
+                )
+            )
+    goals = [g.model_dump() for g in client.goals]
+    return c.tool_result(tool, metrics, flags, data={"goals": goals, "as_of": as_of.isoformat()})

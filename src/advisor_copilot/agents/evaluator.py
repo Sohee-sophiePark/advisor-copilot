@@ -53,6 +53,7 @@ async def evaluate(draft: Recommendation, ctx: SynthContext, deps: Deps) -> Eval
         messages=[Message(role="user", text=text)],
         temperature=s.temperature.evaluator,
         thinking_level=s.thinking_level.evaluator,
+        max_output_tokens=s.max_output_tokens.evaluator,
         response_schema=EvalResponse,
         purpose="evaluator",
     )

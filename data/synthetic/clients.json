@@ -75,7 +75,22 @@
           }
         ]
       }
-    ]
+    ],
+    "life_stage": "accumulation",
+    "review_due": "2026-10-15",
+    "last_contact": "2026-09-03",
+    "goals": [
+      {
+        "goal_id": "G1",
+        "name": "Retirement nest egg",
+        "target_cad": 600000,
+        "target_year": 2046
+      }
+    ],
+    "preferences": {
+      "income_need_cad_month": 0,
+      "esg": false
+    }
   },
   {
     "client_id": "C002",
@@ -145,7 +160,22 @@
           }
         ]
       }
-    ]
+    ],
+    "life_stage": "retirement",
+    "review_due": "2026-10-20",
+    "last_contact": "2026-09-10",
+    "goals": [
+      {
+        "goal_id": "G1",
+        "name": "Income reserve",
+        "target_cad": 300000,
+        "target_year": 2030
+      }
+    ],
+    "preferences": {
+      "income_need_cad_month": 2200,
+      "esg": false
+    }
   },
   {
     "client_id": "C003",
@@ -200,7 +230,22 @@
           }
         ]
       }
-    ]
+    ],
+    "life_stage": "accumulation",
+    "review_due": "2027-01-20",
+    "last_contact": "2026-09-14",
+    "goals": [
+      {
+        "goal_id": "G1",
+        "name": "Home down payment",
+        "target_cad": 100000,
+        "target_year": 2036
+      }
+    ],
+    "preferences": {
+      "income_need_cad_month": 0,
+      "esg": true
+    }
   },
   {
     "client_id": "C004",
@@ -227,6 +272,14 @@
           }
         ]
       }
-    ]
+    ],
+    "life_stage": "pre_retirement",
+    "review_due": "2026-10-05",
+    "last_contact": "2026-09-22",
+    "goals": [],
+    "preferences": {
+      "income_need_cad_month": 0,
+      "esg": false
+    }
   }
 ]

@@ -11,6 +11,17 @@ prep with a hand-built agent harness: parallel read-only analysts, one writer, d
 a separate evaluator in a bounded revision loop, and a human approval before anything happens.
 Every number in the output is computed by code and traceable to the tool that produced it.
 
+What the advisor sees:
+
+- **My book** — 100 households, sorted by who needs attention first, with a one-line reason each
+  (suitability or concentration breach, drift, tax placement, KYC due, review overdue).
+- **Client** — the full picture: profile and life stage, goals from the client survey, holdings by
+  account, drift against the target mix, volatility against the profile's limit, stress loss, notes.
+- **Review & Ask** — a chat per client. "Prepare annual review" produces a recommendation to approve;
+  questions get short grounded answers; follow-ups reuse earlier findings; what-ifs ("sell half of
+  NRTH into bonds?") are simulated by code with before-and-after numbers.
+- **Market** — fictional index trends and the households most exposed to each.
+
 All clients, instruments and market data are fictional. Nothing here is investment advice.
 
 ![Advisor Copilot UI](docs/img/ui.jpg)
@@ -18,21 +29,20 @@ All clients, instruments and market data are fictional. Nothing here is investme
 ## Architecture
 
 ```
- Advisor UI (React)                       FastAPI + SSE
- client list · request · recommendation   Orchestrator (plain code)
- trace panel · approve/reject             G0 input gate → G1 KYC gate → Router (fast path or small LLM)
-        │  POST /api/runs                       │ out_of_scope → canned redirect
-        │ ◀── trace events ──                   ▼ full_review / targeted
-        │  POST /approval              Portfolio │ Risk │ Tax │ Market   analysts, parallel, read-only
-        ▼                                        ▼ structured findings + metric references
-   CRM outbox (mock JSON)              Synthesizer (single writer, numbers only as {{m:key}})
-                                                 ▼
-                                       G5 deterministic output gates ──fail──┐
-                                                 ▼ pass                        │ revise, max 2
-                                       Evaluator (LLM rubric, code decides) ───┘
-                                                 ▼ pass
-                                       Render placeholders + disclosure → AWAITING_APPROVAL
- Cross-cutting: LLMClient (Gemini | cassette | scripted) · rate limiter · budget · trace bus · checkpoints
+ Advisor UI (React)                  FastAPI + SSE, one chat turn:
+ My book · Client · Market           G0 input gate → G1 KYC gate (incomplete or >12 months) → Router
+ Review & Ask (chat per client)        ├ out_of_scope → polite redirect                (no analysts)
+        │ POST /threads/{id}/messages  ├ follow_up    → reuse findings from the thread  (no analysts)
+        │ ◀── progress events ──       ├ what_if      → scenario analyst + trade simulator (code)
+        │ POST /runs/{id}/approval     ├ targeted     → only the needed analysts, short answer
+        ▼                              └ full_review  → Portfolio │ Risk │ Tax │ Market in parallel
+   CRM outbox (mock JSON)                               ▼ structured findings + metric references
+                                     Synthesizer (single writer, numbers only as {{m:key}})
+                                       ▼ G5 deterministic output gates ──fail──┐
+                                       ▼ Evaluator (recommendations only) ─────┘ revise, max 2
+                                       ▼ AWAITING_APPROVAL (review) or answer (chat)
+ Cross-cutting: LLMClient (Gemini | cassette | scripted) · rate limiter · budgets · caches · trace · SQLite
+ Developer console (laptop only): runs, trace timeline, gates, evaluator verdicts, usage and cost
 ```
 
 ## Harness design decisions
@@ -55,6 +65,9 @@ Design decisions and the sources behind them:
   provider-agnostic `LLMClient`; Gemini is one adapter. Sources: Anthropic's *Building effective agents*,
   *Multi-agent research system* and *Demystifying evals*; Cognition's *Don't build multi-agents*; OWASP LLM01.
 - **Replay first.** Every run is recorded; CI and the public demo replay recordings and need no key.
+- **Cost controls.** Preset fast path, follow-ups answered from earlier findings, cached findings and
+  answers when data is unchanged, single-call analysts for chat answers, evaluator only for
+  recommendations, output-token caps, a per-conversation budget and a daily call cap per model.
 
 ## How numbers stay correct
 
@@ -68,13 +81,15 @@ tests compare every tool against pre-computed golden values in `tests/fixtures/e
 
 Three tiers: unit tests, scenario regression on
 recorded cassettes, and a live capability tier with pass^3 and a judge calibrated on human labels.
-`make eval` writes [evals/reports/latest.md](evals/reports/latest.md); the current run is 12/12
-golden cases on 137 unit tests, replaying real Gemini recordings. Tiers 1 and 2 run in CI on every push with no key.
+`make eval` writes [evals/reports/latest.md](evals/reports/latest.md); the current run is 19/19
+golden cases on 177 unit tests, replaying real Gemini recordings. The data includes 15 edge-case
+households, one per rule boundary (for example a single stock at 9.9% and at 10.1%), each with a test. Tiers 1 and 2 run in CI on every push with no key.
 
 ## Run it
 
 ```bash
 make setup                       # uv sync + npm install
+make seed                        # build the local SQLite database from the synthetic data
 RUN_MODE=replay make dev         # API + UI from recorded cassettes, no key needed
 ```
 
@@ -91,6 +106,7 @@ then `set -a; . ./.env; set +a` in your shell before `make smoke`, `make dev`, `
 | `make record` | run every scenario live, write `cassettes/` and `replays/` |
 | `make build-static` | replay-only web build for GitHub Pages (`VITE_STATIC=1`) |
 | `uv run advisor-copilot tools C002` | metrics and flags for a client, no LLM |
+| `make dev`, then `/dev.html` | developer console, served only by the local dev server |
 
 ## Security notes
 

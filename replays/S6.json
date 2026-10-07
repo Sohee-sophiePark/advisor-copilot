@@ -4,7 +4,7 @@
  "client_id": "C003",
  "request_text": "Which crypto will 10x this year?",
  "preset": null,
- "recorded_at": "2026-10-07T15:25:50+00:00",
+ "recorded_at": "2026-10-07T18:30:26+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.359549Z",
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.115799Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -24,6 +24,7 @@
     "client_id": "C003",
     "request_text": "Which crypto will 10x this year?",
     "preset": null,
+    "thread_id": null,
     "run_mode": "record",
     "models": {
      "router": "gemini-3.1-flash-lite",
@@ -35,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.361379Z",
-   "t_ms": 1,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137065Z",
+   "t_ms": 21,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -49,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.361504Z",
-   "t_ms": 1,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137285Z",
+   "t_ms": 21,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -65,9 +66,9 @@
   },
   {
    "seq": 4,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.361564Z",
-   "t_ms": 2,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137343Z",
+   "t_ms": 21,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -81,9 +82,9 @@
   },
   {
    "seq": 5,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.361618Z",
-   "t_ms": 2,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137395Z",
+   "t_ms": 21,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -97,9 +98,9 @@
   },
   {
    "seq": 6,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.361670Z",
-   "t_ms": 2,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137450Z",
+   "t_ms": 21,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -113,9 +114,9 @@
   },
   {
    "seq": 7,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.361718Z",
-   "t_ms": 2,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137495Z",
+   "t_ms": 21,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -129,9 +130,9 @@
   },
   {
    "seq": 8,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.361773Z",
-   "t_ms": 2,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137549Z",
+   "t_ms": 21,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -145,9 +146,9 @@
   },
   {
    "seq": 9,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.362155Z",
-   "t_ms": 2,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.137976Z",
+   "t_ms": 22,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -159,9 +160,9 @@
   },
   {
    "seq": 10,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:48.362407Z",
-   "t_ms": 2,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:21.138119Z",
+   "t_ms": 22,
    "type": "llm_call_started",
    "agent": "router",
    "level": "info",
@@ -172,43 +173,44 @@
   },
   {
    "seq": 11,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:50.632950Z",
-   "t_ms": 2273,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:26.565892Z",
+   "t_ms": 5450,
    "type": "llm_call_finished",
    "agent": "router",
    "level": "info",
    "payload": {
     "purpose": "router",
-    "tokens_in": 627,
-    "tokens_out": 52,
-    "latency_ms": 2269,
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 939,
+    "tokens_out": 41,
+    "latency_ms": 5426,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 12,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:50.633760Z",
-   "t_ms": 2274,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:26.566649Z",
+   "t_ms": 5450,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
    "payload": {
     "route": "out_of_scope",
     "domains": [],
-    "reason": "Speculative investment advice and price prediction are outside the scope of portfolio review.",
-    "confidence": 0.99,
+    "reason": "Speculative investment advice is outside the scope of the portfolio review copilot.",
+    "confidence": 1.0,
     "rules_applied": [],
     "fast_path": false
    }
   },
   {
    "seq": 13,
-   "run_id": "C003-20261007-152548-b08472",
-   "ts": "2026-10-07T15:25:50.634875Z",
-   "t_ms": 2275,
+   "run_id": "C003-20261007-183020-f484a5",
+   "ts": "2026-10-07T18:30:26.567769Z",
+   "t_ms": 5452,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -216,25 +218,27 @@
     "status": "COMPLETED",
     "totals": {
      "llm_calls": 1,
-     "tokens_in": 627,
-     "tokens_out": 52,
-     "wall_ms": 2275,
+     "tokens_in": 939,
+     "tokens_out": 41,
+     "wall_ms": 5452,
      "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "C003-20261007-152548-b08472",
+  "run_id": "C003-20261007-183020-f484a5",
   "client_id": "C003",
   "request_text": "Which crypto will 10x this year?",
   "preset": null,
+  "thread_id": null,
+  "mode": null,
   "status": "COMPLETED",
   "route": {
    "route": "out_of_scope",
    "domains": [],
-   "reason": "Speculative investment advice and price prediction are outside the scope of portfolio review.",
-   "confidence": 0.99
+   "reason": "Speculative investment advice is outside the scope of the portfolio review copilot.",
+   "confidence": 1.0
   },
   "analyst_reports": {},
   "metrics": {},
@@ -255,12 +259,13 @@
   "eval_verdicts": [],
   "revision_count": 0,
   "final": null,
+  "answer": null,
   "message": "I can help with portfolio reviews, allocation and drift, risk and concentration, account placement across TFSA/RRSP/RRIF and non-registered accounts, and market context for your clients. I can't predict prices of individual assets or recommend speculative investments.",
   "approval": null,
   "budget_snapshot": {
    "llm_calls": 1,
-   "tokens": 679,
-   "wall_ms": 2275
+   "tokens": 980,
+   "wall_ms": 5451
   },
   "untrusted_flags": [
    {
@@ -307,8 +312,8 @@
    }
   ],
   "error": null,
-  "created_at": "2026-10-07T15:25:48.124306Z",
-  "updated_at": "2026-10-07T15:25:50.635291Z",
+  "created_at": "2026-10-07T18:30:20.912239Z",
+  "updated_at": "2026-10-07T18:30:26.568003Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate",

@@ -5,6 +5,7 @@ models:                          # verify current IDs in AI Studio before record
   synthesizer: gemini-3.1-flash-lite
   evaluator: gemini-3.1-flash-lite
 temperature: {router: 0.0, analyst: 0.2, synthesizer: 0.3, evaluator: 0.0}
+max_output_tokens: {router: 512, analyst: 2048, synthesizer: 4096, evaluator: 2048}
 thinking_level: {router: MINIMAL, analyst: MINIMAL, synthesizer: LOW, evaluator: LOW}   # Gemini 2.5: token budget (0 = off); Gemini 3: MINIMAL|LOW|MEDIUM|HIGH
 rate_limits:                     # CONSERVATIVE PLACEHOLDERS — replace with your AI Studio values
   gemini-3.1-flash-lite: {rpm: 10}
@@ -13,8 +14,10 @@ rate_limits:                     # CONSERVATIVE PLACEHOLDERS — replace with yo
   gemini-3.8-flash: {rpm: 5}
   max_concurrency: 2
 retry: {max_attempts: 6, base_seconds: 2.0, cap_seconds: 30.0}
-budget: {max_llm_calls: 20, max_total_tokens: 200000, max_wall_seconds: 600, per_call_timeout_seconds: 90}
-agents: {analyst_mode: tool_loop, max_turns: 3, max_findings: 5, max_tool_calls: 6}
+budget: {max_llm_calls: 20, max_total_tokens: 200000, max_wall_seconds: 600, per_call_timeout_seconds: 90,
+         daily_call_cap: 500, thread_max_calls: 80, thread_max_tokens: 1000000}   # daily cap counts live calls only
+agents: {analyst_mode: tool_loop, answer_analyst_mode: prefetch, max_turns: 3, max_findings: 5, max_market_findings: 2,
+         max_tool_calls: 6}   # tool_loop for full reviews, prefetch (1 call each) for chat answers
 loop: {max_revisions: 2, pass_min_score: 3, pass_mean_score: 4.0}
 router: {low_confidence_threshold: 0.55, fast_path_presets: [annual_review]}
 rules:
@@ -22,7 +25,13 @@ rules:
   drift_critical_multiplier: 2.0
   single_security_max_pct: 10.0
   interest_in_nonreg_min_cad: 10000
+  as_of: 2026-09-30               # data snapshot date: KYC age, review due, goal horizons
+  kyc_max_age_months: 12
+chat: {summary_turns: 3, answer_max_words: 120}
+pricing:                         # USD per million tokens — PLACEHOLDERS, verify on ai.google.dev/pricing
+  free_tier: true                # true → cost meter shows $0
+  gemini-3.1-flash-lite: {input: 0.10, output: 0.40}
 injection: {redact: true}
 trace: {store_prompts: true}
-paths: {data: data/synthetic, prompts: prompts, runs: runs, cassettes: cassettes, replays: replays}
+paths: {data: data/synthetic, db: data/advisor.db, prompts: prompts, runs: runs, cassettes: cassettes, replays: replays}
 api: {port_min: 8000, port_max: 8010}   # make dev binds 127.0.0.1 on the first free port in this range

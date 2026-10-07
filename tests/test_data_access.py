@@ -7,9 +7,9 @@ from advisor_copilot import data_access as da
 
 def test_fixtures_load() -> None:
     fx = da.load_fixtures()
-    assert len(fx.clients) == 4
+    assert len(fx.clients) == 100
     assert len(fx.instruments) == 7
-    assert len(fx.notes) == 7
+    assert {"C001", "C002", "C003", "C004", "C005", "C085", "C101", "C115"} <= set(fx.clients)
 
 
 def test_client_lookup() -> None:

@@ -6,7 +6,7 @@ import numpy as np
 from pydantic import BaseModel, Field
 
 from advisor_copilot.config import get_settings
-from advisor_copilot.data_access import get_client, get_cma, get_targets, get_vol_band_max
+from advisor_copilot.data_access import get_cma, get_targets, get_vol_band_max
 from advisor_copilot.models import (
     RISK_BUCKETS,
     Client,
@@ -67,8 +67,8 @@ def expected_return(weights: dict[RiskBucket, float]) -> float:
     return sum(weights[b] * cma.buckets[b].expected_return_pct for b in RISK_BUCKETS)
 
 
-def compute_risk_metrics(client_id: str, args: NoArgs | None = None) -> ToolResult:
-    client = get_client(client_id)
+def compute_risk_metrics(client_id: "str | Client", args: NoArgs | None = None) -> ToolResult:
+    client = c.resolve(client_id)
     tool = "compute_risk_metrics"
     w = bucket_weights(client)
     vol = portfolio_volatility(w)
@@ -93,8 +93,7 @@ def compute_risk_metrics(client_id: str, args: NoArgs | None = None) -> ToolResu
                     "VOL_ABOVE_PROFILE_BAND",
                     "critical",
                     [c.K_RISK_VOL, c.K_RISK_BAND],
-                    f"Portfolio volatility {vol:.1f}% exceeds the {client.risk_profile} "
-                    f"band maximum of {band:.1f}%",
+                    f"Volatility {vol:.1f}% is above the {client.risk_profile} limit ({band:.1f}%)",
                 )
             )
     data = {
@@ -104,9 +103,9 @@ def compute_risk_metrics(client_id: str, args: NoArgs | None = None) -> ToolResu
     return c.tool_result(tool, metrics, flags, data)
 
 
-def run_stress_test(client_id: str, args: StressArgs | None = None) -> ToolResult:
+def run_stress_test(client_id: "str | Client", args: StressArgs | None = None) -> ToolResult:
     args = args or StressArgs()
-    client = get_client(client_id)
+    client = c.resolve(client_id)
     tool = "run_stress_test"
     scenario = get_cma().stress_scenarios[args.scenario]
     pos = c.positions(client)
@@ -127,8 +126,8 @@ def run_stress_test(client_id: str, args: StressArgs | None = None) -> ToolResul
     return c.tool_result(tool, metrics, data=data)
 
 
-def check_concentration(client_id: str, args: NoArgs | None = None) -> ToolResult:
-    client = get_client(client_id)
+def check_concentration(client_id: "str | Client", args: NoArgs | None = None) -> ToolResult:
+    client = c.resolve(client_id)
     tool = "check_concentration"
     limit = get_settings().rules.single_security_max_pct
     pos = c.positions(client)
@@ -149,8 +148,7 @@ def check_concentration(client_id: str, args: NoArgs | None = None) -> ToolResul
                     "SINGLE_SECURITY_ABOVE_LIMIT",
                     "critical",
                     [c.k_conc(ticker), c.K_CONC_LIMIT],
-                    f"{ticker} is {pct:.1f}% of the portfolio, above the {limit:.1f}% "
-                    "single-security limit",
+                    f"{ticker} is {pct:.1f}% of the portfolio (single-stock limit {limit:.0f}%)",
                 )
             )
     return c.tool_result(tool, metrics, flags, data={"single_securities": sorted(by_ticker)})

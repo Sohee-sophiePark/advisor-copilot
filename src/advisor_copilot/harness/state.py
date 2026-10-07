@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 from advisor_copilot.models import (
     AnalystReport,
     ApprovalDecision,
+    ChatAnswer,
     EvalVerdict,
     Flag,
     GateResult,
@@ -48,6 +49,8 @@ class RunState(BaseModel):
     client_id: str
     request_text: str
     preset: str | None = None
+    thread_id: str | None = None
+    mode: str | None = None  # recommendation | answer
     status: RunStatus = RunStatus.CREATED
     route: RouteDecision | None = None
     analyst_reports: dict[str, AnalystReport] = {}
@@ -58,6 +61,7 @@ class RunState(BaseModel):
     eval_verdicts: list[EvalVerdict] = []
     revision_count: int = 0
     final: RenderedRecommendation | None = None
+    answer: ChatAnswer | None = None  # chat answer, numbers as {{m:key}} like drafts
     message: str | None = None
     approval: ApprovalDecision | None = None
     budget_snapshot: dict[str, Any] = {}

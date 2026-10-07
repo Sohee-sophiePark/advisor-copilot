@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from advisor_copilot.agents.evaluator import evaluate, passes  # noqa: E402
 from advisor_copilot.config import get_settings  # noqa: E402
 from advisor_copilot.data_access import get_client, get_notes  # noqa: E402
+from advisor_copilot.harness.chat import reply_text  # noqa: E402
 from advisor_copilot.harness.context import SynthContext  # noqa: E402
 from advisor_copilot.harness.gates import code_finding  # noqa: E402
 from advisor_copilot.harness.orchestrator import make_deps, run_pipeline  # noqa: E402
@@ -116,6 +117,12 @@ def check(expect: dict, state: RunState, events: list) -> list[str]:
             ok = not any(w in texts for w in want)
         elif key == "final_summary_contains":
             ok = state.final is not None and want in state.final.recommendation.summary
+        elif key == "metrics_present":
+            ok = all(k in state.metrics for k in want)
+        elif key == "mode":
+            ok = state.mode == want
+        elif key == "answer_contains":
+            ok = want in reply_text(state)
         elif key == "message_contains":
             ok = bool(state.message) and want in state.message
         else:

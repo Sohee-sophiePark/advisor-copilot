@@ -32,7 +32,13 @@ def test_state_round_trip_is_atomic(tmp_path: Path) -> None:
 def test_budget_limits() -> None:
     budget = RunBudget(
         BudgetCfg(
-            max_llm_calls=2, max_total_tokens=100, max_wall_seconds=60, per_call_timeout_seconds=1
+            max_llm_calls=2,
+            max_total_tokens=100,
+            max_wall_seconds=60,
+            per_call_timeout_seconds=1,
+            daily_call_cap=9,
+            thread_max_calls=9,
+            thread_max_tokens=9,
         )
     )
     for _ in range(2):

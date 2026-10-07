@@ -1,4 +1,4 @@
-"""Read-only, cached access to the synthetic fixtures in data/synthetic/."""
+"""Read-only, cached client data: SQLite when seeded from the current JSON, else the JSON itself."""
 
 import json
 from functools import lru_cache
@@ -6,6 +6,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, TypeAdapter
 
+from advisor_copilot import db
 from advisor_copilot.config import get_settings
 from advisor_copilot.models import (
     AssetClass,
@@ -32,20 +33,34 @@ def _read(path: Path) -> object:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def read_json(d: Path) -> dict:
+    """All fixtures as plain data: base files plus the generated book."""
+    book = _read(d / "book.json") if (d / "book.json").exists() else {"clients": [], "notes": []}
+    return {
+        "instruments": _read(d / "instruments.json"),
+        "clients": _read(d / "clients.json") + book["clients"],
+        "notes": _read(d / "crm_notes.json") + book["notes"],
+        "model_portfolios": _read(d / "model_portfolios.json"),
+        "cma": _read(d / "capital_market_assumptions.json"),
+        "market": _read(d / "market_snapshot.json"),
+    }
+
+
 @lru_cache(maxsize=4)
-def load_fixtures(data_dir: Path | None = None) -> Fixtures:
-    """Load and validate every fixture once. Raises ValueError on dangling ticker references."""
-    d = data_dir or get_settings().path("data")
-    instruments = TypeAdapter(list[Instrument]).validate_python(_read(d / "instruments.json"))
-    clients = TypeAdapter(list[Client]).validate_python(_read(d / "clients.json"))
-    notes = TypeAdapter(list[CrmNote]).validate_python(_read(d / "crm_notes.json"))
+def load_fixtures(data_dir: Path | None = None, db_path: Path | None = None) -> Fixtures:
+    """Validate client data once. Reads SQLite only if it was seeded from the current JSON."""
+    s = get_settings()
+    d, dbp = data_dir or s.path("data"), db_path or s.path("db")
+    raw = db.load(dbp) if db.stored_hash(dbp) == db.source_hash(d) else read_json(d)
+    instruments = TypeAdapter(list[Instrument]).validate_python(raw["instruments"])
+    clients = TypeAdapter(list[Client]).validate_python(raw["clients"])
     fx = Fixtures(
         instruments={i.ticker: i for i in instruments},
         clients={c.client_id: c for c in clients},
-        notes=notes,
-        model_portfolios=ModelPortfolios.model_validate(_read(d / "model_portfolios.json")),
-        cma=CapitalMarketAssumptions.model_validate(_read(d / "capital_market_assumptions.json")),
-        market=MarketSnapshot.model_validate(_read(d / "market_snapshot.json")),
+        notes=TypeAdapter(list[CrmNote]).validate_python(raw["notes"]),
+        model_portfolios=ModelPortfolios.model_validate(raw["model_portfolios"]),
+        cma=CapitalMarketAssumptions.model_validate(raw["cma"]),
+        market=MarketSnapshot.model_validate(raw["market"]),
     )
     unknown = {
         h.ticker

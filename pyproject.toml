@@ -40,6 +40,11 @@ extend-exclude = ["web", "runs"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "W"]
 
+[tool.ruff.lint.per-file-ignores]
+# SQL schema and synthetic data tables: structured blocks, kept on one line each
+"src/advisor_copilot/db.py" = ["E501"]
+"data/generate_book.py" = ["E501"]
+
 [tool.ruff.lint.isort]
 known-first-party = ["advisor_copilot"]
 

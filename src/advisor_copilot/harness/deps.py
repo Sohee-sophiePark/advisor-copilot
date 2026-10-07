@@ -5,7 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from advisor_copilot.config import Settings
-from advisor_copilot.harness.budget import RunBudget
+from advisor_copilot.db import Store
+from advisor_copilot.harness.budget import BudgetExhausted, RunBudget
 from advisor_copilot.harness.trace import TraceBus
 from advisor_copilot.llm.base import LLMClient, LLMRequest, LLMResponse
 from advisor_copilot.llm.limiter import RateLimiter
@@ -19,6 +20,7 @@ class Deps:
     budget: RunBudget
     trace: TraceBus
     run_dir: Path | None = None
+    store: Store | None = None  # live mode only: daily usage cap and caches
 
     def __post_init__(self) -> None:
         self.limiter.on_retry = lambda status, wait, attempt: self.trace.emit(
@@ -29,6 +31,8 @@ class Deps:
         )
 
     async def llm_call(self, req: LLMRequest) -> LLMResponse:
+        if self.store and self.store.usage_today(req.model) >= self.settings.budget.daily_call_cap:
+            raise BudgetExhausted("daily_call_cap")
         self.budget.check()
         agent = req.purpose.split(":")[-1]
         started = self.trace.emit(
@@ -44,11 +48,14 @@ class Deps:
             self.budget.release()
             raise
         self.budget.charge(resp.tokens_in, resp.tokens_out)
+        if self.store and resp.source == "live":
+            self.store.add_usage(req.model, resp.tokens_in, resp.tokens_out)
         self.trace.emit(
             "llm_call_finished",
             agent,
             {
                 "purpose": req.purpose,
+                "model": req.model,
                 "tokens_in": resp.tokens_in,
                 "tokens_out": resp.tokens_out,
                 "latency_ms": resp.latency_ms,

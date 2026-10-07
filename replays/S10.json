@@ -1,0 +1,150 @@
+{
+ "scenario_id": "S10",
+ "title": "KYC older than a year",
+ "client_id": "C101",
+ "request_text": "",
+ "preset": "annual_review",
+ "recorded_at": "2026-10-07T18:32:24+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "C101-20261007-183224-438db5",
+   "ts": "2026-10-07T18:32:24.849119Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "C101",
+    "request_text": "",
+    "preset": "annual_review",
+    "thread_id": null,
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "C101-20261007-183224-438db5",
+   "ts": "2026-10-07T18:32:24.869862Z",
+   "t_ms": 20,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "C101-20261007-183224-438db5",
+   "ts": "2026-10-07T18:32:24.870360Z",
+   "t_ms": 21,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "warn",
+   "payload": {
+    "gate": "G1",
+    "passed": false,
+    "violations": [
+     "KYC last reviewed 2025-06-01, over 12 months ago"
+    ]
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "C101-20261007-183224-438db5",
+   "ts": "2026-10-07T18:32:24.870422Z",
+   "t_ms": 21,
+   "type": "kyc_blocked",
+   "agent": "gate",
+   "level": "warn",
+   "payload": {
+    "missing_fields": [],
+    "reasons": [
+     "KYC last reviewed 2025-06-01, over 12 months ago"
+    ]
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "C101-20261007-183224-438db5",
+   "ts": "2026-10-07T18:32:24.870712Z",
+   "t_ms": 21,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "BLOCKED",
+    "totals": {
+     "llm_calls": 0,
+     "tokens_in": 0,
+     "tokens_out": 0,
+     "wall_ms": 21,
+     "retries": 0
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "C101-20261007-183224-438db5",
+  "client_id": "C101",
+  "request_text": "",
+  "preset": "annual_review",
+  "thread_id": null,
+  "mode": null,
+  "status": "BLOCKED",
+  "route": null,
+  "analyst_reports": {},
+  "metrics": {},
+  "flags": {},
+  "drafts": [],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G1",
+    "passed": false,
+    "violations": [
+     "KYC last reviewed 2025-06-01, over 12 months ago"
+    ]
+   }
+  ],
+  "eval_verdicts": [],
+  "revision_count": 0,
+  "final": null,
+  "answer": null,
+  "message": "KYC refresh required: the last review is more than a year old",
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 0,
+   "tokens": 0,
+   "wall_ms": 21
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T18:32:24.633568Z",
+  "updated_at": "2026-10-07T18:32:24.870771Z",
+  "completed_steps": [
+   "input_gate",
+   "kyc_gate"
+  ]
+ },
+ "outbox": null
+}

@@ -4,11 +4,15 @@
 
 API_PORT ?= $(shell uv run advisor-copilot port)
 
-.PHONY: setup test lint format eval eval-live api web dev record smoke build-static env-check clean
+.PHONY: seed setup test lint format eval eval-live api web dev record smoke build-static env-check clean
 
 setup:
 	uv sync
 	@if [ -f web/package.json ]; then npm --prefix web install; fi
+
+seed:
+	uv run python data/generate_book.py
+	uv run advisor-copilot seed
 
 test:
 	RUN_MODE=replay uv run pytest -q
@@ -28,7 +32,7 @@ eval-live:
 	RUN_MODE=live uv run python evals/run_evals.py --tier 3 --k 3
 
 api:
-	uv run uvicorn advisor_copilot.api.app:create_app --factory --host 127.0.0.1 --port $(API_PORT) --reload
+	DEV_CONSOLE=1 uv run uvicorn advisor_copilot.api.app:create_app --factory --host 127.0.0.1 --port $(API_PORT) --reload
 
 web:
 	API_PORT=$(API_PORT) npm --prefix web run dev
@@ -43,6 +47,7 @@ smoke:
 	RUN_MODE=live uv run advisor-copilot smoke
 
 build-static:
+	uv run advisor-copilot export web/public/static-data.json
 	VITE_STATIC=1 npm --prefix web run build
 
 env-check:

@@ -25,6 +25,7 @@ def request_key(req: LLMRequest) -> str:
         "schema_name": req.response_schema.__name__ if req.response_schema else None,
         "temperature": req.temperature,
         "thinking_level": req.thinking_level,
+        "max_output_tokens": req.max_output_tokens,
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
 
@@ -64,5 +65,5 @@ class CassetteClient:
         self.entries.setdefault(key, []).append(entry)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a", encoding="utf-8") as f:
-            f.write(json.dumps(entry) + "\n")  # key order matters
+            f.write(json.dumps(entry) + "\n")
         return resp

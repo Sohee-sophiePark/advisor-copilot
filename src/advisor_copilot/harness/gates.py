@@ -4,12 +4,14 @@ import re
 
 from pydantic import ValidationError
 
+from advisor_copilot.config import RulesCfg
 from advisor_copilot.data_access import load_fixtures
 from advisor_copilot.harness.context import SynthContext
 from advisor_copilot.harness.injection import detect
 from advisor_copilot.models import (
     SEVERITY_RANK,
     AnalystReport,
+    ChatAnswer,
     Client,
     Finding,
     Flag,
@@ -19,11 +21,20 @@ from advisor_copilot.models import (
 )
 
 PLACEHOLDER = re.compile(r"\{\{m:([^}]+)\}\}")
-PREFIX = {"portfolio": "PORT", "risk": "RISK", "tax": "TAX", "market": "MKT"}
+PREFIX = {"portfolio": "PORT", "risk": "RISK", "tax": "TAX", "market": "MKT", "scenario": "WHATIF"}
 PROHIBITED = re.compile(
     r"guarantee(d)?|risk[- ]free|no risk|can(no|')t lose|sure thing|will definitely", re.IGNORECASE
 )
 MAX_REQUEST_CHARS = 1000
+ACTION_FLAGS = {  # flag families each action type may address (G5.11)
+    "rebalance": ("FLAG-DRIFT", "FLAG-SUIT", "FLAG-CONC"),
+    "reduce_position": ("FLAG-CONC", "FLAG-SUIT", "FLAG-DRIFT"),
+    "relocate_holding": ("FLAG-L1",),
+    "use_tfsa_room": ("FLAG-L3", "FLAG-L2"),
+    "review_kyc": ("FLAG-GOAL",),
+    "no_action": (),
+}
+SECOND_PERSON = re.compile(r"\byou(r|rs|rself)?\b", re.IGNORECASE)
 
 
 def input_gate(client_id: str, request_text: str, preset: str | None) -> GateResult:
@@ -38,10 +49,19 @@ def input_gate(client_id: str, request_text: str, preset: str | None) -> GateRes
     return GateResult(gate="G0", passed=not v, violations=v)
 
 
-def kyc_gate(client: Client) -> GateResult:
-    """G1: risk profile, horizon and objectives must all be on file."""
-    missing = client.kyc_missing()
-    return GateResult(gate="G1", passed=not missing, violations=[f"missing {m}" for m in missing])
+def kyc_expired(client: Client, rules: RulesCfg) -> bool:
+    """Last KYC review older than `kyc_max_age_months` before the data snapshot date."""
+    last = client.kyc_last_reviewed
+    return last is not None and (rules.as_of - last).days > rules.kyc_max_age_months * 365 / 12
+
+
+def kyc_gate(client: Client, rules: RulesCfg) -> GateResult:
+    """G1: risk profile, horizon and objectives on file, and the KYC review not expired."""
+    v = [f"missing {m}" for m in client.kyc_missing()]
+    if kyc_expired(client, rules):
+        age = rules.kyc_max_age_months
+        v.append(f"KYC last reviewed {client.kyc_last_reviewed}, over {age} months ago")
+    return GateResult(gate="G1", passed=not v, violations=v)
 
 
 IDENT = re.compile(r"\b[A-Z][A-Z_-]*\d+[A-Z_-]*\b")  # FLAG-L1-USEQ, TAX-2, L3_UNUSED_TFSA_ROOM
@@ -156,11 +176,57 @@ def output_gates(raw: dict, ctx: SynthContext) -> tuple[Recommendation | None, G
         v.append("G5.8 restraint: no_action mixed with other actions")
     limits = [
         (len(d.headline.split()) > 20, "headline over 20 words"),
-        (len(d.summary.split()) > 150, "summary over 150 words"),
+        (len(d.summary.split()) > 100, "summary over 100 words"),
         (len(d.actions) > 5, "more than 5 actions"),
         (len(d.client_talking_points) > 3, "more than 3 talking points"),
     ]
     v += [f"G5.9 limits: {msg}" for hit, msg in limits if hit]
     if detect(joined):
         v.append("G5.10 no_injection_echo: recommendation text matches an injection pattern")
+    finding_flags = {f.finding_id: f.flag_refs for f in ctx.findings}
+    for a in d.actions:
+        if a.type == "no_action":
+            continue
+        allowed = ACTION_FLAGS[a.type]
+        for r in a.finding_refs:
+            refs = finding_flags.get(r, [])
+            if refs and not any(f.startswith(allowed) for f in refs):
+                v.append(
+                    f"G5.11 action_matches_finding: {a.type} cannot address {r} ({', '.join(refs)})"
+                )
+    advisor_facing = [
+        d.headline,
+        d.summary,
+        *(t for a in d.actions for t in (a.description, a.rationale)),
+    ]
+    if any(SECOND_PERSON.search(t) for t in advisor_facing):
+        v.append(
+            "G5.12 advisor_voice: headline, summary and actions speak about the client, not to them"
+        )
     return d, GateResult(gate="G5", passed=not v, violations=v)
+
+
+def answer_gates(
+    raw: dict, ctx: SynthContext, max_words: int
+) -> tuple[ChatAnswer | None, GateResult]:
+    """Chat answers: schema, numbers via placeholders only, keys resolve, language, length."""
+    try:
+        a = ChatAnswer.model_validate(raw)
+    except ValidationError as e:
+        return None, GateResult(
+            gate="G5", passed=False, violations=[f"G5.1 schema: {e.error_count()} errors"]
+        )
+    texts = [a.answer, *a.suggested_questions]
+    joined = "\n".join(texts)
+    v: list[str] = []
+    if any(has_raw_digits(t) for t in texts):
+        v.append("G5.2 no_raw_numbers: digits outside {{m:...}} placeholders")
+    if missing := sorted({k for k in PLACEHOLDER.findall(joined) if k not in ctx.metrics}):
+        v.append(f"G5.3 placeholders_resolve: unknown metric keys {missing}")
+    if m := PROHIBITED.search(joined):
+        v.append(f"G5.7 prohibited_language: {m.group(0)!r}")
+    if len(a.answer.split()) > max_words or len(a.suggested_questions) > 3:
+        v.append(f"G5.9 limits: answer over {max_words} words or more than 3 suggested questions")
+    if detect(joined):
+        v.append("G5.10 no_injection_echo: answer text matches an injection pattern")
+    return a, GateResult(gate="G5", passed=not v, violations=v)

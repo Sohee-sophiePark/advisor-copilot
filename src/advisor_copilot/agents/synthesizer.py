@@ -5,10 +5,13 @@ import json
 from advisor_copilot.harness.context import Feedback, SynthContext, load_prompt, synth_inputs
 from advisor_copilot.harness.deps import Deps
 from advisor_copilot.llm.base import LLMRequest, Message
-from advisor_copilot.models import Recommendation
+from advisor_copilot.models import ChatAnswer, Recommendation
 
 
-async def synthesize(ctx: SynthContext, deps: Deps, feedback: Feedback | None) -> dict:
+async def synthesize(
+    ctx: SynthContext, deps: Deps, feedback: Feedback | None, answer_mode: bool = False
+) -> dict:
+    """Recommendation draft (annual review) or short chat answer, numbers as placeholders."""
     s = deps.settings
     parts = synth_inputs(ctx)
     if feedback:
@@ -19,11 +22,12 @@ async def synthesize(ctx: SynthContext, deps: Deps, feedback: Feedback | None) -
         ]
     req = LLMRequest(
         model=s.models.synthesizer,
-        system=load_prompt("synthesizer.md", s),
+        system=load_prompt("answer.md" if answer_mode else "synthesizer.md", s),
         messages=[Message(role="user", text="\n".join(parts))],
         temperature=s.temperature.synthesizer,
         thinking_level=s.thinking_level.synthesizer,
-        response_schema=Recommendation,
+        max_output_tokens=s.max_output_tokens.synthesizer,
+        response_schema=ChatAnswer if answer_mode else Recommendation,
         purpose="synthesizer",
     )
     return (await deps.llm_call(req)).parsed or {}

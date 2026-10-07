@@ -13,7 +13,7 @@ KEY_RE = re.compile(
     r"|drift\.[A-Z_]+\.pp|cfg\.drift_tolerance\.pp"
     r"|risk\.(vol|vol_band_max|target_vol|exp_return)\.pct|stress\.equity_bear\.(pct|cad)"
     r"|conc\.[A-Z]+\.pct|conc\.limit\.pct|tax\.(tfsa_room|rrsp_room|nonreg_interest)\.cad"
-    r"|tax\.l1\.[A-Z]+\.cad|mkt\.[a-z0-9_]+\.pct)$"
+    r"|tax\.l1\.[A-Z]+\.cad|mkt\.[a-z0-9_]+\.pct|goal\.model_return\.pct|goal\.[A-Z0-9]+\.required\.pct)$"
 )
 
 
@@ -26,10 +26,11 @@ def test_all_expected_flags_reproduced(cid: str, expected: dict) -> None:
 
 def test_allowlists_match_spec() -> None:
     want = {
-        "portfolio": ["get_positions", "compute_allocation", "compute_drift"],
+        "portfolio": ["get_positions", "compute_allocation", "compute_drift", "check_goals"],
         "risk": ["compute_risk_metrics", "run_stress_test", "check_concentration"],
         "tax": ["get_positions", "check_asset_location", "get_contribution_room"],
         "market": ["get_market_snapshot"],
+        "scenario": ["simulate_trade"],
     }
     for agent, names in want.items():
         assert [t.name for t in reg.tools_for(agent)] == names

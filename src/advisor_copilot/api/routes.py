@@ -1,33 +1,45 @@
-"""HTTP and SSE routes (02 §5)."""
+"""HTTP and SSE routes: advisor views, chat threads, runs; dev routes only when DEV_CONSOLE=1."""
 
 import asyncio
+import json
+import uuid
 from collections.abc import AsyncIterator
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Path, Request
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends, HTTPException, Path, Request
+from pydantic import BaseModel, Field
 from sse_starlette.sse import EventSourceResponse
 
+from advisor_copilot import book
 from advisor_copilot.actions import apply_approval
-from advisor_copilot.data_access import get_client, get_targets, list_clients
-from advisor_copilot.harness.context import profile_summary
+from advisor_copilot.config import ROOT
+from advisor_copilot.data_access import get_client
+from advisor_copilot.harness.chat import answer_key, reply_text, thread_context
 from advisor_copilot.harness.orchestrator import run_pipeline, start_run
 from advisor_copilot.harness.state import RunState, load_state, state_path
 from advisor_copilot.harness.trace import TraceBus, load_events
 from advisor_copilot.models import ApprovalDecision
-from advisor_copilot.replay import load_replay, scenario_for, scenarios
-from advisor_copilot.tools.common import positions
-from advisor_copilot.tools.portfolio import allocation
-from advisor_copilot.tools.registry import flags_for_client
+from advisor_copilot.replay import scenario_for
 
 router = APIRouter(prefix="/api")
 SafeId = Annotated[str, Path(pattern=r"^[A-Za-z0-9_-]{1,80}$")]  # ids become file paths
+PRESET_TEXT = {"annual_review": "Prepare annual review"}
 
 
-class RunRequest(BaseModel):
-    client_id: str
-    request_text: str = ""
+class ThreadRequest(BaseModel):
+    client_id: str = Field(pattern=r"^[A-Za-z0-9_-]{1,80}$")
+
+
+class MessageRequest(BaseModel):
+    text: str = Field("", max_length=1000)
     preset: str | None = None
+
+
+def _known_client(client_id: str) -> None:
+    try:
+        get_client(client_id)
+    except KeyError:
+        raise HTTPException(404, "unknown client") from None
 
 
 @router.get("/health")
@@ -36,68 +48,88 @@ def health(request: Request) -> dict:
     return {"status": "ok", "run_mode": s.run_mode, "models": s.models.model_dump()}
 
 
-@router.get("/clients")
-def clients() -> list[dict]:
-    out = []
-    for c in list_clients():
-        total, _ = allocation(c)
-        kyc = not c.kyc_missing()
-        flags = [f for f in flags_for_client(c.client_id) if f.severity != "info"] if kyc else []
-        out.append(
-            {
-                "client_id": c.client_id,
-                "name": c.name,
-                "age": c.age,
-                "risk_profile": c.risk_profile,
-                "total_cad": round(total, 2),
-                "flag_count": len(flags) if kyc else None,
-                "kyc_complete": kyc,
-            }
-        )
-    return out
+@router.get("/book")
+def get_book() -> dict:
+    return book.book()
 
 
 @router.get("/clients/{client_id}")
 def client_detail(client_id: SafeId) -> dict:
-    try:
-        c = get_client(client_id)
-    except KeyError:
-        raise HTTPException(404, "unknown client") from None
-    total, alloc = allocation(c)
-    targets = get_targets(c.risk_profile) if c.risk_profile else {}
-    return {
-        "client": profile_summary(c),
-        "total_cad": round(total, 2),
-        "positions": [
-            {
-                "account_type": p.account_type,
-                "ticker": p.ticker,
-                "units": p.units,
-                "market_value_cad": round(p.market_value, 2),
-            }
-            for p in positions(c)
-        ],
-        "allocation": [
-            {"asset_class": ac, "current_pct": round(v, 2), "target_pct": targets.get(ac)}
-            for ac, v in alloc.items()
-        ],
-    }
+    _known_client(client_id)
+    return book.client_detail(client_id)
 
 
-@router.post("/runs")
-async def create_run(body: RunRequest, request: Request) -> dict:
+@router.get("/market")
+def market() -> dict:
+    return book.market_view()
+
+
+@router.post("/threads")
+def create_thread(body: ThreadRequest, request: Request) -> dict:
+    _known_client(body.client_id)
+    thread_id = uuid.uuid4().hex[:12]
+    request.app.state.store.create_thread(thread_id, body.client_id)
+    return {"thread_id": thread_id, "client_id": body.client_id}
+
+
+@router.get("/threads/{thread_id}")
+def get_thread(thread_id: SafeId, request: Request) -> dict:
+    store = request.app.state.store
+    if not (client_id := store.thread_client(thread_id)):
+        raise HTTPException(404, "unknown thread")
+    return {"thread_id": thread_id, "client_id": client_id, "messages": store.messages(thread_id)}
+
+
+@router.post("/threads/{thread_id}/messages")
+async def post_message(thread_id: SafeId, body: MessageRequest, request: Request) -> dict:
+    """One chat turn. Checks the thread budget, reuses a cached answer (live), else starts a run."""
     app = request.app.state
-    sc = scenario_for(body.client_id, body.request_text, body.preset)
+    s, store, runs = app.settings, app.store, app.settings.path("runs")
+    if not (client_id := store.thread_client(thread_id)):
+        raise HTTPException(404, "unknown thread")
+    if not body.text.strip() and body.preset not in PRESET_TEXT:
+        raise HTTPException(422, "empty message")
+    calls, tokens = store.thread_totals(thread_id)
+    if calls >= s.budget.thread_max_calls or tokens >= s.budget.thread_max_tokens:
+        raise HTTPException(429, "This conversation reached its budget. Start a new one.")
+    key = answer_key(thread_id, body.text, body.preset, get_client(client_id).model_dump_json())
+    ctx = thread_context(store, thread_id, runs, s.chat.summary_turns)
+    store.add_message(thread_id, "advisor", body.text or PRESET_TEXT[body.preset])
+    if (
+        s.run_mode == "live"
+        and (cached := store.cache_get(key))
+        and state_path(runs, cached).exists()
+    ):
+        st = load_state(cached, runs)
+        store.add_message(
+            thread_id, "copilot", reply_text(st), cached, st.route.route if st.route else None
+        )
+        return {"run_id": cached, "cached": True}
+    sc = (
+        None if ctx.summary else scenario_for(client_id, body.text, body.preset)
+    )  # replay: first turn only
     state, deps = await start_run(
-        body.client_id,
-        body.request_text,
-        body.preset,
-        app.settings,
-        sc["id"] if sc else None,
-        app.llm,
+        client_id, body.text, body.preset, s, sc and sc["id"], app.llm, thread_id
     )
-    app.runs[state.run_id] = (state, deps, asyncio.create_task(run_pipeline(state, deps)))
-    return {"run_id": state.run_id}
+
+    async def turn() -> None:
+        st = await run_pipeline(state, deps, thread=ctx)
+        route = st.route.route if st.route else None
+        snap = st.budget_snapshot
+        store.add_message(
+            thread_id,
+            "copilot",
+            reply_text(st),
+            st.run_id,
+            route,
+            snap.get("llm_calls", 0),
+            snap.get("tokens", 0),
+        )
+        if s.run_mode == "live" and st.status in ("COMPLETED", "AWAITING_APPROVAL"):
+            store.cache_put(key, st.run_id)
+
+    app.runs[state.run_id] = (state, deps, asyncio.create_task(turn()))
+    return {"run_id": state.run_id, "cached": False}
 
 
 def _state(request: Request, run_id: str) -> RunState:
@@ -150,19 +182,104 @@ def approval(run_id: SafeId, decision: ApprovalDecision, request: Request) -> di
     return {"state": state, "outbox": outbox}
 
 
-@router.get("/replays")
-def replays(request: Request) -> list[dict]:
-    d = request.app.state.settings.path("replays")
-    return [
-        {"scenario_id": sc["id"], "title": sc["title"], "client_id": sc["client_id"]}
-        for sc in scenarios()
-        if not sc.get("hidden") and (d / f"{sc['id']}.json").exists()
+def loopback_only(request: Request) -> None:
+    if request.client is None or request.client.host not in {"127.0.0.1", "::1"}:
+        raise HTTPException(403, "developer console is local only")
+
+
+dev = APIRouter(prefix="/api/dev", dependencies=[Depends(loopback_only)])
+
+
+def _run_cost(events: list, request: Request) -> float:
+    pricing = request.app.state.settings.pricing
+    done = [e.payload for e in events if e.type == "llm_call_finished"]
+    return round(
+        sum(pricing.cost(p.get("model", ""), p["tokens_in"], p["tokens_out"]) for p in done), 6
+    )
+
+
+@dev.get("/runs")
+def dev_runs(request: Request) -> list[dict]:
+    runs = request.app.state.settings.path("runs")
+    paths = sorted(runs.glob("*/state.json"), key=lambda p: p.stat().st_mtime, reverse=True)[:200]
+    out = []
+    for p in paths:
+        st = RunState.model_validate_json(p.read_text(encoding="utf-8"))
+        out.append(
+            {
+                "run_id": st.run_id,
+                "client_id": st.client_id,
+                "request_text": st.request_text,
+                "preset": st.preset,
+                "thread_id": st.thread_id,
+                "status": st.status,
+                "mode": st.mode,
+                "route": st.route.route if st.route else None,
+                "created_at": st.created_at,
+                **st.budget_snapshot,
+            }
+        )
+    return out
+
+
+@dev.get("/runs/{run_id}")
+def dev_run(run_id: SafeId, request: Request) -> dict:
+    state = _state(request, run_id)
+    path = request.app.state.settings.path("runs") / run_id / "trace.jsonl"
+    events = load_events(path) if path.exists() else []
+    return {"state": state, "events": events, "cost_usd": _run_cost(events, request)}
+
+
+@dev.get("/usage")
+def dev_usage(request: Request) -> dict:
+    s = request.app.state.settings
+    rows = [
+        {**r, "cost_usd": round(s.pricing.cost(r["model"], r["tokens_in"], r["tokens_out"]), 6)}
+        for r in request.app.state.store.usage()
     ]
+    return {
+        "daily_call_cap": s.budget.daily_call_cap,
+        "free_tier": s.pricing.free_tier,
+        "rows": rows,
+    }
 
 
-@router.get("/replays/{scenario_id}")
-def replay(scenario_id: SafeId, request: Request) -> dict:
-    try:
-        return load_replay(scenario_id, request.app.state.settings)
-    except FileNotFoundError:
-        raise HTTPException(404, "no replay for that scenario") from None
+@dev.get("/evals")
+def dev_evals() -> dict:
+    path = ROOT / "evals" / "reports" / "latest.md"
+    return {
+        "report": path.read_text(encoding="utf-8")
+        if path.exists()
+        else "No report yet: run make eval."
+    }
+
+
+def export_static(settings: object) -> str:
+    """Everything the public replay build shows, as one JSON document (no LLM, no backend)."""
+    from advisor_copilot.data_access import list_clients
+    from advisor_copilot.replay import scenarios
+
+    recorded: dict[str, list] = {}
+    for sc in scenarios():
+        path = settings.path("replays") / f"{sc['id']}.json"
+        if sc.get("hidden") or not path.exists():
+            continue
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        question = doc["request_text"] or PRESET_TEXT.get(doc.get("preset") or "", "")
+        recorded.setdefault(doc["client_id"], []).append(
+            {
+                "scenario_id": doc["scenario_id"],
+                "title": doc["title"],
+                "question": question,
+                "preset": doc.get("preset"),
+                "state": doc["final_state"],
+                "outbox": doc.get("outbox"),
+            }
+        )
+    data = {
+        "book": book.book(),
+        "market": book.market_view(),
+        "recorded": recorded,
+        "clients": {c.client_id: book.client_detail(c.client_id) for c in list_clients()},
+    }
+    return json.dumps(data, default=str)

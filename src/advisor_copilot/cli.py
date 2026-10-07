@@ -16,6 +16,8 @@ COMMANDS: dict[str, str] = {
     "tools": "print metrics and flags for a client with no LLM call",
     "smoke": "list flash models, one structured-output call, one function-call round trip (live)",
     "port": "print the first free API port in the configured range",
+    "seed": "rebuild the local SQLite database from the synthetic JSON",
+    "export": "write the data the public replay build shows to a JSON file",
 }
 
 
@@ -247,6 +249,31 @@ def _cmd_port(args: argparse.Namespace) -> int:
     return 1
 
 
+def _cmd_seed(args: argparse.Namespace) -> int:
+    from advisor_copilot import db
+    from advisor_copilot.config import get_settings
+    from advisor_copilot.data_access import read_json
+
+    s = get_settings()
+    raw = read_json(s.path("data"))
+    db.seed(raw, s.path("data"), s.path("db"))
+    print(f"seeded {s.paths.db}: {len(raw['clients'])} clients, {len(raw['notes'])} notes")
+    return 0
+
+
+def _cmd_export(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from advisor_copilot.api.routes import export_static
+    from advisor_copilot.config import get_settings
+
+    out = Path(args.path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(export_static(get_settings()), encoding="utf-8")
+    print(f"wrote {args.path}")
+    return 0
+
+
 HANDLERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "run": _cmd_run,
     "approve": _cmd_approve,
@@ -256,6 +283,8 @@ HANDLERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "tools": _cmd_tools,
     "smoke": _cmd_smoke,
     "port": _cmd_port,
+    "seed": _cmd_seed,
+    "export": _cmd_export,
 }
 
 
@@ -275,6 +304,7 @@ def build_parser() -> argparse.ArgumentParser:
     p["record"].add_argument("--scenario", help="record one scenario only")
     p["replay"].add_argument("scenario")
     p["tools"].add_argument("client_id", help="client id, e.g. C002")
+    p["export"].add_argument("path", help="output file, e.g. web/public/static-data.json")
     return parser
 
 

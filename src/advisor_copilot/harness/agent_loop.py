@@ -114,6 +114,7 @@ async def run_agent(
             messages=list(messages),
             temperature=s.temperature.analyst,
             thinking_level=s.thinking_level.analyst,
+            max_output_tokens=s.max_output_tokens.analyst,
             tools=([] if final else tools) + [SUBMIT_DECL],
             tool_mode="ANY",
             allowed_tools=["submit_findings"] if final else None,
@@ -150,7 +151,7 @@ async def run_agent(
             )
             continue
         report, violations = analyst_gate(
-            AnalystReport(agent=spec.name, **args.model_dump()), results, s.agents.max_findings
+            AnalystReport(agent=spec.name, **args.model_dump()), results, spec.max_findings
         )
         if violations and not repaired:
             repaired = True

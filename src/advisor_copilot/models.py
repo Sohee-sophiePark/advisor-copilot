@@ -14,8 +14,8 @@ IncomeType = Literal["interest", "eligible_dividend", "foreign_dividend", "other
 AccountType = Literal["TFSA", "RRSP", "RRIF", "NON_REG"]
 Severity = Literal["critical", "warning", "info"]
 Unit = Literal["pct", "pp", "cad", "years", "ratio"]
-Domain = Literal["portfolio", "risk", "tax", "market"]
-Route = Literal["full_review", "targeted", "out_of_scope"]
+Domain = Literal["portfolio", "risk", "tax", "market", "scenario"]  # scenario: what-if only
+Route = Literal["full_review", "targeted", "follow_up", "what_if", "out_of_scope"]
 ActionType = Literal[
     "rebalance", "reduce_position", "relocate_holding", "use_tfsa_room", "review_kyc", "no_action"
 ]
@@ -67,6 +67,21 @@ class Account(BaseModel):
     holdings: list[Holding]
 
 
+LifeStage = Literal["accumulation", "pre_retirement", "retirement"]
+
+
+class Goal(BaseModel):
+    goal_id: str
+    name: str
+    target_cad: float
+    target_year: int
+
+
+class Preferences(BaseModel):
+    income_need_cad_month: float = 0
+    esg: bool = False
+
+
 class Client(BaseModel):
     client_id: str
     name: str
@@ -81,6 +96,11 @@ class Client(BaseModel):
     tfsa_room_cad: float
     rrsp_room_cad: float
     accounts: list[Account]
+    life_stage: LifeStage | None = None
+    review_due: dt.date | None = None
+    last_contact: dt.date | None = None
+    goals: list[Goal] = []
+    preferences: Preferences = Preferences()
 
     def kyc_missing(self) -> list[str]:
         """KYC fields that are null; non-empty means gate G1 blocks the run."""
@@ -131,6 +151,7 @@ class MarketIndicator(BaseModel):
     value: float
     unit: Unit
     asset_classes: list[AssetClass]
+    history: list[float] = []  # month-end values, fictional, ending at `value`
 
 
 class Headline(BaseModel):
@@ -142,6 +163,7 @@ class Headline(BaseModel):
 class MarketSnapshot(BaseModel):
     as_of: dt.date
     label: str
+    history_months: list[str] = []
     indicators: list[MarketIndicator]
     headlines: list[Headline]
 
@@ -217,6 +239,11 @@ class Recommendation(BaseModel):
     risks_and_considerations: list[str]
     deferred: list[Deferral]
     client_talking_points: list[str]
+
+
+class ChatAnswer(BaseModel):
+    answer: str
+    suggested_questions: list[str]
 
 
 class GateResult(BaseModel):

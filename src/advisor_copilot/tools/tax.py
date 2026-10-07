@@ -40,8 +40,8 @@ def check_asset_location(client_id: str, args: NoArgs | None = None) -> ToolResu
                 "L1_US_LISTED_IN_TFSA",
                 "warning",
                 [c.k_l1(ticker)],
-                f"{ticker} is US-listed and pays foreign dividends; held in a TFSA the US "
-                "withholding tax is a permanent cost, unlike in an RRSP/RRIF",
+                f"US fund {ticker} in the TFSA loses part of its dividends to US tax; "
+                "an RRSP would avoid it",
             )
         )
     if nonreg_interest >= rules.interest_in_nonreg_min_cad:
@@ -51,7 +51,7 @@ def check_asset_location(client_id: str, args: NoArgs | None = None) -> ToolResu
                 "L2_INTEREST_IN_NON_REG",
                 "info",
                 [c.K_NONREG_INTEREST],
-                "Interest income in a non-registered account is fully taxable every year",
+                "Interest income in the taxable account is taxed every year",
             )
         )
     if client.tfsa_room_cad > 0 and nonreg_interest > 0:
@@ -61,8 +61,7 @@ def check_asset_location(client_id: str, args: NoArgs | None = None) -> ToolResu
                 "L3_UNUSED_TFSA_ROOM",
                 "warning",
                 [c.K_TFSA_ROOM, c.K_NONREG_INTEREST],
-                "Unused TFSA room while interest-bearing holdings sit in a non-registered "
-                "account; sheltering them would remove the annual tax drag",
+                "Unused TFSA room while interest-earning cash sits in a taxable account",
             )
         )
     return c.tool_result(tool, metrics, flags, data={"l1_tickers": sorted(l1)})

@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 from helpers import synth_ctx
 
+from advisor_copilot.config import get_settings
 from advisor_copilot.data_access import get_client
 from advisor_copilot.harness.gates import input_gate, kyc_gate, output_gates
 from advisor_copilot.models import Finding
@@ -43,8 +44,8 @@ def test_g0_and_g1() -> None:
         "request longer than 1000 characters"
     ]
     assert not input_gate("C999", "", None).passed
-    assert kyc_gate(get_client("C001")).passed
-    assert kyc_gate(get_client("C004")).violations == [
+    assert kyc_gate(get_client("C001"), get_settings().rules).passed
+    assert kyc_gate(get_client("C004"), get_settings().rules).violations == [
         "missing risk_profile",
         "missing time_horizon_years",
         "missing objectives",

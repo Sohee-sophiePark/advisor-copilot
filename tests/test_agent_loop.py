@@ -43,7 +43,7 @@ def call(name: str, args: dict | None = None, cid: str = "1") -> LLMResponse:
 
 def spec(max_turns: int = 3) -> AnalystSpec:
     tools = ("compute_risk_metrics", "run_stress_test", "check_concentration")
-    return AnalystSpec("risk", "risk_analyst.md", tools, "tool_loop", max_turns)
+    return AnalystSpec("risk", "risk_analyst.md", tools, "tool_loop", max_turns, 5)
 
 
 async def test_1_valid_submit_returns_code_corrected_report(deps: Deps) -> None:

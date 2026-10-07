@@ -4,7 +4,7 @@
  "client_id": "C002",
  "request_text": "",
  "preset": "annual_review",
- "recorded_at": "2026-10-07T15:21:41+00:00",
+ "recorded_at": "2026-10-07T18:08:01+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.376843Z",
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.311733Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -24,6 +24,7 @@
     "client_id": "C002",
     "request_text": "",
     "preset": "annual_review",
+    "thread_id": null,
     "run_mode": "record",
     "models": {
      "router": "gemini-3.1-flash-lite",
@@ -35,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.377801Z",
-   "t_ms": 0,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.332590Z",
+   "t_ms": 20,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -49,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.378216Z",
-   "t_ms": 1,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.333306Z",
+   "t_ms": 21,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -63,9 +64,9 @@
   },
   {
    "seq": 4,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.378328Z",
-   "t_ms": 1,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.333383Z",
+   "t_ms": 21,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
@@ -85,9 +86,9 @@
   },
   {
    "seq": 5,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.379721Z",
-   "t_ms": 2,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.334092Z",
+   "t_ms": 22,
    "type": "agent_started",
    "agent": "portfolio",
    "level": "info",
@@ -96,15 +97,16 @@
     "tools": [
      "get_positions",
      "compute_allocation",
-     "compute_drift"
+     "compute_drift",
+     "check_goals"
     ]
    }
   },
   {
    "seq": 6,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.380294Z",
-   "t_ms": 3,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.334727Z",
+   "t_ms": 23,
    "type": "llm_call_started",
    "agent": "portfolio",
    "level": "info",
@@ -115,9 +117,9 @@
   },
   {
    "seq": 7,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.380398Z",
-   "t_ms": 3,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.334815Z",
+   "t_ms": 23,
    "type": "agent_started",
    "agent": "risk",
    "level": "info",
@@ -132,9 +134,9 @@
   },
   {
    "seq": 8,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.380857Z",
-   "t_ms": 4,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.335423Z",
+   "t_ms": 23,
    "type": "llm_call_started",
    "agent": "risk",
    "level": "info",
@@ -145,9 +147,9 @@
   },
   {
    "seq": 9,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.380938Z",
-   "t_ms": 4,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.335498Z",
+   "t_ms": 23,
    "type": "agent_started",
    "agent": "tax",
    "level": "info",
@@ -162,9 +164,9 @@
   },
   {
    "seq": 10,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.381321Z",
-   "t_ms": 4,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.336197Z",
+   "t_ms": 24,
    "type": "llm_call_started",
    "agent": "tax",
    "level": "info",
@@ -175,9 +177,9 @@
   },
   {
    "seq": 11,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.381378Z",
-   "t_ms": 4,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.336304Z",
+   "t_ms": 24,
    "type": "agent_started",
    "agent": "market",
    "level": "info",
@@ -190,9 +192,9 @@
   },
   {
    "seq": 12,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:06.381605Z",
-   "t_ms": 4,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:38.336702Z",
+   "t_ms": 25,
    "type": "llm_call_started",
    "agent": "market",
    "level": "info",
@@ -203,26 +205,27 @@
   },
   {
    "seq": 13,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:24.549804Z",
-   "t_ms": 18173,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.384928Z",
+   "t_ms": 1073,
    "type": "llm_call_finished",
    "agent": "risk",
    "level": "info",
    "payload": {
     "purpose": "analyst:risk",
+    "model": "gemini-3.1-flash-lite",
     "tokens_in": 1003,
     "tokens_out": 42,
-    "latency_ms": 18140,
+    "latency_ms": 1016,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 14,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:24.551035Z",
-   "t_ms": 18174,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.386950Z",
+   "t_ms": 1075,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -241,9 +244,9 @@
   },
   {
    "seq": 15,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:24.551255Z",
-   "t_ms": 18174,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.387335Z",
+   "t_ms": 1075,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -262,9 +265,9 @@
   },
   {
    "seq": 16,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:24.551424Z",
-   "t_ms": 18174,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.387536Z",
+   "t_ms": 1075,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -280,9 +283,9 @@
   },
   {
    "seq": 17,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:24.551672Z",
-   "t_ms": 18174,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.387973Z",
+   "t_ms": 1076,
    "type": "llm_call_started",
    "agent": "risk",
    "level": "info",
@@ -293,40 +296,27 @@
   },
   {
    "seq": 18,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:24.781237Z",
-   "t_ms": 18404,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 2465,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 19,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:54.565916Z",
-   "t_ms": 48189,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.388232Z",
+   "t_ms": 1076,
    "type": "llm_call_finished",
    "agent": "portfolio",
    "level": "info",
    "payload": {
     "purpose": "analyst:portfolio",
-    "tokens_in": 1136,
-    "tokens_out": 30,
-    "latency_ms": 48183,
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1283,
+    "tokens_out": 40,
+    "latency_ms": 1047,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 20,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:54.567622Z",
-   "t_ms": 48190,
+   "seq": 19,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.388985Z",
+   "t_ms": 1077,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -339,10 +329,10 @@
    }
   },
   {
-   "seq": 21,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:54.567962Z",
-   "t_ms": 48191,
+   "seq": 20,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.389267Z",
+   "t_ms": 1077,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -364,10 +354,26 @@
    }
   },
   {
+   "seq": 21,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.469164Z",
+   "t_ms": 1157,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "check_goals",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
    "seq": 22,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:54.568197Z",
-   "t_ms": 48191,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.469414Z",
+   "t_ms": 1157,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -381,9 +387,9 @@
   },
   {
    "seq": 23,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:54.568493Z",
-   "t_ms": 48191,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:39.469627Z",
+   "t_ms": 1157,
    "type": "llm_call_started",
    "agent": "portfolio",
    "level": "info",
@@ -394,95 +400,27 @@
   },
   {
    "seq": 24,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:18:55.499542Z",
-   "t_ms": 49122,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 2765,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 25,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:17.765630Z",
-   "t_ms": 71388,
-   "type": "llm_call_finished",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:market",
-    "tokens_in": 820,
-    "tokens_out": 57,
-    "latency_ms": 52982,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 26,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:17.766950Z",
-   "t_ms": 71390,
-   "type": "tool_call",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "name": "get_market_snapshot",
-    "args": {
-     "asset_classes": [
-      "CASH",
-      "CA_BONDS",
-      "CA_EQUITY",
-      "US_EQUITY",
-      "INTL_EQUITY",
-      "REAL_ASSETS"
-     ]
-    },
-    "metrics_count": 7,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 27,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:17.767351Z",
-   "t_ms": 71390,
-   "type": "llm_call_started",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:market",
-    "model": "gemini-3.1-flash-lite"
-   }
-  },
-  {
-   "seq": 28,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:29.555940Z",
-   "t_ms": 83179,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:40.215699Z",
+   "t_ms": 1904,
    "type": "llm_call_finished",
    "agent": "tax",
    "level": "info",
    "payload": {
     "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite",
     "tokens_in": 1168,
     "tokens_out": 34,
-    "latency_ms": 34054,
-    "attempt": 2,
+    "latency_ms": 744,
+    "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 29,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:29.557184Z",
-   "t_ms": 83180,
+   "seq": 25,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:40.217071Z",
+   "t_ms": 1905,
    "type": "tool_call",
    "agent": "tax",
    "level": "info",
@@ -495,10 +433,10 @@
    }
   },
   {
-   "seq": 30,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:29.557396Z",
-   "t_ms": 83180,
+   "seq": 26,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:40.217422Z",
+   "t_ms": 1905,
    "type": "tool_call",
    "agent": "tax",
    "level": "info",
@@ -511,10 +449,10 @@
    }
   },
   {
-   "seq": 31,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:29.557612Z",
-   "t_ms": 83180,
+   "seq": 27,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:40.217732Z",
+   "t_ms": 1906,
    "type": "tool_call",
    "agent": "tax",
    "level": "info",
@@ -527,10 +465,10 @@
    }
   },
   {
-   "seq": 32,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:29.558155Z",
-   "t_ms": 83181,
+   "seq": 28,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:40.218099Z",
+   "t_ms": 1906,
    "type": "llm_call_started",
    "agent": "tax",
    "level": "info",
@@ -540,148 +478,84 @@
    }
   },
   {
-   "seq": 33,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:38.983244Z",
-   "t_ms": 92606,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 4442,
-    "attempt": 2
-   }
-  },
-  {
-   "seq": 34,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:45.384282Z",
-   "t_ms": 99007,
-   "type": "llm_call_finished",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:portfolio",
-    "tokens_in": 2604,
-    "tokens_out": 355,
-    "latency_ms": 27615,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 35,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:45.386648Z",
-   "t_ms": 99010,
-   "type": "agent_finished",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "findings_count": 2,
-    "status": "ok",
-    "data_gaps": []
-   }
-  },
-  {
-   "seq": 36,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:19:53.815674Z",
-   "t_ms": 107439,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 2755,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 37,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:04.399442Z",
-   "t_ms": 118022,
+   "seq": 29,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:45.749771Z",
+   "t_ms": 7438,
    "type": "llm_call_finished",
    "agent": "market",
    "level": "info",
    "payload": {
     "purpose": "analyst:market",
-    "tokens_in": 1363,
-    "tokens_out": 527,
-    "latency_ms": 25414,
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 848,
+    "tokens_out": 57,
+    "latency_ms": 6278,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 38,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:04.401159Z",
-   "t_ms": 118024,
-   "type": "agent_finished",
+   "seq": 30,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:45.750278Z",
+   "t_ms": 7438,
+   "type": "tool_call",
    "agent": "market",
    "level": "info",
    "payload": {
-    "findings_count": 4,
-    "status": "ok",
-    "data_gaps": []
+    "name": "get_market_snapshot",
+    "args": {
+     "asset_classes": [
+      "CASH",
+      "CA_BONDS",
+      "CA_EQUITY",
+      "INTL_EQUITY",
+      "REAL_ASSETS",
+      "US_EQUITY"
+     ]
+    },
+    "metrics_count": 7,
+    "flags": [],
+    "error": null
    }
   },
   {
-   "seq": 39,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:17.671760Z",
-   "t_ms": 131295,
-   "type": "llm_call_finished",
-   "agent": "tax",
+   "seq": 31,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:45.750461Z",
+   "t_ms": 7438,
+   "type": "llm_call_started",
+   "agent": "market",
    "level": "info",
    "payload": {
-    "purpose": "analyst:tax",
-    "tokens_in": 1796,
-    "tokens_out": 142,
-    "latency_ms": 13269,
-    "attempt": 2,
-    "source": "live"
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite"
    }
   },
   {
-   "seq": 40,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:17.673140Z",
-   "t_ms": 131296,
-   "type": "agent_finished",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "findings_count": 1,
-    "status": "ok",
-    "data_gaps": []
-   }
-  },
-  {
-   "seq": 41,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:34.258869Z",
-   "t_ms": 147882,
+   "seq": 32,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:48.298503Z",
+   "t_ms": 9986,
    "type": "llm_call_finished",
    "agent": "risk",
    "level": "info",
    "payload": {
     "purpose": "analyst:risk",
+    "model": "gemini-3.1-flash-lite",
     "tokens_in": 1662,
-    "tokens_out": 419,
-    "latency_ms": 40441,
-    "attempt": 3,
+    "tokens_out": 411,
+    "latency_ms": 8078,
+    "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 42,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:34.260366Z",
-   "t_ms": 147883,
+   "seq": 33,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:48.302152Z",
+   "t_ms": 9990,
    "type": "agent_finished",
    "agent": "risk",
    "level": "info",
@@ -692,10 +566,106 @@
    }
   },
   {
-   "seq": 43,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:34.264529Z",
-   "t_ms": 147888,
+   "seq": 34,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:49.636509Z",
+   "t_ms": 11324,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1796,
+    "tokens_out": 201,
+    "latency_ms": 1331,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 35,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:49.638870Z",
+   "t_ms": 11327,
+   "type": "agent_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "findings_count": 2,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 36,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:54.556658Z",
+   "t_ms": 16245,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1391,
+    "tokens_out": 246,
+    "latency_ms": 4915,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 37,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:54.558874Z",
+   "t_ms": 16247,
+   "type": "agent_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "findings_count": 2,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 38,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:55.830234Z",
+   "t_ms": 17518,
+   "type": "llm_call_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2873,
+    "tokens_out": 323,
+    "latency_ms": 10077,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 39,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:55.834441Z",
+   "t_ms": 17522,
+   "type": "agent_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "findings_count": 2,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 40,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:07:55.837939Z",
+   "t_ms": 17526,
    "type": "llm_call_started",
    "agent": "synthesizer",
    "level": "info",
@@ -705,54 +675,42 @@
    }
   },
   {
-   "seq": 44,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:35.794022Z",
-   "t_ms": 149417,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 2635,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 45,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:48.804289Z",
-   "t_ms": 162427,
+   "seq": 41,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:00.035463Z",
+   "t_ms": 21723,
    "type": "llm_call_finished",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "purpose": "synthesizer",
-    "tokens_in": 3869,
-    "tokens_out": 2807,
-    "latency_ms": 10369,
-    "attempt": 2,
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 3900,
+    "tokens_out": 981,
+    "latency_ms": 4195,
+    "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 46,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:48.806696Z",
-   "t_ms": 162430,
+   "seq": 42,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:00.038754Z",
+   "t_ms": 21727,
    "type": "draft_created",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "revision": 0,
-    "actions_count": 4
+    "mode": "recommendation",
+    "actions_count": 3
    }
   },
   {
-   "seq": 47,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:48.806938Z",
-   "t_ms": 162430,
+   "seq": 43,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:00.039159Z",
+   "t_ms": 21727,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -763,10 +721,10 @@
    }
   },
   {
-   "seq": 48,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:48.807874Z",
-   "t_ms": 162431,
+   "seq": 44,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:00.040167Z",
+   "t_ms": 21728,
    "type": "llm_call_started",
    "agent": "evaluator",
    "level": "info",
@@ -776,83 +734,28 @@
    }
   },
   {
-   "seq": 49,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:20:50.233369Z",
-   "t_ms": 163856,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 2327,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 50,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:21:08.172793Z",
-   "t_ms": 181796,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 4317,
-    "attempt": 2
-   }
-  },
-  {
-   "seq": 51,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:21:13.785859Z",
-   "t_ms": 187409,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 8282,
-    "attempt": 3
-   }
-  },
-  {
-   "seq": 52,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:21:22.813344Z",
-   "t_ms": 196437,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 16931,
-    "attempt": 4
-   }
-  },
-  {
-   "seq": 53,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:21:41.385944Z",
-   "t_ms": 215009,
+   "seq": 45,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:01.671968Z",
+   "t_ms": 23360,
    "type": "llm_call_finished",
    "agent": "evaluator",
    "level": "info",
    "payload": {
     "purpose": "evaluator",
-    "tokens_in": 4452,
-    "tokens_out": 214,
-    "latency_ms": 1636,
-    "attempt": 5,
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 4371,
+    "tokens_out": 221,
+    "latency_ms": 1629,
+    "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 54,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:21:41.387621Z",
-   "t_ms": 215011,
+   "seq": 46,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:01.674000Z",
+   "t_ms": 23362,
    "type": "evaluator_verdict",
    "agent": "evaluator",
    "level": "info",
@@ -874,22 +777,22 @@
    }
   },
   {
-   "seq": 55,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:21:41.388188Z",
-   "t_ms": 215011,
+   "seq": 47,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:01.675156Z",
+   "t_ms": 23363,
    "type": "awaiting_approval",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
-    "summary": "The portfolio currently exceeds the conservative risk mandate due to a significant concentration in a single security, 28.6%, and an elevated Canadian equity allocation of 33.1%. This has pushed portfolio volatility to 11.9%, well above the limit of 7.0%. To align with your objectives of capital preservation and income, we must reduce this concentration. Given your emotional attachment to the holding and tax considerations, we recommend a phased reduction of the position. Simultaneously, we will rebalance proceeds to increase US equity exposure, which is currently underweight at 4.5% against a target of 12.0%, to improve diversification and lower overall risk."
+    "summary": "Margaret's portfolio currently deviates from her conservative mandate, primarily due to a significant concentration in Northshore Energy (NRTH) and an overall equity overweight. This has driven portfolio volatility to 11.9%, exceeding the 7.0% threshold. To better protect her capital and secure the monthly income she relies on, we must reduce this idiosyncratic risk. While she is attached to the holding, the current exposure of 28.6% creates unacceptable risk for her retirement stage. We will propose a staged reduction plan to manage tax implications and emotional concerns."
    }
   },
   {
-   "seq": 56,
-   "run_id": "C002-20261007-151806-4e9bb8",
-   "ts": "2026-10-07T15:21:41.390532Z",
-   "t_ms": 215014,
+   "seq": 48,
+   "run_id": "C002-20261007-180738-6f266e",
+   "ts": "2026-10-07T18:08:01.676943Z",
+   "t_ms": 23365,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -897,19 +800,21 @@
     "status": "AWAITING_APPROVAL",
     "totals": {
      "llm_calls": 10,
-     "tokens_in": 19873,
-     "tokens_out": 4627,
-     "wall_ms": 215014,
-     "retries": 9
+     "tokens_in": 20295,
+     "tokens_out": 2556,
+     "wall_ms": 23365,
+     "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "C002-20261007-151806-4e9bb8",
+  "run_id": "C002-20261007-180738-6f266e",
   "client_id": "C002",
   "request_text": "",
   "preset": "annual_review",
+  "thread_id": null,
+  "mode": "recommendation",
   "status": "AWAITING_APPROVAL",
   "route": {
    "route": "full_review",
@@ -928,12 +833,12 @@
     "findings": [
      {
       "finding_id": "PORT-1",
-      "title": "Canadian equity allocation significantly exceeds conservative target due to concentrated position",
+      "title": "Significant Canadian equity overweight driven by concentrated holding",
       "severity": "critical",
-      "detail": "The Canadian equity allocation is {{m:alloc.CA_EQUITY.pct}}, significantly above the target of {{m:target.CA_EQUITY.pct}}. This is primarily driven by the Northshore Energy position in the non-registered account, which accounts for {{m:acct.NON_REG.value.cad}} of the total portfolio. This concentration conflicts with the conservative risk profile.",
+      "detail": "Canadian equity is significantly overweight by {{m:drift.CA_EQUITY.pp}} percentage points, primarily due to the concentrated position in Northshore Energy ({{m:acct.NON_REG.value.cad}} in NON_REG). This exceeds the drift tolerance of {{m:cfg.drift_tolerance.pp}} percentage points, creating a critical risk to the conservative mandate.",
       "metric_refs": [
-       "alloc.CA_EQUITY.pct",
-       "target.CA_EQUITY.pct",
+       "drift.CA_EQUITY.pp",
+       "cfg.drift_tolerance.pp",
        "acct.NON_REG.value.cad"
       ],
       "flag_refs": [
@@ -942,13 +847,12 @@
      },
      {
       "finding_id": "PORT-2",
-      "title": "US equity allocation is underweight relative to target portfolio",
+      "title": "US equity underweight relative to conservative model portfolio",
       "severity": "warning",
-      "detail": "The US equity allocation is {{m:alloc.US_EQUITY.pct}}, which is below the target of {{m:target.US_EQUITY.pct}}. This drift of {{m:drift.US_EQUITY.pp}} exceeds the tolerance threshold, indicating a need to rebalance to align with the client's conservative investment strategy.",
+      "detail": "US equity is underweight by {{m:drift.US_EQUITY.pp}} percentage points, exceeding the {{m:cfg.drift_tolerance.pp}} percentage point tolerance. This drift, combined with the Canadian equity concentration, indicates a portfolio structure that deviates from the conservative risk profile.",
       "metric_refs": [
-       "alloc.US_EQUITY.pct",
-       "target.US_EQUITY.pct",
-       "drift.US_EQUITY.pp"
+       "drift.US_EQUITY.pp",
+       "cfg.drift_tolerance.pp"
       ],
       "flag_refs": [
        "FLAG-DRIFT-US_EQUITY"
@@ -965,7 +869,7 @@
       "finding_id": "RISK-1",
       "title": "Portfolio volatility exceeds conservative suitability band",
       "severity": "critical",
-      "detail": "The portfolio volatility of {{m:risk.vol.pct}} exceeds the maximum allowable volatility of {{m:risk.vol_band_max.pct}} for a conservative profile. Given the client's age of sixty-eight and need for monthly income, this level of volatility is inappropriate and poses a significant risk to capital preservation.",
+      "detail": "The portfolio volatility of {{m:risk.vol.pct}} exceeds the maximum threshold of {{m:risk.vol_band_max.pct}} for a conservative investor. Given the client is {{m:age}} and requires monthly income, this elevated volatility poses a significant risk to capital preservation and liquidity needs.",
       "metric_refs": [
        "risk.vol.pct",
        "risk.vol_band_max.pct"
@@ -978,7 +882,7 @@
       "finding_id": "RISK-2",
       "title": "Excessive concentration in single security NRTH",
       "severity": "critical",
-      "detail": "The holding in NRTH represents {{m:conc.NRTH.pct}} of the portfolio, significantly exceeding the concentration limit of {{m:conc.limit.pct}}. This high exposure to a single security creates excessive idiosyncratic risk, which is unsuitable for a conservative investor requiring liquidity for monthly income.",
+      "detail": "The holding in NRTH represents {{m:conc.NRTH.pct}} of the portfolio, significantly exceeding the {{m:conc.limit.pct}} concentration limit. This high exposure to a single security creates excessive idiosyncratic risk, which is inappropriate for a conservative retiree.",
       "metric_refs": [
        "conc.NRTH.pct",
        "conc.limit.pct"
@@ -991,7 +895,7 @@
       "finding_id": "RISK-3",
       "title": "Significant downside risk in equity bear market scenario",
       "severity": "info",
-      "detail": "In an equity bear market scenario, the portfolio would experience a loss of {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. This potential downside is substantial for a retiree with moderate liquidity needs, potentially impacting the ability to sustain monthly income draws.",
+      "detail": "In an equity bear market scenario, the portfolio is projected to lose {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. This potential loss is substantial for a conservative client drawing monthly income, potentially impacting their long-term financial stability.",
       "metric_refs": [
        "stress.equity_bear.cad",
        "stress.equity_bear.pct"
@@ -1007,11 +911,20 @@
     "findings": [
      {
       "finding_id": "TAX-1",
-      "title": "No unused TFSA or RRSP contribution room available",
+      "title": "No unused TFSA contribution room available",
       "severity": "info",
-      "detail": "The client has no unused contribution room in either TFSA or RRSP accounts, as indicated by {{m:tax.tfsa_room.cad}} and {{m:tax.rrsp_room.cad}}. Consequently, no further tax-advantaged contributions can be made at this time.",
+      "detail": "The client has no unused TFSA contribution room ({{m:tax.tfsa_room.cad}}), limiting opportunities to optimize tax-sheltered growth. All current contributions are maximized.",
       "metric_refs": [
-       "tax.tfsa_room.cad",
+       "tax.tfsa_room.cad"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "TAX-2",
+      "title": "No unused RRSP contribution room available",
+      "severity": "info",
+      "detail": "The client has no unused RRSP contribution room ({{m:tax.rrsp_room.cad}}), meaning no additional tax-deferred savings can be made at this time.",
+      "metric_refs": [
        "tax.rrsp_room.cad"
       ],
       "flag_refs": []
@@ -1025,9 +938,9 @@
     "findings": [
      {
       "finding_id": "MKT-1",
-      "title": "US equity markets show strong year-to-date performance",
+      "title": "US equity growth driven by technology sector rally",
       "severity": "info",
-      "detail": "US equities experienced significant growth, with the index returning {{m:mkt.us_equity_ytd.pct}} percent year to date. This performance was primarily driven by a rally in technology sector stocks.",
+      "detail": "US equity holdings experienced significant growth, with the index returning {{m:mkt.us_equity_ytd.pct}} percent year to date, driven by a rally in technology names.",
       "metric_refs": [
        "mkt.us_equity_ytd.pct"
       ],
@@ -1035,34 +948,12 @@
      },
      {
       "finding_id": "MKT-2",
-      "title": "Canadian equity performance impacted by energy sector volatility",
-      "severity": "info",
-      "detail": "Canadian equity performance was more moderate at {{m:mkt.ca_equity_ytd.pct}} percent. Volatility in the energy sector, which saw a {{m:mkt.energy_sector_qtd.pct}} percent decline quarter to date, contributed to this performance profile.",
-      "metric_refs": [
-       "mkt.ca_equity_ytd.pct",
-       "mkt.energy_sector_qtd.pct"
-      ],
-      "flag_refs": []
-     },
-     {
-      "finding_id": "MKT-3",
       "title": "Canadian bond yields decline amid cooling inflation",
       "severity": "info",
-      "detail": "Canadian bond yields have drifted lower, with the ten-year yield currently at {{m:mkt.ca_10y_yield.pct}} percent. The bond index has returned {{m:mkt.ca_bond_ytd.pct}} percent year to date as inflation pressures have cooled.",
+      "detail": "Canadian bond yields have drifted lower to {{m:mkt.ca_10y_yield.pct}} percent as inflation cools, contributing to a year to date return of {{m:mkt.ca_bond_ytd.pct}} percent for the Canadian bond index.",
       "metric_refs": [
        "mkt.ca_10y_yield.pct",
        "mkt.ca_bond_ytd.pct"
-      ],
-      "flag_refs": []
-     },
-     {
-      "finding_id": "MKT-4",
-      "title": "International equity and real asset performance overview",
-      "severity": "info",
-      "detail": "International equities have returned {{m:mkt.intl_equity_ytd.pct}} percent year to date, while real assets, represented by the REIT index, have seen a return of {{m:mkt.reit_ytd.pct}} percent over the same period.",
-      "metric_refs": [
-       "mkt.intl_equity_ytd.pct",
-       "mkt.reit_ytd.pct"
       ],
       "flag_refs": []
      }
@@ -1125,42 +1016,42 @@
     "key": "target.CASH.pct",
     "value": 5.0,
     "unit": "pct",
-    "label": "CASH target (conservative)",
+    "label": "Cash target (conservative)",
     "source_tool": "compute_allocation"
    },
    "target.CA_BONDS.pct": {
     "key": "target.CA_BONDS.pct",
     "value": 55.0,
     "unit": "pct",
-    "label": "CA_BONDS target (conservative)",
+    "label": "Canadian bonds target (conservative)",
     "source_tool": "compute_allocation"
    },
    "target.CA_EQUITY.pct": {
     "key": "target.CA_EQUITY.pct",
     "value": 15.0,
     "unit": "pct",
-    "label": "CA_EQUITY target (conservative)",
+    "label": "Canadian equity target (conservative)",
     "source_tool": "compute_allocation"
    },
    "target.US_EQUITY.pct": {
     "key": "target.US_EQUITY.pct",
     "value": 12.0,
     "unit": "pct",
-    "label": "US_EQUITY target (conservative)",
+    "label": "US equity target (conservative)",
     "source_tool": "compute_allocation"
    },
    "target.INTL_EQUITY.pct": {
     "key": "target.INTL_EQUITY.pct",
     "value": 8.0,
     "unit": "pct",
-    "label": "INTL_EQUITY target (conservative)",
+    "label": "International equity target (conservative)",
     "source_tool": "compute_allocation"
    },
    "target.REAL_ASSETS.pct": {
     "key": "target.REAL_ASSETS.pct",
     "value": 5.0,
     "unit": "pct",
-    "label": "REAL_ASSETS target (conservative)",
+    "label": "Real estate target (conservative)",
     "source_tool": "compute_allocation"
    },
    "cfg.drift_tolerance.pp": {
@@ -1174,43 +1065,57 @@
     "key": "drift.CASH.pp",
     "value": -1.22,
     "unit": "pp",
-    "label": "CASH drift vs target",
+    "label": "Cash vs target",
     "source_tool": "compute_drift"
    },
    "drift.CA_BONDS.pp": {
     "key": "drift.CA_BONDS.pp",
     "value": -2.09,
     "unit": "pp",
-    "label": "CA_BONDS drift vs target",
+    "label": "Canadian bonds vs target",
     "source_tool": "compute_drift"
    },
    "drift.CA_EQUITY.pp": {
     "key": "drift.CA_EQUITY.pp",
     "value": 18.11,
     "unit": "pp",
-    "label": "CA_EQUITY drift vs target",
+    "label": "Canadian equity vs target",
     "source_tool": "compute_drift"
    },
    "drift.US_EQUITY.pp": {
     "key": "drift.US_EQUITY.pp",
     "value": -7.46,
     "unit": "pp",
-    "label": "US_EQUITY drift vs target",
+    "label": "US equity vs target",
     "source_tool": "compute_drift"
    },
    "drift.INTL_EQUITY.pp": {
     "key": "drift.INTL_EQUITY.pp",
     "value": -4.6,
     "unit": "pp",
-    "label": "INTL_EQUITY drift vs target",
+    "label": "International equity vs target",
     "source_tool": "compute_drift"
    },
    "drift.REAL_ASSETS.pp": {
     "key": "drift.REAL_ASSETS.pp",
     "value": -2.73,
     "unit": "pp",
-    "label": "REAL_ASSETS drift vs target",
+    "label": "Real estate vs target",
     "source_tool": "compute_drift"
+   },
+   "goal.model_return.pct": {
+    "key": "goal.model_return.pct",
+    "value": 5.19,
+    "unit": "pct",
+    "label": "Model-portfolio expected return",
+    "source_tool": "check_goals"
+   },
+   "goal.G1.required.pct": {
+    "key": "goal.G1.required.pct",
+    "value": 3.19,
+    "unit": "pct",
+    "label": "Return needed for Income reserve",
+    "source_tool": "check_goals"
    },
    "acct.RRIF.value.cad": {
     "key": "acct.RRIF.value.cad",
@@ -1383,7 +1288,7 @@
      "drift.CA_EQUITY.pp",
      "cfg.drift_tolerance.pp"
     ],
-    "message": "CA_EQUITY is 18.1 pp above the conservative target (tolerance 5.0 pp)"
+    "message": "Canadian equity is 18.1 points above target (tolerance 5)"
    },
    "FLAG-DRIFT-US_EQUITY": {
     "flag_id": "FLAG-DRIFT-US_EQUITY",
@@ -1393,7 +1298,7 @@
      "drift.US_EQUITY.pp",
      "cfg.drift_tolerance.pp"
     ],
-    "message": "US_EQUITY is 7.5 pp below the conservative target (tolerance 5.0 pp)"
+    "message": "US equity is 7.5 points below target (tolerance 5)"
    },
    "FLAG-SUIT-VOL": {
     "flag_id": "FLAG-SUIT-VOL",
@@ -1403,7 +1308,7 @@
      "risk.vol.pct",
      "risk.vol_band_max.pct"
     ],
-    "message": "Portfolio volatility 11.9% exceeds the conservative band maximum of 7.0%"
+    "message": "Volatility 11.9% is above the conservative limit (7.0%)"
    },
    "FLAG-CONC-NRTH": {
     "flag_id": "FLAG-CONC-NRTH",
@@ -1413,22 +1318,23 @@
      "conc.NRTH.pct",
      "conc.limit.pct"
     ],
-    "message": "NRTH is 28.6% of the portfolio, above the 10.0% single-security limit"
+    "message": "NRTH is 28.6% of the portfolio (single-stock limit 10%)"
    }
   },
   "drafts": [
    {
-    "headline": "Addressing Portfolio Concentration and Aligning Asset Allocation with Conservative Risk Profile",
-    "summary": "The portfolio currently exceeds the conservative risk mandate due to a significant concentration in a single security, {{m:conc.NRTH.pct}}, and an elevated Canadian equity allocation of {{m:alloc.CA_EQUITY.pct}}. This has pushed portfolio volatility to {{m:risk.vol.pct}}, well above the limit of {{m:risk.vol_band_max.pct}}. To align with your objectives of capital preservation and income, we must reduce this concentration. Given your emotional attachment to the holding and tax considerations, we recommend a phased reduction of the position. Simultaneously, we will rebalance proceeds to increase US equity exposure, which is currently underweight at {{m:alloc.US_EQUITY.pct}} against a target of {{m:target.US_EQUITY.pct}}, to improve diversification and lower overall risk.",
+    "headline": "Addressing portfolio concentration and volatility to align with Margaret's conservative retirement objectives",
+    "summary": "Margaret's portfolio currently deviates from her conservative mandate, primarily due to a significant concentration in Northshore Energy (NRTH) and an overall equity overweight. This has driven portfolio volatility to {{m:risk.vol.pct}}, exceeding the {{m:risk.vol_band_max.pct}} threshold. To better protect her capital and secure the monthly income she relies on, we must reduce this idiosyncratic risk. While she is attached to the holding, the current exposure of {{m:conc.NRTH.pct}} creates unacceptable risk for her retirement stage. We will propose a staged reduction plan to manage tax implications and emotional concerns.",
     "actions": [
      {
       "action_id": "ACT-001",
       "type": "reduce_position",
       "target": "NRTH",
       "direction": "decrease",
-      "description": "Begin a phased reduction of the concentrated holding to bring exposure within the limit.",
-      "rationale": "The current concentration of {{m:conc.NRTH.pct}} creates excessive idiosyncratic risk.",
+      "description": "Implement a phased reduction of the Northshore Energy position to bring it within the {{m:conc.limit.pct}} concentration limit.",
+      "rationale": "The current {{m:conc.NRTH.pct}} allocation creates excessive idiosyncratic risk, violating the conservative mandate and threatening capital preservation.",
       "finding_refs": [
+       "PORT-1",
        "RISK-2"
       ],
       "priority": "high"
@@ -1436,55 +1342,43 @@
      {
       "action_id": "ACT-002",
       "type": "rebalance",
-      "target": "US_EQUITY",
-      "direction": "increase",
-      "description": "Increase US equity exposure to align with the target allocation.",
-      "rationale": "The current allocation of {{m:alloc.US_EQUITY.pct}} is below the target of {{m:target.US_EQUITY.pct}}.",
-      "finding_refs": [
-       "PORT-2"
-      ],
-      "priority": "medium"
-     },
-     {
-      "action_id": "ACT-003",
-      "type": "rebalance",
       "target": "CA_EQUITY",
       "direction": "decrease",
-      "description": "Reduce overall Canadian equity exposure to align with the conservative target.",
-      "rationale": "The current allocation of {{m:alloc.CA_EQUITY.pct}} significantly exceeds the target of {{m:target.CA_EQUITY.pct}}.",
+      "description": "Reduce overall Canadian equity exposure to align with the target allocation.",
+      "rationale": "Canadian equity is overweight by {{m:drift.CA_EQUITY.pp}}, contributing to the portfolio's elevated volatility and drift from the conservative model.",
       "finding_refs": [
        "PORT-1"
       ],
       "priority": "medium"
      },
      {
-      "action_id": "ACT-004",
-      "type": "review_kyc",
-      "target": "CA_EQUITY",
-      "direction": "none",
-      "description": "Review the portfolio structure to ensure it remains within the volatility band.",
-      "rationale": "Current volatility of {{m:risk.vol.pct}} exceeds the maximum threshold of {{m:risk.vol_band_max.pct}}.",
+      "action_id": "ACT-003",
+      "type": "rebalance",
+      "target": "US_EQUITY",
+      "direction": "increase",
+      "description": "Increase US equity exposure to address the current underweight position.",
+      "rationale": "US equity is underweight by {{m:drift.US_EQUITY.pp}}, and increasing this exposure will help diversify the portfolio and restore alignment with the conservative model.",
       "finding_refs": [
-       "RISK-1"
+       "PORT-2"
       ],
-      "priority": "high"
+      "priority": "medium"
      }
     ],
     "risks_and_considerations": [
-     "Potential capital gains tax liability upon selling the concentrated position.",
-     "Market volatility during the transition period.",
-     "Emotional difficulty in reducing a legacy holding."
+     "Reducing the NRTH position will trigger capital gains taxes, which must be managed through a multi-year, staged liquidation strategy.",
+     "The portfolio's current volatility of {{m:risk.vol.pct}} leaves it vulnerable to market downturns, with a potential loss of {{m:stress.equity_bear.cad}} in a bear market scenario.",
+     "Moving away from the concentrated energy holding may impact the specific dividend income stream Margaret currently receives."
     ],
     "deferred": [
      {
-      "finding_id": "RISK-2",
-      "reason": "Full liquidation is deferred to allow for a tax-efficient, multi-year exit strategy that respects the client's emotional attachment to the inherited shares."
+      "finding_id": "RISK-1",
+      "reason": "Volatility will naturally decrease as the concentrated NRTH position is reduced and the portfolio is rebalanced toward the conservative model."
      }
     ],
     "client_talking_points": [
-     "We will discuss how reducing the single-stock concentration helps protect your monthly income and lowers portfolio volatility.",
-     "We will outline a tax-efficient plan to gradually transition out of the inherited shares over time.",
-     "We will explain how increasing our US equity exposure provides better diversification to support your capital preservation goals."
+     "Margaret, your portfolio is currently taking on more risk than is appropriate for your conservative goals, largely because over {{m:conc.NRTH.pct}} of your wealth is tied to a single energy stock.",
+     "We want to protect your monthly income and capital by gradually diversifying your holdings, which will help lower the overall volatility of your investments.",
+     "I understand your emotional attachment to the Northshore shares, so we will plan a tax-efficient, staged approach to reduce this position over time rather than selling everything at once."
     ]
    }
   ],
@@ -1526,17 +1420,18 @@
   "revision_count": 0,
   "final": {
    "recommendation": {
-    "headline": "Addressing Portfolio Concentration and Aligning Asset Allocation with Conservative Risk Profile",
-    "summary": "The portfolio currently exceeds the conservative risk mandate due to a significant concentration in a single security, 28.6%, and an elevated Canadian equity allocation of 33.1%. This has pushed portfolio volatility to 11.9%, well above the limit of 7.0%. To align with your objectives of capital preservation and income, we must reduce this concentration. Given your emotional attachment to the holding and tax considerations, we recommend a phased reduction of the position. Simultaneously, we will rebalance proceeds to increase US equity exposure, which is currently underweight at 4.5% against a target of 12.0%, to improve diversification and lower overall risk.",
+    "headline": "Addressing portfolio concentration and volatility to align with Margaret's conservative retirement objectives",
+    "summary": "Margaret's portfolio currently deviates from her conservative mandate, primarily due to a significant concentration in Northshore Energy (NRTH) and an overall equity overweight. This has driven portfolio volatility to 11.9%, exceeding the 7.0% threshold. To better protect her capital and secure the monthly income she relies on, we must reduce this idiosyncratic risk. While she is attached to the holding, the current exposure of 28.6% creates unacceptable risk for her retirement stage. We will propose a staged reduction plan to manage tax implications and emotional concerns.",
     "actions": [
      {
       "action_id": "ACT-001",
       "type": "reduce_position",
       "target": "NRTH",
       "direction": "decrease",
-      "description": "Begin a phased reduction of the concentrated holding to bring exposure within the limit.",
-      "rationale": "The current concentration of 28.6% creates excessive idiosyncratic risk.",
+      "description": "Implement a phased reduction of the Northshore Energy position to bring it within the 10.0% concentration limit.",
+      "rationale": "The current 28.6% allocation creates excessive idiosyncratic risk, violating the conservative mandate and threatening capital preservation.",
       "finding_refs": [
+       "PORT-1",
        "RISK-2"
       ],
       "priority": "high"
@@ -1544,79 +1439,74 @@
      {
       "action_id": "ACT-002",
       "type": "rebalance",
-      "target": "US_EQUITY",
-      "direction": "increase",
-      "description": "Increase US equity exposure to align with the target allocation.",
-      "rationale": "The current allocation of 4.5% is below the target of 12.0%.",
-      "finding_refs": [
-       "PORT-2"
-      ],
-      "priority": "medium"
-     },
-     {
-      "action_id": "ACT-003",
-      "type": "rebalance",
       "target": "CA_EQUITY",
       "direction": "decrease",
-      "description": "Reduce overall Canadian equity exposure to align with the conservative target.",
-      "rationale": "The current allocation of 33.1% significantly exceeds the target of 15.0%.",
+      "description": "Reduce overall Canadian equity exposure to align with the target allocation.",
+      "rationale": "Canadian equity is overweight by +18.1 pp, contributing to the portfolio's elevated volatility and drift from the conservative model.",
       "finding_refs": [
        "PORT-1"
       ],
       "priority": "medium"
      },
      {
-      "action_id": "ACT-004",
-      "type": "review_kyc",
-      "target": "CA_EQUITY",
-      "direction": "none",
-      "description": "Review the portfolio structure to ensure it remains within the volatility band.",
-      "rationale": "Current volatility of 11.9% exceeds the maximum threshold of 7.0%.",
+      "action_id": "ACT-003",
+      "type": "rebalance",
+      "target": "US_EQUITY",
+      "direction": "increase",
+      "description": "Increase US equity exposure to address the current underweight position.",
+      "rationale": "US equity is underweight by -7.5 pp, and increasing this exposure will help diversify the portfolio and restore alignment with the conservative model.",
       "finding_refs": [
-       "RISK-1"
+       "PORT-2"
       ],
-      "priority": "high"
+      "priority": "medium"
      }
     ],
     "risks_and_considerations": [
-     "Potential capital gains tax liability upon selling the concentrated position.",
-     "Market volatility during the transition period.",
-     "Emotional difficulty in reducing a legacy holding."
+     "Reducing the NRTH position will trigger capital gains taxes, which must be managed through a multi-year, staged liquidation strategy.",
+     "The portfolio's current volatility of 11.9% leaves it vulnerable to market downturns, with a potential loss of -$47,400 in a bear market scenario.",
+     "Moving away from the concentrated energy holding may impact the specific dividend income stream Margaret currently receives."
     ],
     "deferred": [
      {
-      "finding_id": "RISK-2",
-      "reason": "Full liquidation is deferred to allow for a tax-efficient, multi-year exit strategy that respects the client's emotional attachment to the inherited shares."
+      "finding_id": "RISK-1",
+      "reason": "Volatility will naturally decrease as the concentrated NRTH position is reduced and the portfolio is rebalanced toward the conservative model."
      }
     ],
     "client_talking_points": [
-     "We will discuss how reducing the single-stock concentration helps protect your monthly income and lowers portfolio volatility.",
-     "We will outline a tax-efficient plan to gradually transition out of the inherited shares over time.",
-     "We will explain how increasing our US equity exposure provides better diversification to support your capital preservation goals."
+     "Margaret, your portfolio is currently taking on more risk than is appropriate for your conservative goals, largely because over 28.6% of your wealth is tied to a single energy stock.",
+     "We want to protect your monthly income and capital by gradually diversifying your holdings, which will help lower the overall volatility of your investments.",
+     "I understand your emotional attachment to the Northshore shares, so we will plan a tax-efficient, staged approach to reduce this position over time rather than selling everything at once."
     ]
    },
    "disclosure": "Generated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client.",
    "metrics_used": [
-    {
-     "key": "alloc.CA_EQUITY.pct",
-     "value": 33.11,
-     "unit": "pct",
-     "label": "CA_EQUITY allocation",
-     "source_tool": "compute_allocation"
-    },
-    {
-     "key": "alloc.US_EQUITY.pct",
-     "value": 4.54,
-     "unit": "pct",
-     "label": "US_EQUITY allocation",
-     "source_tool": "compute_allocation"
-    },
     {
      "key": "conc.NRTH.pct",
      "value": 28.57,
      "unit": "pct",
      "label": "NRTH share of portfolio",
      "source_tool": "check_concentration"
+    },
+    {
+     "key": "conc.limit.pct",
+     "value": 10.0,
+     "unit": "pct",
+     "label": "Single-security concentration limit",
+     "source_tool": "check_concentration"
+    },
+    {
+     "key": "drift.CA_EQUITY.pp",
+     "value": 18.11,
+     "unit": "pp",
+     "label": "Canadian equity vs target",
+     "source_tool": "compute_drift"
+    },
+    {
+     "key": "drift.US_EQUITY.pp",
+     "value": -7.46,
+     "unit": "pp",
+     "label": "US equity vs target",
+     "source_tool": "compute_drift"
     },
     {
      "key": "risk.vol.pct",
@@ -1633,32 +1523,26 @@
      "source_tool": "compute_risk_metrics"
     },
     {
-     "key": "target.CA_EQUITY.pct",
-     "value": 15.0,
-     "unit": "pct",
-     "label": "CA_EQUITY target (conservative)",
-     "source_tool": "compute_allocation"
-    },
-    {
-     "key": "target.US_EQUITY.pct",
-     "value": 12.0,
-     "unit": "pct",
-     "label": "US_EQUITY target (conservative)",
-     "source_tool": "compute_allocation"
+     "key": "stress.equity_bear.cad",
+     "value": -47400.0,
+     "unit": "cad",
+     "label": "Equity bear market (illustrative): P&L",
+     "source_tool": "run_stress_test"
     }
    ]
   },
+  "answer": null,
   "message": null,
   "approval": null,
   "budget_snapshot": {
    "llm_calls": 10,
-   "tokens": 24500,
-   "wall_ms": 215014
+   "tokens": 22851,
+   "wall_ms": 23365
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T15:18:06.160345Z",
-  "updated_at": "2026-10-07T15:21:41.390899Z",
+  "created_at": "2026-10-07T18:07:38.087130Z",
+  "updated_at": "2026-10-07T18:08:01.677268Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate",

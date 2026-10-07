@@ -1,0 +1,648 @@
+{
+ "scenario_id": "S11",
+ "title": "What if half the single stock moves into bonds",
+ "client_id": "C002",
+ "request_text": "What if we sell half of the NRTH shares and put the money into bonds?",
+ "preset": null,
+ "recorded_at": "2026-10-07T18:32:47+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:25.288116Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "C002",
+    "request_text": "What if we sell half of the NRTH shares and put the money into bonds?",
+    "preset": null,
+    "thread_id": null,
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:25.306021Z",
+   "t_ms": 17,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:25.306545Z",
+   "t_ms": 18,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G1",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:25.306822Z",
+   "t_ms": 18,
+   "type": "llm_call_started",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:32.869196Z",
+   "t_ms": 7581,
+   "type": "llm_call_finished",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 946,
+    "tokens_out": 52,
+    "latency_ms": 7561,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 6,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:32.869979Z",
+   "t_ms": 7581,
+   "type": "route_decided",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "route": "what_if",
+    "domains": [
+     "scenario"
+    ],
+    "reason": "The request describes a hypothetical trade involving selling a specific holding and reallocating the proceeds.",
+    "confidence": 1.0,
+    "rules_applied": [],
+    "fast_path": false
+   }
+  },
+  {
+   "seq": 7,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:32.871186Z",
+   "t_ms": 7583,
+   "type": "agent_started",
+   "agent": "scenario",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "simulate_trade"
+    ]
+   }
+  },
+  {
+   "seq": 8,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:32.872569Z",
+   "t_ms": 7584,
+   "type": "llm_call_started",
+   "agent": "scenario",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:scenario",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 9,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:38.699873Z",
+   "t_ms": 13411,
+   "type": "llm_call_finished",
+   "agent": "scenario",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:scenario",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1035,
+    "tokens_out": 36,
+    "latency_ms": 5826,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 10,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:38.702716Z",
+   "t_ms": 13414,
+   "type": "tool_call",
+   "agent": "scenario",
+   "level": "info",
+   "payload": {
+    "name": "simulate_trade",
+    "args": {
+     "sell_fraction": 0.5,
+     "sell_ticker": "NRTH",
+     "buy_ticker": "CBND"
+    },
+    "metrics_count": 31,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 11,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:38.703248Z",
+   "t_ms": 13415,
+   "type": "llm_call_started",
+   "agent": "scenario",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:scenario",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 12,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:45.239837Z",
+   "t_ms": 19951,
+   "type": "llm_call_finished",
+   "agent": "scenario",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:scenario",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2405,
+    "tokens_out": 358,
+    "latency_ms": 6534,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 13,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:45.242544Z",
+   "t_ms": 19954,
+   "type": "agent_finished",
+   "agent": "scenario",
+   "level": "info",
+   "payload": {
+    "findings_count": 3,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 14,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:45.246279Z",
+   "t_ms": 19958,
+   "type": "llm_call_started",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 15,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:47.283559Z",
+   "t_ms": 21995,
+   "type": "llm_call_finished",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2442,
+    "tokens_out": 356,
+    "latency_ms": 2035,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 16,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:47.285362Z",
+   "t_ms": 21997,
+   "type": "draft_created",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "revision": 0,
+    "mode": "answer",
+    "actions_count": 0
+   }
+  },
+  {
+   "seq": 17,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:47.285668Z",
+   "t_ms": 21997,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 18,
+   "run_id": "C002-20261007-183225-ab3546",
+   "ts": "2026-10-07T18:32:47.286969Z",
+   "t_ms": 21998,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "COMPLETED",
+    "totals": {
+     "llm_calls": 4,
+     "tokens_in": 6828,
+     "tokens_out": 802,
+     "wall_ms": 21998,
+     "retries": 0
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "C002-20261007-183225-ab3546",
+  "client_id": "C002",
+  "request_text": "What if we sell half of the NRTH shares and put the money into bonds?",
+  "preset": null,
+  "thread_id": null,
+  "mode": "answer",
+  "status": "COMPLETED",
+  "route": {
+   "route": "what_if",
+   "domains": [
+    "scenario"
+   ],
+   "reason": "The request describes a hypothetical trade involving selling a specific holding and reallocating the proceeds.",
+   "confidence": 1.0
+  },
+  "analyst_reports": {
+   "scenario": {
+    "agent": "scenario",
+    "findings": [
+     {
+      "finding_id": "WHATIF-1",
+      "title": "Reduced stress loss in equity bear market scenario",
+      "severity": "info",
+      "detail": "The trade reduces the portfolio's exposure to a bear market, moving from {{m:stress.equity_bear.cad}} to {{m:whatif.stress.equity_bear.cad}}.",
+      "metric_refs": [
+       "stress.equity_bear.cad",
+       "whatif.stress.equity_bear.cad"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "WHATIF-2",
+      "title": "Portfolio volatility remains above conservative limit",
+      "severity": "info",
+      "detail": "Portfolio volatility decreases from {{m:risk.vol.pct}} to {{m:whatif.risk.vol.pct}}, though it remains above the conservative profile limit of {{m:risk.vol_band_max.pct}}.",
+      "metric_refs": [
+       "risk.vol.pct",
+       "whatif.risk.vol.pct",
+       "risk.vol_band_max.pct"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "WHATIF-3",
+      "title": "NRTH concentration remains above limit",
+      "severity": "info",
+      "detail": "The concentration of NRTH decreases from {{m:conc.NRTH.pct}} to {{m:whatif.conc.NRTH.pct}}, though it still exceeds the {{m:conc.limit.pct}} limit.",
+      "metric_refs": [
+       "conc.NRTH.pct",
+       "whatif.conc.NRTH.pct",
+       "conc.limit.pct"
+      ],
+      "flag_refs": []
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   }
+  },
+  "metrics": {
+   "cfg.drift_tolerance.pp": {
+    "key": "cfg.drift_tolerance.pp",
+    "value": 5.0,
+    "unit": "pp",
+    "label": "Drift tolerance",
+    "source_tool": "compute_drift"
+   },
+   "drift.CASH.pp": {
+    "key": "drift.CASH.pp",
+    "value": -1.22,
+    "unit": "pp",
+    "label": "Cash vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.CA_BONDS.pp": {
+    "key": "drift.CA_BONDS.pp",
+    "value": -2.09,
+    "unit": "pp",
+    "label": "Canadian bonds vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.CA_EQUITY.pp": {
+    "key": "drift.CA_EQUITY.pp",
+    "value": 18.11,
+    "unit": "pp",
+    "label": "Canadian equity vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.US_EQUITY.pp": {
+    "key": "drift.US_EQUITY.pp",
+    "value": -7.46,
+    "unit": "pp",
+    "label": "US equity vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.INTL_EQUITY.pp": {
+    "key": "drift.INTL_EQUITY.pp",
+    "value": -4.6,
+    "unit": "pp",
+    "label": "International equity vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.REAL_ASSETS.pp": {
+    "key": "drift.REAL_ASSETS.pp",
+    "value": -2.73,
+    "unit": "pp",
+    "label": "Real estate vs target",
+    "source_tool": "compute_drift"
+   },
+   "risk.vol.pct": {
+    "key": "risk.vol.pct",
+    "value": 11.86,
+    "unit": "pct",
+    "label": "Portfolio volatility (annualised, illustrative)",
+    "source_tool": "compute_risk_metrics"
+   },
+   "risk.exp_return.pct": {
+    "key": "risk.exp_return.pct",
+    "value": 5.56,
+    "unit": "pct",
+    "label": "Expected return (illustrative)",
+    "source_tool": "compute_risk_metrics"
+   },
+   "risk.vol_band_max.pct": {
+    "key": "risk.vol_band_max.pct",
+    "value": 7.0,
+    "unit": "pct",
+    "label": "Max volatility for conservative",
+    "source_tool": "compute_risk_metrics"
+   },
+   "risk.target_vol.pct": {
+    "key": "risk.target_vol.pct",
+    "value": 6.88,
+    "unit": "pct",
+    "label": "Model-portfolio volatility",
+    "source_tool": "compute_risk_metrics"
+   },
+   "conc.limit.pct": {
+    "key": "conc.limit.pct",
+    "value": 10.0,
+    "unit": "pct",
+    "label": "Single-security concentration limit",
+    "source_tool": "check_concentration"
+   },
+   "conc.NRTH.pct": {
+    "key": "conc.NRTH.pct",
+    "value": 28.57,
+    "unit": "pct",
+    "label": "NRTH share of portfolio",
+    "source_tool": "check_concentration"
+   },
+   "stress.equity_bear.cad": {
+    "key": "stress.equity_bear.cad",
+    "value": -47400.0,
+    "unit": "cad",
+    "label": "Equity bear market (illustrative): P&L",
+    "source_tool": "run_stress_test"
+   },
+   "stress.equity_bear.pct": {
+    "key": "stress.equity_bear.pct",
+    "value": -17.91,
+    "unit": "pct",
+    "label": "Equity bear market (illustrative): % of portfolio",
+    "source_tool": "run_stress_test"
+   },
+   "whatif.cfg.drift_tolerance.pp": {
+    "key": "whatif.cfg.drift_tolerance.pp",
+    "value": 5.0,
+    "unit": "pp",
+    "label": "After the trade: Drift tolerance",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.drift.CASH.pp": {
+    "key": "whatif.drift.CASH.pp",
+    "value": -1.22,
+    "unit": "pp",
+    "label": "After the trade: Cash vs target",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.drift.CA_BONDS.pp": {
+    "key": "whatif.drift.CA_BONDS.pp",
+    "value": 12.2,
+    "unit": "pp",
+    "label": "After the trade: Canadian bonds vs target",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.drift.CA_EQUITY.pp": {
+    "key": "whatif.drift.CA_EQUITY.pp",
+    "value": 3.82,
+    "unit": "pp",
+    "label": "After the trade: Canadian equity vs target",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.drift.US_EQUITY.pp": {
+    "key": "whatif.drift.US_EQUITY.pp",
+    "value": -7.46,
+    "unit": "pp",
+    "label": "After the trade: US equity vs target",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.drift.INTL_EQUITY.pp": {
+    "key": "whatif.drift.INTL_EQUITY.pp",
+    "value": -4.6,
+    "unit": "pp",
+    "label": "After the trade: International equity vs target",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.drift.REAL_ASSETS.pp": {
+    "key": "whatif.drift.REAL_ASSETS.pp",
+    "value": -2.73,
+    "unit": "pp",
+    "label": "After the trade: Real estate vs target",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.risk.vol.pct": {
+    "key": "whatif.risk.vol.pct",
+    "value": 7.74,
+    "unit": "pct",
+    "label": "After the trade: Portfolio volatility (annualised, illustrative)",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.risk.exp_return.pct": {
+    "key": "whatif.risk.exp_return.pct",
+    "value": 4.99,
+    "unit": "pct",
+    "label": "After the trade: Expected return (illustrative)",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.risk.vol_band_max.pct": {
+    "key": "whatif.risk.vol_band_max.pct",
+    "value": 7.0,
+    "unit": "pct",
+    "label": "After the trade: Max volatility for conservative",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.risk.target_vol.pct": {
+    "key": "whatif.risk.target_vol.pct",
+    "value": 6.88,
+    "unit": "pct",
+    "label": "After the trade: Model-portfolio volatility",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.conc.limit.pct": {
+    "key": "whatif.conc.limit.pct",
+    "value": 10.0,
+    "unit": "pct",
+    "label": "After the trade: Single-security concentration limit",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.conc.NRTH.pct": {
+    "key": "whatif.conc.NRTH.pct",
+    "value": 14.29,
+    "unit": "pct",
+    "label": "After the trade: NRTH share of portfolio",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.stress.equity_bear.cad": {
+    "key": "whatif.stress.equity_bear.cad",
+    "value": -27366.0,
+    "unit": "cad",
+    "label": "After the trade: Equity bear market (illustrative): P&L",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.stress.equity_bear.pct": {
+    "key": "whatif.stress.equity_bear.pct",
+    "value": -10.34,
+    "unit": "pct",
+    "label": "After the trade: Equity bear market (illustrative): % of portfolio",
+    "source_tool": "simulate_trade"
+   },
+   "whatif.trade.cad": {
+    "key": "whatif.trade.cad",
+    "value": 37800.0,
+    "unit": "cad",
+    "label": "NRTH sold into CBND",
+    "source_tool": "simulate_trade"
+   },
+   "client.age.years": {
+    "key": "client.age.years",
+    "value": 68.0,
+    "unit": "years",
+    "label": "Client age",
+    "source_tool": "context"
+   },
+   "client.horizon.years": {
+    "key": "client.horizon.years",
+    "value": 10.0,
+    "unit": "years",
+    "label": "Time horizon",
+    "source_tool": "context"
+   }
+  },
+  "flags": {},
+  "drafts": [],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G1",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  ],
+  "eval_verdicts": [],
+  "revision_count": 0,
+  "final": null,
+  "answer": {
+   "answer": "This simulation shows that selling half of the NRTH position reduces potential losses in an equity bear market from {{m:stress.equity_bear.cad}} to {{m:whatif.stress.equity_bear.cad}}. While this trade improves the portfolio's risk profile, the concentration of NRTH remains above the {{m:conc.limit.pct}} limit, decreasing from {{m:conc.NRTH.pct}} to {{m:whatif.conc.NRTH.pct}}. Additionally, portfolio volatility improves from {{m:risk.vol.pct}} to {{m:whatif.risk.vol.pct}}, though it still exceeds the conservative limit of {{m:risk.vol_band_max.pct}}. Please note this is a simulation and does not account for taxes or trading costs. We should discuss these trade-offs and the tax implications at your upcoming annual review.",
+   "suggested_questions": [
+    "Would you like to review the tax implications of selling these shares?",
+    "Shall we model a full exit strategy for the NRTH position?",
+    "How does this trade align with your income needs for the next year?"
+   ]
+  },
+  "message": null,
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 4,
+   "tokens": 7630,
+   "wall_ms": 21998
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T18:32:25.114970Z",
+  "updated_at": "2026-10-07T18:32:47.287272Z",
+  "completed_steps": [
+   "input_gate",
+   "kyc_gate",
+   "router",
+   "analyst:scenario",
+   "synthesis"
+  ]
+ },
+ "outbox": null
+}

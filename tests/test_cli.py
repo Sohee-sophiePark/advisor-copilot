@@ -10,6 +10,7 @@ SAMPLE_ARGS = {
     "approve": ["r1"],
     "resume": ["r1"],
     "replay": ["S1"],
+    "export": ["out.json"],
 }
 
 

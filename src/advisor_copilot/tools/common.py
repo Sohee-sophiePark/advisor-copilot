@@ -6,7 +6,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from advisor_copilot.data_access import get_instrument
+from advisor_copilot.data_access import get_client, get_instrument
 from advisor_copilot.models import (
     AccountType,
     AssetClass,
@@ -18,6 +18,23 @@ from advisor_copilot.models import (
     ToolResult,
     Unit,
 )
+
+
+class ToolError(Exception):
+    """Base for errors the harness turns into structured messages for the model."""
+
+
+class UnknownToolError(ToolError):
+    pass
+
+
+class ToolArgsError(ToolError):
+    pass
+
+
+def resolve(client: "str | Client") -> Client:
+    """A client id, or an already-built (e.g. hypothetical) client."""
+    return client if isinstance(client, Client) else get_client(client)
 
 
 class NoArgs(BaseModel):
@@ -76,6 +93,14 @@ def tool_result(
 
 
 # ---- metric keys (03 §6) ----
+ASSET_LABEL = {
+    "CASH": "Cash",
+    "CA_BONDS": "Canadian bonds",
+    "CA_EQUITY": "Canadian equity",
+    "US_EQUITY": "US equity",
+    "INTL_EQUITY": "International equity",
+    "REAL_ASSETS": "Real estate",
+}
 K_TOTAL = "total.value.cad"
 K_DRIFT_TOL = "cfg.drift_tolerance.pp"
 K_RISK_VOL = "risk.vol.pct"
@@ -87,6 +112,7 @@ K_TFSA_ROOM = "tax.tfsa_room.cad"
 K_RRSP_ROOM = "tax.rrsp_room.cad"
 K_NONREG_INTEREST = "tax.nonreg_interest.cad"
 K_CLIENT_AGE = "client.age.years"
+K_GOAL_MODEL_RETURN = "goal.model_return.pct"
 K_CLIENT_HORIZON = "client.horizon.years"
 
 
@@ -116,6 +142,10 @@ def k_conc(ticker: str) -> str:
 
 def k_l1(ticker: str) -> str:
     return f"tax.l1.{ticker}.cad"
+
+
+def k_goal(goal_id: str) -> str:
+    return f"goal.{goal_id}.required.pct"
 
 
 def k_mkt(indicator: str) -> str:

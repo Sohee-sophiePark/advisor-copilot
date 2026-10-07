@@ -13,6 +13,7 @@ SLICES: dict[str, tuple[str, ...]] = {
     "risk": ("risk_profile", "age", "time_horizon_years", "liquidity_needs"),
     "tax": ("tfsa_room_cad", "rrsp_room_cad", "objectives"),
     "market": (),
+    "scenario": ("risk_profile", "time_horizon_years", "liquidity_needs"),
 }
 SEES_NOTES = {"portfolio", "tax", "synthesizer", "evaluator"}
 
@@ -33,6 +34,7 @@ class SynthContext:
     findings: list[Finding]
     metrics: dict[str, Metric]
     flags: dict[str, Flag]
+    thread_summary: str = ""
 
     @property
     def must_address(self) -> list[str]:
@@ -52,6 +54,8 @@ def client_slice(client: Client, agent: str) -> dict:
         out["account_types"] = [a.type for a in client.accounts]
     if agent == "market":
         out["asset_classes_held"] = asset_classes_held(client)
+    if agent == "scenario":
+        out["holdings"] = sorted({(h.ticker, a.type) for a in client.accounts for h in a.holdings})
     return out
 
 
@@ -115,4 +119,9 @@ def synth_inputs(ctx: SynthContext) -> list[str]:
         f"<findings>\n{json.dumps([f.model_dump() for f in ctx.findings])}\n</findings>",
         f"<metric_dictionary>\n{json.dumps(metrics)}\n</metric_dictionary>",
         f"<must_address>{json.dumps(ctx.must_address)}</must_address>",
-    ]
+    ] + ([thread_block(ctx.thread_summary)] if ctx.thread_summary else [])
+
+
+def thread_block(summary: str) -> str:
+    """Earlier chat turns, wrapped as untrusted because they quote the advisor's own words."""
+    return f"<thread_context>\n{wrap(summary, 'thread', 'summary')}\n</thread_context>"

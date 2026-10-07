@@ -8,22 +8,16 @@ from pydantic import BaseModel, ValidationError
 
 from advisor_copilot.data_access import get_client
 from advisor_copilot.models import Domain, Flag, ToolResult
-from advisor_copilot.tools import market, portfolio, risk, tax
-from advisor_copilot.tools.common import NoArgs, asset_classes_held
+from advisor_copilot.tools import market, portfolio, risk, scenario, tax
+from advisor_copilot.tools.common import (  # noqa: F401 — errors re-exported for callers
+    NoArgs,
+    ToolArgsError,
+    ToolError,
+    UnknownToolError,
+    asset_classes_held,
+)
 
 ToolFn = Callable[[str, Any], ToolResult]
-
-
-class ToolError(Exception):
-    """Base for errors the harness turns into structured messages for the model."""
-
-
-class UnknownToolError(ToolError):
-    pass
-
-
-class ToolArgsError(ToolError):
-    pass
 
 
 def _inline(node: Any, defs: dict[str, Any], in_props: bool = False) -> Any:
@@ -107,6 +101,16 @@ _SPECS: list[ToolSpec] = [
         ("portfolio",),
     ),
     ToolSpec(
+        "check_goals",
+        portfolio.check_goals,
+        NoArgs,
+        "Returns, for each goal from the client's survey, the annual return needed to reach it "
+        "from today's portfolio value (no new contributions), and the expected return of the "
+        "client's model portfolio. Flags FLAG-GOAL-<GOAL_ID> (warning) when a goal needs more "
+        "return than the risk profile supports. Use it whenever goals or suitability come up.",
+        ("portfolio",),
+    ),
+    ToolSpec(
         "compute_risk_metrics",
         risk.compute_risk_metrics,
         NoArgs,
@@ -157,6 +161,18 @@ _SPECS: list[ToolSpec] = [
         "does not forecast.",
         ("market",),
     ),
+    ToolSpec(
+        "simulate_trade",
+        scenario.simulate_trade,
+        scenario.TradeArgs,
+        "Simulates one hypothetical trade without executing it: sells part of a holding the "
+        "client owns (a fraction or a dollar amount) and puts the proceeds into another ticker "
+        "inside the same accounts. Returns current metrics and the same metrics after the trade "
+        "(keys prefixed whatif.) for drift, volatility vs the profile limit, single-stock "
+        "concentration and stress loss, plus which breaches the trade resolves, leaves or "
+        "creates. Taxes and trading costs are not modelled.",
+        ("scenario",),
+    ),
 ]
 
 TOOLS: dict[str, ToolSpec] = {spec.name: spec for spec in _SPECS}
@@ -185,7 +201,7 @@ def run_all_for_client(client_id: str) -> list[ToolResult]:
     """Every tool with default arguments; no LLM involved. Used by the CLI and the client list."""
     held = asset_classes_held(get_client(client_id))
     out: list[ToolResult] = []
-    for spec in _SPECS:
+    for spec in (s for s in _SPECS if "scenario" not in s.agents):  # what-ifs need trade args
         args = {"asset_classes": held} if spec.input_model is market.MarketArgs else None
         out.append(spec.run(client_id, args))
     return out

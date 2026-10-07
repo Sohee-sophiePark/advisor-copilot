@@ -1,5 +1,6 @@
 """Settings loader. `config/settings.yaml` is the single source of truth; env overrides run_mode."""
 
+import datetime as dt
 import os
 from functools import lru_cache
 from pathlib import Path
@@ -26,6 +27,13 @@ class TemperatureCfg(BaseModel):
     analyst: float
     synthesizer: float
     evaluator: float
+
+
+class MaxOutputCfg(BaseModel):
+    router: int
+    analyst: int
+    synthesizer: int
+    evaluator: int
 
 
 class ThinkingCfg(BaseModel):
@@ -61,12 +69,17 @@ class BudgetCfg(BaseModel):
     max_total_tokens: int
     max_wall_seconds: int
     per_call_timeout_seconds: int
+    daily_call_cap: int
+    thread_max_calls: int
+    thread_max_tokens: int
 
 
 class AgentsCfg(BaseModel):
     analyst_mode: Literal["tool_loop", "prefetch"]
+    answer_analyst_mode: Literal["tool_loop", "prefetch"]
     max_turns: int
     max_findings: int
+    max_market_findings: int
     max_tool_calls: int
 
 
@@ -86,6 +99,26 @@ class RulesCfg(BaseModel):
     drift_critical_multiplier: float
     single_security_max_pct: float
     interest_in_nonreg_min_cad: float
+    as_of: dt.date
+    kyc_max_age_months: int
+
+
+class ChatCfg(BaseModel):
+    summary_turns: int
+    answer_max_words: int
+
+
+class PricingCfg(BaseModel):
+    """`free_tier` plus one `{input, output}` USD-per-million entry per model id (extra keys)."""
+
+    model_config = ConfigDict(extra="allow")
+    free_tier: bool = True
+
+    def cost(self, model: str, tokens_in: int, tokens_out: int) -> float:
+        p = (self.model_extra or {}).get(model)
+        if self.free_tier or not isinstance(p, dict):
+            return 0.0
+        return (tokens_in * p["input"] + tokens_out * p["output"]) / 1_000_000
 
 
 class InjectionCfg(BaseModel):
@@ -98,6 +131,7 @@ class TraceCfg(BaseModel):
 
 class PathsCfg(BaseModel):
     data: str
+    db: str
     prompts: str
     runs: str
     cassettes: str
@@ -113,6 +147,7 @@ class Settings(BaseModel):
     run_mode: RunMode
     models: ModelsCfg
     temperature: TemperatureCfg
+    max_output_tokens: MaxOutputCfg
     thinking_level: ThinkingCfg
     rate_limits: RateLimitsCfg
     retry: RetryCfg
@@ -121,6 +156,8 @@ class Settings(BaseModel):
     loop: LoopCfg
     router: RouterCfg
     rules: RulesCfg
+    chat: ChatCfg
+    pricing: PricingCfg
     injection: InjectionCfg
     trace: TraceCfg
     paths: PathsCfg

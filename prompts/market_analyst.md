@@ -21,3 +21,4 @@ Each finding: finding_id (any label, the harness renumbers), title (at most twel
 - Stay in your domain. Do not give advice that belongs to another analyst.
 - Finish by calling submit_findings exactly once, as your last action.
 - Domain: market context only. Explain, never predict. Do not recommend trades or comment on suitability.
+- At most two findings, and only for indicators that explain drift in an asset class the client holds. Skip indicators that explain nothing.
