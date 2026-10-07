@@ -103,6 +103,12 @@ def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     assert su["filings"][0]["url"] == "https://www.sec.gov/Archives/edgar/data/311337/0001261/a.htm"
     assert su["facts_source"] == "SEC EDGAR"
     assert store.latest("fx.USDCAD") == ("2026-10-07", 1.4257)
+    real = json.loads((tmp_path / "market_real.json").read_text())[0]
+    assert (real["source"], real["as_of"], len(real["history"])) == (
+        "Bank of Canada",
+        "2026-10-07",
+        2,
+    )
     assert store.latest("px.SU.usd") == ("2026-10-06", 40.0)
     sec = [r for r in seen if "sec.gov" in str(r.url)]
     assert all(r.headers["User-Agent"] == ENV["SEC_USER_AGENT"] for r in sec)

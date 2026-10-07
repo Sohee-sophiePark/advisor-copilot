@@ -20,7 +20,8 @@ What the advisor sees:
 - **Review & Ask** — a chat per client; past conversations can be reopened and continued. "Prepare annual review" produces a recommendation to approve;
   questions get short grounded answers; follow-ups reuse earlier findings; what-ifs ("sell half of
   SU into bonds?") are simulated by code with before-and-after numbers.
-- **Market** — fictional index trends and the households most exposed to each.
+- **Market** — the real USD/CAD rate from the Bank of Canada (with source and date), fictional index trends and the
+  households most exposed to each, and links to every instrument's page.
 - **Ticker** — each holding's page: public facts from SEC EDGAR filings with source and date (issuer, latest annual
   revenue, profit, assets, cash flow, dividends, recent filings), the price source, and the households that hold it.
 - **Ask about my book** — a chat panel beside My book and Market for questions across all households: who to call

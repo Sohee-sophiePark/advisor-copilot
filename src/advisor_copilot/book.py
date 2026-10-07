@@ -1,5 +1,6 @@
 """Advisor views computed by code (no LLM): book overview, client detail, market context."""
 
+import json
 from functools import lru_cache
 
 from advisor_copilot.config import get_settings
@@ -168,7 +169,7 @@ def instrument_view(ticker: str) -> dict:
 
 
 def market_view() -> dict:
-    snap = get_market()
+    snap, real = get_market(), get_settings().path("data") / "market_real.json"
     weights = {c.client_id: (c.name, allocation(c)[1]) for c in list_clients()}
     indicators = []
     for i in snap.indicators:
@@ -197,4 +198,5 @@ def market_view() -> dict:
         "instruments": [
             {"ticker": i.ticker, "name": i.name} for i in load_fixtures().instruments.values()
         ],
+        "real": json.loads(real.read_text()) if real.exists() else [],  # republishable series
     }

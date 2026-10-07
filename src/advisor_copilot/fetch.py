@@ -99,6 +99,17 @@ class Fetcher:
         r = self.get("boc", url)
         self.store.put_raw("boc", url, LICENCE["boc"], r.text)
         rows = [("fx.USDCAD", o["d"], float(o["FXUSDCAD"]["v"])) for o in r.json()["observations"]]
+        public = {  # republishable with attribution: the public site shows this snapshot
+            "key": "fx_usdcad",
+            "label": "USD/CAD, daily average (indicative)",
+            "source": "Bank of Canada",
+            "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
+            "terms": "https://www.bankofcanada.ca/terms/",
+            "as_of": max(d for _, d, _ in rows),
+            "history": [{"date": d, "value": v} for _, d, v in sorted(rows, key=lambda x: x[1])],
+        }
+        path = self.s.path("data") / "market_real.json"
+        path.write_text(json.dumps([public], indent=1) + "\n", encoding="utf-8")
         return f"{self.store.put_history('boc', rows)} new values"
 
     def sec(self, user_agent: str) -> str:
