@@ -1,0 +1,523 @@
+{
+ "scenario_id": "S12",
+ "title": "Book chat",
+ "client_id": "BOOK",
+ "request_text": "Who should I call first this week?",
+ "preset": null,
+ "recorded_at": "2026-10-07T20:29:42+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:35.120176Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "BOOK",
+    "request_text": "Who should I call first this week?",
+    "preset": null,
+    "thread_id": null,
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:35.120582Z",
+   "t_ms": 0,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:35.140529Z",
+   "t_ms": 20,
+   "type": "llm_call_started",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:38.365154Z",
+   "t_ms": 3244,
+   "type": "llm_call_finished",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 705,
+    "tokens_out": 49,
+    "latency_ms": 3223,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:38.365696Z",
+   "t_ms": 3245,
+   "type": "route_decided",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "route": "book_question",
+    "domains": [
+     "book"
+    ],
+    "reason": "The advisor is asking for a prioritization of households within their book of business.",
+    "confidence": 1.0,
+    "rules_applied": [],
+    "fast_path": false
+   }
+  },
+  {
+   "seq": 6,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:38.366564Z",
+   "t_ms": 3246,
+   "type": "agent_started",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "get_market_snapshot",
+     "book_attention",
+     "book_segments",
+     "book_risk",
+     "book_exposure",
+     "book_market_impact",
+     "book_tax",
+     "book_goals"
+    ]
+   }
+  },
+  {
+   "seq": 7,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:38.368905Z",
+   "t_ms": 3248,
+   "type": "llm_call_started",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 8,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:39.315805Z",
+   "t_ms": 4195,
+   "type": "llm_call_finished",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2287,
+    "tokens_out": 16,
+    "latency_ms": 945,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 9,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:39.360026Z",
+   "t_ms": 4239,
+   "type": "tool_call",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "name": "book_attention",
+    "args": {
+     "level": "all"
+    },
+    "metrics_count": 19,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 10,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:39.360692Z",
+   "t_ms": 4240,
+   "type": "llm_call_started",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 11,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:41.196013Z",
+   "t_ms": 6075,
+   "type": "llm_call_finished",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 3658,
+    "tokens_out": 322,
+    "latency_ms": 1833,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 12,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:41.199127Z",
+   "t_ms": 6078,
+   "type": "agent_finished",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "findings_count": 2,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 13,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:41.202297Z",
+   "t_ms": 6082,
+   "type": "llm_call_started",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 14,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:42.863209Z",
+   "t_ms": 7743,
+   "type": "llm_call_finished",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1911,
+    "tokens_out": 376,
+    "latency_ms": 1659,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 15,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:42.865445Z",
+   "t_ms": 7745,
+   "type": "draft_created",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "revision": 0,
+    "mode": "answer",
+    "actions_count": 0
+   }
+  },
+  {
+   "seq": 16,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:42.866168Z",
+   "t_ms": 7745,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 17,
+   "run_id": "BOOK-20261007-202934-0ecc5b",
+   "ts": "2026-10-07T20:29:42.867545Z",
+   "t_ms": 7747,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "COMPLETED",
+    "totals": {
+     "llm_calls": 4,
+     "tokens_in": 8561,
+     "tokens_out": 763,
+     "wall_ms": 7747,
+     "retries": 0
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "BOOK-20261007-202934-0ecc5b",
+  "client_id": "BOOK",
+  "request_text": "Who should I call first this week?",
+  "preset": null,
+  "thread_id": null,
+  "mode": "answer",
+  "status": "COMPLETED",
+  "route": {
+   "route": "book_question",
+   "domains": [
+    "book"
+   ],
+   "reason": "The advisor is asking for a prioritization of households within their book of business.",
+   "confidence": 1.0
+  },
+  "analyst_reports": {
+   "book": {
+    "agent": "book",
+    "findings": [
+     {
+      "finding_id": "BOOK-1",
+      "title": "Urgent attention required for multiple households with risk and tax issues",
+      "severity": "info",
+      "detail": "Of {{m:book.attention_all.matches.count}} households needing attention, {{m:book.attention_all.risk_limit.count}} exceed volatility limits, {{m:book.attention_all.drift.count}} have significant asset allocation drift, and {{m:book.attention_all.tax.count}} have tax-placement issues. {{h:C028}} requires immediate attention due to an overdue review, volatility breach, and tax-inefficient holdings.",
+      "metric_refs": [
+       "book.attention_all.matches.count",
+       "book.attention_all.risk_limit.count",
+       "book.attention_all.drift.count",
+       "book.attention_all.tax.count"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "BOOK-2",
+      "title": "Concentration risk identified in specific households",
+      "severity": "info",
+      "detail": "{{h:C002}} and {{h:C103}} exceed single-stock concentration limits for NRTH. {{h:C002}} also shows significant volatility and allocation drift, requiring a review of their portfolio structure.",
+      "metric_refs": [
+       "book.attention_all.concentration.count"
+      ],
+      "flag_refs": []
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   }
+  },
+  "metrics": {
+   "book.attention_all.matches.count": {
+    "key": "book.attention_all.matches.count",
+    "value": 35.0,
+    "unit": "count",
+    "label": "Households that match",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.shown.count": {
+    "key": "book.attention_all.shown.count",
+    "value": 10.0,
+    "unit": "count",
+    "label": "Households listed",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.concentration.count": {
+    "key": "book.attention_all.concentration.count",
+    "value": 2.0,
+    "unit": "count",
+    "label": "Matching households with a concentration item",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.drift.count": {
+    "key": "book.attention_all.drift.count",
+    "value": 7.0,
+    "unit": "count",
+    "label": "Matching households with a drift item",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.goal.count": {
+    "key": "book.attention_all.goal.count",
+    "value": 1.0,
+    "unit": "count",
+    "label": "Matching households with a goal item",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.kyc.count": {
+    "key": "book.attention_all.kyc.count",
+    "value": 2.0,
+    "unit": "count",
+    "label": "Matching households with a kyc item",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.review.count": {
+    "key": "book.attention_all.review.count",
+    "value": 11.0,
+    "unit": "count",
+    "label": "Matching households with a review item",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.risk_limit.count": {
+    "key": "book.attention_all.risk_limit.count",
+    "value": 9.0,
+    "unit": "count",
+    "label": "Matching households with a risk limit item",
+    "source_tool": "book_attention"
+   },
+   "book.attention_all.tax.count": {
+    "key": "book.attention_all.tax.count",
+    "value": 14.0,
+    "unit": "count",
+    "label": "Matching households with a tax item",
+    "source_tool": "book_attention"
+   },
+   "book.C006.total.cad": {
+    "key": "book.C006.total.cad",
+    "value": 3783200.0,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C028.total.cad": {
+    "key": "book.C028.total.cad",
+    "value": 2593389.99,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C073.total.cad": {
+    "key": "book.C073.total.cad",
+    "value": 2427100.0,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C016.total.cad": {
+    "key": "book.C016.total.cad",
+    "value": 662799.99,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C015.total.cad": {
+    "key": "book.C015.total.cad",
+    "value": 498400.01,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C109.total.cad": {
+    "key": "book.C109.total.cad",
+    "value": 400000.0,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C002.total.cad": {
+    "key": "book.C002.total.cad",
+    "value": 264600.0,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C054.total.cad": {
+    "key": "book.C054.total.cad",
+    "value": 116979.99,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C103.total.cad": {
+    "key": "book.C103.total.cad",
+    "value": 100000.0,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   },
+   "book.C105.total.cad": {
+    "key": "book.C105.total.cad",
+    "value": 100000.0,
+    "unit": "cad",
+    "label": "Household assets",
+    "source_tool": "book_attention"
+   }
+  },
+  "flags": {},
+  "drafts": [],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  ],
+  "eval_verdicts": [],
+  "revision_count": 0,
+  "final": null,
+  "answer": {
+   "answer": "Of {{m:book.attention_all.matches.count}} households needing attention, {{m:book.attention_all.tax.count}} have tax-placement issues, {{m:book.attention_all.review.count}} are due for a review, {{m:book.attention_all.risk_limit.count}} exceed volatility limits, {{m:book.attention_all.drift.count}} have asset allocation drift, {{m:book.attention_all.kyc.count}} have KYC needs, {{m:book.attention_all.concentration.count}} have concentration risk, and {{m:book.attention_all.goal.count}} have goal issues. Prioritize {{h:C028}} due to an overdue review, volatility breach, and tax-inefficient holdings. Also prioritize {{h:C002}} and {{h:C103}} for single-stock concentration risk. {{h:C002}} also requires attention for volatility and drift.",
+   "suggested_questions": [
+    "Which households have the largest tax-placement issues?",
+    "Show me the households with the most significant asset allocation drift.",
+    "Which households are overdue for a review?"
+   ]
+  },
+  "message": null,
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 4,
+   "tokens": 9324,
+   "wall_ms": 7747
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T20:29:34.896945Z",
+  "updated_at": "2026-10-07T20:29:42.867844Z",
+  "completed_steps": [
+   "input_gate",
+   "router",
+   "analyst:book",
+   "synthesis"
+  ]
+ },
+ "outbox": null
+}

@@ -34,6 +34,6 @@ def thread_context(store: Store, thread_id: str, runs_dir: Path, turns: int) -> 
     return ThreadContext("\n".join(lines[-turns:]), last)
 
 
-def answer_key(thread_id: str, text: str, preset: str | None, client_json: str) -> str:
-    raw = "|".join([thread_id, " ".join(text.lower().split()), preset or "", client_json])
+def answer_key(thread_id: str, text: str, preset: str | None, data: str) -> str:
+    raw = "|".join([thread_id, " ".join(text.lower().split()), preset or "", data])
     return "answer:" + hashlib.sha256(raw.encode()).hexdigest()

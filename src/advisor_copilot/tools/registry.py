@@ -8,7 +8,7 @@ from pydantic import BaseModel, ValidationError
 
 from advisor_copilot.data_access import get_client
 from advisor_copilot.models import Domain, Flag, ToolResult
-from advisor_copilot.tools import market, portfolio, risk, scenario, tax
+from advisor_copilot.tools import book, market, portfolio, risk, scenario, tax
 from advisor_copilot.tools.common import (  # noqa: F401 — errors re-exported for callers
     NoArgs,
     ToolArgsError,
@@ -159,7 +159,7 @@ _SPECS: list[ToolSpec] = [
         "Returns fictional market indicators (%) and headlines for the requested asset "
         "classes as of the snapshot date. Use it to explain why allocations drifted. It "
         "does not forecast.",
-        ("market",),
+        ("market", "book"),
     ),
     ToolSpec(
         "simulate_trade",
@@ -172,6 +172,66 @@ _SPECS: list[ToolSpec] = [
         "concentration and stress loss, plus which breaches the trade resolves, leaves or "
         "creates. Taxes and trading costs are not modelled.",
         ("scenario",),
+    ),
+    ToolSpec(
+        "book_attention",
+        book.book_attention,
+        book.AttentionArgs,
+        "Households that need the advisor, most urgent first (critical breaches, KYC due, "
+        "warnings, overdue reviews), with the reasons for each. level filters to one kind of "
+        "item; all returns every household with something to act on.",
+        ("book",),
+    ),
+    ToolSpec(
+        "book_segments",
+        book.book_segments,
+        book.SegmentArgs,
+        "Splits the book by life stage, size tier (Core, Premier, Private) or risk profile: "
+        "households, assets in CAD and households needing attention per group.",
+        ("book",),
+    ),
+    ToolSpec(
+        "book_risk",
+        book.book_risk,
+        book.RiskArgs,
+        "Ranks households by one risk measure: volatility above the profile's limit, equity "
+        "bear-market stress loss, largest single-stock weight, or largest drift from target. "
+        "Returns the values and how many households breach the limit.",
+        ("book",),
+    ),
+    ToolSpec(
+        "book_exposure",
+        book.book_exposure,
+        book.ExposureArgs,
+        "Households holding an asset class or a ticker, ranked by its share of the household, "
+        "with the value in CAD and the total across the book.",
+        ("book",),
+    ),
+    ToolSpec(
+        "book_market_impact",
+        book.book_market_impact,
+        book.ImpactArgs,
+        "Hypothetical: the change in value per household if an asset class or ticker moves by "
+        "move_pct, in CAD and as a share of the household, plus the total for the book. "
+        "Simple arithmetic on current holdings; not a forecast.",
+        ("book",),
+    ),
+    ToolSpec(
+        "book_tax",
+        book.book_tax,
+        book.TaxArgs,
+        "Households with a tax-placement issue: US-listed funds in a TFSA, unused TFSA room "
+        "while interest-earning holdings sit in a taxable account, or interest holdings in a "
+        "non-registered account. Amounts in CAD.",
+        ("book",),
+    ),
+    ToolSpec(
+        "book_goals",
+        book.book_goals,
+        book.GoalArgs,
+        "Households whose survey goals need more annual return than their risk profile's "
+        "model portfolio is expected to deliver.",
+        ("book",),
     ),
 ]
 
@@ -201,7 +261,8 @@ def run_all_for_client(client_id: str) -> list[ToolResult]:
     """Every tool with default arguments; no LLM involved. Used by the CLI and the client list."""
     held = asset_classes_held(get_client(client_id))
     out: list[ToolResult] = []
-    for spec in (s for s in _SPECS if "scenario" not in s.agents):  # what-ifs need trade args
+    # what-ifs need trade args; book tools are not per client
+    for spec in (s for s in _SPECS if not set(s.agents) <= {"scenario", "book"}):
         args = {"asset_classes": held} if spec.input_model is market.MarketArgs else None
         out.append(spec.run(client_id, args))
     return out

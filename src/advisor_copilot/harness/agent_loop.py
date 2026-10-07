@@ -56,7 +56,7 @@ def execute_tool(
         out = {"error": "tool call limit reached; call submit_findings now"}
     else:
         try:
-            results[call.name] = registry.run_tool(call.name, ctx.client.client_id, call.args)
+            results[call.name] = registry.run_tool(call.name, ctx.client_id, call.args)
             out = compact_result(results[call.name])
         except registry.ToolError as e:
             out = {"error": str(e)}
@@ -98,10 +98,7 @@ async def run_agent(
     tools = [ToolDecl(**registry.get_tool(t).declaration()) for t in spec.tools]
     if spec.mode == "prefetch":
         results.update(
-            {
-                t: registry.run_tool(t, ctx.client.client_id, default_args(t, ctx))
-                for t in spec.tools
-            }
+            {t: registry.run_tool(t, ctx.client_id, default_args(t, ctx)) for t in spec.tools}
         )
         messages[0].text += "\n" + render_tool_results(results)
         tools = []

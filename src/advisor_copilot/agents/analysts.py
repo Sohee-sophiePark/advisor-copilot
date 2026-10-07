@@ -1,4 +1,4 @@
-"""The four AnalystSpecs: name, prompt file, tool allowlist, loop mode, and turn cap."""
+"""AnalystSpecs per domain (review, what-if, book): prompt file, tool allowlist, mode, turn cap."""
 
 from dataclasses import dataclass
 from typing import Literal
@@ -30,5 +30,5 @@ def analyst_specs(settings: Settings, mode: str | None = None) -> dict[Domain, A
             a.max_turns,
             a.max_market_findings if d == "market" else a.max_findings,
         )
-        for d in (*DOMAINS, "scenario")
+        for d in (*DOMAINS, "scenario", "book")
     }

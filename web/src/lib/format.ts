@@ -3,6 +3,7 @@ export function formatValue(v: number, unit: string): string {
   if (unit === "pp") return `${v >= 0 ? "+" : ""}${v.toFixed(1)} pp`;
   if (unit === "cad") return `${v < 0 ? "-" : ""}$${Math.abs(Math.round(v)).toLocaleString("en-CA")}`;
   if (unit === "years") return `${Math.round(v)} years`;
+  if (unit === "count") return `${Math.round(v)}`;
   return v.toFixed(2);
 }
 

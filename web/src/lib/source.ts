@@ -1,4 +1,4 @@
-import type { Book, ClientDetail, Market, Outbox, Recorded, RunState, Source, TraceEvent } from "./types";
+import type { Book, ClientDetail, Market, Outbox, PastTurn, Recorded, RunState, Source, TraceEvent } from "./types";
 
 const json = async (url: string, init?: RequestInit) => {
   const r = await fetch(url, init);
@@ -15,6 +15,17 @@ export const liveSource: Source = {
   client: (id) => json(`/api/clients/${id}`),
   market: () => json("/api/market"),
   recorded: async () => [],
+  threads: (clientId) => json(`/api/threads?client_id=${clientId}`),
+  async thread(threadId) {
+    const { messages } = await json(`/api/threads/${threadId}`);
+    const out: PastTurn[] = [];
+    for (let i = 0; i + 1 < messages.length; i += 2) {
+      const reply = messages[i + 1];
+      const state = reply.run_id ? await json(`/api/runs/${reply.run_id}`).catch(() => null) : null;
+      out.push({ question: messages[i].text, state, text: reply.text });
+    }
+    return out;
+  },
   async ask(clientId, threadId, text, preset, onEvent) {
     const tid: string = threadId ?? (await post("/api/threads", { client_id: clientId })).thread_id;
     const { run_id, cached } = await post(`/api/threads/${tid}/messages`, { text, preset });
@@ -61,6 +72,8 @@ export const staticSource: Source = {
   client: async (id) => (await load()).clients[id],
   market: async () => (await load()).market,
   recorded: async (id) => (await load()).recorded[id] ?? [],
+  threads: async () => [],
+  thread: async () => [],
   async ask(clientId, _thread, text, preset, onEvent) {
     const rec = (await load()).recorded[clientId]?.find((r) => (preset ? r.preset === preset : r.question === text));
     if (!rec) throw new Error("This public demo replays recorded questions only. Live chat runs on the advisor's laptop.");

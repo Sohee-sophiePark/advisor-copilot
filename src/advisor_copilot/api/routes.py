@@ -6,7 +6,7 @@ import uuid
 from collections.abc import AsyncIterator
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Path, Request
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request
 from pydantic import BaseModel, Field
 from sse_starlette.sse import EventSourceResponse
 
@@ -14,11 +14,12 @@ from advisor_copilot import book
 from advisor_copilot.actions import apply_approval
 from advisor_copilot.config import ROOT
 from advisor_copilot.data_access import get_client
+from advisor_copilot.db import source_hash
 from advisor_copilot.harness.chat import answer_key, reply_text, thread_context
 from advisor_copilot.harness.orchestrator import run_pipeline, start_run
 from advisor_copilot.harness.state import RunState, load_state, state_path
 from advisor_copilot.harness.trace import TraceBus, load_events
-from advisor_copilot.models import ApprovalDecision
+from advisor_copilot.models import BOOK, ApprovalDecision
 from advisor_copilot.replay import scenario_for
 
 router = APIRouter(prefix="/api")
@@ -66,10 +67,18 @@ def market() -> dict:
 
 @router.post("/threads")
 def create_thread(body: ThreadRequest, request: Request) -> dict:
-    _known_client(body.client_id)
+    if body.client_id != BOOK:
+        _known_client(body.client_id)
     thread_id = uuid.uuid4().hex[:12]
     request.app.state.store.create_thread(thread_id, body.client_id)
     return {"thread_id": thread_id, "client_id": body.client_id}
+
+
+@router.get("/threads")
+def list_threads(
+    request: Request, client_id: Annotated[str, Query(pattern=r"^[A-Za-z0-9_-]{1,80}$")]
+) -> list[dict]:
+    return request.app.state.store.threads(client_id)
 
 
 @router.get("/threads/{thread_id}")
@@ -92,7 +101,9 @@ async def post_message(thread_id: SafeId, body: MessageRequest, request: Request
     calls, tokens = store.thread_totals(thread_id)
     if calls >= s.budget.thread_max_calls or tokens >= s.budget.thread_max_tokens:
         raise HTTPException(429, "This conversation reached its budget. Start a new one.")
-    key = answer_key(thread_id, body.text, body.preset, get_client(client_id).model_dump_json())
+    book = client_id == BOOK
+    data = source_hash(s.path("data")) if book else get_client(client_id).model_dump_json()
+    key = answer_key(thread_id, body.text, body.preset, data)
     ctx = thread_context(store, thread_id, runs, s.chat.summary_turns)
     store.add_message(thread_id, "advisor", body.text or PRESET_TEXT[body.preset])
     if (

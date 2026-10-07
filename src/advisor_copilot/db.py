@@ -201,6 +201,16 @@ class Store:
                 "INSERT INTO threads VALUES (?,?,datetime('now'))", (thread_id, client_id)
             )
 
+    def threads(self, client_id: str) -> list[dict]:
+        """A client's threads that have messages, newest first, titled by their first question."""
+        sql = (
+            "SELECT t.thread_id, t.created_at, COUNT(m.seq) AS messages, "
+            "(SELECT text FROM messages WHERE thread_id=t.thread_id AND seq=1) AS title "
+            "FROM threads t JOIN messages m USING (thread_id) WHERE t.client_id=? "
+            "GROUP BY t.thread_id ORDER BY t.rowid DESC LIMIT 20"
+        )
+        return [dict(r) for r in self.conn.execute(sql, (client_id,))]
+
     def thread_client(self, thread_id: str) -> str | None:
         row = self.conn.execute(
             "SELECT client_id FROM threads WHERE thread_id=?", (thread_id,)

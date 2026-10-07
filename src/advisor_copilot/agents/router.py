@@ -16,23 +16,27 @@ OUT_OF_SCOPE_TEMPLATE = (
 
 
 def post_rules(
-    d: RouteDecision, threshold: float, previous: list[str] | None = None
+    d: RouteDecision, threshold: float, previous: list[str] | None = None, book: bool = False
 ) -> tuple[RouteDecision, list[str]]:
-    """Widen, never narrow: follow_up needs a previous analysis; low confidence → full_review."""
+    """Widen, never narrow: follow_up needs a previous analysis; low confidence → the widest
+    route of the scope (full_review for a client, book_question for the book)."""
     rules: list[str] = []
+    wide = "book_question" if book else "full_review"
     route, domains = d.route, [x for x in DOMAINS if x in d.domains]
+    if (route == "book_question") != book and route not in ("follow_up", "out_of_scope"):
+        route, rules = wide, ["route_outside_scope"]
     if route == "follow_up" and previous is None:
-        route, rules = "full_review", ["follow_up_without_findings"]
+        route, rules = wide, ["follow_up_without_findings"]
     if route == "follow_up":
-        domains = [x for x in DOMAINS if x in (previous or [])]
+        domains = list(previous or [])
     if route == "what_if":
         domains = ["scenario"]
     if route == "targeted" and not domains:
         route, rules = "full_review", ["targeted_without_domains"]
-    if d.confidence < threshold and route != "full_review":
-        route, rules = "full_review", rules + ["low_confidence"]
-    domains = (
-        list(DOMAINS) if route == "full_review" else [] if route == "out_of_scope" else domains
+    if d.confidence < threshold and route != wide:
+        route, rules = wide, rules + ["low_confidence"]
+    domains = {"full_review": list(DOMAINS), "book_question": ["book"], "out_of_scope": []}.get(
+        route, domains
     )
     return RouteDecision(
         route=route, domains=domains, reason=d.reason, confidence=d.confidence
@@ -53,10 +57,11 @@ async def route(
     deps: Deps,
     thread_summary: str = "",
     previous: list[str] | None = None,
+    book: bool = False,
 ) -> RouteDecision:
     """`previous` = domains of the thread's last analysis (None if there is none)."""
     s = deps.settings
-    if preset in s.router.fast_path_presets:
+    if preset in s.router.fast_path_presets and not book:
         d = RouteDecision(
             route="full_review", domains=list(DOMAINS), reason="preset", confidence=1.0
         )
@@ -66,7 +71,7 @@ async def route(
         return d
     req = LLMRequest(
         model=s.models.router,
-        system=load_prompt("router.md", s),
+        system=load_prompt("book_router.md" if book else "router.md", s),
         messages=[Message(role="user", text=router_input(request_text, thread_summary, previous))],
         temperature=s.temperature.router,
         thinking_level=s.thinking_level.router,
@@ -81,7 +86,7 @@ async def route(
         raw = RouteDecision(
             route="full_review", domains=[], reason="unparseable router output", confidence=0.0
         )
-    d, rules = post_rules(raw, s.router.low_confidence_threshold, previous)
+    d, rules = post_rules(raw, s.router.low_confidence_threshold, previous, book)
     deps.trace.emit(
         "route_decided", "router", {**d.model_dump(), "rules_applied": rules, "fast_path": False}
     )

@@ -13,9 +13,10 @@ RiskProfile = Literal["conservative", "balanced", "growth"]
 IncomeType = Literal["interest", "eligible_dividend", "foreign_dividend", "other_income"]
 AccountType = Literal["TFSA", "RRSP", "RRIF", "NON_REG"]
 Severity = Literal["critical", "warning", "info"]
-Unit = Literal["pct", "pp", "cad", "years", "ratio"]
-Domain = Literal["portfolio", "risk", "tax", "market", "scenario"]  # scenario: what-if only
-Route = Literal["full_review", "targeted", "follow_up", "what_if", "out_of_scope"]
+Unit = Literal["pct", "pp", "cad", "years", "ratio", "count"]
+Domain = Literal["portfolio", "risk", "tax", "market", "scenario", "book"]  # not in DOMAINS
+Route = Literal["full_review", "targeted", "follow_up", "what_if", "out_of_scope", "book_question"]
+BOOK = "BOOK"  # scope id used in place of a client id for questions about the whole book
 ActionType = Literal[
     "rebalance", "reduce_position", "relocate_holding", "use_tfsa_room", "review_kyc", "no_action"
 ]

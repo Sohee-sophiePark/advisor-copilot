@@ -22,7 +22,14 @@ async def synthesize(
         ]
     req = LLMRequest(
         model=s.models.synthesizer,
-        system=load_prompt("answer.md" if answer_mode else "synthesizer.md", s),
+        system=load_prompt(
+            "synthesizer.md"
+            if not answer_mode
+            else "answer.md"
+            if ctx.client
+            else "book_answer.md",
+            s,
+        ),
         messages=[Message(role="user", text="\n".join(parts))],
         temperature=s.temperature.synthesizer,
         thinking_level=s.thinking_level.synthesizer,

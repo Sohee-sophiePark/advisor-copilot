@@ -1,0 +1,166 @@
+{
+ "scenario_id": "S14",
+ "title": "Book chat",
+ "client_id": "BOOK",
+ "request_text": "Which stock should all my clients buy?",
+ "preset": null,
+ "recorded_at": "2026-10-07T20:16:11+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "BOOK-20261007-201610-2eefa4",
+   "ts": "2026-10-07T20:16:10.237471Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "BOOK",
+    "request_text": "Which stock should all my clients buy?",
+    "preset": null,
+    "thread_id": null,
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "BOOK-20261007-201610-2eefa4",
+   "ts": "2026-10-07T20:16:10.237918Z",
+   "t_ms": 0,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "BOOK-20261007-201610-2eefa4",
+   "ts": "2026-10-07T20:16:10.256469Z",
+   "t_ms": 19,
+   "type": "llm_call_started",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "BOOK-20261007-201610-2eefa4",
+   "ts": "2026-10-07T20:16:11.098216Z",
+   "t_ms": 860,
+   "type": "llm_call_finished",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 705,
+    "tokens_out": 57,
+    "latency_ms": 840,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "BOOK-20261007-201610-2eefa4",
+   "ts": "2026-10-07T20:16:11.099052Z",
+   "t_ms": 861,
+   "type": "route_decided",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "route": "out_of_scope",
+    "domains": [],
+    "reason": "The advisor is asking for investment recommendations, which is outside the scope of the portfolio-review copilot.",
+    "confidence": 1.0,
+    "rules_applied": [],
+    "fast_path": false
+   }
+  },
+  {
+   "seq": 6,
+   "run_id": "BOOK-20261007-201610-2eefa4",
+   "ts": "2026-10-07T20:16:11.100385Z",
+   "t_ms": 862,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "COMPLETED",
+    "totals": {
+     "llm_calls": 1,
+     "tokens_in": 705,
+     "tokens_out": 57,
+     "wall_ms": 862,
+     "retries": 0
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "BOOK-20261007-201610-2eefa4",
+  "client_id": "BOOK",
+  "request_text": "Which stock should all my clients buy?",
+  "preset": null,
+  "thread_id": null,
+  "mode": null,
+  "status": "COMPLETED",
+  "route": {
+   "route": "out_of_scope",
+   "domains": [],
+   "reason": "The advisor is asking for investment recommendations, which is outside the scope of the portfolio-review copilot.",
+   "confidence": 1.0
+  },
+  "analyst_reports": {},
+  "metrics": {},
+  "flags": {},
+  "drafts": [],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  ],
+  "eval_verdicts": [],
+  "revision_count": 0,
+  "final": null,
+  "answer": null,
+  "message": "I can help with portfolio reviews, allocation and drift, risk and concentration, account placement across TFSA/RRSP/RRIF and non-registered accounts, and market context for your clients. I can't predict prices of individual assets or recommend speculative investments.",
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 1,
+   "tokens": 762,
+   "wall_ms": 862
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T20:16:10.051717Z",
+  "updated_at": "2026-10-07T20:16:11.100620Z",
+  "completed_steps": [
+   "input_gate",
+   "router",
+   "out_of_scope"
+  ]
+ },
+ "outbox": null
+}

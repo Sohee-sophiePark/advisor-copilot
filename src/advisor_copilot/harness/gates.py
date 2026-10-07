@@ -5,10 +5,11 @@ import re
 from pydantic import ValidationError
 
 from advisor_copilot.config import RulesCfg
-from advisor_copilot.data_access import load_fixtures
+from advisor_copilot.data_access import list_clients, load_fixtures
 from advisor_copilot.harness.context import SynthContext
 from advisor_copilot.harness.injection import detect
 from advisor_copilot.models import (
+    BOOK,
     SEVERITY_RANK,
     AnalystReport,
     ChatAnswer,
@@ -21,7 +22,21 @@ from advisor_copilot.models import (
 )
 
 PLACEHOLDER = re.compile(r"\{\{m:([^}]+)\}\}")
-PREFIX = {"portfolio": "PORT", "risk": "RISK", "tax": "TAX", "market": "MKT", "scenario": "WHATIF"}
+HOUSEHOLD = re.compile(r"\{\{h:([^}]+)\}\}")
+CLIENT_ID = re.compile(r"\bC\d{3}\b")
+NUMBER_WORD = re.compile(  # "one" is left out: it is mostly a pronoun ("no one", "this one")
+    r"\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|(thir|four|fif|six|seven|eigh|nine)teen"
+    r"|(twen|thir|for|fif|six|seven|eigh|nine)ty|hundred|thousand|million|billion|dozen)\b",
+    re.IGNORECASE,
+)
+PREFIX = {
+    "portfolio": "PORT",
+    "risk": "RISK",
+    "tax": "TAX",
+    "market": "MKT",
+    "scenario": "WHATIF",
+    "book": "BOOK",
+}
 PROHIBITED = re.compile(
     r"guarantee(d)?|risk[- ]free|no risk|can(no|')t lose|sure thing|will definitely", re.IGNORECASE
 )
@@ -38,9 +53,9 @@ SECOND_PERSON = re.compile(r"\byou(r|rs|rself)?\b", re.IGNORECASE)
 
 
 def input_gate(client_id: str, request_text: str, preset: str | None) -> GateResult:
-    """G0: client exists; request non-empty unless a preset is given; request length capped."""
+    """G0: client exists (or the book scope); request non-empty unless a preset; length capped."""
     v = []
-    if client_id not in load_fixtures().clients:
+    if client_id != BOOK and client_id not in load_fixtures().clients:
         v.append(f"unknown client {client_id!r}")
     if not request_text.strip() and not preset:
         v.append("request is empty and no preset given")
@@ -229,4 +244,21 @@ def answer_gates(
         v.append(f"G5.9 limits: answer over {max_words} words or more than 3 suggested questions")
     if detect(joined):
         v.append("G5.10 no_injection_echo: answer text matches an injection pattern")
+    if not ctx.client:
+        v += known_households(joined, ctx)
     return a, GateResult(gate="G5", passed=not v, violations=v)
+
+
+def known_households(text: str, ctx: SynthContext) -> list[str]:
+    """G5.13 (book answers): households named only as {{h:id}}, each one returned by a tool;
+    counts only as placeholders (no number words)."""
+    returned = {k.split(".")[1] for k in ctx.metrics if k.startswith("book.")}
+    v = []
+    if unknown := sorted(set(HOUSEHOLD.findall(text)) - returned):
+        v.append(f"G5.13 known_households: households not in the tool results {unknown}")
+    bare = PLACEHOLDER.sub("", HOUSEHOLD.sub("", text))
+    if CLIENT_ID.search(bare) or any(c.name in bare for c in list_clients()):
+        v.append("G5.13 known_households: households must be named only as {{h:<client_id>}}")
+    if m := NUMBER_WORD.search(bare):
+        v.append(f"G5.13 counts_as_placeholders: number word {m.group(0)!r}; use {{{{m:<key>}}}}")
+    return v

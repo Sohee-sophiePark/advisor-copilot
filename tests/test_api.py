@@ -24,7 +24,7 @@ def settings(tmp_path: Path, **budget: int):  # noqa: ANN201
 
 def client(app, host: str = "127.0.0.1") -> httpx.AsyncClient:  # noqa: ANN001
     return httpx.AsyncClient(
-        transport=httpx.ASGITransport(app=app, client=(host, 1)), base_url="http://t"
+        transport=httpx.ASGITransport(app=app, client=(host, 1)), base_url="http://localhost"
     )
 
 
@@ -89,6 +89,10 @@ async def test_thread_review_follow_up_approval(tmp_path: Path, scripted: Script
         assert [m["role"] for m in msgs] == ["advisor", "copilot", "advisor", "copilot"]
         assert msgs[0]["text"] == "Prepare annual review" and msgs[3]["route"] == "follow_up"
         assert msgs[3]["text"] == "Daniel has $14,000 of room."
+        listed = (await c.get("/api/threads", params={"client_id": "C001"})).json()
+        assert [(t["thread_id"], t["messages"], t["title"]) for t in listed] == [
+            (th, 4, "Prepare annual review")
+        ]
         body = (
             await c.post(f"/api/runs/{first['run_id']}/approval", json={"decision": "approve"})
         ).json()
@@ -120,6 +124,8 @@ async def test_dev_routes_need_flag_and_loopback(
         assert (await c.get("/api/dev/usage")).json()["daily_call_cap"] == 500
     async with client(app, host="10.0.0.5") as c:
         assert (await c.get("/api/dev/runs")).status_code == 403
+    async with client(app) as c:  # a rebinding page arrives with its own Host name
+        assert (await c.get("/api/health", headers={"host": "evil.example"})).status_code == 400
 
 
 def test_export_static() -> None:

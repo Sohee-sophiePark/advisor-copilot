@@ -17,10 +17,13 @@ What the advisor sees:
   (suitability or concentration breach, drift, tax placement, KYC due, review overdue).
 - **Client** — the full picture: profile and life stage, goals from the client survey, holdings by
   account, drift against the target mix, volatility against the profile's limit, stress loss, notes.
-- **Review & Ask** — a chat per client. "Prepare annual review" produces a recommendation to approve;
+- **Review & Ask** — a chat per client; past conversations can be reopened and continued. "Prepare annual review" produces a recommendation to approve;
   questions get short grounded answers; follow-ups reuse earlier findings; what-ifs ("sell half of
   NRTH into bonds?") are simulated by code with before-and-after numbers.
 - **Market** — fictional index trends and the households most exposed to each.
+- **Ask about my book** — a chat panel beside My book and Market for questions across all households: who to call
+  first, segments, risk above the limit, exposure to a holding, a hypothetical market move, tax placement, goals.
+  Every list and number comes from code; households appear as links to their page.
 
 All clients, instruments and market data are fictional. Nothing here is investment advice.
 
@@ -35,8 +38,9 @@ All clients, instruments and market data are fictional. Nothing here is investme
         │ POST /threads/{id}/messages  ├ follow_up    → reuse findings from the thread  (no analysts)
         │ ◀── progress events ──       ├ what_if      → scenario analyst + trade simulator (code)
         │ POST /runs/{id}/approval     ├ targeted     → only the needed analysts, short answer
-        ▼                              └ full_review  → Portfolio │ Risk │ Tax │ Market in parallel
-   CRM outbox (mock JSON)                               ▼ structured findings + metric references
+        ▼                              ├ full_review  → Portfolio │ Risk │ Tax │ Market in parallel
+   CRM outbox (mock JSON)              └ book_question (book chat) → book analyst over seven book tools
+                                                        ▼ structured findings + metric references
                                      Synthesizer (single writer, numbers only as {{m:key}})
                                        ▼ G5 deterministic output gates ──fail──┐
                                        ▼ Evaluator (recommendations only) ─────┘ revise, max 2
@@ -74,15 +78,16 @@ Design decisions and the sources behind them:
 Tools return `Metric(key, value, unit, label, source_tool)`. The models see the values but may only
 cite them as `{{m:<key>}}`. Gate G4 rejects analyst findings and gate G5.2 rejects any draft with a
 digit outside a placeholder; the renderer fills placeholders from the metric dictionary and the UI
-shows each value as a chip whose tooltip names the metric key, the tool and the raw value. Unit
+shows each value as a chip whose tooltip names the metric key, the tool and the raw value. Book answers name
+households only as `{{h:<client_id>}}`; gate G5.13 rejects any id the tools did not return and any bare name. Unit
 tests compare every tool against pre-computed golden values in `tests/fixtures/expected_values.json`.
 
 ## Evaluation
 
 Three tiers: unit tests, scenario regression on
 recorded cassettes, and a live capability tier with pass^3 and a judge calibrated on human labels.
-`make eval` writes [evals/reports/latest.md](evals/reports/latest.md); the current run is 19/19
-golden cases on 177 unit tests, replaying real Gemini recordings. The data includes 15 edge-case
+`make eval` writes [evals/reports/latest.md](evals/reports/latest.md); the current run is 22/22
+golden cases on 183 unit tests, replaying real Gemini recordings. The data includes 15 edge-case
 households, one per rule boundary (for example a single stock at 9.9% and at 10.1%), each with a test. Tiers 1 and 2 run in CI on every push with no key.
 
 ## Run it
@@ -111,7 +116,8 @@ then `set -a; . ./.env; set +a` in your shell before `make smoke`, `make dev`, `
 ## Security notes
 
 No secrets in the repository; the key is read from the environment at call time and a test fails
-if key-shaped material appears in any tracked file. The API binds loopback only, validates every id
+if key-shaped material appears in any tracked file. The API binds loopback only, accepts only local Host names
+(against DNS rebinding), validates every id
 in a URL before it becomes a file path, limits CORS to the dev UI, and runs the full pipeline
 without any model call when KYC is incomplete. Full prompts and tool results are written under
 `runs/` (git-ignored) for audit.

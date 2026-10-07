@@ -4,8 +4,9 @@ import json
 from dataclasses import dataclass
 
 from advisor_copilot.config import Settings
+from advisor_copilot.data_access import load_fixtures
 from advisor_copilot.harness.injection import wrap
-from advisor_copilot.models import Client, CrmNote, Finding, Flag, Metric, ToolResult
+from advisor_copilot.models import BOOK, Client, CrmNote, Finding, Flag, Metric, ToolResult
 from advisor_copilot.tools.common import asset_classes_held
 
 SLICES: dict[str, tuple[str, ...]] = {
@@ -20,14 +21,18 @@ SEES_NOTES = {"portfolio", "tax", "synthesizer", "evaluator"}
 
 @dataclass(frozen=True)
 class AgentContext:
-    client: Client
+    client: Client | None  # None = the whole book
     notes: list[CrmNote]
     request_text: str
+
+    @property
+    def client_id(self) -> str:
+        return self.client.client_id if self.client else BOOK
 
 
 @dataclass(frozen=True)
 class SynthContext:
-    client: Client
+    client: Client | None  # None = the whole book
     notes: list[CrmNote]
     request_text: str
     route: str
@@ -64,7 +69,20 @@ def notes_block(notes: list[CrmNote]) -> str:
     return f"<crm_notes>\n{inner}\n</crm_notes>"
 
 
+def book_scope() -> str:
+    """Book questions see the household count and the instruments clients may hold."""
+    fx = load_fixtures()
+    inst = [
+        {"ticker": i.ticker, "name": i.name, "asset_class": i.asset_class}
+        for i in fx.instruments.values()
+    ]
+    body = json.dumps({"households": len(fx.clients), "instruments": inst})
+    return f"<book_scope>\n{body}\n</book_scope>"
+
+
 def build_brief(agent: str, ctx: AgentContext) -> str:
+    if not ctx.client:
+        return "\n".join([book_scope(), wrap(ctx.request_text, "advisor_request", "request")])
     parts = [f"<client_profile>\n{json.dumps(client_slice(ctx.client, agent))}\n</client_profile>"]
     if agent in SEES_NOTES:
         parts.append(notes_block(ctx.notes))
@@ -111,11 +129,16 @@ def synth_inputs(ctx: SynthContext) -> list[str]:
     metrics = {
         k: {"label": m.label, "value": m.value, "unit": m.unit} for k, m in ctx.metrics.items()
     }
+    profile = (
+        f"<client_profile>\n{json.dumps(profile_summary(ctx.client))}\n</client_profile>"
+        if ctx.client
+        else book_scope()
+    )
     return [
-        f"<client_profile>\n{json.dumps(profile_summary(ctx.client))}\n</client_profile>",
+        profile,
         f"<route>{ctx.route}</route>",
         wrap(ctx.request_text, "advisor_request", "request"),
-        notes_block(ctx.notes),
+        *([notes_block(ctx.notes)] if ctx.client else []),
         f"<findings>\n{json.dumps([f.model_dump() for f in ctx.findings])}\n</findings>",
         f"<metric_dictionary>\n{json.dumps(metrics)}\n</metric_dictionary>",
         f"<must_address>{json.dumps(ctx.must_address)}</must_address>",

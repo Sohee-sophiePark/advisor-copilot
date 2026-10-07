@@ -38,12 +38,16 @@ export interface ClientDetail extends Household {
 export interface Indicator { key: string; label: string; value: number; asset_classes: string[]; history: number[]; most_exposed: { client_id: string; name: string; weight_pct: number }[] }
 export interface Market { as_of: string; label: string; months: string[]; indicators: Indicator[]; headlines: { id: string; text: string }[] }
 export interface Recorded { scenario_id: string; title: string; question: string; preset: string | null; state: RunState; outbox: Outbox | null }
+export interface PastThread { thread_id: string; created_at: string; messages: number; title: string }
+export interface PastTurn { question: string; state: RunState | null; text: string }
 export interface Source {
   live: boolean;
   book(): Promise<Book>;
   client(id: string): Promise<ClientDetail>;
   market(): Promise<Market>;
   recorded(id: string): Promise<Recorded[]>;
+  threads(clientId: string): Promise<PastThread[]>;
+  thread(threadId: string): Promise<PastTurn[]>;
   ask(clientId: string, threadId: string | null, text: string, preset: string | undefined, onEvent: (e: TraceEvent) => void): Promise<{ threadId: string | null; state: RunState }>;
   approve(state: RunState, decision: "approve" | "reject", note: string): Promise<{ state: RunState; outbox: Outbox | null }>;
 }

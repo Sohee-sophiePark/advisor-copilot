@@ -8,7 +8,6 @@ from advisor_copilot.harness.context import profile_summary
 from advisor_copilot.harness.gates import kyc_expired
 from advisor_copilot.tools.common import positions
 from advisor_copilot.tools.portfolio import allocation
-from advisor_copilot.tools.registry import run_all_for_client
 
 RANK = {"critical": 0, "kyc": 1, "warning": 2, "review": 3}
 
@@ -19,6 +18,8 @@ def aum_tier(total: float) -> str:
 
 @lru_cache(maxsize=256)
 def _tools(client_id: str) -> tuple[dict, list]:
+    from advisor_copilot.tools.registry import run_all_for_client  # registry imports book tools
+
     results = run_all_for_client(client_id)
     metrics = {m.key: m.value for r in results for m in r.metrics}
     flags = list({f.flag_id: f for r in results for f in r.flags}.values())

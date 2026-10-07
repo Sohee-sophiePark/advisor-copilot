@@ -28,6 +28,7 @@ from advisor_copilot.llm.base import FatalLLMError, LLMClient, RetryableLLMError
 from advisor_copilot.llm.cassette import CassetteClient
 from advisor_copilot.llm.limiter import RateLimiter
 from advisor_copilot.models import (
+    BOOK,
     AnalystReport,
     ChatAnswer,
     EvalVerdict,
@@ -178,17 +179,17 @@ def findings_key(spec: AnalystSpec, ctx: AgentContext, s: Settings) -> str:
 async def _analyse(state: RunState, deps: Deps, ctx: AgentContext, mode: str | None) -> None:
     """Run or reuse (cache) the analysts for the routed domains; degrade per domain on errors."""
     s, t, done = deps.settings, deps.trace, state.completed_steps
+    store = deps.store if ctx.client else None  # book findings depend on the model's tool args
     specs = analyst_specs(s, mode)
     todo = [d for d in state.route.domains if f"analyst:{d}" not in done]
     results: dict[str, dict[str, ToolResult]] = {d: {} for d in todo}
     cached: dict[str, AnalystReport] = {}
     for d in todo:
-        hit = deps.store.cache_get(findings_key(specs[d], ctx, s)) if deps.store else None
+        hit = store.cache_get(findings_key(specs[d], ctx, s)) if store else None
         if hit:
             cached[d] = AnalystReport.model_validate_json(hit)
             results[d] = {
-                n: registry.run_tool(n, ctx.client.client_id, default_args(n, ctx))
-                for n in specs[d].tools
+                n: registry.run_tool(n, ctx.client_id, default_args(n, ctx)) for n in specs[d].tools
             }
             t.emit("cache_hit", d, {"kind": "findings", "findings_count": len(cached[d].findings)})
     live = [d for d in todo if d not in cached]
@@ -216,8 +217,8 @@ async def _analyse(state: RunState, deps: Deps, ctx: AgentContext, mode: str | N
             report = degraded_report(specs[d], results[d])
         elif isinstance(report, BaseException):
             raise report
-        elif deps.store and d in live and report.status == "ok":
-            deps.store.cache_put(findings_key(specs[d], ctx, s), report.model_dump_json())
+        elif store and d in live and report.status == "ok":
+            store.cache_put(findings_key(specs[d], ctx, s), report.model_dump_json())
         state.analyst_reports[d] = report
         for r in results[d].values():
             state.metrics.update({m.key: m for m in r.metrics})
@@ -241,7 +242,8 @@ async def _steps(state: RunState, deps: Deps, runs_dir: Path, thread: ThreadCont
     t.emit("gate_result", "gate", g0.model_dump(), "info" if g0.passed else "error")
     if not g0.passed:
         raise ValueError("; ".join(g0.violations))
-    client, notes = get_client(state.client_id), get_notes(state.client_id)
+    book = state.client_id == BOOK
+    client, notes = None if book else get_client(state.client_id), get_notes(state.client_id)
     request_text = state.request_text
     sources = [("advisor_request", "request", request_text)]
     sources += [("crm_note", n.note_id, n.text) for n in notes]
@@ -261,24 +263,25 @@ async def _steps(state: RunState, deps: Deps, runs_dir: Path, thread: ThreadCont
         request_text = redact(request_text)
         notes = [n.model_copy(update={"text": redact(n.text)}) for n in notes]
     checkpoint(RunStatus.INPUT_GATED, "input_gate")
-    g1 = kyc_gate(client, s.rules)
-    state.gate_results.append(g1)
-    t.emit("gate_result", "gate", g1.model_dump(), "info" if g1.passed else "warn")
-    if not g1.passed:
-        t.emit(
-            "kyc_blocked",
-            "gate",
-            {"missing_fields": client.kyc_missing(), "reasons": g1.violations},
-            "warn",
-        )
-        state.message = KYC_MESSAGE if client.kyc_missing() else KYC_REFRESH_MESSAGE
-        checkpoint(RunStatus.BLOCKED, "kyc_gate")
-        return
-    done.append("kyc_gate")
+    if client:  # book questions give no advice to one client, so no suitability gate
+        g1 = kyc_gate(client, s.rules)
+        state.gate_results.append(g1)
+        t.emit("gate_result", "gate", g1.model_dump(), "info" if g1.passed else "warn")
+        if not g1.passed:
+            t.emit(
+                "kyc_blocked",
+                "gate",
+                {"missing_fields": client.kyc_missing(), "reasons": g1.violations},
+                "warn",
+            )
+            state.message = KYC_MESSAGE if client.kyc_missing() else KYC_REFRESH_MESSAGE
+            checkpoint(RunStatus.BLOCKED, "kyc_gate")
+            return
+        done.append("kyc_gate")
     last = thread.last
     if "router" not in done:
         previous = list(last.route.domains) if last and last.route else None
-        state.route = await route(request_text, state.preset, deps, thread.summary, previous)
+        state.route = await route(request_text, state.preset, deps, thread.summary, previous, book)
         checkpoint(RunStatus.ROUTED, "router")
     assert state.route is not None
     if state.route.route == "out_of_scope":
@@ -294,12 +297,15 @@ async def _steps(state: RunState, deps: Deps, runs_dir: Path, thread: ThreadCont
         t.emit("cache_hit", "orchestrator", {"kind": "follow_up", "from_run": last.run_id})
         done.append("follow_up")
     else:
-        prefetch = state.route.route not in ("full_review", "what_if")  # what-ifs need trade args
+        prefetch = state.route.route not in ("full_review", "what_if", "book_question")  # tool args
         await _analyse(state, deps, ctx, s.agents.answer_analyst_mode if prefetch else None)
-    state.metrics[K_CLIENT_AGE] = metric(K_CLIENT_AGE, client.age, "years", "Client age", "context")
-    state.metrics[K_CLIENT_HORIZON] = metric(
-        K_CLIENT_HORIZON, client.time_horizon_years or 0, "years", "Time horizon", "context"
-    )
+    if client:
+        state.metrics[K_CLIENT_AGE] = metric(
+            K_CLIENT_AGE, client.age, "years", "Client age", "context"
+        )
+        state.metrics[K_CLIENT_HORIZON] = metric(
+            K_CLIENT_HORIZON, client.time_horizon_years or 0, "years", "Time horizon", "context"
+        )
     checkpoint(RunStatus.ANALYZING)
     findings = [f for d in state.route.domains for f in state.analyst_reports[d].findings]
     sctx = SynthContext(

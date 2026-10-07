@@ -114,6 +114,32 @@
     analysts_run: [scenario]
     mode: answer
     metrics_present: [whatif.conc.NRTH.pct, whatif.risk.vol.pct]
+- id: G20
+  title: Book chat ranks who needs attention, naming households only through placeholders
+  scenario: S12
+  expect:
+    status: COMPLETED
+    route: book_question
+    analysts_run: [book]
+    mode: answer
+    gates_final_pass: true
+    events: [{type: tool_call, name: book_attention}]
+- id: G21
+  title: Book chat computes a hypothetical energy fall per household in code
+  scenario: S13
+  expect:
+    status: COMPLETED
+    route: book_question
+    analysts_run: [book]
+    gates_final_pass: true
+    metrics_present: [book.impact_NRTH.total.cad, book.C002.impact_NRTH.cad]
+- id: G22
+  title: Book chat refuses a stock pick with one call
+  scenario: S14
+  expect:
+    status: COMPLETED
+    route: out_of_scope
+    llm_calls: 1
 - id: G9
   title: Output gates reject the bad draft fixture (G5.2, G5.5, G5.6, G5.7)
   pytest: tests/test_gates.py::test_g9_bad_draft_fails_exactly_2_5_6_7

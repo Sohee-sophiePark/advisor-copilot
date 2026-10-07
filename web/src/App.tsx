@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BOOK, Chat } from "./components/Chat";
 import { source } from "./lib/source";
 import { Client } from "./pages/Client";
 import { Home } from "./pages/Home";
@@ -27,7 +28,14 @@ export default function App() {
         <nav className="ml-4 flex gap-1">{nav("#/", "My book", !client && hash !== "#/market")}{nav("#/market", "Market", hash === "#/market")}</nav>
         <span className="ml-auto rounded-md bg-amber-100 px-2 py-1 text-xs text-amber-900">All clients and market data are fictional · not investment advice</span>
       </header>
-      {page}
+      <div className={client ? "" : "grid grid-cols-[minmax(0,1fr)_420px] items-start gap-4"}>
+        {page}
+        {/* stays mounted so My book and Market share one conversation */}
+        <aside className={client ? "hidden" : "sticky top-4 flex h-[calc(100vh-7rem)] flex-col gap-2"}>
+          <h2 className="text-sm font-semibold text-slate-700">Ask about my book</h2>
+          <div className="min-h-0 flex-1"><Chat clientId={BOOK} /></div>
+        </aside>
+      </div>
     </div>
   );
 }

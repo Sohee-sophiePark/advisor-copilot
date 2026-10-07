@@ -1,0 +1,481 @@
+{
+ "scenario_id": "S13",
+ "title": "Book chat",
+ "client_id": "BOOK",
+ "request_text": "If energy falls another 10%, who is hit hardest?",
+ "preset": null,
+ "recorded_at": "2026-10-07T20:23:54+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:41.597444Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "BOOK",
+    "request_text": "If energy falls another 10%, who is hit hardest?",
+    "preset": null,
+    "thread_id": null,
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:41.597850Z",
+   "t_ms": 0,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:41.616573Z",
+   "t_ms": 19,
+   "type": "llm_call_started",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:43.331059Z",
+   "t_ms": 1733,
+   "type": "llm_call_finished",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 710,
+    "tokens_out": 52,
+    "latency_ms": 1713,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:43.331963Z",
+   "t_ms": 1734,
+   "type": "route_decided",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "route": "book_question",
+    "domains": [
+     "book"
+    ],
+    "reason": "The advisor is asking for a hypothetical market move impact analysis across their entire book of households.",
+    "confidence": 1.0,
+    "rules_applied": [],
+    "fast_path": false
+   }
+  },
+  {
+   "seq": 6,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:43.333260Z",
+   "t_ms": 1735,
+   "type": "agent_started",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "get_market_snapshot",
+     "book_attention",
+     "book_segments",
+     "book_risk",
+     "book_exposure",
+     "book_market_impact",
+     "book_tax",
+     "book_goals"
+    ]
+   }
+  },
+  {
+   "seq": 7,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:43.335904Z",
+   "t_ms": 1738,
+   "type": "llm_call_started",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 8,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:51.467108Z",
+   "t_ms": 9869,
+   "type": "llm_call_finished",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2292,
+    "tokens_out": 30,
+    "latency_ms": 8129,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 9,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:51.470459Z",
+   "t_ms": 9872,
+   "type": "tool_call",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "name": "book_market_impact",
+    "args": {
+     "limit": 5,
+     "target": "NRTH",
+     "move_pct": -10
+    },
+    "metrics_count": 14,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 10,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:51.470995Z",
+   "t_ms": 9873,
+   "type": "llm_call_started",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 11,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:52.946435Z",
+   "t_ms": 11348,
+   "type": "llm_call_finished",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2970,
+    "tokens_out": 264,
+    "latency_ms": 1473,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 12,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:52.949540Z",
+   "t_ms": 11352,
+   "type": "agent_finished",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "findings_count": 1,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 13,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:52.953153Z",
+   "t_ms": 11355,
+   "type": "llm_call_started",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 14,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:54.946636Z",
+   "t_ms": 13349,
+   "type": "llm_call_finished",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1715,
+    "tokens_out": 443,
+    "latency_ms": 1991,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 15,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:54.949527Z",
+   "t_ms": 13352,
+   "type": "draft_created",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "revision": 0,
+    "mode": "answer",
+    "actions_count": 0
+   }
+  },
+  {
+   "seq": 16,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:54.950037Z",
+   "t_ms": 13352,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 17,
+   "run_id": "BOOK-20261007-202341-0ecf81",
+   "ts": "2026-10-07T20:23:54.951455Z",
+   "t_ms": 13353,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "COMPLETED",
+    "totals": {
+     "llm_calls": 4,
+     "tokens_in": 7687,
+     "tokens_out": 789,
+     "wall_ms": 13353,
+     "retries": 0
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "BOOK-20261007-202341-0ecf81",
+  "client_id": "BOOK",
+  "request_text": "If energy falls another 10%, who is hit hardest?",
+  "preset": null,
+  "thread_id": null,
+  "mode": "answer",
+  "status": "COMPLETED",
+  "route": {
+   "route": "book_question",
+   "domains": [
+    "book"
+   ],
+   "reason": "The advisor is asking for a hypothetical market move impact analysis across their entire book of households.",
+   "confidence": 1.0
+  },
+  "analyst_reports": {
+   "book": {
+    "agent": "book",
+    "findings": [
+     {
+      "finding_id": "BOOK-1",
+      "title": "Impact of a hypothetical energy sector decline on household portfolios",
+      "severity": "info",
+      "detail": "A {{m:book.impact_NRTH.move.pct}} decline in Northshore Energy Corp. would impact {{m:book.impact_NRTH.matches.count}} households, resulting in a total book-wide value change of {{m:book.impact_NRTH.total.cad}}. {{h:C079}} faces the largest absolute loss of {{m:book.C079.impact_NRTH.cad}}, while {{h:C002}} experiences the most significant relative impact at {{m:book.C002.impact_NRTH.pct}} of their household value.",
+      "metric_refs": [
+       "book.impact_NRTH.move.pct",
+       "book.impact_NRTH.matches.count",
+       "book.impact_NRTH.total.cad",
+       "book.C079.impact_NRTH.cad",
+       "book.C002.impact_NRTH.pct"
+      ],
+      "flag_refs": []
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   }
+  },
+  "metrics": {
+   "book.impact_NRTH.matches.count": {
+    "key": "book.impact_NRTH.matches.count",
+    "value": 7.0,
+    "unit": "count",
+    "label": "Households that match",
+    "source_tool": "book_market_impact"
+   },
+   "book.impact_NRTH.shown.count": {
+    "key": "book.impact_NRTH.shown.count",
+    "value": 5.0,
+    "unit": "count",
+    "label": "Households listed",
+    "source_tool": "book_market_impact"
+   },
+   "book.impact_NRTH.total.cad": {
+    "key": "book.impact_NRTH.total.cad",
+    "value": -22101.8,
+    "unit": "cad",
+    "label": "Change across the book",
+    "source_tool": "book_market_impact"
+   },
+   "book.impact_NRTH.move.pct": {
+    "key": "book.impact_NRTH.move.pct",
+    "value": -10.0,
+    "unit": "pct",
+    "label": "Hypothetical NRTH move",
+    "source_tool": "book_market_impact"
+   },
+   "book.C002.impact_NRTH.cad": {
+    "key": "book.C002.impact_NRTH.cad",
+    "value": -7560.0,
+    "unit": "cad",
+    "label": "Change in value if NRTH moves",
+    "source_tool": "book_market_impact"
+   },
+   "book.C002.impact_NRTH.pct": {
+    "key": "book.C002.impact_NRTH.pct",
+    "value": -2.86,
+    "unit": "pct",
+    "label": "Change as share of the household",
+    "source_tool": "book_market_impact"
+   },
+   "book.C103.impact_NRTH.cad": {
+    "key": "book.C103.impact_NRTH.cad",
+    "value": -1009.8,
+    "unit": "cad",
+    "label": "Change in value if NRTH moves",
+    "source_tool": "book_market_impact"
+   },
+   "book.C103.impact_NRTH.pct": {
+    "key": "book.C103.impact_NRTH.pct",
+    "value": -1.01,
+    "unit": "pct",
+    "label": "Change as share of the household",
+    "source_tool": "book_market_impact"
+   },
+   "book.C102.impact_NRTH.cad": {
+    "key": "book.C102.impact_NRTH.cad",
+    "value": -990.0,
+    "unit": "cad",
+    "label": "Change in value if NRTH moves",
+    "source_tool": "book_market_impact"
+   },
+   "book.C102.impact_NRTH.pct": {
+    "key": "book.C102.impact_NRTH.pct",
+    "value": -0.99,
+    "unit": "pct",
+    "label": "Change as share of the household",
+    "source_tool": "book_market_impact"
+   },
+   "book.C079.impact_NRTH.cad": {
+    "key": "book.C079.impact_NRTH.cad",
+    "value": -10561.0,
+    "unit": "cad",
+    "label": "Change in value if NRTH moves",
+    "source_tool": "book_market_impact"
+   },
+   "book.C079.impact_NRTH.pct": {
+    "key": "book.C079.impact_NRTH.pct",
+    "value": -0.37,
+    "unit": "pct",
+    "label": "Change as share of the household",
+    "source_tool": "book_market_impact"
+   },
+   "book.C020.impact_NRTH.cad": {
+    "key": "book.C020.impact_NRTH.cad",
+    "value": -1280.0,
+    "unit": "cad",
+    "label": "Change in value if NRTH moves",
+    "source_tool": "book_market_impact"
+   },
+   "book.C020.impact_NRTH.pct": {
+    "key": "book.C020.impact_NRTH.pct",
+    "value": -0.35,
+    "unit": "pct",
+    "label": "Change as share of the household",
+    "source_tool": "book_market_impact"
+   }
+  },
+  "flags": {},
+  "drafts": [],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  ],
+  "eval_verdicts": [],
+  "revision_count": 0,
+  "final": null,
+  "answer": {
+   "answer": "A {{m:book.impact_NRTH.move.pct}} decline in Northshore Energy Corp. impacts {{m:book.impact_NRTH.matches.count}} households, with a total book-wide value change of {{m:book.impact_NRTH.total.cad}}. {{h:C079}} faces the largest absolute loss of {{m:book.C079.impact_NRTH.cad}}, while {{h:C002}} experiences the most significant relative impact at {{m:book.C002.impact_NRTH.pct}} of their household value. Other affected households include {{h:C020}} ({{m:book.C020.impact_NRTH.cad}}), {{h:C103}} ({{m:book.C103.impact_NRTH.cad}}), and {{h:C102}} ({{m:book.C102.impact_NRTH.cad}}). This is a hypothetical calculation based on current holdings.",
+   "suggested_questions": [
+    "Which households have the highest concentration in energy?",
+    "Review the portfolio for {{h:C002}}.",
+    "Review the portfolio for {{h:C079}}."
+   ]
+  },
+  "message": null,
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 4,
+   "tokens": 8476,
+   "wall_ms": 13353
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T20:23:41.388211Z",
+  "updated_at": "2026-10-07T20:23:54.951807Z",
+  "completed_steps": [
+   "input_gate",
+   "router",
+   "analyst:book",
+   "synthesis"
+  ]
+ },
+ "outbox": null
+}
