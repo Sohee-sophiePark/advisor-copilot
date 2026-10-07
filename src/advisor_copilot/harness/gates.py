@@ -79,7 +79,7 @@ def kyc_gate(client: Client, rules: RulesCfg) -> GateResult:
     return GateResult(gate="G1", passed=not v, violations=v)
 
 
-IDENT = re.compile(r"\b[A-Z][A-Z_-]*\d+[A-Z_-]*\b")  # FLAG-L1-USEQ, TAX-2, L3_UNUSED_TFSA_ROOM
+IDENT = re.compile(r"\b[A-Z][A-Z_-]*\d+[A-Z_-]*\b")  # FLAG-L1-VTI, TAX-2, L3_UNUSED_TFSA_ROOM
 
 
 def has_raw_digits(text: str) -> bool:

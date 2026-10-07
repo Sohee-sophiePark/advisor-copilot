@@ -26,7 +26,7 @@ export default function App() {
         <span className="text-lg font-semibold tracking-tight text-slate-900">Advisor Copilot</span>
         {mode && <span className={`rounded-full px-2 py-0.5 text-xs font-semibold text-white ${mode === "LIVE" ? "bg-emerald-600" : "bg-blue-600"}`} title={mode === "LIVE" ? "Answers come from the model now" : "Answers replay recorded runs"}>{mode}</span>}
         <nav className="ml-4 flex gap-1">{nav("#/", "My book", !client && hash !== "#/market")}{nav("#/market", "Market", hash === "#/market")}</nav>
-        <span className="ml-auto rounded-md bg-amber-100 px-2 py-1 text-xs text-amber-900">All clients and market data are fictional · not investment advice</span>
+        <span className="ml-auto rounded-md bg-amber-100 px-2 py-1 text-xs text-amber-900">Fictional clients · real tickers, illustrative prices and market data · not investment advice</span>
       </header>
       <div className={client ? "" : "grid grid-cols-[minmax(0,1fr)_420px] items-start gap-4"}>
         {page}

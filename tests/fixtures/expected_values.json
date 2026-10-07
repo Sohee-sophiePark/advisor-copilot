@@ -33,7 +33,7 @@
     "location_flags": [
       {
         "rule": "L1_US_LISTED_IN_TFSA",
-        "ticker": "USEQ",
+        "ticker": "VTI",
         "market_value": 27000.0
       },
       {
@@ -61,7 +61,7 @@
         "severity": "warning"
       },
       {
-        "flag_id": "FLAG-L1-USEQ",
+        "flag_id": "FLAG-L1-VTI",
         "severity": "warning"
       },
       {
@@ -104,10 +104,10 @@
     "stress_equity_bear_pnl": -47400.0,
     "stress_equity_bear_pct": -17.91,
     "single_security_pct": {
-      "NRTH": 28.57
+      "SU": 28.57
     },
     "concentration_breaches": [
-      "NRTH"
+      "SU"
     ],
     "location_flags": [],
     "account_values": {
@@ -125,7 +125,7 @@
         "severity": "warning"
       },
       {
-        "flag_id": "FLAG-CONC-NRTH",
+        "flag_id": "FLAG-CONC-SU",
         "severity": "critical"
       },
       {

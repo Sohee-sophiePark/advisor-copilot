@@ -14,8 +14,8 @@ from advisor_copilot.render import render
 
 def awaiting(tmp_path: Path) -> RunState:
     m = {
-        "conc.NRTH.pct": Metric(
-            key="conc.NRTH.pct", value=28.57, unit="pct", label="x", source_tool="t"
+        "conc.SU.pct": Metric(
+            key="conc.SU.pct", value=28.57, unit="pct", label="x", source_tool="t"
         )
     }
     return RunState(

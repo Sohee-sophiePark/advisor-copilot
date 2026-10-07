@@ -1,7 +1,7 @@
 [
   {
-    "ticker": "CASHX",
-    "name": "Northbay High-Interest Savings ETF (fictional)",
+    "ticker": "CSAV",
+    "name": "CI High Interest Savings ETF",
     "asset_class": "CASH",
     "risk_bucket": "CASH",
     "price_cad": 50.0,
@@ -10,8 +10,8 @@
     "single_security": false
   },
   {
-    "ticker": "CBND",
-    "name": "Maplecrest Canadian Aggregate Bond ETF (fictional)",
+    "ticker": "XBB",
+    "name": "iShares Core Canadian Universe Bond Index ETF",
     "asset_class": "CA_BONDS",
     "risk_bucket": "CA_BONDS",
     "price_cad": 25.0,
@@ -20,8 +20,8 @@
     "single_security": false
   },
   {
-    "ticker": "CEQX",
-    "name": "Maplecrest Canadian Equity Index ETF (fictional)",
+    "ticker": "XIC",
+    "name": "iShares Core S&P/TSX Capped Composite Index ETF",
     "asset_class": "CA_EQUITY",
     "risk_bucket": "CA_EQUITY",
     "price_cad": 40.0,
@@ -30,8 +30,8 @@
     "single_security": false
   },
   {
-    "ticker": "USEQ",
-    "name": "Liberty Plains US Total Market ETF (fictional, US-listed)",
+    "ticker": "VTI",
+    "name": "Vanguard Total Stock Market ETF (US-listed)",
     "asset_class": "US_EQUITY",
     "risk_bucket": "US_EQUITY",
     "price_cad": 150.0,
@@ -40,8 +40,8 @@
     "single_security": false
   },
   {
-    "ticker": "INTQ",
-    "name": "Harbourline International Equity ETF (fictional)",
+    "ticker": "XEF",
+    "name": "iShares Core MSCI EAFE IMI Index ETF",
     "asset_class": "INTL_EQUITY",
     "risk_bucket": "INTL_EQUITY",
     "price_cad": 30.0,
@@ -50,8 +50,8 @@
     "single_security": false
   },
   {
-    "ticker": "REAL",
-    "name": "Cornerstone REIT Index ETF (fictional)",
+    "ticker": "XRE",
+    "name": "iShares S&P/TSX Capped REIT Index ETF",
     "asset_class": "REAL_ASSETS",
     "risk_bucket": "REAL_ASSETS",
     "price_cad": 20.0,
@@ -60,8 +60,8 @@
     "single_security": false
   },
   {
-    "ticker": "NRTH",
-    "name": "Northshore Energy Corp. (fictional single stock)",
+    "ticker": "SU",
+    "name": "Suncor Energy Inc. (single stock)",
     "asset_class": "CA_EQUITY",
     "risk_bucket": "SINGLE_STOCK",
     "price_cad": 18.0,

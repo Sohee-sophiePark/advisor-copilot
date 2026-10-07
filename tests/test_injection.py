@@ -15,7 +15,7 @@ def test_injected_note_is_flagged_and_clean_notes_are_not() -> None:
 def test_redaction_replaces_offending_sentences_only() -> None:
     out = redact(NOTES["N-302"])
     assert out.startswith("Call summary: client happy with performance and asked no questions.")
-    assert REDACTED in out and "NRTH" not in out and "admin mode" not in out
+    assert REDACTED in out and "SU" not in out and "admin mode" not in out
     assert redact(NOTES["N-101"]) == NOTES["N-101"]
 
 

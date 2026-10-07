@@ -22,11 +22,11 @@
         "type": "TFSA",
         "holdings": [
           {
-            "ticker": "USEQ",
+            "ticker": "VTI",
             "units": 180
           },
           {
-            "ticker": "INTQ",
+            "ticker": "XEF",
             "units": 300
           }
         ]
@@ -36,15 +36,15 @@
         "type": "RRSP",
         "holdings": [
           {
-            "ticker": "CBND",
+            "ticker": "XBB",
             "units": 2400
           },
           {
-            "ticker": "CEQX",
+            "ticker": "XIC",
             "units": 900
           },
           {
-            "ticker": "USEQ",
+            "ticker": "VTI",
             "units": 160
           }
         ]
@@ -54,23 +54,23 @@
         "type": "NON_REG",
         "holdings": [
           {
-            "ticker": "CEQX",
+            "ticker": "XIC",
             "units": 300
           },
           {
-            "ticker": "REAL",
+            "ticker": "XRE",
             "units": 450
           },
           {
-            "ticker": "CASHX",
+            "ticker": "CSAV",
             "units": 300
           },
           {
-            "ticker": "INTQ",
+            "ticker": "XEF",
             "units": 400
           },
           {
-            "ticker": "USEQ",
+            "ticker": "VTI",
             "units": 100
           }
         ]
@@ -115,15 +115,15 @@
         "type": "RRIF",
         "holdings": [
           {
-            "ticker": "CBND",
+            "ticker": "XBB",
             "units": 4000
           },
           {
-            "ticker": "CASHX",
+            "ticker": "CSAV",
             "units": 200
           },
           {
-            "ticker": "CEQX",
+            "ticker": "XIC",
             "units": 300
           }
         ]
@@ -133,11 +133,11 @@
         "type": "TFSA",
         "holdings": [
           {
-            "ticker": "CBND",
+            "ticker": "XBB",
             "units": 1600
           },
           {
-            "ticker": "INTQ",
+            "ticker": "XEF",
             "units": 300
           }
         ]
@@ -147,15 +147,15 @@
         "type": "NON_REG",
         "holdings": [
           {
-            "ticker": "NRTH",
+            "ticker": "SU",
             "units": 4200
           },
           {
-            "ticker": "USEQ",
+            "ticker": "VTI",
             "units": 80
           },
           {
-            "ticker": "REAL",
+            "ticker": "XRE",
             "units": 300
           }
         ]
@@ -199,19 +199,19 @@
         "type": "TFSA",
         "holdings": [
           {
-            "ticker": "CEQX",
+            "ticker": "XIC",
             "units": 380
           },
           {
-            "ticker": "INTQ",
+            "ticker": "XEF",
             "units": 400
           },
           {
-            "ticker": "CASHX",
+            "ticker": "CSAV",
             "units": 24
           },
           {
-            "ticker": "REAL",
+            "ticker": "XRE",
             "units": 150
           }
         ]
@@ -221,11 +221,11 @@
         "type": "RRSP",
         "holdings": [
           {
-            "ticker": "USEQ",
+            "ticker": "VTI",
             "units": 130
           },
           {
-            "ticker": "CBND",
+            "ticker": "XBB",
             "units": 360
           }
         ]
@@ -267,7 +267,7 @@
         "type": "NON_REG",
         "holdings": [
           {
-            "ticker": "CASHX",
+            "ticker": "CSAV",
             "units": 800
           }
         ]

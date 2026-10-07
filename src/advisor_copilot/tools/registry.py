@@ -233,6 +233,14 @@ _SPECS: list[ToolSpec] = [
         "model portfolio is expected to deliver.",
         ("book",),
     ),
+    ToolSpec(
+        "get_instrument_facts",
+        book.get_instrument_facts,
+        book.FactsArgs,
+        "Fund facts for one ticker: what it holds, objective, risk rating, fees (MER), yield, "
+        "top holdings, and where the facts come from and as of when.",
+        ("book",),
+    ),
 ]
 
 TOOLS: dict[str, ToolSpec] = {spec.name: spec for spec in _SPECS}

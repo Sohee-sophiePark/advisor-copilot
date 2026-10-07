@@ -19,13 +19,14 @@ What the advisor sees:
   account, drift against the target mix, volatility against the profile's limit, stress loss, notes.
 - **Review & Ask** — a chat per client; past conversations can be reopened and continued. "Prepare annual review" produces a recommendation to approve;
   questions get short grounded answers; follow-ups reuse earlier findings; what-ifs ("sell half of
-  NRTH into bonds?") are simulated by code with before-and-after numbers.
+  SU into bonds?") are simulated by code with before-and-after numbers.
 - **Market** — fictional index trends and the households most exposed to each.
 - **Ask about my book** — a chat panel beside My book and Market for questions across all households: who to call
   first, segments, risk above the limit, exposure to a holding, a hypothetical market move, tax placement, goals.
   Every list and number comes from code; households appear as links to their page.
 
-All clients, instruments and market data are fictional. Nothing here is investment advice.
+Clients, holdings and notes are fictional. Tickers are real (Canadian ETFs, a US total-market ETF and one energy
+stock) but prices, index trends and headlines are illustrative. Nothing here is investment advice.
 
 ![Advisor Copilot UI](docs/img/ui.jpg)
 
@@ -131,5 +132,5 @@ created. The harness concepts carry over; the plumbing is the platform's.
 
 ## Disclaimer
 
-Fictional clients, instruments, prices and market data; simplified educational tax rules;
+Fictional clients; real tickers with illustrative prices and market data; simplified educational tax rules;
 illustrative capital-market assumptions. Not investment advice. Built with Claude Code.

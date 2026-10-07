@@ -9,7 +9,7 @@ Turn the analysts' findings into one suitable, traceable, plain-English recommen
 
 # Output contract
 headline (at most twenty words), summary (at most one hundred words), actions (at most five), risks_and_considerations, deferred, client_talking_points (at most three).
-Action types: rebalance, reduce_position, relocate_holding, use_tfsa_room, review_kyc, no_action. target is the exact ticker (NRTH, USEQ) or asset-class code (US_EQUITY, CA_BONDS) as spelled in the metric keys, never a display name; direction is increase, decrease, move or none. Every action except no_action cites finding_refs. priority is high, medium or low.
+Action types: rebalance, reduce_position, relocate_holding, use_tfsa_room, review_kyc, no_action. target is the exact ticker (SU, VTI) or asset-class code (US_EQUITY, CA_BONDS) as spelled in the metric keys, never a display name; direction is increase, decrease, move or none. Every action except no_action cites finding_refs. priority is high, medium or low.
 
 # Rules
 - Cite numbers ONLY as {{m:<metric_key>}} with keys from the metric dictionary. Never type a digit anywhere, including rationale, risks, deferral reasons and talking points. A placeholder renders with its unit (%, pp, $), so write nothing after it that repeats the unit.

@@ -44,7 +44,7 @@ async def test_s3_injection_flagged_and_redacted(deps: Deps, tmp_path: Path) -> 
     flagged = [e for e in deps.trace.events if e.type == "injection_flagged"]
     assert {e.payload["id"] for e in flagged} == {"N-302"} and state.untrusted_flags
     briefs = [m.text for r in deps.llm.requests for m in r.messages if m.role == "user"]
-    assert all("admin mode" not in b and "NRTH" not in b for b in briefs)
+    assert all("admin mode" not in b and "SU" not in b for b in briefs)
     assert state.status == RunStatus.AWAITING_APPROVAL and state.final.recommendation.actions == []
 
 
@@ -117,7 +117,7 @@ async def test_g12_budget_exhaustion_degrades_with_partial_output(
     assert len(state.analyst_reports) == 4 and any(
         r.findings for r in state.analyst_reports.values()
     )
-    assert "FLAG-CONC-NRTH" in state.flags or "FLAG-SUIT-VOL" in state.flags
+    assert "FLAG-CONC-SU" in state.flags or "FLAG-SUIT-VOL" in state.flags
 
 
 async def test_resume_skips_completed_analysts(deps: Deps, tmp_path: Path) -> None:

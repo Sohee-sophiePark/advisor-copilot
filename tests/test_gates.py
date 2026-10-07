@@ -17,7 +17,7 @@ CTX = synth_ctx("C002", FINDINGS)
 ACTION = {
     "action_id": "A1",
     "type": "reduce_position",
-    "target": "NRTH",
+    "target": "SU",
     "direction": "decrease",
     "description": "Trim the energy stock in stages.",
     "rationale": "Concentration and income needs.",
@@ -26,7 +26,7 @@ ACTION = {
 }
 GOOD = {
     "headline": "Reduce concentration in stages",
-    "summary": "NRTH is {{m:conc.NRTH.pct}} of the portfolio.",
+    "summary": "SU is {{m:conc.SU.pct}} of the portfolio.",
     "actions": [ACTION],
     "risks_and_considerations": [],
     "deferred": [],

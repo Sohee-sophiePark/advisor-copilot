@@ -57,6 +57,29 @@ class Instrument(BaseModel):
     single_security: bool
 
 
+class TopHolding(BaseModel):
+    name: str
+    weight_pct: float
+
+
+class InstrumentFacts(BaseModel):
+    """Fund-facts style overview; `facts_source` is `fictional` or `official:<provider>`."""
+
+    ticker: str
+    description: str
+    objective: str
+    risk_rating: Literal["low", "low-to-medium", "medium", "medium-to-high", "high"]
+    mer_pct: float | None = None
+    distribution_yield_pct: float | None = None
+    dividend_yield_pct: float | None = None
+    sector: str | None = None
+    inception: dt.date | None = None
+    top_holdings: list[TopHolding] = []
+    facts_source: str
+    facts_as_of: dt.date
+    facts_url: str = ""
+
+
 class Holding(BaseModel):
     ticker: str
     units: float

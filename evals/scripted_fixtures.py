@@ -46,7 +46,7 @@ FAIL = {
 }
 BASE_DRAFT = {
     "headline": "Reduce concentration in stages",
-    "summary": "NRTH is {{m:conc.NRTH.pct}} of the portfolio.",
+    "summary": "SU is {{m:conc.SU.pct}} of the portfolio.",
     "actions": [],
     "risks_and_considerations": [],
     "deferred": [],
@@ -184,15 +184,15 @@ def script_scenario(llm: ScriptedClient, sc: dict) -> None:
                 parsed={"route": "what_if", "domains": [], "reason": "x", "confidence": 0.9}
             ),
         )
-        trade = {"sell_ticker": "NRTH", "sell_fraction": 0.5, "buy_ticker": "CBND"}
+        trade = {"sell_ticker": "SU", "sell_fraction": 0.5, "buy_ticker": "XBB"}
         submit = {
             "findings": [
                 {
                     "finding_id": "x",
                     "title": "Concentration halves",
                     "severity": "info",
-                    "detail": "NRTH goes to {{m:whatif.conc.NRTH.pct}}.",
-                    "metric_refs": ["whatif.conc.NRTH.pct"],
+                    "detail": "SU goes to {{m:whatif.conc.SU.pct}}.",
+                    "metric_refs": ["whatif.conc.SU.pct"],
                     "flag_refs": [],
                 }
             ]
@@ -206,7 +206,7 @@ def script_scenario(llm: ScriptedClient, sc: dict) -> None:
             "synthesizer",
             LLMResponse(
                 parsed={
-                    "answer": "NRTH would be {{m:whatif.conc.NRTH.pct}}.",
+                    "answer": "SU would be {{m:whatif.conc.SU.pct}}.",
                     "suggested_questions": [],
                 }
             ),

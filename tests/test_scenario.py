@@ -15,25 +15,25 @@ from advisor_copilot.tools.scenario import TradeArgs, simulate_trade
 
 def sim(**args: object):  # noqa: ANN201
     return simulate_trade(
-        "C002", TradeArgs.model_validate({"sell_ticker": "NRTH", "buy_ticker": "CBND", **args})
+        "C002", TradeArgs.model_validate({"sell_ticker": "SU", "buy_ticker": "XBB", **args})
     )
 
 
 def test_half_of_nrth_into_bonds() -> None:
     r = sim(sell_fraction=0.5)
     m = metrics(r)
-    assert m["conc.NRTH.pct"] == pytest.approx(28.57) and m[
-        "whatif.conc.NRTH.pct"
-    ] == pytest.approx(14.29)
+    assert m["conc.SU.pct"] == pytest.approx(28.57) and m["whatif.conc.SU.pct"] == pytest.approx(
+        14.29
+    )
     assert m["whatif.trade.cad"] == 37800 and m["whatif.risk.vol.pct"] < m["risk.vol.pct"]
-    assert "FLAG-CONC-NRTH" in r.data["remaining"] and r.flags == []
+    assert "FLAG-CONC-SU" in r.data["remaining"] and r.flags == []
 
 
 def test_selling_enough_resolves_the_concentration() -> None:
     r = sim(sell_fraction=0.7)
     assert (
-        metrics(r)["whatif.conc.NRTH.pct"] == pytest.approx(8.57)
-        and "FLAG-CONC-NRTH" in r.data["resolved"]
+        metrics(r)["whatif.conc.SU.pct"] == pytest.approx(8.57)
+        and "FLAG-CONC-SU" in r.data["resolved"]
     )
 
 
@@ -47,19 +47,17 @@ def test_amount_is_capped_at_the_holding() -> None:
         {},
         {"sell_fraction": 0.5, "sell_amount_cad": 10},
         {"sell_fraction": 0.5, "buy_ticker": "BTC"},
-        {"sell_fraction": 0.5, "buy_ticker": "NRTH"},
+        {"sell_fraction": 0.5, "buy_ticker": "SU"},
     ],
 )
 def test_bad_args_are_rejected(args: dict) -> None:
     with pytest.raises(reg.ToolArgsError):
-        reg.run_tool(
-            "simulate_trade", "C002", {"sell_ticker": "NRTH", "buy_ticker": "CBND", **args}
-        )
+        reg.run_tool("simulate_trade", "C002", {"sell_ticker": "SU", "buy_ticker": "XBB", **args})
 
 
 def test_selling_something_not_held_is_an_error() -> None:
     with pytest.raises(reg.ToolArgsError, match="not held"):
-        reg.run_tool("simulate_trade", "C001", {"sell_ticker": "NRTH", "sell_fraction": 0.5})
+        reg.run_tool("simulate_trade", "C001", {"sell_ticker": "SU", "sell_fraction": 0.5})
 
 
 def test_router_assigns_the_scenario_analyst() -> None:
@@ -77,14 +75,14 @@ async def test_what_if_turn_end_to_end(deps: Deps, tmp_path) -> None:  # noqa: A
     call = ToolCall(
         id="1",
         name="simulate_trade",
-        args={"sell_ticker": "NRTH", "sell_fraction": 0.5, "buy_ticker": "CBND"},
+        args={"sell_ticker": "SU", "sell_fraction": 0.5, "buy_ticker": "XBB"},
     )
     finding = {
         "finding_id": "x",
         "title": "Concentration halves but stays above limit",
         "severity": "info",
-        "detail": "NRTH falls from {{m:conc.NRTH.pct}} to {{m:whatif.conc.NRTH.pct}}.",
-        "metric_refs": ["conc.NRTH.pct", "whatif.conc.NRTH.pct"],
+        "detail": "SU falls from {{m:conc.SU.pct}} to {{m:whatif.conc.SU.pct}}.",
+        "metric_refs": ["conc.SU.pct", "whatif.conc.SU.pct"],
         "flag_refs": [],
     }
     deps.llm.add(
@@ -98,13 +96,13 @@ async def test_what_if_turn_end_to_end(deps: Deps, tmp_path) -> None:  # noqa: A
         "synthesizer",
         LLMResponse(
             parsed={
-                "answer": "NRTH would drop to {{m:whatif.conc.NRTH.pct}}.",
+                "answer": "SU would drop to {{m:whatif.conc.SU.pct}}.",
                 "suggested_questions": [],
             }
         ),
     )
     s = await run_pipeline(
-        RunState(run_id="w", client_id="C002", request_text="Sell half NRTH?"), deps, tmp_path
+        RunState(run_id="w", client_id="C002", request_text="Sell half SU?"), deps, tmp_path
     )
     assert (
         s.status == RunStatus.COMPLETED

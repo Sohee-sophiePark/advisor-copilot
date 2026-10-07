@@ -20,7 +20,7 @@
    {
     "action_id": "A2",
     "type": "relocate_holding",
-    "target": "USEQ",
+    "target": "VTI",
     "direction": "move",
     "description": "Hold the US-listed fund in the RRSP instead of the TFSA.",
     "rationale": "Treaty exemption applies in an RRSP, not a TFSA.",

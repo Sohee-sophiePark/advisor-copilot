@@ -2,9 +2,9 @@
  "scenario_id": "S11",
  "title": "What if half the single stock moves into bonds",
  "client_id": "C002",
- "request_text": "What if we sell half of the NRTH shares and put the money into bonds?",
+ "request_text": "What if we sell half of the SU shares and put the money into bonds?",
  "preset": null,
- "recorded_at": "2026-10-07T18:32:47+00:00",
+ "recorded_at": "2026-10-07T21:32:21+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,15 +14,15 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:25.288116Z",
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:15.944493Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
     "client_id": "C002",
-    "request_text": "What if we sell half of the NRTH shares and put the money into bonds?",
+    "request_text": "What if we sell half of the SU shares and put the money into bonds?",
     "preset": null,
     "thread_id": null,
     "run_mode": "record",
@@ -36,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:25.306021Z",
-   "t_ms": 17,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:15.963800Z",
+   "t_ms": 19,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -50,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:25.306545Z",
-   "t_ms": 18,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:15.964412Z",
+   "t_ms": 19,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -64,9 +64,9 @@
   },
   {
    "seq": 4,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:25.306822Z",
-   "t_ms": 18,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:15.964704Z",
+   "t_ms": 20,
    "type": "llm_call_started",
    "agent": "router",
    "level": "info",
@@ -77,27 +77,27 @@
   },
   {
    "seq": 5,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:32.869196Z",
-   "t_ms": 7581,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:16.878183Z",
+   "t_ms": 933,
    "type": "llm_call_finished",
    "agent": "router",
    "level": "info",
    "payload": {
     "purpose": "router",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 946,
+    "tokens_in": 943,
     "tokens_out": 52,
-    "latency_ms": 7561,
+    "latency_ms": 912,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 6,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:32.869979Z",
-   "t_ms": 7581,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:16.878981Z",
+   "t_ms": 934,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
@@ -114,9 +114,9 @@
   },
   {
    "seq": 7,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:32.871186Z",
-   "t_ms": 7583,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:16.880203Z",
+   "t_ms": 935,
    "type": "agent_started",
    "agent": "scenario",
    "level": "info",
@@ -129,9 +129,9 @@
   },
   {
    "seq": 8,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:32.872569Z",
-   "t_ms": 7584,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:16.881530Z",
+   "t_ms": 937,
    "type": "llm_call_started",
    "agent": "scenario",
    "level": "info",
@@ -142,27 +142,27 @@
   },
   {
    "seq": 9,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:38.699873Z",
-   "t_ms": 13411,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:17.748548Z",
+   "t_ms": 1804,
    "type": "llm_call_finished",
    "agent": "scenario",
    "level": "info",
    "payload": {
     "purpose": "analyst:scenario",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1035,
-    "tokens_out": 36,
-    "latency_ms": 5826,
+    "tokens_in": 1033,
+    "tokens_out": 35,
+    "latency_ms": 866,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 10,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:38.702716Z",
-   "t_ms": 13414,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:17.749931Z",
+   "t_ms": 1805,
    "type": "tool_call",
    "agent": "scenario",
    "level": "info",
@@ -170,8 +170,8 @@
     "name": "simulate_trade",
     "args": {
      "sell_fraction": 0.5,
-     "sell_ticker": "NRTH",
-     "buy_ticker": "CBND"
+     "sell_ticker": "SU",
+     "buy_ticker": "XBB"
     },
     "metrics_count": 31,
     "flags": [],
@@ -180,9 +180,9 @@
   },
   {
    "seq": 11,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:38.703248Z",
-   "t_ms": 13415,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:17.750194Z",
+   "t_ms": 1805,
    "type": "llm_call_started",
    "agent": "scenario",
    "level": "info",
@@ -193,41 +193,41 @@
   },
   {
    "seq": 12,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:45.239837Z",
-   "t_ms": 19951,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:19.591819Z",
+   "t_ms": 3647,
    "type": "llm_call_finished",
    "agent": "scenario",
    "level": "info",
    "payload": {
     "purpose": "analyst:scenario",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 2405,
-    "tokens_out": 358,
-    "latency_ms": 6534,
+    "tokens_in": 2395,
+    "tokens_out": 520,
+    "latency_ms": 1840,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 13,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:45.242544Z",
-   "t_ms": 19954,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:19.592787Z",
+   "t_ms": 3648,
    "type": "agent_finished",
    "agent": "scenario",
    "level": "info",
    "payload": {
-    "findings_count": 3,
+    "findings_count": 4,
     "status": "ok",
     "data_gaps": []
    }
   },
   {
    "seq": 14,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:45.246279Z",
-   "t_ms": 19958,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:19.594200Z",
+   "t_ms": 3649,
    "type": "llm_call_started",
    "agent": "synthesizer",
    "level": "info",
@@ -238,27 +238,27 @@
   },
   {
    "seq": 15,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:47.283559Z",
-   "t_ms": 21995,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:21.463384Z",
+   "t_ms": 5518,
    "type": "llm_call_finished",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "purpose": "synthesizer",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 2442,
-    "tokens_out": 356,
-    "latency_ms": 2035,
+    "tokens_in": 2592,
+    "tokens_out": 365,
+    "latency_ms": 1867,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 16,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:47.285362Z",
-   "t_ms": 21997,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:21.465370Z",
+   "t_ms": 5520,
    "type": "draft_created",
    "agent": "synthesizer",
    "level": "info",
@@ -270,9 +270,9 @@
   },
   {
    "seq": 17,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:47.285668Z",
-   "t_ms": 21997,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:21.466265Z",
+   "t_ms": 5521,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -284,9 +284,9 @@
   },
   {
    "seq": 18,
-   "run_id": "C002-20261007-183225-ab3546",
-   "ts": "2026-10-07T18:32:47.286969Z",
-   "t_ms": 21998,
+   "run_id": "C002-20261007-213215-535d65",
+   "ts": "2026-10-07T21:32:21.467847Z",
+   "t_ms": 5523,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -294,18 +294,18 @@
     "status": "COMPLETED",
     "totals": {
      "llm_calls": 4,
-     "tokens_in": 6828,
-     "tokens_out": 802,
-     "wall_ms": 21998,
+     "tokens_in": 6963,
+     "tokens_out": 972,
+     "wall_ms": 5523,
      "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "C002-20261007-183225-ab3546",
+  "run_id": "C002-20261007-213215-535d65",
   "client_id": "C002",
-  "request_text": "What if we sell half of the NRTH shares and put the money into bonds?",
+  "request_text": "What if we sell half of the SU shares and put the money into bonds?",
   "preset": null,
   "thread_id": null,
   "mode": "answer",
@@ -324,20 +324,21 @@
     "findings": [
      {
       "finding_id": "WHATIF-1",
-      "title": "Reduced stress loss in equity bear market scenario",
+      "title": "SU concentration reduced but remains above limit",
       "severity": "info",
-      "detail": "The trade reduces the portfolio's exposure to a bear market, moving from {{m:stress.equity_bear.cad}} to {{m:whatif.stress.equity_bear.cad}}.",
+      "detail": "Selling half of the SU position reduces the concentration from {{m:conc.SU.pct}} to {{m:whatif.conc.SU.pct}}, though it remains above the {{m:conc.limit.pct}} limit.",
       "metric_refs": [
-       "stress.equity_bear.cad",
-       "whatif.stress.equity_bear.cad"
+       "conc.SU.pct",
+       "whatif.conc.SU.pct",
+       "conc.limit.pct"
       ],
       "flag_refs": []
      },
      {
       "finding_id": "WHATIF-2",
-      "title": "Portfolio volatility remains above conservative limit",
+      "title": "Portfolio volatility decreases toward conservative limit",
       "severity": "info",
-      "detail": "Portfolio volatility decreases from {{m:risk.vol.pct}} to {{m:whatif.risk.vol.pct}}, though it remains above the conservative profile limit of {{m:risk.vol_band_max.pct}}.",
+      "detail": "Portfolio volatility decreases from {{m:risk.vol.pct}} to {{m:whatif.risk.vol.pct}}, moving closer to the {{m:risk.vol_band_max.pct}} limit for a conservative profile.",
       "metric_refs": [
        "risk.vol.pct",
        "whatif.risk.vol.pct",
@@ -347,13 +348,25 @@
      },
      {
       "finding_id": "WHATIF-3",
-      "title": "NRTH concentration remains above limit",
+      "title": "Equity bear market stress loss improves",
       "severity": "info",
-      "detail": "The concentration of NRTH decreases from {{m:conc.NRTH.pct}} to {{m:whatif.conc.NRTH.pct}}, though it still exceeds the {{m:conc.limit.pct}} limit.",
+      "detail": "The equity bear market stress loss improves from {{m:stress.equity_bear.cad}} to {{m:whatif.stress.equity_bear.cad}}, representing a reduction from {{m:stress.equity_bear.pct}} to {{m:whatif.stress.equity_bear.pct}} of the total portfolio.",
       "metric_refs": [
-       "conc.NRTH.pct",
-       "whatif.conc.NRTH.pct",
-       "conc.limit.pct"
+       "stress.equity_bear.cad",
+       "whatif.stress.equity_bear.cad",
+       "stress.equity_bear.pct",
+       "whatif.stress.equity_bear.pct"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "WHATIF-4",
+      "title": "New drift breach in Canadian bonds",
+      "severity": "info",
+      "detail": "The trade causes Canadian bonds to drift from {{m:drift.CA_BONDS.pp}} to {{m:whatif.drift.CA_BONDS.pp}}, creating a new drift breach.",
+      "metric_refs": [
+       "drift.CA_BONDS.pp",
+       "whatif.drift.CA_BONDS.pp"
       ],
       "flag_refs": []
      }
@@ -447,11 +460,11 @@
     "label": "Single-security concentration limit",
     "source_tool": "check_concentration"
    },
-   "conc.NRTH.pct": {
-    "key": "conc.NRTH.pct",
+   "conc.SU.pct": {
+    "key": "conc.SU.pct",
     "value": 28.57,
     "unit": "pct",
-    "label": "NRTH share of portfolio",
+    "label": "SU share of portfolio",
     "source_tool": "check_concentration"
    },
    "stress.equity_bear.cad": {
@@ -552,11 +565,11 @@
     "label": "After the trade: Single-security concentration limit",
     "source_tool": "simulate_trade"
    },
-   "whatif.conc.NRTH.pct": {
-    "key": "whatif.conc.NRTH.pct",
+   "whatif.conc.SU.pct": {
+    "key": "whatif.conc.SU.pct",
     "value": 14.29,
     "unit": "pct",
-    "label": "After the trade: NRTH share of portfolio",
+    "label": "After the trade: SU share of portfolio",
     "source_tool": "simulate_trade"
    },
    "whatif.stress.equity_bear.cad": {
@@ -577,7 +590,7 @@
     "key": "whatif.trade.cad",
     "value": 37800.0,
     "unit": "cad",
-    "label": "NRTH sold into CBND",
+    "label": "SU sold into XBB",
     "source_tool": "simulate_trade"
    },
    "client.age.years": {
@@ -618,24 +631,24 @@
   "revision_count": 0,
   "final": null,
   "answer": {
-   "answer": "This simulation shows that selling half of the NRTH position reduces potential losses in an equity bear market from {{m:stress.equity_bear.cad}} to {{m:whatif.stress.equity_bear.cad}}. While this trade improves the portfolio's risk profile, the concentration of NRTH remains above the {{m:conc.limit.pct}} limit, decreasing from {{m:conc.NRTH.pct}} to {{m:whatif.conc.NRTH.pct}}. Additionally, portfolio volatility improves from {{m:risk.vol.pct}} to {{m:whatif.risk.vol.pct}}, though it still exceeds the conservative limit of {{m:risk.vol_band_max.pct}}. Please note this is a simulation and does not account for taxes or trading costs. We should discuss these trade-offs and the tax implications at your upcoming annual review.",
+   "answer": "This simulation, which excludes taxes and trading costs, shows that selling half of the Suncor position reduces its concentration from {{m:conc.SU.pct}} to {{m:whatif.conc.SU.pct}}, though it remains above the {{m:conc.limit.pct}} limit. Portfolio volatility improves, moving from {{m:risk.vol.pct}} toward the {{m:risk.vol_band_max.pct}} conservative limit, reaching {{m:whatif.risk.vol.pct}}. Additionally, the equity bear market stress loss improves from {{m:stress.equity_bear.cad}} to {{m:whatif.stress.equity_bear.cad}}. However, this trade creates a new drift breach in Canadian bonds, moving from {{m:drift.CA_BONDS.pp}} to {{m:whatif.drift.CA_BONDS.pp}}. We should discuss these trade-offs and tax implications during your upcoming annual review.",
    "suggested_questions": [
-    "Would you like to review the tax implications of selling these shares?",
-    "Shall we model a full exit strategy for the NRTH position?",
-    "How does this trade align with your income needs for the next year?"
+    "How does this trade impact the monthly income generated?",
+    "What are the tax implications of selling these shares?",
+    "Should we rebalance the bond drift breach simultaneously?"
    ]
   },
   "message": null,
   "approval": null,
   "budget_snapshot": {
    "llm_calls": 4,
-   "tokens": 7630,
-   "wall_ms": 21998
+   "tokens": 7935,
+   "wall_ms": 5523
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T18:32:25.114970Z",
-  "updated_at": "2026-10-07T18:32:47.287272Z",
+  "created_at": "2026-10-07T21:32:15.770113Z",
+  "updated_at": "2026-10-07T21:32:21.468175Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate",

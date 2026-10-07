@@ -16,7 +16,7 @@ from advisor_copilot.llm.base import LLMResponse, ToolCall
 from advisor_copilot.models import Finding
 
 ANSWER = {
-    "answer": "Margaret holds {{m:conc.NRTH.pct}} in one stock.",
+    "answer": "Margaret holds {{m:conc.SU.pct}} in one stock.",
     "suggested_questions": ["Why stages?"],
 }
 
@@ -62,7 +62,7 @@ async def test_targeted_answer_mode_uses_prefetch(deps: Deps, tmp_path: Path) ->
                 "severity": "info",
                 "detail": "Room is {{m:tax.tfsa_room.cad}}.",
                 "metric_refs": ["tax.tfsa_room.cad"],
-                "flag_refs": ["FLAG-L1-USEQ", "FLAG-L2", "FLAG-L3"],
+                "flag_refs": ["FLAG-L1-VTI", "FLAG-L2", "FLAG-L3"],
             }
         ]
     }

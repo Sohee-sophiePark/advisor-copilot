@@ -54,6 +54,7 @@ SOURCE_FILES = [
     "model_portfolios.json",
     "capital_market_assumptions.json",
     "market_snapshot.json",
+    "fund_facts.json",
 ]
 
 
@@ -106,7 +107,7 @@ def seed(raw: dict, data_dir: Path, path: Path) -> None:
                 for n in raw["notes"]
             ],
         )
-        for name in ("model_portfolios", "cma", "market"):
+        for name in ("model_portfolios", "cma", "market", "facts"):
             conn.execute("INSERT INTO reference VALUES (?,?)", (name, json.dumps(raw[name])))
         conn.execute(
             "INSERT OR REPLACE INTO meta VALUES ('source_hash', ?)", (source_hash(data_dir),)

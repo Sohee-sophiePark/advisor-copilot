@@ -32,4 +32,4 @@ def test_parser_accepts_each_command() -> None:
 def test_tools_command_prints_metrics_and_flags(capsys: pytest.CaptureFixture[str]) -> None:
     assert main(["tools", "C002"]) == 0
     out = capsys.readouterr().out
-    assert "conc.NRTH.pct" in out and "FLAG-CONC-NRTH" in out and "critical" in out
+    assert "conc.SU.pct" in out and "FLAG-CONC-SU" in out and "critical" in out

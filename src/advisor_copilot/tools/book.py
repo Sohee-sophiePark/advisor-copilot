@@ -51,6 +51,10 @@ class GoalArgs(BaseModel):
     limit: Limit = 10
 
 
+class FactsArgs(BaseModel):
+    ticker: str = Field(description="A ticker from <book_scope>")
+
+
 def _result(
     tool: str, name: str, rows: list[Row], limit: int, totals: list[tuple] = ()
 ) -> ToolResult:
@@ -252,3 +256,23 @@ def book_goals(_: str, args: GoalArgs) -> ToolResult:
             ]
             rows.append((cl.client_id, ms, {}))
     return _result("book_goals", "goals", rows, args.limit)
+
+
+def get_instrument_facts(_: str, args: FactsArgs) -> ToolResult:
+    """Fund facts for one ticker: fees, yield, top holdings as metrics; text, provenance as data."""
+    facts = load_fixtures().facts
+    if args.ticker not in facts:
+        raise c.ToolArgsError(f"no facts for ticker {args.ticker!r}")
+    f, tool = facts[args.ticker], "get_instrument_facts"
+    rows = [
+        ("mer", f.mer_pct, "Management expense ratio"),
+        ("yield", f.distribution_yield_pct, "Distribution yield"),
+        ("yield", f.dividend_yield_pct, "Dividend yield"),
+        *((f"top{i}", h.weight_pct, h.name) for i, h in enumerate(f.top_holdings, 1)),
+    ]
+    metrics = [
+        c.metric(f"inst.{f.ticker}.{k}.pct", v, "pct", label, tool)
+        for k, v, label in rows
+        if v is not None
+    ]
+    return c.tool_result(tool, metrics, data=f.model_dump(mode="json"))

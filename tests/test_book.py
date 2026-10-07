@@ -38,9 +38,9 @@ def test_book_tools_match_book_figures() -> None:
         seg[f"book.seg_{g}.households.count"]
         for g in ("accumulation", "pre_retirement", "retirement")
     ] == [40, 28, 32]
-    m, ids = run("book_exposure", target="NRTH")
+    m, ids = run("book_exposure", target="SU")
     assert sorted(ids) == ["C002", "C020", "C030", "C054", "C079", "C102", "C103"]
-    assert m["book.C002.exposure_NRTH.pct"] == 28.57
+    assert m["book.C002.exposure_SU.pct"] == 28.57
     m, ids = run("book_market_impact", target="CA_EQUITY", move_pct=-10, limit=3)
     assert ids[0] == "C107" and m["book.C107.impact_CA_EQUITY.pct"] == -4.0
     assert run("book_risk", kind="volatility")[0]["book.risk_volatility.breaches.count"] == 9
@@ -58,6 +58,7 @@ def test_book_tools_are_book_only() -> None:
     assert {t.name for t in reg.tools_for("book")} == {
         "book_attention", "book_segments", "book_risk", "book_exposure",
         "book_market_impact", "book_tax", "book_goals", "get_market_snapshot",
+        "get_instrument_facts",
     }  # fmt: skip
     assert not any(r.tool.startswith("book_") for r in reg.run_all_for_client("C001"))
 
@@ -74,10 +75,10 @@ def test_post_rules_keep_each_scope() -> None:
 
 
 def test_g5_13_known_households() -> None:
-    r = reg.run_tool("book_exposure", BOOK, {"target": "NRTH"})
+    r = reg.run_tool("book_exposure", BOOK, {"target": "SU"})
     ctx = SynthContext(None, [], "q", "book_question", [], {m.key: m for m in r.metrics}, {})
     ok = {
-        "answer": "{{h:C002}} holds {{m:book.C002.exposure_NRTH.pct}}.",
+        "answer": "{{h:C002}} holds {{m:book.C002.exposure_SU.pct}}.",
         "suggested_questions": [],
     }
     assert answer_gates(ok, ctx, 120)[1].passed

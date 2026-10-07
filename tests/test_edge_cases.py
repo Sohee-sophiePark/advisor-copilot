@@ -26,7 +26,7 @@ def test_e01_kyc_expired_blocks() -> None:
 
 @pytest.mark.parametrize(("cid", "flagged"), [("C102", False), ("C103", True)])
 def test_e02_e03_concentration_boundary(cid: str, flagged: bool) -> None:
-    assert flags(rk.check_concentration(cid)) == ({"FLAG-CONC-NRTH": "critical"} if flagged else {})
+    assert flags(rk.check_concentration(cid)) == ({"FLAG-CONC-SU": "critical"} if flagged else {})
 
 
 def test_e04_drift_exactly_at_tolerance_is_not_flagged() -> None:
@@ -71,7 +71,7 @@ def test_e11_no_room_interest_info_only() -> None:
 
 
 def test_e12_small_us_fund_in_tfsa() -> None:
-    assert flags(tx.check_asset_location("C112")) == {"FLAG-L1-USEQ": "warning"}
+    assert flags(tx.check_asset_location("C112")) == {"FLAG-L1-VTI": "warning"}
 
 
 def test_e13_reworded_injection_is_detected() -> None:

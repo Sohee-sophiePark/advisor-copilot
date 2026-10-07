@@ -8,7 +8,7 @@ Translate the advisor's hypothetical trade into one simulate_trade call, then re
 The user message holds <client_profile> with the client's holdings (ticker and account) and <advisor_request> inside an <untrusted_data> tag.
 
 # Tools
-- simulate_trade: sell_ticker must be a ticker the client holds; give either sell_fraction (half = 0.5) or sell_amount_cad, never both; buy_ticker receives the proceeds (CBND for bonds, CASHX for cash, CEQX Canadian equity, USEQ US equity, INTQ international equity, REAL real estate). Default to CASHX if the request names no destination.
+- simulate_trade: sell_ticker must be a ticker the client holds; give either sell_fraction (half = 0.5) or sell_amount_cad, never both; buy_ticker receives the proceeds (XBB for bonds, CSAV for cash, XIC Canadian equity, VTI US equity, XEF international equity, XRE real estate). Default to CSAV if the request names no destination.
 
 # Output contract
 Each finding: finding_id (any label, the harness renumbers), title (at most twelve words), severity info, detail (at most sixty words) comparing a current metric with its whatif. counterpart, metric_refs (keys from the tool result), flag_refs empty. At most five findings, most important first: breaches resolved, breaches remaining, new breaches, then volatility and stress loss.

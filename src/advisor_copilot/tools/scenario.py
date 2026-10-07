@@ -12,13 +12,13 @@ CHECKS = (compute_drift, compute_risk_metrics, check_concentration, run_stress_t
 
 
 class TradeArgs(BaseModel):
-    sell_ticker: str = Field(..., description="Ticker the client holds, to sell, e.g. NRTH")
+    sell_ticker: str = Field(..., description="Ticker the client holds, to sell, e.g. SU")
     sell_fraction: float = Field(
         0, ge=0, le=1, description="Share of the holding to sell, 0 to 1; 0 if an amount is given"
     )
     sell_amount_cad: float = Field(0, ge=0, description="Dollars to sell; 0 if a fraction is given")
     buy_ticker: str = Field(
-        "CASHX", description="Ticker that receives the proceeds, e.g. CBND for bonds"
+        "CSAV", description="Ticker that receives the proceeds, e.g. XBB for bonds"
     )
 
     @model_validator(mode="after")

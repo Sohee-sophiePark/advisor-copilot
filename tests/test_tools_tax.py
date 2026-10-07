@@ -8,9 +8,9 @@ from advisor_copilot.tools import tax as tx
 
 def test_c001_location_flags_and_amounts() -> None:
     result = tx.check_asset_location("C001")
-    assert flags(result) == {"FLAG-L1-USEQ": "warning", "FLAG-L2": "info", "FLAG-L3": "warning"}
+    assert flags(result) == {"FLAG-L1-VTI": "warning", "FLAG-L2": "info", "FLAG-L3": "warning"}
     m = metrics(result)
-    assert m["tax.l1.USEQ.cad"] == 27000.0
+    assert m["tax.l1.VTI.cad"] == 27000.0
     assert m["tax.nonreg_interest.cad"] == 15000.0
     assert m["tax.tfsa_room.cad"] == 14000.0
 

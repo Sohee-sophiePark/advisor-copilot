@@ -13,7 +13,7 @@ from sse_starlette.sse import EventSourceResponse
 from advisor_copilot import book
 from advisor_copilot.actions import apply_approval
 from advisor_copilot.config import ROOT
-from advisor_copilot.data_access import get_client
+from advisor_copilot.data_access import get_client, load_fixtures
 from advisor_copilot.db import source_hash
 from advisor_copilot.harness.chat import answer_key, reply_text, thread_context
 from advisor_copilot.harness.orchestrator import run_pipeline, start_run
@@ -58,6 +58,13 @@ def get_book() -> dict:
 def client_detail(client_id: SafeId) -> dict:
     _known_client(client_id)
     return book.client_detail(client_id)
+
+
+@router.get("/instruments/{ticker}")
+def instrument(ticker: SafeId) -> dict:
+    if ticker not in load_fixtures().instruments:
+        raise HTTPException(404, "unknown ticker")
+    return book.instrument_view(ticker)
 
 
 @router.get("/market")
@@ -292,5 +299,6 @@ def export_static(settings: object) -> str:
         "market": book.market_view(),
         "recorded": recorded,
         "clients": {c.client_id: book.client_detail(c.client_id) for c in list_clients()},
+        "instruments": {t: book.instrument_view(t) for t in load_fixtures().instruments},
     }
     return json.dumps(data, default=str)

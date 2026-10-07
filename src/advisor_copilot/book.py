@@ -3,7 +3,14 @@
 from functools import lru_cache
 
 from advisor_copilot.config import get_settings
-from advisor_copilot.data_access import get_client, get_market, get_notes, get_targets, list_clients
+from advisor_copilot.data_access import (
+    get_client,
+    get_market,
+    get_notes,
+    get_targets,
+    list_clients,
+    load_fixtures,
+)
 from advisor_copilot.harness.context import profile_summary
 from advisor_copilot.harness.gates import kyc_expired
 from advisor_copilot.tools.common import positions
@@ -131,6 +138,29 @@ def client_detail(client_id: str) -> dict:
             n.model_dump(mode="json")
             for n in sorted(get_notes(client_id), key=lambda n: n.date, reverse=True)
         ],
+    }
+
+
+def instrument_view(ticker: str) -> dict:
+    """Ticker page: instrument, fund facts with provenance, holders and the book's total."""
+    from advisor_copilot.tools.book import _exposure  # tools.book imports this module
+
+    fx = load_fixtures()
+    holders = _exposure(ticker)
+    names = {c.client_id: c.name for c in list_clients()}
+    return {
+        **fx.instruments[ticker].model_dump(),
+        "facts": fx.facts[ticker].model_dump(mode="json") if ticker in fx.facts else None,
+        "holders": [
+            {
+                "client_id": cid,
+                "name": names[cid],
+                "value_cad": round(v, 2),
+                "weight_pct": round(p, 2),
+            }
+            for cid, v, p in holders
+        ],
+        "total_cad": round(sum(v for _, v, _ in holders), 2),
     }
 
 

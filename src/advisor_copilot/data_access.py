@@ -14,6 +14,7 @@ from advisor_copilot.models import (
     Client,
     CrmNote,
     Instrument,
+    InstrumentFacts,
     MarketSnapshot,
     ModelPortfolios,
     RiskProfile,
@@ -27,6 +28,7 @@ class Fixtures(BaseModel):
     model_portfolios: ModelPortfolios
     cma: CapitalMarketAssumptions
     market: MarketSnapshot
+    facts: dict[str, InstrumentFacts]
 
 
 def _read(path: Path) -> object:
@@ -43,6 +45,7 @@ def read_json(d: Path) -> dict:
         "model_portfolios": _read(d / "model_portfolios.json"),
         "cma": _read(d / "capital_market_assumptions.json"),
         "market": _read(d / "market_snapshot.json"),
+        "facts": _read(d / "fund_facts.json"),
     }
 
 
@@ -61,6 +64,9 @@ def load_fixtures(data_dir: Path | None = None, db_path: Path | None = None) -> 
         model_portfolios=ModelPortfolios.model_validate(raw["model_portfolios"]),
         cma=CapitalMarketAssumptions.model_validate(raw["cma"]),
         market=MarketSnapshot.model_validate(raw["market"]),
+        facts={
+            f.ticker: f for f in TypeAdapter(list[InstrumentFacts]).validate_python(raw["facts"])
+        },
     )
     unknown = {
         h.ticker
