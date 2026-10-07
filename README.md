@@ -21,7 +21,8 @@ What the advisor sees:
   questions get short grounded answers; follow-ups reuse earlier findings; what-ifs ("sell half of
   SU into bonds?") are simulated by code with before-and-after numbers.
 - **Market** — real Bank of Canada data with source and date (USD/CAD and the 10-year minus 2-year Canada yield
-  spread, a common stress gauge), fictional index trends and the
+  spread, a common stress gauge) and the US Treasury 10y−2y spread; on the advisor's laptop also US sector ETF moves
+  and the VIX (personal-use sources, never published), fictional index trends and the
   households most exposed to each, and links to every instrument's page.
 - **Ticker** — each holding's page: public facts from SEC EDGAR filings with source and date (issuer, latest annual
   revenue, profit, assets, cash flow, dividends, recent filings), the price source, and the households that hold it.

@@ -1,5 +1,6 @@
 """Advisor views computed by code (no LLM): book overview, client detail, market context."""
 
+import datetime as dt
 import json
 from functools import lru_cache
 
@@ -170,6 +171,8 @@ def instrument_view(ticker: str) -> dict:
 
 def market_view() -> dict:
     snap, real = get_market(), get_settings().path("data") / "market_real.json"
+    official = get_settings().data_source == "official"
+    local = _local(dt.date.today().isoformat()) if official else {"cards": [], "sectors": []}
     weights = {c.client_id: (c.name, allocation(c)[1]) for c in list_clients()}
     indicators = []
     for i in snap.indicators:
@@ -198,5 +201,38 @@ def market_view() -> dict:
         "instruments": [
             {"ticker": i.ticker, "name": i.name} for i in load_fixtures().instruments.values()
         ],
-        "real": json.loads(real.read_text()) if real.exists() else [],  # republishable series
+        "real": (json.loads(real.read_text()) if real.exists() else []) + local["cards"],
+        "sectors": local["sectors"],
     }
+
+
+@lru_cache(maxsize=1)
+def _local(day: str) -> dict:
+    """Laptop only (DATA_SOURCE=official): US sector ETF moves from history; VIX live from FRED."""
+    import os
+
+    import httpx
+
+    from advisor_copilot import fetch
+    from advisor_copilot.db import Store
+
+    s = get_settings()
+    store, since = (
+        Store(s.path("db")),
+        str(dt.date.fromisoformat(day) - dt.timedelta(days=s.fetch.history_days)),
+    )
+    sectors = []
+    for t, name in s.fetch.sector_etfs.items():
+        if len(h := store.series(f"px.{t}.usd", since)) > 1:
+            change = round(100 * (h[-1][1] / h[0][1] - 1), 1)
+            sectors.append(
+                {"ticker": t, "sector": name, "change_pct": change, "from": h[0][0], "to": h[-1][0]}
+            )
+    cards = []
+    if key := os.environ.get("FRED_API_KEY"):
+        try:
+            with httpx.Client(timeout=30) as http:
+                cards = [c for c in [fetch.vix(s, store, http, key)] if c and c["history"]]
+        except httpx.HTTPError:
+            pass  # the Market page still renders without VIX
+    return {"cards": cards, "sectors": sorted(sectors, key=lambda x: -x["change_pct"])}

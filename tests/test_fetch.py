@@ -56,10 +56,15 @@ FACTS = {"facts": {"ifrs-full": {
 }}}  # fmt: skip
 
 
+TREASURY = 'Date,"1 Mo","2 Yr","10 Yr"\n10/06/2026,4.06,4.79,5.27\n'
+
+
 def handler(seen: list[httpx.Request]):  # noqa: ANN201
     def h(req: httpx.Request) -> httpx.Response:
         seen.append(req)
         url = str(req.url)
+        if "treasury.gov" in url:
+            return httpx.Response(200, text=TREASURY)
         body = (
             BOC if "bankofcanada" in url
             else STOCKS if url.endswith("company_tickers.json")
@@ -75,7 +80,12 @@ def handler(seen: list[httpx.Request]):  # noqa: ANN201
 
 def setup(tmp_path: Path, **caps: int) -> tuple:
     s = load_settings(env={})
-    fetch_cfg = s.fetch.model_copy(update={"caps": {**s.fetch.caps, **caps}})
+    fetch_cfg = s.fetch.model_copy(
+        update={
+            "caps": {**s.fetch.caps, **caps},
+            "history_days": 100_000,
+        }  # window independent of today
+    )
     s = s.model_copy(
         update={"fetch": fetch_cfg, "paths": s.paths.model_copy(update={"data": str(tmp_path)})}
     )
@@ -94,7 +104,12 @@ ENV = {"SEC_USER_AGENT": "Test test@example.com", "TIINGO_API_KEY": "k"}
 def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     s, store, http, seen = setup(tmp_path)
     out = fetch.run(s, store, http, ENV)
-    assert out == {"boc": "4 new values", "sec": "facts for 2 tickers", "tiingo": "2 new values"}
+    assert out == {
+        "boc": "4 new values",
+        "sec": "facts for 2 tickers",
+        "tiingo": "13 new values",  # 2 holdings + 11 sector ETFs
+        "treasury": "2 new values",
+    }
     su = json.loads((tmp_path / "instrument_facts.json").read_text())[1]
     assert su["figures"] == [
         {
@@ -114,7 +129,10 @@ def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
         "2026-10-07",
         2,
     )
-    curve = json.loads((tmp_path / "market_real.json").read_text())[1]
+    cards = json.loads((tmp_path / "market_real.json").read_text())
+    assert [c["key"] for c in cards] == ["fx_usdcad", "ca_curve", "us_curve"]
+    assert cards[2]["history"] == [{"date": "2026-10-06", "value": 0.48}]
+    curve = cards[1]
     assert (
         curve["history"] == [{"date": "2026-10-06", "value": 0.69}]
         and curve["as_of"] == "2026-10-06"
@@ -128,7 +146,7 @@ def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     again = fetch.run(s, store, http, ENV)
     assert again["boc"] == again["tiingo"] == "0 new values"  # history never overwritten
     raw = store.conn.execute("SELECT COUNT(*) FROM market_raw").fetchone()[0]
-    assert raw == 6  # second run fetched identical responses: stored once
+    assert raw == 18  # boc 1 + sec 3 + tiingo 13 + treasury 1; the second run stored nothing new
 
 
 def test_caps_missing_keys_and_ci(tmp_path: Path) -> None:
@@ -156,3 +174,19 @@ def test_official_prices_keep_value_on_the_data_date(tmp_path: Path) -> None:
     assert fx.instruments["SU"].price_cad == 66.0  # 44 USD x 1.5
     assert after * 60.0 == pytest.approx(su * 18.0, rel=1e-4)  # same value on the data date
     assert fx.instruments["XBB"].price_cad == load_fixtures().instruments["XBB"].price_cad
+
+
+def test_vix_is_never_stored(tmp_path: Path) -> None:
+    s, store, _, _ = setup(tmp_path, fred=1)
+    obs = {
+        "observations": [
+            {"date": "2026-10-06", "value": "."},
+            {"date": "2026-10-07", "value": "16.2"},
+        ]
+    }
+    http = httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(200, json=obs)))
+    v = fetch.vix(s, store, http, "k")
+    assert v["history"] == [{"date": "2026-10-07", "value": 16.2}] and v["as_of"] == "2026-10-07"
+    assert store.conn.execute("SELECT COUNT(*) FROM market_raw").fetchone()[0] == 0
+    assert store.conn.execute("SELECT COUNT(*) FROM market_history").fetchone()[0] == 0
+    assert fetch.vix(s, store, http, "k") is None  # daily cap

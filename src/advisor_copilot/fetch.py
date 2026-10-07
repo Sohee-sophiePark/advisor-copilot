@@ -1,6 +1,8 @@
 """Laptop-only fetch from free sources into the raw and history layers, under daily request caps."""
 
+import csv
 import datetime as dt
+import io
 import json
 from collections.abc import Callable, Mapping
 
@@ -19,11 +21,41 @@ SEC_TICKERS = "https://www.sec.gov/files/company_tickers.json"
 SEC_FUNDS = "https://www.sec.gov/files/company_tickers_mf.json"
 SEC_DOC = "https://data.sec.gov/{kind}/CIK{cik:010d}.json"
 TIINGO = "https://api.tiingo.com/tiingo/daily/{ticker}/prices?startDate={start}"
+TREASURY = (
+    "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/"
+    "daily-treasury-rates.csv/{year}/all?type=daily_treasury_yield_curve"
+    "&field_tdr_date_value={year}&_format=csv"
+)
+FRED = (
+    "https://api.stlouisfed.org/fred/series/observations?series_id=VIXCLS&file_type=json"
+    "&observation_start={start}&api_key={key}"
+)
 LICENCE = {
     "boc": "Bank of Canada Valet; reuse with attribution (bankofcanada.ca/terms)",
     "sec": "SEC EDGAR; public domain, cite the SEC (sec.gov/privacy)",
     "tiingo": "Tiingo free tier; personal use only, never republish",
+    "treasury": "US Treasury; US government work, public domain",
 }
+BOC_TERMS = {"source": "Bank of Canada", "terms": "https://www.bankofcanada.ca/terms/"}
+CURVES = [  # key, label, source block, 2-year series, 10-year series
+    (
+        "ca_curve",
+        "Canada yield curve: 10-year minus 2-year",
+        BOC_TERMS,
+        "yield.CA2Y",
+        "yield.CA10Y",
+    ),
+    (
+        "us_curve",
+        "US yield curve: 10-year minus 2-year",
+        {
+            "source": "US Treasury",
+            "terms": "https://home.treasury.gov/treasury-daily-interest-rate-xml-feed",
+        },
+        "yield.US2Y",
+        "yield.US10Y",
+    ),
+]
 
 
 FIGURES = [  # key, label, unit, candidate concepts (IFRS and US GAAP); the newest annual value wins
@@ -103,42 +135,21 @@ class Fetcher:
         url = BOC.format(series=",".join(BOC_SERIES), n=self.s.fetch.history_days)
         r = self.get("boc", url)
         self.store.put_raw("boc", url, LICENCE["boc"], r.text)
-        obs = sorted(r.json()["observations"], key=lambda o: o["d"])
+        obs = r.json()["observations"]
         rows = [
             (BOC_SERIES[k], o["d"], float(o[k]["v"])) for o in obs for k in BOC_SERIES if k in o
         ]
-        series = {n: {d: v for s, d, v in rows if s == n} for n in BOC_SERIES.values()}
-        both = sorted(series["yield.CA2Y"].keys() & series["yield.CA10Y"].keys())
-        common = {"source": "Bank of Canada", "terms": "https://www.bankofcanada.ca/terms/"}
-        public = [  # republishable with attribution: the public site shows this snapshot
-            {
-                **common,
-                "key": "fx_usdcad",
-                "label": "USD/CAD, daily average (indicative)",
-                "unit": "ratio",
-                "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
-                "history": [{"date": d, "value": v} for d, v in series["fx.USDCAD"].items()],
-            },
-            {
-                **common,
-                "key": "ca_curve",
-                "label": "Canada yield curve: 10-year minus 2-year",
-                "unit": "pp",
-                "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-bonds/",
-                "note": "A common stress gauge; below zero the curve is inverted.",
-                "history": [
-                    {
-                        "date": d,
-                        "value": round(series["yield.CA10Y"][d] - series["yield.CA2Y"][d], 2),
-                    }
-                    for d in both
-                ],
-            },
-        ]
-        public = [{**p, "as_of": p["history"][-1]["date"]} for p in public if p["history"]]
-        path = self.s.path("data") / "market_real.json"
-        path.write_text(json.dumps(public, indent=1) + "\n", encoding="utf-8")
         return f"{self.store.put_history('boc', rows)} new values"
+
+    def treasury(self, _: str) -> str:
+        url = TREASURY.format(year=dt.date.today().year)
+        r = self.get("treasury", url)
+        self.store.put_raw("treasury", url, LICENCE["treasury"], r.text)
+        rows = []
+        for c in csv.DictReader(io.StringIO(r.text)):
+            d = dt.datetime.strptime(c["Date"], "%m/%d/%Y").date().isoformat()
+            rows += [("yield.US2Y", d, float(c["2 Yr"])), ("yield.US10Y", d, float(c["10 Yr"]))]
+        return f"{self.store.put_history('treasury', rows)} new values"
 
     def sec(self, user_agent: str) -> str:
         h = {"User-Agent": user_agent}
@@ -166,7 +177,7 @@ class Fetcher:
     def tiingo(self, key: str) -> str:
         start = dt.date.today() - dt.timedelta(days=self.s.fetch.history_days)
         rows = []
-        for t in self.s.fetch.us_tickers:
+        for t in [*self.s.fetch.us_tickers, *self.s.fetch.sector_etfs]:
             url = TIINGO.format(ticker=t, start=start)
             r = self.get("tiingo", url, {"Authorization": f"Token {key}"})
             self.store.put_raw("tiingo", url, LICENCE["tiingo"], r.text)
@@ -185,6 +196,7 @@ def run(
         ("boc", f.boc, None),
         ("sec", f.sec, "SEC_USER_AGENT"),
         ("tiingo", f.tiingo, "TIINGO_API_KEY"),
+        ("treasury", f.treasury, None),
     ]
     out = {}
     for name, step, var in steps:
@@ -199,4 +211,64 @@ def run(
             out[name] = f"failed: HTTP {e.response.status_code}"
         except httpx.HTTPError as e:
             out[name] = f"failed: {type(e).__name__}"
+    write_public(settings, store)
     return out
+
+
+def write_public(s: Settings, store: Store) -> None:
+    """Public snapshot (republishable series only): USD/CAD and the 10y-2y curves, from history."""
+    since = (dt.date.today() - dt.timedelta(days=s.fetch.history_days)).isoformat()
+    fx = store.series("fx.USDCAD", since)
+    cards = [
+        {
+            **BOC_TERMS,
+            "key": "fx_usdcad",
+            "label": "USD/CAD, daily average (indicative)",
+            "unit": "rate",
+            "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
+            "history": [{"date": d, "value": v} for d, v in fx],
+        }
+    ]
+    for key, label, src, short, long in CURVES:
+        a, b = dict(store.series(short, since)), dict(store.series(long, since))
+        hist = [{"date": d, "value": round(b[d] - a[d], 2)} for d in sorted(a.keys() & b.keys())]
+        cards.append(
+            {
+                **src,
+                "key": key,
+                "label": label,
+                "unit": "pp",
+                "url": src["terms"],
+                "note": "A common stress gauge; below zero the curve is inverted.",
+                "history": hist,
+            }
+        )
+    public = [{**c, "as_of": c["history"][-1]["date"]} for c in cards if c["history"]]
+    path = s.path("data") / "market_real.json"
+    path.write_text(json.dumps(public, indent=1) + "\n", encoding="utf-8")
+
+
+def vix(s: Settings, store: Store, http: httpx.Client, key: str) -> dict | None:
+    """Laptop only, never stored (FRED terms forbid caching): recent VIX closes, Cboe data."""
+    if store.usage_today("fetch:fred") >= s.fetch.caps["fred"]:
+        return None
+    store.add_usage("fetch:fred", 0, 0)
+    start = dt.date.today() - dt.timedelta(days=s.fetch.history_days)
+    r = http.get(FRED.format(start=start, key=key))
+    r.raise_for_status()
+    hist = [
+        {"date": o["date"], "value": float(o["value"])}
+        for o in r.json()["observations"]
+        if o["value"] != "."
+    ]
+    return {
+        "key": "vix",
+        "label": "VIX, US equity volatility (fear index)",
+        "unit": "index",
+        "source": "FRED (Cboe data)",
+        "url": "https://fred.stlouisfed.org/series/VIXCLS",
+        "terms": "https://fred.stlouisfed.org/docs/api/terms_of_use.html",
+        "note": "Laptop only; personal use, never stored or published.",
+        "history": hist,
+        "as_of": hist[-1]["date"] if hist else "",
+    }

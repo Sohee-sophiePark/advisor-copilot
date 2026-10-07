@@ -39,4 +39,7 @@ data_source: fictional           # official = latest fetched prices (laptop only
 fetch:                           # `make fetch`, laptop only; caps stay far under each free tier
   us_tickers: [VTI, SU]          # priced from Tiingo end-of-day (USD) x Bank of Canada USD/CAD
   history_days: 30
-  caps: {boc: 10, sec: 20, tiingo: 50}   # requests per day; free tiers: SEC 10/s, Tiingo 1,000/day
+  sector_etfs: {XLB: Materials, XLC: Communication services, XLE: Energy, XLF: Financials, XLI: Industrials,
+    XLK: Technology, XLP: Consumer staples, XLRE: Real estate, XLU: Utilities, XLV: Health care,
+    XLY: Consumer discretionary}             # US sector ETFs, Tiingo, laptop only
+  caps: {boc: 10, sec: 20, tiingo: 50, treasury: 5, fred: 10}   # per day; free: SEC 10/s, Tiingo 1,000/day

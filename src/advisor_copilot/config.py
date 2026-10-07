@@ -147,6 +147,7 @@ class FetchCfg(BaseModel):
     """Laptop-only fetch: US-listed tickers to price, FX series, daily request caps per source."""
 
     us_tickers: list[str]
+    sector_etfs: dict[str, str] = {}
     history_days: int
     caps: dict[str, int]
 

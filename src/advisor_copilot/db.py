@@ -280,6 +280,11 @@ class Store:
         ).fetchone()
         return (row["date"], row["value"]) if row else None
 
+    def series(self, series: str, since: str) -> list[tuple[str, float]]:
+        """History of a series from `since`, oldest first."""
+        sql = "SELECT date, value FROM market_history WHERE series=? AND date>=? ORDER BY date"
+        return [(r["date"], r["value"]) for r in self.conn.execute(sql, (series, since))]
+
     def thread_totals(self, thread_id: str) -> tuple[int, int]:
         row = self.conn.execute(
             "SELECT COALESCE(SUM(calls),0), COALESCE(SUM(tokens),0) FROM messages WHERE thread_id=?",

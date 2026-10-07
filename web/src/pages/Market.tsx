@@ -14,7 +14,7 @@ export function Market() {
     <div className="space-y-4">
       <div className="grid gap-4 md:grid-cols-2">
       {m.real.map((r) => (
-        <Card key={r.key} title={`${r.label} · real data`} right={<span className="text-lg font-semibold text-slate-900">{formatValue(r.history.at(-1)?.value ?? 0, r.unit === "pp" ? "pp" : "rate")}</span>}>
+        <Card key={r.key} title={`${r.label} · real data`} right={<span className="text-lg font-semibold text-slate-900">{formatValue(r.history.at(-1)?.value ?? 0, r.unit)}</span>}>
           <ResponsiveContainer width="100%" height={110}>
             <LineChart data={r.history} margin={{ top: 4, right: 8, left: -12, bottom: 0 }}>
               <XAxis dataKey="date" tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} minTickGap={40} />
@@ -28,6 +28,13 @@ export function Market() {
         </Card>
       ))}
       </div>
+      {m.sectors.length > 0 && (
+        <Card title="US sector ETFs · laptop only" right={<span className="text-xs text-slate-500">change {m.sectors[0].from} → {m.sectors[0].to} · Tiingo, personal use, never published</span>}>
+          <div className="grid gap-x-6 gap-y-1 text-sm md:grid-cols-3">{m.sectors.map((x) => (
+            <div key={x.ticker} className="flex justify-between"><span>{x.sector} <span className="text-xs text-slate-400">{x.ticker}</span></span>
+              <span className={x.change_pct < 0 ? "text-red-700" : "text-emerald-700"}>{x.change_pct > 0 ? "+" : ""}{x.change_pct}%</span></div>))}</div>
+        </Card>
+      )}
       <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">{m.label} As of {m.as_of}.</p>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {m.indicators.map((i) => (
