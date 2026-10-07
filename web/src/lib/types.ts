@@ -36,7 +36,16 @@ export interface ClientDetail extends Household {
   notes: { note_id: string; date: string; author: string; text: string }[];
 }
 export interface Indicator { key: string; label: string; value: number; asset_classes: string[]; history: number[]; most_exposed: { client_id: string; name: string; weight_pct: number }[] }
-export interface Market { as_of: string; label: string; months: string[]; indicators: Indicator[]; headlines: { id: string; text: string }[] }
+export interface Market { as_of: string; label: string; months: string[]; indicators: Indicator[]; headlines: { id: string; text: string }[]; instruments: { ticker: string; name: string }[] }
+export interface InstrumentFacts {
+  ticker: string; entity: string; description: string; facts_source: string; facts_as_of: string; facts_url: string;
+  figures: { key: string; label: string; value: number; unit: string; period: string }[];
+  filings: { form: string; date: string; url: string }[];
+}
+export interface InstrumentView {
+  ticker: string; name: string; asset_class: string; listing: string; price_cad: number; price_note: string;
+  facts: InstrumentFacts | null; holders: { client_id: string; name: string; value_cad: number; weight_pct: number }[]; total_cad: number;
+}
 export interface Recorded { scenario_id: string; title: string; question: string; preset: string | null; state: RunState; outbox: Outbox | null }
 export interface PastThread { thread_id: string; created_at: string; messages: number; title: string }
 export interface PastTurn { question: string; state: RunState | null; text: string }
@@ -45,6 +54,7 @@ export interface Source {
   book(): Promise<Book>;
   client(id: string): Promise<ClientDetail>;
   market(): Promise<Market>;
+  instrument(ticker: string): Promise<InstrumentView>;
   recorded(id: string): Promise<Recorded[]>;
   threads(clientId: string): Promise<PastThread[]>;
   thread(threadId: string): Promise<PastTurn[]>;

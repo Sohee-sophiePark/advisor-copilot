@@ -1,5 +1,6 @@
 """Fetch: history per source, raw kept once, caps, missing keys, CI refusal, official prices."""
 
+import json
 from pathlib import Path
 
 import httpx
@@ -19,6 +20,35 @@ BOC = {
 TIINGO = [{"date": "2026-10-06T00:00:00.000Z", "close": 40.0}]
 STOCKS = {"0": {"cik_str": 311337, "ticker": "SU", "title": "SUNCOR ENERGY INC"}}
 FUNDS = {"fields": ["cik", "seriesId", "classId", "symbol"], "data": [[36405, "S1", "C1", "VTI"]]}
+RECENT = {
+    "form": ["6-K"],
+    "filingDate": ["2026-10-05"],
+    "accessionNumber": ["0001-26-1"],
+    "primaryDocument": ["a.htm"],
+}
+SUB = {
+    "cik": "311337",
+    "name": "SUNCOR ENERGY INC",
+    "sicDescription": "Petroleum Refining",
+    "filings": {"recent": RECENT},
+}
+
+
+def fy(val: float, year: int) -> dict:
+    return {
+        "val": val,
+        "fy": year,
+        "fp": "FY",
+        "form": "40-F",
+        "end": f"{year}-12-31",
+        "filed": f"{year + 1}-02-26",
+    }
+
+
+FACTS = {"facts": {"ifrs-full": {
+    "Revenue": {"units": {"CAD": [fy(1, 2017)]}},
+    "RevenueFromContractsWithCustomers": {"units": {"CAD": [fy(52_377_000_000, 2025)]}},
+}}}  # fmt: skip
 
 
 def handler(seen: list[httpx.Request]):  # noqa: ANN201
@@ -30,7 +60,8 @@ def handler(seen: list[httpx.Request]):  # noqa: ANN201
             else STOCKS if url.endswith("company_tickers.json")
             else FUNDS if url.endswith("company_tickers_mf.json")
             else TIINGO if "tiingo" in url
-            else {"doc": url}
+            else FACTS if "companyfacts" in url
+            else SUB
         )  # fmt: skip
         return httpx.Response(200, json=body)
 
@@ -39,8 +70,9 @@ def handler(seen: list[httpx.Request]):  # noqa: ANN201
 
 def setup(tmp_path: Path, **caps: int) -> tuple:
     s = load_settings(env={})
+    fetch_cfg = s.fetch.model_copy(update={"caps": {**s.fetch.caps, **caps}})
     s = s.model_copy(
-        update={"fetch": s.fetch.model_copy(update={"caps": {**s.fetch.caps, **caps}})}
+        update={"fetch": fetch_cfg, "paths": s.paths.model_copy(update={"data": str(tmp_path)})}
     )
     seen: list[httpx.Request] = []
     return (
@@ -57,7 +89,19 @@ ENV = {"SEC_USER_AGENT": "Test test@example.com", "TIINGO_API_KEY": "k"}
 def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     s, store, http, seen = setup(tmp_path)
     out = fetch.run(s, store, http, ENV)
-    assert out == {"boc": "2 new values", "sec": "3 documents", "tiingo": "2 new values"}
+    assert out == {"boc": "2 new values", "sec": "facts for 2 tickers", "tiingo": "2 new values"}
+    su = json.loads((tmp_path / "instrument_facts.json").read_text())[1]
+    assert su["figures"] == [
+        {
+            "key": "revenue",
+            "label": "Revenue",
+            "value": 52_377_000_000,
+            "unit": "cad",
+            "period": "FY2025",
+        }
+    ]  # the newest annual value across equivalent concepts
+    assert su["filings"][0]["url"] == "https://www.sec.gov/Archives/edgar/data/311337/0001261/a.htm"
+    assert su["facts_source"] == "SEC EDGAR"
     assert store.latest("fx.USDCAD") == ("2026-10-07", 1.4257)
     assert store.latest("px.SU.usd") == ("2026-10-06", 40.0)
     sec = [r for r in seen if "sec.gov" in str(r.url)]

@@ -52,6 +52,11 @@ def test_book_tools_match_book_figures() -> None:
     assert run("book_goals")[1] == ["C110"]
     with pytest.raises(reg.ToolArgsError):
         run("book_exposure", target="DOGE")
+    assert (
+        "inst.SU.revenue.cad" in run("get_instrument_facts", ticker="SU")[0]
+    )  # SEC EDGAR snapshot
+    with pytest.raises(reg.ToolArgsError):
+        run("get_instrument_facts", ticker="XBB")  # Canadian-only ETF: not an SEC filer
 
 
 def test_book_tools_are_book_only() -> None:

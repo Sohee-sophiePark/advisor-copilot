@@ -1,0 +1,117 @@
+[
+ {
+  "ticker": "VTI",
+  "entity": "VANGUARD INDEX FUNDS",
+  "description": "",
+  "figures": [],
+  "filings": [
+   {
+    "form": "497",
+    "date": "2026-09-16",
+    "url": "https://www.sec.gov/Archives/edgar/data/36405/000119312526392561/f46182d1.htm"
+   },
+   {
+    "form": "NPORT-P",
+    "date": "2026-08-28",
+    "url": "https://www.sec.gov/Archives/edgar/data/36405/000003640526000483/xslFormNPORT-P_X01/primary_doc.xml"
+   },
+   {
+    "form": "N-CSRS",
+    "date": "2026-08-27",
+    "url": "https://www.sec.gov/Archives/edgar/data/36405/000110465926102240/tm2620528d8_ncsrs.htm"
+   },
+   {
+    "form": "N-PX",
+    "date": "2026-08-27",
+    "url": "https://www.sec.gov/Archives/edgar/data/36405/000110465926102001/xslN-PX_X01/primary_doc.xml"
+   },
+   {
+    "form": "497",
+    "date": "2026-07-29",
+    "url": "https://www.sec.gov/Archives/edgar/data/36405/000003640526000386/f45788d1.htm"
+   }
+  ],
+  "facts_source": "SEC EDGAR",
+  "facts_as_of": "2026-10-07",
+  "facts_url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000036405"
+ },
+ {
+  "ticker": "SU",
+  "entity": "SUNCOR ENERGY INC",
+  "description": "Petroleum Refining",
+  "figures": [
+   {
+    "key": "revenue",
+    "label": "Revenue",
+    "value": 52377000000,
+    "unit": "cad",
+    "period": "FY2025"
+   },
+   {
+    "key": "profit",
+    "label": "Net profit",
+    "value": 5918000000,
+    "unit": "cad",
+    "period": "FY2025"
+   },
+   {
+    "key": "assets",
+    "label": "Total assets",
+    "value": 89913000000,
+    "unit": "cad",
+    "period": "FY2025"
+   },
+   {
+    "key": "op_cash",
+    "label": "Cash from operations",
+    "value": 12781000000,
+    "unit": "cad",
+    "period": "FY2025"
+   },
+   {
+    "key": "dividends",
+    "label": "Dividends paid",
+    "value": 2809000000,
+    "unit": "cad",
+    "period": "FY2025"
+   },
+   {
+    "key": "shares",
+    "label": "Shares outstanding",
+    "value": 1193519494,
+    "unit": "count",
+    "period": "FY2025"
+   }
+  ],
+  "filings": [
+   {
+    "form": "6-K",
+    "date": "2026-10-05",
+    "url": "https://www.sec.gov/Archives/edgar/data/311337/000110465926113453/tm2627015d1_6k.htm"
+   },
+   {
+    "form": "6-K",
+    "date": "2026-08-06",
+    "url": "https://www.sec.gov/Archives/edgar/data/311337/000110465926091680/tm2622191d2_6k.htm"
+   },
+   {
+    "form": "6-K",
+    "date": "2026-08-05",
+    "url": "https://www.sec.gov/Archives/edgar/data/311337/000110465926090544/su-20260804x6k.htm"
+   },
+   {
+    "form": "6-K",
+    "date": "2026-08-04",
+    "url": "https://www.sec.gov/Archives/edgar/data/311337/000110465926090475/tm2622191d1_6k.htm"
+   },
+   {
+    "form": "6-K",
+    "date": "2026-07-21",
+    "url": "https://www.sec.gov/Archives/edgar/data/311337/000110465926085439/tm2620989d1_6k.htm"
+   }
+  ],
+  "facts_source": "SEC EDGAR",
+  "facts_as_of": "2026-10-07",
+  "facts_url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000311337"
+ }
+]

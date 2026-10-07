@@ -1,6 +1,7 @@
 """Laptop-only fetch from free sources into the raw and history layers, under daily request caps."""
 
 import datetime as dt
+import json
 from collections.abc import Callable, Mapping
 
 import httpx
@@ -20,8 +21,62 @@ LICENCE = {
 }
 
 
+FIGURES = [  # key, label, unit, candidate concepts (IFRS and US GAAP); the newest annual value wins
+    ("revenue", "Revenue", "cad", ["RevenueFromContractsWithCustomers", "Revenue", "Revenues"]),
+    ("profit", "Net profit", "cad", ["ProfitLoss", "NetIncomeLoss"]),
+    ("assets", "Total assets", "cad", ["Assets"]),
+    ("op_cash", "Cash from operations", "cad", ["CashFlowsFromUsedInOperations"]),
+    ("dividends", "Dividends paid", "cad", ["DividendsPaidOrdinaryShares", "PaymentsOfDividends"]),
+    ("shares", "Shares outstanding", "count", ["EntityCommonStockSharesOutstanding"]),
+]
+ANNUAL = ("10-K", "20-F", "40-F")
+
+
 class CapReached(Exception):
     pass
+
+
+def sec_facts(ticker: str, sub: dict, facts: dict | None, today: dt.date) -> dict:
+    """InstrumentFacts from EDGAR submissions and companyfacts (CAD figures only, latest annual)."""
+    by_name = {n: c for tax in (facts or {}).get("facts", {}).values() for n, c in tax.items()}
+    figures = []
+    for key, label, unit, names in FIGURES:
+        vals = [
+            v
+            for n in names
+            for u, vs in by_name.get(n, {}).get("units", {}).items()
+            if u in ("CAD", "shares")
+            for v in vs
+            if v.get("form") in ANNUAL and v.get("fp") == "FY"
+        ]
+        if vals:
+            v = max(vals, key=lambda v: (v["end"], v["filed"]))
+            figures.append(
+                {
+                    "key": key,
+                    "label": label,
+                    "value": v["val"],
+                    "unit": unit,
+                    "period": f"FY{v['fy']}",
+                }
+            )
+    r, cik = sub["filings"]["recent"], int(sub["cik"])
+    filings: dict[tuple, dict] = {}  # one per form and date (a fund trust files per series)
+    for form, date, acc, doc in zip(
+        r["form"], r["filingDate"], r["accessionNumber"], r["primaryDocument"], strict=False
+    ):
+        url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}/{doc}"
+        filings.setdefault((form, date), {"form": form, "date": date, "url": url})
+    return {
+        "ticker": ticker,
+        "entity": sub["name"],
+        "description": sub.get("sicDescription") or "",
+        "figures": figures,
+        "filings": list(filings.values())[:5],
+        "facts_source": "SEC EDGAR",
+        "facts_as_of": today.isoformat(),
+        "facts_url": f"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK={cik:010d}",
+    }
 
 
 class Fetcher:
@@ -53,15 +108,21 @@ class Fetcher:
         }
         funds = self.get("sec", SEC_FUNDS, h).json()
         funds = {r[3]: r[0] for r in funds["data"]}
-        n = 0
+        out = []
         for t in self.s.fetch.us_tickers:
             kinds = ["submissions", "api/xbrl/companyfacts"] if t in stocks else ["submissions"]
             cik = stocks.get(t) or funds.get(t)
+            docs = []
             for kind in kinds if cik else []:
                 url = SEC_DOC.format(kind=kind, cik=cik)
-                self.store.put_raw("sec", url, LICENCE["sec"], self.get("sec", url, h).text)
-                n += 1
-        return f"{n} documents"
+                docs.append(self.get("sec", url, h).text)
+                self.store.put_raw("sec", url, LICENCE["sec"], docs[-1])
+            if docs:
+                facts = json.loads(docs[1]) if len(docs) > 1 else None
+                out.append(sec_facts(t, json.loads(docs[0]), facts, dt.date.today()))
+        path = self.s.path("data") / "instrument_facts.json"
+        path.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
+        return f"facts for {len(out)} tickers"
 
     def tiingo(self, key: str) -> str:
         start = dt.date.today() - dt.timedelta(days=self.s.fetch.history_days)

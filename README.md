@@ -21,6 +21,8 @@ What the advisor sees:
   questions get short grounded answers; follow-ups reuse earlier findings; what-ifs ("sell half of
   SU into bonds?") are simulated by code with before-and-after numbers.
 - **Market** — fictional index trends and the households most exposed to each.
+- **Ticker** — each holding's page: public facts from SEC EDGAR filings with source and date (issuer, latest annual
+  revenue, profit, assets, cash flow, dividends, recent filings), the price source, and the households that hold it.
 - **Ask about my book** — a chat panel beside My book and Market for questions across all households: who to call
   first, segments, risk above the limit, exposure to a holding, a hypothetical market move, tax placement, goals.
   Every list and number comes from code; households appear as links to their page.

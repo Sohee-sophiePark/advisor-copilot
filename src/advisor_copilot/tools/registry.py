@@ -237,8 +237,9 @@ _SPECS: list[ToolSpec] = [
         "get_instrument_facts",
         book.get_instrument_facts,
         book.FactsArgs,
-        "Fund facts for one ticker: what it holds, objective, risk rating, fees (MER), yield, "
-        "top holdings, and where the facts come from and as of when.",
+        "Public facts for one ticker from SEC EDGAR: the issuer, its latest annual figures "
+        "(revenue, profit, assets, operating cash flow, dividends, shares) and recent filings, "
+        "with source and as-of date. Not every ticker has SEC facts.",
         ("book",),
     ),
 ]

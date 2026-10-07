@@ -57,27 +57,31 @@ class Instrument(BaseModel):
     single_security: bool
 
 
-class TopHolding(BaseModel):
-    name: str
-    weight_pct: float
+class Figure(BaseModel):
+    key: str
+    label: str
+    value: float
+    unit: Literal["cad", "count"]
+    period: str
+
+
+class Filing(BaseModel):
+    form: str
+    date: dt.date
+    url: str
 
 
 class InstrumentFacts(BaseModel):
-    """Fund-facts style overview; `facts_source` is `fictional` or `official:<provider>`."""
+    """Public facts about a ticker with provenance (`facts_source`, `facts_as_of`, `facts_url`)."""
 
     ticker: str
-    description: str
-    objective: str
-    risk_rating: Literal["low", "low-to-medium", "medium", "medium-to-high", "high"]
-    mer_pct: float | None = None
-    distribution_yield_pct: float | None = None
-    dividend_yield_pct: float | None = None
-    sector: str | None = None
-    inception: dt.date | None = None
-    top_holdings: list[TopHolding] = []
+    entity: str
+    description: str = ""
+    figures: list[Figure] = []
+    filings: list[Filing] = []
     facts_source: str
     facts_as_of: dt.date
-    facts_url: str = ""
+    facts_url: str
 
 
 class Holding(BaseModel):

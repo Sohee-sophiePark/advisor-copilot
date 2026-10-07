@@ -259,20 +259,15 @@ def book_goals(_: str, args: GoalArgs) -> ToolResult:
 
 
 def get_instrument_facts(_: str, args: FactsArgs) -> ToolResult:
-    """Fund facts for one ticker: fees, yield, top holdings as metrics; text, provenance as data."""
+    """Public facts for one ticker: figures as metrics; entity, filings, provenance as data."""
     facts = load_fixtures().facts
     if args.ticker not in facts:
-        raise c.ToolArgsError(f"no facts for ticker {args.ticker!r}")
+        raise c.ToolArgsError(f"no public facts for {args.ticker!r} (not an SEC filer)")
     f, tool = facts[args.ticker], "get_instrument_facts"
-    rows = [
-        ("mer", f.mer_pct, "Management expense ratio"),
-        ("yield", f.distribution_yield_pct, "Distribution yield"),
-        ("yield", f.dividend_yield_pct, "Dividend yield"),
-        *((f"top{i}", h.weight_pct, h.name) for i, h in enumerate(f.top_holdings, 1)),
-    ]
     metrics = [
-        c.metric(f"inst.{f.ticker}.{k}.pct", v, "pct", label, tool)
-        for k, v, label in rows
-        if v is not None
+        c.metric(
+            f"inst.{f.ticker}.{g.key}.{g.unit}", g.value, g.unit, f"{g.label} ({g.period})", tool
+        )
+        for g in f.figures
     ]
-    return c.tool_result(tool, metrics, data=f.model_dump(mode="json"))
+    return c.tool_result(tool, metrics, data=f.model_dump(mode="json", exclude={"figures"}))

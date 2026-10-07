@@ -29,6 +29,10 @@ export function Market() {
           </Card>
         ))}
       </div>
+      <Card title="Instruments in client portfolios">
+        <ul className="grid gap-1 text-sm md:grid-cols-2">{m.instruments.map((i) => (
+          <li key={i.ticker}><a className="text-sky-700 hover:underline" href={`#/ticker/${i.ticker}`}>{i.ticker} · {i.name}</a></li>))}</ul>
+      </Card>
       <Card title="Headlines (fictional)"><ul className="list-disc pl-5 text-sm text-slate-700">{m.headlines.map((h) => <li key={h.id}>{h.text.replace("Fictional: ", "")}</li>)}</ul></Card>
     </div>
   );

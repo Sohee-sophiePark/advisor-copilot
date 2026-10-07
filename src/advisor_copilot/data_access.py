@@ -45,7 +45,7 @@ def read_json(d: Path) -> dict:
         "model_portfolios": _read(d / "model_portfolios.json"),
         "cma": _read(d / "capital_market_assumptions.json"),
         "market": _read(d / "market_snapshot.json"),
-        "facts": _read(d / "fund_facts.json"),
+        "facts": _read(d / "instrument_facts.json"),
     }
 
 

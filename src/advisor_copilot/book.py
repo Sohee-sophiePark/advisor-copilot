@@ -143,14 +143,17 @@ def client_detail(client_id: str) -> dict:
 
 def instrument_view(ticker: str) -> dict:
     """Ticker page: instrument, fund facts with provenance, holders and the book's total."""
+    from advisor_copilot.db import Store
     from advisor_copilot.tools.book import _exposure  # tools.book imports this module
 
-    fx = load_fixtures()
+    fx, s = load_fixtures(), get_settings()
+    px = Store(s.path("db")).latest(f"px.{ticker}.usd") if s.data_source == "official" else None
     holders = _exposure(ticker)
     names = {c.client_id: c.name for c in list_clients()}
     return {
         **fx.instruments[ticker].model_dump(),
         "facts": fx.facts[ticker].model_dump(mode="json") if ticker in fx.facts else None,
+        "price_note": f"Tiingo close {px[0]} in CAD (laptop only)" if px else "Illustrative price",
         "holders": [
             {
                 "client_id": cid,
@@ -191,4 +194,7 @@ def market_view() -> dict:
         "months": snap.history_months,
         "indicators": indicators,
         "headlines": [h.model_dump() for h in snap.headlines],
+        "instruments": [
+            {"ticker": i.ticker, "name": i.name} for i in load_fixtures().instruments.values()
+        ],
     }

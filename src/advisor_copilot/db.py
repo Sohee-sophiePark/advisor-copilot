@@ -57,7 +57,7 @@ SOURCE_FILES = [
     "model_portfolios.json",
     "capital_market_assumptions.json",
     "market_snapshot.json",
-    "fund_facts.json",
+    "instrument_facts.json",
 ]
 
 

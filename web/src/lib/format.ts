@@ -8,7 +8,7 @@ export function formatValue(v: number, unit: string): string {
 }
 
 export const money = (v: number) =>
-  v >= 1e6 ? `$${(v / 1e6).toFixed(1)}M` : v >= 1e4 ? `$${Math.round(v / 1e3)}k` : `$${Math.round(v).toLocaleString("en-CA")}`;
+  v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(1)}M` : v >= 1e4 ? `$${Math.round(v / 1e3)}k` : `$${Math.round(v).toLocaleString("en-CA")}`;
 
 const WORDS: Record<string, string> = {
   CASH: "Cash", CA_BONDS: "Canadian bonds", CA_EQUITY: "Canadian equity", US_EQUITY: "US equity",

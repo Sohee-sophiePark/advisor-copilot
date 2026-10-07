@@ -4,7 +4,7 @@
  "client_id": "BOOK",
  "request_text": "If energy falls another 10%, who is hit hardest?",
  "preset": null,
- "recorded_at": "2026-10-07T21:33:34+00:00",
+ "recorded_at": "2026-10-07T22:05:44+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:07.436867Z",
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:11.394912Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,8 +36,8 @@
   },
   {
    "seq": 2,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:07.437191Z",
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:11.395269Z",
    "t_ms": 0,
    "type": "gate_result",
    "agent": "gate",
@@ -50,8 +50,8 @@
   },
   {
    "seq": 3,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:07.457331Z",
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:11.415658Z",
    "t_ms": 20,
    "type": "llm_call_started",
    "agent": "router",
@@ -63,27 +63,27 @@
   },
   {
    "seq": 4,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:25.153737Z",
-   "t_ms": 17716,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:12.388447Z",
+   "t_ms": 993,
    "type": "llm_call_finished",
    "agent": "router",
    "level": "info",
    "payload": {
     "purpose": "router",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 727,
-    "tokens_out": 53,
-    "latency_ms": 17695,
+    "tokens_in": 723,
+    "tokens_out": 51,
+    "latency_ms": 972,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 5,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:25.154216Z",
-   "t_ms": 17717,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:12.388892Z",
+   "t_ms": 994,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
@@ -92,17 +92,17 @@
     "domains": [
      "book"
     ],
-    "reason": "The advisor is asking for a hypothetical market move impact analysis across their entire book of households.",
-    "confidence": 0.95,
+    "reason": "The advisor is asking for a hypothetical market move analysis across their entire book of households.",
+    "confidence": 1.0,
     "rules_applied": [],
     "fast_path": false
    }
   },
   {
    "seq": 6,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:25.154934Z",
-   "t_ms": 17718,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:12.389613Z",
+   "t_ms": 994,
    "type": "agent_started",
    "agent": "book",
    "level": "info",
@@ -123,9 +123,9 @@
   },
   {
    "seq": 7,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:25.156855Z",
-   "t_ms": 17719,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:12.391212Z",
+   "t_ms": 996,
    "type": "llm_call_started",
    "agent": "book",
    "level": "info",
@@ -136,36 +136,36 @@
   },
   {
    "seq": 8,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:25.884211Z",
-   "t_ms": 18447,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:22.933966Z",
+   "t_ms": 11539,
    "type": "llm_call_finished",
    "agent": "book",
    "level": "info",
    "payload": {
     "purpose": "analyst:book",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 2409,
+    "tokens_in": 2426,
     "tokens_out": 30,
-    "latency_ms": 726,
+    "latency_ms": 10541,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 9,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:25.885811Z",
-   "t_ms": 18448,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:22.937801Z",
+   "t_ms": 11542,
    "type": "tool_call",
    "agent": "book",
    "level": "info",
    "payload": {
     "name": "book_market_impact",
     "args": {
-     "target": "SU",
+     "move_pct": -10,
      "limit": 20,
-     "move_pct": -10
+     "target": "SU"
     },
     "metrics_count": 18,
     "flags": [],
@@ -174,9 +174,9 @@
   },
   {
    "seq": 10,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:25.886036Z",
-   "t_ms": 18449,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:22.938551Z",
+   "t_ms": 11543,
    "type": "llm_call_started",
    "agent": "book",
    "level": "info",
@@ -187,41 +187,41 @@
   },
   {
    "seq": 11,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:27.290214Z",
-   "t_ms": 19853,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:38.575718Z",
+   "t_ms": 27180,
    "type": "llm_call_finished",
    "agent": "book",
    "level": "info",
    "payload": {
     "purpose": "analyst:book",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 3251,
-    "tokens_out": 241,
-    "latency_ms": 1402,
+    "tokens_in": 3268,
+    "tokens_out": 306,
+    "latency_ms": 15634,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 12,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:27.293507Z",
-   "t_ms": 19856,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:38.578452Z",
+   "t_ms": 27183,
    "type": "agent_finished",
    "agent": "book",
    "level": "info",
    "payload": {
-    "findings_count": 1,
+    "findings_count": 2,
     "status": "ok",
     "data_gaps": []
    }
   },
   {
    "seq": 13,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:27.296946Z",
-   "t_ms": 19860,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:38.581045Z",
+   "t_ms": 27186,
    "type": "llm_call_started",
    "agent": "synthesizer",
    "level": "info",
@@ -232,27 +232,27 @@
   },
   {
    "seq": 14,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:34.325174Z",
-   "t_ms": 26888,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:44.363209Z",
+   "t_ms": 32968,
    "type": "llm_call_finished",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "purpose": "synthesizer",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1871,
-    "tokens_out": 457,
-    "latency_ms": 7025,
+    "tokens_in": 1913,
+    "tokens_out": 451,
+    "latency_ms": 5780,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 15,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:34.327052Z",
-   "t_ms": 26890,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:44.369275Z",
+   "t_ms": 32974,
    "type": "draft_created",
    "agent": "synthesizer",
    "level": "info",
@@ -264,9 +264,9 @@
   },
   {
    "seq": 16,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:34.327477Z",
-   "t_ms": 26890,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:44.372605Z",
+   "t_ms": 32977,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -278,9 +278,9 @@
   },
   {
    "seq": 17,
-   "run_id": "BOOK-20261007-213307-170774",
-   "ts": "2026-10-07T21:33:34.328708Z",
-   "t_ms": 26891,
+   "run_id": "BOOK-20261007-220511-ddb7d3",
+   "ts": "2026-10-07T22:05:44.373890Z",
+   "t_ms": 32978,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -288,16 +288,16 @@
     "status": "COMPLETED",
     "totals": {
      "llm_calls": 4,
-     "tokens_in": 8258,
-     "tokens_out": 781,
-     "wall_ms": 26891,
+     "tokens_in": 8330,
+     "tokens_out": 838,
+     "wall_ms": 32978,
      "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "BOOK-20261007-213307-170774",
+  "run_id": "BOOK-20261007-220511-ddb7d3",
   "client_id": "BOOK",
   "request_text": "If energy falls another 10%, who is hit hardest?",
   "preset": null,
@@ -309,8 +309,8 @@
    "domains": [
     "book"
    ],
-   "reason": "The advisor is asking for a hypothetical market move impact analysis across their entire book of households.",
-   "confidence": 0.95
+   "reason": "The advisor is asking for a hypothetical market move analysis across their entire book of households.",
+   "confidence": 1.0
   },
   "analyst_reports": {
    "book": {
@@ -318,13 +318,22 @@
     "findings": [
      {
       "finding_id": "BOOK-1",
-      "title": "Impact of a hypothetical energy sector decline",
+      "title": "Impact of a potential energy sector decline on the book",
       "severity": "info",
-      "detail": "A {{m:book.impact_SU.move.pct}} decline in Suncor Energy impacts {{m:book.impact_SU.matches.count}} households, with a total book-wide impact of {{m:book.impact_SU.total.cad}}. {{h:C002}} faces the largest relative impact at {{m:book.C002.impact_SU.pct}}, while {{h:C079}} faces the largest absolute impact of {{m:book.C079.impact_SU.cad}}.",
+      "detail": "A hypothetical {{m:book.impact_SU.move.pct}} decline in Suncor Energy would impact {{m:book.impact_SU.matches.count}} households, resulting in a total book-wide value change of {{m:book.impact_SU.total.cad}}.",
       "metric_refs": [
-       "book.impact_SU.matches.count",
-       "book.impact_SU.total.cad",
        "book.impact_SU.move.pct",
+       "book.impact_SU.matches.count",
+       "book.impact_SU.total.cad"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "BOOK-2",
+      "title": "Households most affected by a Suncor Energy decline",
+      "severity": "info",
+      "detail": "{{h:C002}} faces the largest relative impact, with a {{m:book.C002.impact_SU.pct}} decrease in household value, while {{h:C079}} experiences the largest absolute loss of {{m:book.C079.impact_SU.cad}}.",
+      "metric_refs": [
        "book.C002.impact_SU.pct",
        "book.C079.impact_SU.cad"
       ],
@@ -481,24 +490,24 @@
   "revision_count": 0,
   "final": null,
   "answer": {
-   "answer": "A {{m:book.impact_SU.move.pct}} decline in Suncor Energy impacts {{m:book.impact_SU.matches.count}} households, with a total book-wide impact of {{m:book.impact_SU.total.cad}}. {{h:C002}} faces the largest relative impact at {{m:book.C002.impact_SU.pct}}, while {{h:C079}} faces the largest absolute impact of {{m:book.C079.impact_SU.cad}}. The impact for other affected households is: {{h:C103}} ({{m:book.C103.impact_SU.cad}}), {{h:C102}} ({{m:book.C102.impact_SU.cad}}), {{h:C020}} ({{m:book.C020.impact_SU.cad}}), {{h:C030}} ({{m:book.C030.impact_SU.cad}}), and {{h:C054}} ({{m:book.C054.impact_SU.cad}}). This is simple arithmetic based on current holdings, not a forecast.",
+   "answer": "A hypothetical {{m:book.impact_SU.move.pct}} decline in Suncor Energy impacts {{m:book.impact_SU.matches.count}} households, with a total book-wide value change of {{m:book.impact_SU.total.cad}}. {{h:C002}} faces the largest relative impact at {{m:book.C002.impact_SU.pct}}, while {{h:C079}} experiences the largest absolute loss of {{m:book.C079.impact_SU.cad}}. Other affected households include {{h:C103}} ({{m:book.C103.impact_SU.cad}}), {{h:C102}} ({{m:book.C102.impact_SU.cad}}), {{h:C020}} ({{m:book.C020.impact_SU.cad}}), {{h:C030}} ({{m:book.C030.impact_SU.cad}}), and {{h:C054}} ({{m:book.C054.impact_SU.cad}}). This is simple arithmetic on current holdings, not a forecast.",
    "suggested_questions": [
     "Which households have the highest concentration in energy?",
-    "Review the portfolio for {{h:C002}}.",
-    "Review the portfolio for {{h:C079}}."
+    "Are there other single stocks posing similar risks?",
+    "Review the portfolio for {{h:C002}}."
    ]
   },
   "message": null,
   "approval": null,
   "budget_snapshot": {
    "llm_calls": 4,
-   "tokens": 9039,
-   "wall_ms": 26891
+   "tokens": 9168,
+   "wall_ms": 32978
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T21:33:07.211887Z",
-  "updated_at": "2026-10-07T21:33:34.329042Z",
+  "created_at": "2026-10-07T22:05:11.142864Z",
+  "updated_at": "2026-10-07T22:05:44.374205Z",
   "completed_steps": [
    "input_gate",
    "router",

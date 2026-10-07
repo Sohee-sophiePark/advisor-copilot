@@ -1,4 +1,4 @@
-import type { Book, ClientDetail, Market, Outbox, PastTurn, Recorded, RunState, Source, TraceEvent } from "./types";
+import type { Book, ClientDetail, InstrumentView, Market, Outbox, PastTurn, Recorded, RunState, Source, TraceEvent } from "./types";
 
 const json = async (url: string, init?: RequestInit) => {
   const r = await fetch(url, init);
@@ -14,6 +14,7 @@ export const liveSource: Source = {
   book: () => json("/api/book"),
   client: (id) => json(`/api/clients/${id}`),
   market: () => json("/api/market"),
+  instrument: (ticker) => json(`/api/instruments/${ticker}`),
   recorded: async () => [],
   threads: (clientId) => json(`/api/threads?client_id=${clientId}`),
   async thread(threadId) {
@@ -48,7 +49,7 @@ export const liveSource: Source = {
   },
 };
 
-interface StaticData { book: Book; market: Market; clients: Record<string, ClientDetail>; recorded: Record<string, Recorded[]> }
+interface StaticData { book: Book; market: Market; clients: Record<string, ClientDetail>; instruments: Record<string, InstrumentView>; recorded: Record<string, Recorded[]> }
 let data: Promise<StaticData> | null = null;
 const load = (): Promise<StaticData> => (data ??= fetch("./static-data.json").then((r) => r.json()));
 const pause = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -71,6 +72,7 @@ export const staticSource: Source = {
   book: async () => (await load()).book,
   client: async (id) => (await load()).clients[id],
   market: async () => (await load()).market,
+  instrument: async (ticker) => (await load()).instruments[ticker],
   recorded: async (id) => (await load()).recorded[id] ?? [],
   threads: async () => [],
   thread: async () => [],

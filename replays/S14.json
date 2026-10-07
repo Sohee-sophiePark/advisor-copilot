@@ -4,7 +4,7 @@
  "client_id": "BOOK",
  "request_text": "Which stock should all my clients buy?",
  "preset": null,
- "recorded_at": "2026-10-07T21:33:36+00:00",
+ "recorded_at": "2026-10-07T22:06:06+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "BOOK-20261007-213334-b23870",
-   "ts": "2026-10-07T21:33:34.879969Z",
+   "run_id": "BOOK-20261007-220544-98120e",
+   "ts": "2026-10-07T22:05:45.026722Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,8 +36,8 @@
   },
   {
    "seq": 2,
-   "run_id": "BOOK-20261007-213334-b23870",
-   "ts": "2026-10-07T21:33:34.880583Z",
+   "run_id": "BOOK-20261007-220544-98120e",
+   "ts": "2026-10-07T22:05:45.027132Z",
    "t_ms": 0,
    "type": "gate_result",
    "agent": "gate",
@@ -50,8 +50,8 @@
   },
   {
    "seq": 3,
-   "run_id": "BOOK-20261007-213334-b23870",
-   "ts": "2026-10-07T21:33:34.900449Z",
+   "run_id": "BOOK-20261007-220544-98120e",
+   "ts": "2026-10-07T22:05:45.047644Z",
    "t_ms": 20,
    "type": "llm_call_started",
    "agent": "router",
@@ -63,34 +63,34 @@
   },
   {
    "seq": 4,
-   "run_id": "BOOK-20261007-213334-b23870",
-   "ts": "2026-10-07T21:33:36.630772Z",
-   "t_ms": 1750,
+   "run_id": "BOOK-20261007-220544-98120e",
+   "ts": "2026-10-07T22:06:06.773020Z",
+   "t_ms": 21746,
    "type": "llm_call_finished",
    "agent": "router",
    "level": "info",
    "payload": {
     "purpose": "router",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 722,
+    "tokens_in": 718,
     "tokens_out": 61,
-    "latency_ms": 1729,
+    "latency_ms": 21724,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 5,
-   "run_id": "BOOK-20261007-213334-b23870",
-   "ts": "2026-10-07T21:33:36.631412Z",
-   "t_ms": 1751,
+   "run_id": "BOOK-20261007-220544-98120e",
+   "ts": "2026-10-07T22:06:06.773924Z",
+   "t_ms": 21747,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
    "payload": {
     "route": "out_of_scope",
     "domains": [],
-    "reason": "The advisor is asking for investment advice/stock picking, which is outside the scope of the portfolio-review copilot.",
+    "reason": "The advisor is asking for investment recommendations for their clients, which is outside the scope of the portfolio-review copilot.",
     "confidence": 0.98,
     "rules_applied": [],
     "fast_path": false
@@ -98,9 +98,9 @@
   },
   {
    "seq": 6,
-   "run_id": "BOOK-20261007-213334-b23870",
-   "ts": "2026-10-07T21:33:36.632348Z",
-   "t_ms": 1752,
+   "run_id": "BOOK-20261007-220544-98120e",
+   "ts": "2026-10-07T22:06:06.775142Z",
+   "t_ms": 21748,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -108,16 +108,16 @@
     "status": "COMPLETED",
     "totals": {
      "llm_calls": 1,
-     "tokens_in": 722,
+     "tokens_in": 718,
      "tokens_out": 61,
-     "wall_ms": 1752,
+     "wall_ms": 21748,
      "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "BOOK-20261007-213334-b23870",
+  "run_id": "BOOK-20261007-220544-98120e",
   "client_id": "BOOK",
   "request_text": "Which stock should all my clients buy?",
   "preset": null,
@@ -127,7 +127,7 @@
   "route": {
    "route": "out_of_scope",
    "domains": [],
-   "reason": "The advisor is asking for investment advice/stock picking, which is outside the scope of the portfolio-review copilot.",
+   "reason": "The advisor is asking for investment recommendations for their clients, which is outside the scope of the portfolio-review copilot.",
    "confidence": 0.98
   },
   "analyst_reports": {},
@@ -149,13 +149,13 @@
   "approval": null,
   "budget_snapshot": {
    "llm_calls": 1,
-   "tokens": 783,
-   "wall_ms": 1752
+   "tokens": 779,
+   "wall_ms": 21748
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T21:33:34.670998Z",
-  "updated_at": "2026-10-07T21:33:36.632472Z",
+  "created_at": "2026-10-07T22:05:44.801722Z",
+  "updated_at": "2026-10-07T22:06:06.775281Z",
   "completed_steps": [
    "input_gate",
    "router",

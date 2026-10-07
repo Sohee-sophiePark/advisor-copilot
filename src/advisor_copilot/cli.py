@@ -271,12 +271,14 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
 
     from advisor_copilot import fetch
     from advisor_copilot.config import get_settings
-    from advisor_copilot.db import Store
+    from advisor_copilot.data_access import read_json
+    from advisor_copilot.db import Store, seed
 
     s = get_settings()
     with httpx.Client(timeout=30) as http:
         for source, result in fetch.run(s, Store(s.path("db")), http, os.environ).items():
             print(f"{source:<7} {result}")
+    seed(read_json(s.path("data")), s.path("data"), s.path("db"))  # facts file may have changed
     return 0
 
 

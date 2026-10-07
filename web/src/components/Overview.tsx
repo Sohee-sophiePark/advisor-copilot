@@ -86,7 +86,7 @@ export function Accounts({ c }: { c: ClientDetail }) {
         <div key={a.type}>
           <div className="flex justify-between font-medium"><span>{word(a.type)}</span><span>{money(a.value_cad)}</span></div>
           <ul className="mt-1 space-y-0.5 text-slate-600">
-            {a.holdings.map((h) => <li key={h.ticker} className="flex justify-between"><span>{h.name.replace(/ \(fictional.*\)/, "")}</span><span>{money(h.value_cad)}</span></li>)}
+            {a.holdings.map((h) => <li key={h.ticker} className="flex justify-between"><a href={`#/ticker/${h.ticker}`} className="text-sky-700 hover:underline">{h.ticker} · {h.name}</a><span>{money(h.value_cad)}</span></li>)}
           </ul>
         </div>
       ))}
