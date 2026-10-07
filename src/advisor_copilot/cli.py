@@ -18,6 +18,7 @@ COMMANDS: dict[str, str] = {
     "port": "print the first free API port in the configured range",
     "seed": "rebuild the local SQLite database from the synthetic JSON",
     "export": "write the data the public replay build shows to a JSON file",
+    "fetch": "laptop only: fetch free market data (BoC, SEC EDGAR, Tiingo) under daily caps",
 }
 
 
@@ -103,6 +104,8 @@ def _cmd_record(args: argparse.Namespace) -> int:
     from advisor_copilot.models import ApprovalDecision
     from advisor_copilot.replay import scenario_settings, scenarios, write_replay
 
+    if get_settings().data_source != "fictional":
+        raise SystemExit("record uses the illustrative data only: unset DATA_SOURCE")
     settings = get_settings().model_copy(update={"run_mode": "record"})
     for sc in scenarios():
         if args.scenario and sc["id"] != args.scenario:
@@ -261,12 +264,30 @@ def _cmd_seed(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_fetch(args: argparse.Namespace) -> int:
+    import os
+
+    import httpx
+
+    from advisor_copilot import fetch
+    from advisor_copilot.config import get_settings
+    from advisor_copilot.db import Store
+
+    s = get_settings()
+    with httpx.Client(timeout=30) as http:
+        for source, result in fetch.run(s, Store(s.path("db")), http, os.environ).items():
+            print(f"{source:<7} {result}")
+    return 0
+
+
 def _cmd_export(args: argparse.Namespace) -> int:
     from pathlib import Path
 
     from advisor_copilot.api.routes import export_static
     from advisor_copilot.config import get_settings
 
+    if get_settings().data_source != "fictional":
+        raise SystemExit("export is public: real prices are never published, unset DATA_SOURCE")
     out = Path(args.path)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(export_static(get_settings()), encoding="utf-8")
@@ -285,6 +306,7 @@ HANDLERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "port": _cmd_port,
     "seed": _cmd_seed,
     "export": _cmd_export,
+    "fetch": _cmd_fetch,
 }
 
 

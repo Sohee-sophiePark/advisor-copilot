@@ -101,7 +101,8 @@ RUN_MODE=replay make dev         # API + UI from recorded cassettes, no key need
 
 Live mode needs a Gemini API key (free tier is enough): copy `.env.example` to `.env`, fill it in,
 then `set -a; . ./.env; set +a` in your shell before `make smoke`, `make dev`, `make record` or
-`make eval-live`. The API binds `127.0.0.1` on the first free port in the range configured under
+`make eval-live`. `DATA_SOURCE=official make dev` prices the US-listed holdings from the latest `make fetch`
+(laptop only): each holding keeps its value on the data date and then moves with the real market. The API binds `127.0.0.1` on the first free port in the range configured under
 `api` in `config/settings.yaml`; the UI dev server proxies `/api` to it.
 
 | Target | What it does |
@@ -111,6 +112,7 @@ then `set -a; . ./.env; set +a` in your shell before `make smoke`, `make dev`, `
 | `make eval-live` | tier 3: live runs × k, judge calibration, report to `evals/reports/live_<date>.md` |
 | `make record` | run every scenario live, write `cassettes/` and `replays/` |
 | `make build-static` | replay-only web build for GitHub Pages (`VITE_STATIC=1`) |
+| `make fetch` | laptop only: free market data (Bank of Canada USD/CAD, SEC EDGAR, Tiingo end-of-day) under daily caps |
 | `uv run advisor-copilot tools C002` | metrics and flags for a client, no LLM |
 | `make dev`, then `/dev.html` | developer console, served only by the local dev server |
 

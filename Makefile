@@ -4,11 +4,14 @@
 
 API_PORT ?= $(shell uv run advisor-copilot port)
 
-.PHONY: seed setup test lint format eval eval-live api web dev record smoke build-static env-check clean
+.PHONY: fetch seed setup test lint format eval eval-live api web dev record smoke build-static env-check clean
 
 setup:
 	uv sync
 	@if [ -f web/package.json ]; then npm --prefix web install; fi
+
+fetch:  # laptop only; free sources; keys from the shell env (set -a; . ./.env; set +a)
+	uv run advisor-copilot fetch
 
 seed:
 	uv run python data/generate_book.py

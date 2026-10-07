@@ -35,3 +35,8 @@ injection: {redact: true}
 trace: {store_prompts: true}
 paths: {data: data/synthetic, db: data/advisor.db, prompts: prompts, runs: runs, cassettes: cassettes, replays: replays}
 api: {port_min: 8000, port_max: 8010}   # make dev binds 127.0.0.1 on the first free port in this range
+data_source: fictional           # official = latest fetched prices (laptop only); tests, recordings, public site: fictional
+fetch:                           # `make fetch`, laptop only; caps stay far under each free tier
+  us_tickers: [VTI, SU]          # priced from Tiingo end-of-day (USD) x Bank of Canada USD/CAD
+  history_days: 30
+  caps: {boc: 10, sec: 20, tiingo: 50}   # requests per day; free tiers: SEC 10/s, Tiingo 1,000/day

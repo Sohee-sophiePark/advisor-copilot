@@ -143,8 +143,17 @@ class ApiCfg(BaseModel):
     port_max: int
 
 
+class FetchCfg(BaseModel):
+    """Laptop-only fetch: US-listed tickers to price, FX series, daily request caps per source."""
+
+    us_tickers: list[str]
+    history_days: int
+    caps: dict[str, int]
+
+
 class Settings(BaseModel):
     run_mode: RunMode
+    data_source: Literal["fictional", "official"] = "fictional"
     models: ModelsCfg
     temperature: TemperatureCfg
     max_output_tokens: MaxOutputCfg
@@ -162,6 +171,7 @@ class Settings(BaseModel):
     trace: TraceCfg
     paths: PathsCfg
     api: ApiCfg
+    fetch: FetchCfg
 
     def path(self, name: str) -> Path:
         """Absolute path for `paths.<name>`, resolved against the repo root."""
@@ -169,12 +179,12 @@ class Settings(BaseModel):
 
 
 def load_settings(path: Path | None = None, env: dict[str, str] | None = None) -> Settings:
-    """Parse the YAML file. A non-empty `RUN_MODE` in `env` (default: os.environ) wins."""
+    """Parse the YAML file. Non-empty `RUN_MODE` / `DATA_SOURCE` in `env` (os.environ) win."""
     environ = os.environ if env is None else env
     raw = yaml.safe_load((path or SETTINGS_FILE).read_text(encoding="utf-8"))
-    run_mode = environ.get("RUN_MODE", "").strip()
-    if run_mode:
-        raw["run_mode"] = run_mode
+    for var, key in (("RUN_MODE", "run_mode"), ("DATA_SOURCE", "data_source")):
+        if value := environ.get(var, "").strip():
+            raw[key] = value
     return Settings.model_validate(raw)
 
 

@@ -49,6 +49,22 @@ def read_json(d: Path) -> dict:
     }
 
 
+def official_prices(fx: "Fixtures", store: db.Store, as_of: str) -> None:
+    """Laptop only: real CAD prices (latest USD close x USD/CAD); units rescaled so each holding's
+    value on `as_of` equals its illustrative value, so later changes are real market moves."""
+
+    def cad(ticker: str, on: str = "9999") -> float | None:
+        px, rate = store.latest(f"px.{ticker}.usd", on), store.latest("fx.USDCAD", on)
+        return px[1] * rate[1] if px and rate else None
+
+    scale = {}
+    for t, i in fx.instruments.items():
+        if (now := cad(t)) and (anchor := cad(t, as_of)):
+            scale[t], i.price_cad = i.price_cad / anchor, round(now, 4)
+    for h in (h for c in fx.clients.values() for a in c.accounts for h in a.holdings):
+        h.units = round(h.units * scale.get(h.ticker, 1.0), 4)
+
+
 @lru_cache(maxsize=4)
 def load_fixtures(data_dir: Path | None = None, db_path: Path | None = None) -> Fixtures:
     """Validate client data once. Reads SQLite only if it was seeded from the current JSON."""
@@ -77,6 +93,8 @@ def load_fixtures(data_dir: Path | None = None, db_path: Path | None = None) -> 
     }
     if unknown:
         raise ValueError(f"holdings reference unknown tickers: {sorted(unknown)}")
+    if s.data_source == "official":
+        official_prices(fx, db.Store(dbp), str(s.rules.as_of))
     return fx
 
 

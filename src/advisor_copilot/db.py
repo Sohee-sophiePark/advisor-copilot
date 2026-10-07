@@ -26,6 +26,9 @@ CREATE TABLE IF NOT EXISTS messages (thread_id TEXT, seq INTEGER, role TEXT, tex
 CREATE TABLE IF NOT EXISTS usage (day TEXT, model TEXT, calls INTEGER, tokens_in INTEGER, tokens_out INTEGER,
   PRIMARY KEY (day, model));
 CREATE TABLE IF NOT EXISTS cache (key TEXT PRIMARY KEY, value TEXT, created_at TEXT);
+CREATE TABLE IF NOT EXISTS market_raw (source TEXT, url TEXT, fetched_at TEXT, licence TEXT, sha TEXT, payload TEXT);
+CREATE TABLE IF NOT EXISTS market_history (series TEXT, date TEXT, value REAL, source TEXT, fetched_at TEXT,
+  PRIMARY KEY (series, date));
 """
 CLIENT_COLS = [
     "client_id",
@@ -244,6 +247,38 @@ class Store:
                 "SELECT * FROM messages WHERE thread_id=? ORDER BY seq", (thread_id,)
             )
         ]
+
+    def put_raw(self, source: str, url: str, licence: str, payload: str) -> None:
+        """Keep a fetched response as received (raw layer, append-only); unchanged responses once."""
+        sha = hashlib.sha256(payload.encode()).hexdigest()
+        last = self.conn.execute(
+            "SELECT sha FROM market_raw WHERE url=? ORDER BY rowid DESC LIMIT 1", (url,)
+        ).fetchone()
+        if last and last["sha"] == sha:
+            return
+        with self.conn:
+            self.conn.execute(
+                "INSERT INTO market_raw VALUES (?,?,datetime('now'),?,?,?)",
+                (source, url, licence, sha, payload),
+            )
+
+    def put_history(self, source: str, rows: list[tuple[str, str, float]]) -> int:
+        """Append dated values (series, date, value); a value already stored is never overwritten."""
+        with self.conn:
+            cur = self.conn.executemany(
+                "INSERT OR IGNORE INTO market_history VALUES (?,?,?,?,datetime('now'))",
+                [(s, d, v, source) for s, d, v in rows],
+            )
+        return cur.rowcount
+
+    def latest(self, series: str, on: str = "9999") -> tuple[str, float] | None:
+        """Current layer: the newest (date, value) of a series, optionally on or before `on`."""
+        row = self.conn.execute(
+            "SELECT date, value FROM market_history WHERE series=? AND date<=? "
+            "ORDER BY date DESC LIMIT 1",
+            (series, on),
+        ).fetchone()
+        return (row["date"], row["value"]) if row else None
 
     def thread_totals(self, thread_id: str) -> tuple[int, int]:
         row = self.conn.execute(
