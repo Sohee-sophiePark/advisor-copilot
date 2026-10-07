@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Card } from "../components/Status";
+import { formatValue } from "../lib/format";
 import { source } from "../lib/source";
 import type { Market as M } from "../lib/types";
 
@@ -11,8 +12,9 @@ export function Market() {
   if (!m) return <p className="text-slate-500">Loading…</p>;
   return (
     <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2">
       {m.real.map((r) => (
-        <Card key={r.key} title={`${r.label} · real data`} right={<span className="text-lg font-semibold text-slate-900">{r.history.at(-1)?.value.toFixed(4)}</span>}>
+        <Card key={r.key} title={`${r.label} · real data`} right={<span className="text-lg font-semibold text-slate-900">{formatValue(r.history.at(-1)?.value ?? 0, r.unit === "pp" ? "pp" : "rate")}</span>}>
           <ResponsiveContainer width="100%" height={110}>
             <LineChart data={r.history} margin={{ top: 4, right: 8, left: -12, bottom: 0 }}>
               <XAxis dataKey="date" tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} minTickGap={40} />
@@ -21,9 +23,11 @@ export function Market() {
               <Line dataKey="value" stroke="#008300" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
+          {r.note && <p className="mt-1 text-xs text-slate-600">{r.note}</p>}
           <p className="mt-1 text-xs text-slate-500">Source: <a className="text-sky-700 hover:underline" href={r.url} target="_blank" rel="noreferrer">{r.source}</a> · as of {r.as_of} · <a className="text-sky-700 hover:underline" href={r.terms} target="_blank" rel="noreferrer">terms</a></p>
         </Card>
       ))}
+      </div>
       <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">{m.label} As of {m.as_of}.</p>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {m.indicators.map((i) => (

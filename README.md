@@ -20,7 +20,8 @@ What the advisor sees:
 - **Review & Ask** — a chat per client; past conversations can be reopened and continued. "Prepare annual review" produces a recommendation to approve;
   questions get short grounded answers; follow-ups reuse earlier findings; what-ifs ("sell half of
   SU into bonds?") are simulated by code with before-and-after numbers.
-- **Market** — the real USD/CAD rate from the Bank of Canada (with source and date), fictional index trends and the
+- **Market** — real Bank of Canada data with source and date (USD/CAD and the 10-year minus 2-year Canada yield
+  spread, a common stress gauge), fictional index trends and the
   households most exposed to each, and links to every instrument's page.
 - **Ticker** — each holding's page: public facts from SEC EDGAR filings with source and date (issuer, latest annual
   revenue, profit, assets, cash flow, dividends, recent filings), the price source, and the households that hold it.

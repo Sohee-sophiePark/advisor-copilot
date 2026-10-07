@@ -1,11 +1,11 @@
 [
  {
+  "source": "Bank of Canada",
+  "terms": "https://www.bankofcanada.ca/terms/",
   "key": "fx_usdcad",
   "label": "USD/CAD, daily average (indicative)",
-  "source": "Bank of Canada",
+  "unit": "ratio",
   "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
-  "terms": "https://www.bankofcanada.ca/terms/",
-  "as_of": "2026-10-07",
   "history": [
    {
     "date": "2026-08-25",
@@ -127,6 +127,139 @@
     "date": "2026-10-07",
     "value": 1.4257
    }
-  ]
+  ],
+  "as_of": "2026-10-07"
+ },
+ {
+  "source": "Bank of Canada",
+  "terms": "https://www.bankofcanada.ca/terms/",
+  "key": "ca_curve",
+  "label": "Canada yield curve: 10-year minus 2-year",
+  "unit": "pp",
+  "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-bonds/",
+  "note": "A common stress gauge; below zero the curve is inverted.",
+  "history": [
+   {
+    "date": "2026-08-24",
+    "value": 0.72
+   },
+   {
+    "date": "2026-08-25",
+    "value": 0.72
+   },
+   {
+    "date": "2026-08-26",
+    "value": 0.73
+   },
+   {
+    "date": "2026-08-27",
+    "value": 0.74
+   },
+   {
+    "date": "2026-08-28",
+    "value": 0.72
+   },
+   {
+    "date": "2026-08-31",
+    "value": 0.72
+   },
+   {
+    "date": "2026-09-01",
+    "value": 0.74
+   },
+   {
+    "date": "2026-09-02",
+    "value": 0.69
+   },
+   {
+    "date": "2026-09-03",
+    "value": 0.69
+   },
+   {
+    "date": "2026-09-04",
+    "value": 0.69
+   },
+   {
+    "date": "2026-09-08",
+    "value": 0.68
+   },
+   {
+    "date": "2026-09-09",
+    "value": 0.68
+   },
+   {
+    "date": "2026-09-10",
+    "value": 0.63
+   },
+   {
+    "date": "2026-09-11",
+    "value": 0.6
+   },
+   {
+    "date": "2026-09-14",
+    "value": 0.57
+   },
+   {
+    "date": "2026-09-15",
+    "value": 0.6
+   },
+   {
+    "date": "2026-09-16",
+    "value": 0.57
+   },
+   {
+    "date": "2026-09-17",
+    "value": 0.56
+   },
+   {
+    "date": "2026-09-18",
+    "value": 0.55
+   },
+   {
+    "date": "2026-09-21",
+    "value": 0.55
+   },
+   {
+    "date": "2026-09-22",
+    "value": 0.58
+   },
+   {
+    "date": "2026-09-23",
+    "value": 0.56
+   },
+   {
+    "date": "2026-09-24",
+    "value": 0.58
+   },
+   {
+    "date": "2026-09-25",
+    "value": 0.59
+   },
+   {
+    "date": "2026-09-28",
+    "value": 0.59
+   },
+   {
+    "date": "2026-09-29",
+    "value": 0.62
+   },
+   {
+    "date": "2026-10-01",
+    "value": 0.67
+   },
+   {
+    "date": "2026-10-02",
+    "value": 0.68
+   },
+   {
+    "date": "2026-10-05",
+    "value": 0.7
+   },
+   {
+    "date": "2026-10-06",
+    "value": 0.69
+   }
+  ],
+  "as_of": "2026-10-06"
  }
 ]

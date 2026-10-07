@@ -9,7 +9,12 @@ import httpx
 from advisor_copilot.config import Settings
 from advisor_copilot.db import Store
 
-BOC = "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?recent={n}"
+BOC = "https://www.bankofcanada.ca/valet/observations/{series}/json?recent={n}"
+BOC_SERIES = {
+    "FXUSDCAD": "fx.USDCAD",
+    "BD.CDN.2YR.DQ.YLD": "yield.CA2Y",
+    "BD.CDN.10YR.DQ.YLD": "yield.CA10Y",
+}
 SEC_TICKERS = "https://www.sec.gov/files/company_tickers.json"
 SEC_FUNDS = "https://www.sec.gov/files/company_tickers_mf.json"
 SEC_DOC = "https://data.sec.gov/{kind}/CIK{cik:010d}.json"
@@ -95,21 +100,44 @@ class Fetcher:
         return r
 
     def boc(self, _: str) -> str:
-        url = BOC.format(n=self.s.fetch.history_days)
+        url = BOC.format(series=",".join(BOC_SERIES), n=self.s.fetch.history_days)
         r = self.get("boc", url)
         self.store.put_raw("boc", url, LICENCE["boc"], r.text)
-        rows = [("fx.USDCAD", o["d"], float(o["FXUSDCAD"]["v"])) for o in r.json()["observations"]]
-        public = {  # republishable with attribution: the public site shows this snapshot
-            "key": "fx_usdcad",
-            "label": "USD/CAD, daily average (indicative)",
-            "source": "Bank of Canada",
-            "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
-            "terms": "https://www.bankofcanada.ca/terms/",
-            "as_of": max(d for _, d, _ in rows),
-            "history": [{"date": d, "value": v} for _, d, v in sorted(rows, key=lambda x: x[1])],
-        }
+        obs = sorted(r.json()["observations"], key=lambda o: o["d"])
+        rows = [
+            (BOC_SERIES[k], o["d"], float(o[k]["v"])) for o in obs for k in BOC_SERIES if k in o
+        ]
+        series = {n: {d: v for s, d, v in rows if s == n} for n in BOC_SERIES.values()}
+        both = sorted(series["yield.CA2Y"].keys() & series["yield.CA10Y"].keys())
+        common = {"source": "Bank of Canada", "terms": "https://www.bankofcanada.ca/terms/"}
+        public = [  # republishable with attribution: the public site shows this snapshot
+            {
+                **common,
+                "key": "fx_usdcad",
+                "label": "USD/CAD, daily average (indicative)",
+                "unit": "ratio",
+                "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
+                "history": [{"date": d, "value": v} for d, v in series["fx.USDCAD"].items()],
+            },
+            {
+                **common,
+                "key": "ca_curve",
+                "label": "Canada yield curve: 10-year minus 2-year",
+                "unit": "pp",
+                "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-bonds/",
+                "note": "A common stress gauge; below zero the curve is inverted.",
+                "history": [
+                    {
+                        "date": d,
+                        "value": round(series["yield.CA10Y"][d] - series["yield.CA2Y"][d], 2),
+                    }
+                    for d in both
+                ],
+            },
+        ]
+        public = [{**p, "as_of": p["history"][-1]["date"]} for p in public if p["history"]]
         path = self.s.path("data") / "market_real.json"
-        path.write_text(json.dumps([public], indent=1) + "\n", encoding="utf-8")
+        path.write_text(json.dumps(public, indent=1) + "\n", encoding="utf-8")
         return f"{self.store.put_history('boc', rows)} new values"
 
     def sec(self, user_agent: str) -> str:

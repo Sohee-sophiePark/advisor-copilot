@@ -4,6 +4,7 @@ export function formatValue(v: number, unit: string): string {
   if (unit === "cad") return `${v < 0 ? "-" : ""}$${Math.abs(Math.round(v)).toLocaleString("en-CA")}`;
   if (unit === "years") return `${Math.round(v)} years`;
   if (unit === "count") return `${Math.round(v)}`;
+  if (unit === "rate") return v.toFixed(4);
   return v.toFixed(2);
 }
 

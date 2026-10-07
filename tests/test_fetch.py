@@ -13,7 +13,12 @@ from advisor_copilot.db import Store
 
 BOC = {
     "observations": [
-        {"d": "2026-10-06", "FXUSDCAD": {"v": "1.4226"}},
+        {
+            "d": "2026-10-06",
+            "FXUSDCAD": {"v": "1.4226"},
+            "BD.CDN.2YR.DQ.YLD": {"v": "3.23"},
+            "BD.CDN.10YR.DQ.YLD": {"v": "3.92"},
+        },
         {"d": "2026-10-07", "FXUSDCAD": {"v": "1.4257"}},
     ]
 }
@@ -89,7 +94,7 @@ ENV = {"SEC_USER_AGENT": "Test test@example.com", "TIINGO_API_KEY": "k"}
 def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     s, store, http, seen = setup(tmp_path)
     out = fetch.run(s, store, http, ENV)
-    assert out == {"boc": "2 new values", "sec": "facts for 2 tickers", "tiingo": "2 new values"}
+    assert out == {"boc": "4 new values", "sec": "facts for 2 tickers", "tiingo": "2 new values"}
     su = json.loads((tmp_path / "instrument_facts.json").read_text())[1]
     assert su["figures"] == [
         {
@@ -108,6 +113,11 @@ def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
         "Bank of Canada",
         "2026-10-07",
         2,
+    )
+    curve = json.loads((tmp_path / "market_real.json").read_text())[1]
+    assert (
+        curve["history"] == [{"date": "2026-10-06", "value": 0.69}]
+        and curve["as_of"] == "2026-10-06"
     )
     assert store.latest("px.SU.usd") == ("2026-10-06", 40.0)
     sec = [r for r in seen if "sec.gov" in str(r.url)]

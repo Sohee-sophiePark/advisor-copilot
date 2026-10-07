@@ -37,7 +37,7 @@ export interface ClientDetail extends Household {
 }
 export interface Indicator { key: string; label: string; value: number; asset_classes: string[]; history: number[]; most_exposed: { client_id: string; name: string; weight_pct: number }[] }
 export interface Market { as_of: string; label: string; months: string[]; indicators: Indicator[]; headlines: { id: string; text: string }[]; instruments: { ticker: string; name: string }[]; real: RealSeries[] }
-export interface RealSeries { key: string; label: string; source: string; url: string; terms: string; as_of: string; history: { date: string; value: number }[] }
+export interface RealSeries { key: string; label: string; unit: string; note?: string; source: string; url: string; terms: string; as_of: string; history: { date: string; value: number }[] }
 export interface InstrumentFacts {
   ticker: string; entity: string; description: string; facts_source: string; facts_as_of: string; facts_url: string;
   figures: { key: string; label: string; value: number; unit: string; period: string }[];
