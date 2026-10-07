@@ -1,0 +1,151 @@
+{
+ "scenario_id": "S4",
+ "title": "KYC incomplete",
+ "client_id": "C004",
+ "request_text": "",
+ "preset": "annual_review",
+ "recorded_at": "2026-10-07T15:25:06+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "C004-20261007-152506-5fc9f1",
+   "ts": "2026-10-07T15:25:06.781529Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "C004",
+    "request_text": "",
+    "preset": "annual_review",
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "C004-20261007-152506-5fc9f1",
+   "ts": "2026-10-07T15:25:06.782995Z",
+   "t_ms": 1,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "C004-20261007-152506-5fc9f1",
+   "ts": "2026-10-07T15:25:06.783386Z",
+   "t_ms": 1,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "warn",
+   "payload": {
+    "gate": "G1",
+    "passed": false,
+    "violations": [
+     "missing risk_profile",
+     "missing time_horizon_years",
+     "missing objectives"
+    ]
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "C004-20261007-152506-5fc9f1",
+   "ts": "2026-10-07T15:25:06.783440Z",
+   "t_ms": 1,
+   "type": "kyc_blocked",
+   "agent": "gate",
+   "level": "warn",
+   "payload": {
+    "missing_fields": [
+     "risk_profile",
+     "time_horizon_years",
+     "objectives"
+    ]
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "C004-20261007-152506-5fc9f1",
+   "ts": "2026-10-07T15:25:06.783724Z",
+   "t_ms": 2,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "BLOCKED",
+    "totals": {
+     "llm_calls": 0,
+     "tokens_in": 0,
+     "tokens_out": 0,
+     "wall_ms": 2,
+     "retries": 0
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "C004-20261007-152506-5fc9f1",
+  "client_id": "C004",
+  "request_text": "",
+  "preset": "annual_review",
+  "status": "BLOCKED",
+  "route": null,
+  "analyst_reports": {},
+  "metrics": {},
+  "flags": {},
+  "drafts": [],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G1",
+    "passed": false,
+    "violations": [
+     "missing risk_profile",
+     "missing time_horizon_years",
+     "missing objectives"
+    ]
+   }
+  ],
+  "eval_verdicts": [],
+  "revision_count": 0,
+  "final": null,
+  "message": "KYC update required before a suitability-based recommendation",
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 0,
+   "tokens": 0,
+   "wall_ms": 2
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T15:25:06.546303Z",
+  "updated_at": "2026-10-07T15:25:06.783784Z",
+  "completed_steps": [
+   "input_gate",
+   "kyc_gate"
+  ]
+ },
+ "outbox": null
+}

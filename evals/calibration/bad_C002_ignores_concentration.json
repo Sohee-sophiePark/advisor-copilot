@@ -1,0 +1,26 @@
+{
+ "client_id": "C002",
+ "draft": {
+  "headline": "Fine-tune the equity mix",
+  "summary": "Margaret's portfolio offers steady income. A modest shift between equity funds keeps things balanced.",
+  "actions": [
+   {
+    "action_id": "A1",
+    "type": "rebalance",
+    "target": "US_EQUITY",
+    "direction": "increase",
+    "description": "Add to US equity.",
+    "rationale": "Diversification.",
+    "finding_refs": [
+     "PORT-2"
+    ],
+    "priority": "medium"
+   }
+  ],
+  "risks_and_considerations": [],
+  "deferred": [],
+  "client_talking_points": [
+   "Small adjustments only."
+  ]
+ }
+}

@@ -1,0 +1,166 @@
+"""Deterministic gates: G0 input, G1 KYC, G4 analyst report, G5 output checks (03 §10)."""
+
+import re
+
+from pydantic import ValidationError
+
+from advisor_copilot.data_access import load_fixtures
+from advisor_copilot.harness.context import SynthContext
+from advisor_copilot.harness.injection import detect
+from advisor_copilot.models import (
+    SEVERITY_RANK,
+    AnalystReport,
+    Client,
+    Finding,
+    Flag,
+    GateResult,
+    Recommendation,
+    ToolResult,
+)
+
+PLACEHOLDER = re.compile(r"\{\{m:([^}]+)\}\}")
+PREFIX = {"portfolio": "PORT", "risk": "RISK", "tax": "TAX", "market": "MKT"}
+PROHIBITED = re.compile(
+    r"guarantee(d)?|risk[- ]free|no risk|can(no|')t lose|sure thing|will definitely", re.IGNORECASE
+)
+MAX_REQUEST_CHARS = 1000
+
+
+def input_gate(client_id: str, request_text: str, preset: str | None) -> GateResult:
+    """G0: client exists; request non-empty unless a preset is given; request length capped."""
+    v = []
+    if client_id not in load_fixtures().clients:
+        v.append(f"unknown client {client_id!r}")
+    if not request_text.strip() and not preset:
+        v.append("request is empty and no preset given")
+    if len(request_text) > MAX_REQUEST_CHARS:
+        v.append(f"request longer than {MAX_REQUEST_CHARS} characters")
+    return GateResult(gate="G0", passed=not v, violations=v)
+
+
+def kyc_gate(client: Client) -> GateResult:
+    """G1: risk profile, horizon and objectives must all be on file."""
+    missing = client.kyc_missing()
+    return GateResult(gate="G1", passed=not missing, violations=[f"missing {m}" for m in missing])
+
+
+IDENT = re.compile(r"\b[A-Z][A-Z_-]*\d+[A-Z_-]*\b")  # FLAG-L1-USEQ, TAX-2, L3_UNUSED_TFSA_ROOM
+
+
+def has_raw_digits(text: str) -> bool:
+    """True if any digit remains after removing {{m:...}} placeholders and identifier tokens."""
+    return bool(re.search(r"\d", IDENT.sub("", PLACEHOLDER.sub("", text))))
+
+
+def code_finding(flag: Flag, source_tool: str) -> Finding:
+    refs = ", ".join(f"{{{{m:{k}}}}}" for k in flag.metric_refs)
+    return Finding(
+        finding_id=flag.flag_id,
+        title=f"{flag.rule} ({flag.flag_id})",
+        severity=flag.severity,
+        detail=f"Detected by {source_tool}: {flag.rule}. Metrics: {refs}.",
+        metric_refs=list(flag.metric_refs),
+        flag_refs=[flag.flag_id],
+    )
+
+
+def analyst_gate(
+    report: AnalystReport, results: dict[str, ToolResult], max_findings: int
+) -> tuple[AnalystReport, list[str]]:
+    """G4: validate against this agent's tool output; returns corrected report + violations."""
+    metrics = {m.key for r in results.values() for m in r.metrics}
+    flags = {f.flag_id: (f, r.tool) for r in results.values() for f in r.flags}
+    violations: list[str] = []
+    kept: list[Finding] = []
+    if len(report.findings) > max_findings:
+        violations.append(f"too many findings: {len(report.findings)} > {max_findings}")
+    for f in report.findings[:max_findings]:
+        bad = [k for k in f.metric_refs if k not in metrics] + [
+            k for k in f.flag_refs if k not in flags
+        ]
+        if bad:
+            violations.append(f"{f.title!r}: unknown references {bad}")
+        if has_raw_digits(f.title + " " + f.detail):
+            violations.append(f"{f.title!r}: digits outside {{{{m:...}}}} placeholders")
+        if not bad and not has_raw_digits(f.title + " " + f.detail):
+            kept.append(f)
+    covered = {fid for f in kept for fid in f.flag_refs}
+    uncovered = [fid for fid in flags if fid not in covered]
+    if uncovered:
+        violations.append(f"flags not covered by any finding: {uncovered}")
+    findings = kept + [code_finding(flags[fid][0], flags[fid][1]) for fid in uncovered]
+    prefix = PREFIX[report.agent]
+    for i, f in enumerate(findings, 1):
+        refs = [flags[x][0].severity for x in f.flag_refs]
+        f.finding_id = f"{prefix}-{i}"
+        f.severity = max(refs, key=SEVERITY_RANK.get, default="info")
+    corrected = report.model_copy(update={"findings": findings})
+    return corrected, violations
+
+
+def _texts(d: Recommendation) -> list[str]:
+    actions = [t for a in d.actions for t in (a.description, a.rationale)]
+    deferred = [x.reason for x in d.deferred]
+    return [
+        d.headline,
+        d.summary,
+        *actions,
+        *d.risks_and_considerations,
+        *deferred,
+        *d.client_talking_points,
+    ]
+
+
+def output_gates(raw: dict, ctx: SynthContext) -> tuple[Recommendation | None, GateResult]:
+    """G5.1 to G5.10 over a synthesizer draft; returns the parsed draft (None if G5.1 fails)."""
+    try:
+        d = Recommendation.model_validate(raw)
+    except ValidationError as e:
+        return None, GateResult(
+            gate="G5", passed=False, violations=[f"G5.1 schema: {e.error_count()} errors"]
+        )
+    v: list[str] = []
+    texts = _texts(d)
+    joined = "\n".join(texts)
+    if any(has_raw_digits(t) for t in texts):
+        v.append("G5.2 no_raw_numbers: digits outside {{m:...}} placeholders")
+    if missing := sorted({k for k in PLACEHOLDER.findall(joined) if k not in ctx.metrics}):
+        v.append(f"G5.3 placeholders_resolve: unknown metric keys {missing}")
+    ids = {f.finding_id for f in ctx.findings}
+    for a in d.actions:
+        if bad := [r for r in a.finding_refs if r not in ids]:
+            v.append(f"G5.4 refs_valid: action {a.action_id} references unknown findings {bad}")
+        if a.type != "no_action" and not a.finding_refs:
+            v.append(f"G5.4 refs_valid: action {a.action_id} has no finding_refs")
+    deferred_ok = {x.finding_id for x in d.deferred if len(x.reason.split()) >= 5}
+    covered = {r for a in d.actions for r in a.finding_refs} | deferred_ok
+    if uncovered := [m for m in ctx.must_address if m not in covered]:
+        v.append(f"G5.5 coverage: not actioned or deferred with a reason: {uncovered}")
+    for a in d.actions:
+        drift = ctx.metrics.get(f"drift.{a.target}.pp")
+        if a.direction == "increase" and f"FLAG-CONC-{a.target}" in ctx.flags:
+            v.append(f"G5.6 no_contradiction: increase on concentrated {a.target}")
+        worsens = (a.direction == "increase" and drift and drift.value > 0) or (
+            a.direction == "decrease" and drift and drift.value < 0
+        )
+        if f"FLAG-DRIFT-{a.target}" in ctx.flags and worsens:
+            v.append(f"G5.6 no_contradiction: {a.direction} on {a.target} worsens its drift breach")
+    if m := PROHIBITED.search(joined):
+        v.append(f"G5.7 prohibited_language: {m.group(0)!r}")
+    no_action = [a for a in d.actions if a.type == "no_action"]
+    if not ctx.must_address and d.actions and d.actions != no_action[:1]:
+        v.append(
+            "G5.8 restraint: no critical/warning findings; actions must be empty or one no_action"
+        )
+    if no_action and len(d.actions) > 1:
+        v.append("G5.8 restraint: no_action mixed with other actions")
+    limits = [
+        (len(d.headline.split()) > 20, "headline over 20 words"),
+        (len(d.summary.split()) > 150, "summary over 150 words"),
+        (len(d.actions) > 5, "more than 5 actions"),
+        (len(d.client_talking_points) > 3, "more than 3 talking points"),
+    ]
+    v += [f"G5.9 limits: {msg}" for hit, msg in limits if hit]
+    if detect(joined):
+        v.append("G5.10 no_injection_echo: recommendation text matches an injection pattern")
+    return d, GateResult(gate="G5", passed=not v, violations=v)

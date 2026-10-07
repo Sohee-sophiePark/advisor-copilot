@@ -1,0 +1,72 @@
+[
+  {
+    "ticker": "CASHX",
+    "name": "Northbay High-Interest Savings ETF (fictional)",
+    "asset_class": "CASH",
+    "risk_bucket": "CASH",
+    "price_cad": 50.0,
+    "listing": "CA",
+    "income_type": "interest",
+    "single_security": false
+  },
+  {
+    "ticker": "CBND",
+    "name": "Maplecrest Canadian Aggregate Bond ETF (fictional)",
+    "asset_class": "CA_BONDS",
+    "risk_bucket": "CA_BONDS",
+    "price_cad": 25.0,
+    "listing": "CA",
+    "income_type": "interest",
+    "single_security": false
+  },
+  {
+    "ticker": "CEQX",
+    "name": "Maplecrest Canadian Equity Index ETF (fictional)",
+    "asset_class": "CA_EQUITY",
+    "risk_bucket": "CA_EQUITY",
+    "price_cad": 40.0,
+    "listing": "CA",
+    "income_type": "eligible_dividend",
+    "single_security": false
+  },
+  {
+    "ticker": "USEQ",
+    "name": "Liberty Plains US Total Market ETF (fictional, US-listed)",
+    "asset_class": "US_EQUITY",
+    "risk_bucket": "US_EQUITY",
+    "price_cad": 150.0,
+    "listing": "US",
+    "income_type": "foreign_dividend",
+    "single_security": false
+  },
+  {
+    "ticker": "INTQ",
+    "name": "Harbourline International Equity ETF (fictional)",
+    "asset_class": "INTL_EQUITY",
+    "risk_bucket": "INTL_EQUITY",
+    "price_cad": 30.0,
+    "listing": "CA",
+    "income_type": "foreign_dividend",
+    "single_security": false
+  },
+  {
+    "ticker": "REAL",
+    "name": "Cornerstone REIT Index ETF (fictional)",
+    "asset_class": "REAL_ASSETS",
+    "risk_bucket": "REAL_ASSETS",
+    "price_cad": 20.0,
+    "listing": "CA",
+    "income_type": "other_income",
+    "single_security": false
+  },
+  {
+    "ticker": "NRTH",
+    "name": "Northshore Energy Corp. (fictional single stock)",
+    "asset_class": "CA_EQUITY",
+    "risk_bucket": "SINGLE_STOCK",
+    "price_cad": 18.0,
+    "listing": "CA",
+    "income_type": "eligible_dividend",
+    "single_security": true
+  }
+]

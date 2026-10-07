@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-09-30",
+  "note": "Illustrative target allocations for a fictional firm. Not advice.",
+  "targets_pct": {
+    "conservative": {
+      "CASH": 5,
+      "CA_BONDS": 55,
+      "CA_EQUITY": 15,
+      "US_EQUITY": 12,
+      "INTL_EQUITY": 8,
+      "REAL_ASSETS": 5
+    },
+    "balanced": {
+      "CASH": 3,
+      "CA_BONDS": 37,
+      "CA_EQUITY": 20,
+      "US_EQUITY": 22,
+      "INTL_EQUITY": 13,
+      "REAL_ASSETS": 5
+    },
+    "growth": {
+      "CASH": 2,
+      "CA_BONDS": 15,
+      "CA_EQUITY": 25,
+      "US_EQUITY": 33,
+      "INTL_EQUITY": 20,
+      "REAL_ASSETS": 5
+    }
+  },
+  "vol_band_max_pct": {
+    "conservative": 7.0,
+    "balanced": 11.0,
+    "growth": 15.0
+  }
+}

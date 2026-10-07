@@ -1,0 +1,232 @@
+[
+  {
+    "client_id": "C001",
+    "name": "Daniel Okafor",
+    "age": 42,
+    "province": "ON",
+    "risk_profile": "balanced",
+    "time_horizon_years": 20,
+    "objectives": [
+      "retirement_income",
+      "long_term_growth"
+    ],
+    "annual_income_cad": 145000,
+    "liquidity_needs": "low",
+    "kyc_last_reviewed": "2026-03-15",
+    "tfsa_room_cad": 14000,
+    "rrsp_room_cad": 9000,
+    "advisor": "A. Advisor (fictional)",
+    "accounts": [
+      {
+        "account_id": "C001-TFSA",
+        "type": "TFSA",
+        "holdings": [
+          {
+            "ticker": "USEQ",
+            "units": 180
+          },
+          {
+            "ticker": "INTQ",
+            "units": 300
+          }
+        ]
+      },
+      {
+        "account_id": "C001-RRSP",
+        "type": "RRSP",
+        "holdings": [
+          {
+            "ticker": "CBND",
+            "units": 2400
+          },
+          {
+            "ticker": "CEQX",
+            "units": 900
+          },
+          {
+            "ticker": "USEQ",
+            "units": 160
+          }
+        ]
+      },
+      {
+        "account_id": "C001-NON_REG",
+        "type": "NON_REG",
+        "holdings": [
+          {
+            "ticker": "CEQX",
+            "units": 300
+          },
+          {
+            "ticker": "REAL",
+            "units": 450
+          },
+          {
+            "ticker": "CASHX",
+            "units": 300
+          },
+          {
+            "ticker": "INTQ",
+            "units": 400
+          },
+          {
+            "ticker": "USEQ",
+            "units": 100
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "client_id": "C002",
+    "name": "Margaret Leblanc",
+    "age": 68,
+    "province": "NS",
+    "risk_profile": "conservative",
+    "time_horizon_years": 10,
+    "objectives": [
+      "income",
+      "capital_preservation"
+    ],
+    "annual_income_cad": 52000,
+    "liquidity_needs": "moderate (monthly income draws)",
+    "kyc_last_reviewed": "2026-05-02",
+    "tfsa_room_cad": 0,
+    "rrsp_room_cad": 0,
+    "advisor": "A. Advisor (fictional)",
+    "accounts": [
+      {
+        "account_id": "C002-RRIF",
+        "type": "RRIF",
+        "holdings": [
+          {
+            "ticker": "CBND",
+            "units": 4000
+          },
+          {
+            "ticker": "CASHX",
+            "units": 200
+          },
+          {
+            "ticker": "CEQX",
+            "units": 300
+          }
+        ]
+      },
+      {
+        "account_id": "C002-TFSA",
+        "type": "TFSA",
+        "holdings": [
+          {
+            "ticker": "CBND",
+            "units": 1600
+          },
+          {
+            "ticker": "INTQ",
+            "units": 300
+          }
+        ]
+      },
+      {
+        "account_id": "C002-NON_REG",
+        "type": "NON_REG",
+        "holdings": [
+          {
+            "ticker": "NRTH",
+            "units": 4200
+          },
+          {
+            "ticker": "USEQ",
+            "units": 80
+          },
+          {
+            "ticker": "REAL",
+            "units": 300
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "client_id": "C003",
+    "name": "Priya Raman",
+    "age": 29,
+    "province": "BC",
+    "risk_profile": "growth",
+    "time_horizon_years": 30,
+    "objectives": [
+      "long_term_growth"
+    ],
+    "annual_income_cad": 98000,
+    "liquidity_needs": "low",
+    "kyc_last_reviewed": "2026-07-20",
+    "tfsa_room_cad": 0,
+    "rrsp_room_cad": 11500,
+    "advisor": "A. Advisor (fictional)",
+    "accounts": [
+      {
+        "account_id": "C003-TFSA",
+        "type": "TFSA",
+        "holdings": [
+          {
+            "ticker": "CEQX",
+            "units": 380
+          },
+          {
+            "ticker": "INTQ",
+            "units": 400
+          },
+          {
+            "ticker": "CASHX",
+            "units": 24
+          },
+          {
+            "ticker": "REAL",
+            "units": 150
+          }
+        ]
+      },
+      {
+        "account_id": "C003-RRSP",
+        "type": "RRSP",
+        "holdings": [
+          {
+            "ticker": "USEQ",
+            "units": 130
+          },
+          {
+            "ticker": "CBND",
+            "units": 360
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "client_id": "C004",
+    "name": "Tom Becker",
+    "age": 51,
+    "province": "AB",
+    "risk_profile": null,
+    "time_horizon_years": null,
+    "objectives": null,
+    "annual_income_cad": 120000,
+    "liquidity_needs": null,
+    "kyc_last_reviewed": null,
+    "tfsa_room_cad": 7000,
+    "rrsp_room_cad": 15000,
+    "advisor": "A. Advisor (fictional)",
+    "accounts": [
+      {
+        "account_id": "C004-NON_REG",
+        "type": "NON_REG",
+        "holdings": [
+          {
+            "ticker": "CASHX",
+            "units": 800
+          }
+        ]
+      }
+    ]
+  }
+]

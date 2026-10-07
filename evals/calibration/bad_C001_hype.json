@@ -1,0 +1,26 @@
+{
+ "client_id": "C001",
+ "draft": {
+  "headline": "A can't-miss repositioning for strong returns",
+  "summary": "By rotating hard into US equity Daniel will definitely capture the next leg of the rally. This is a sure thing for a balanced investor.",
+  "actions": [
+   {
+    "action_id": "A1",
+    "type": "rebalance",
+    "target": "US_EQUITY",
+    "direction": "increase",
+    "description": "Add aggressively to US equity.",
+    "rationale": "Momentum.",
+    "finding_refs": [
+     "PORT-1"
+    ],
+    "priority": "high"
+   }
+  ],
+  "risks_and_considerations": [],
+  "deferred": [],
+  "client_talking_points": [
+   "Expect outsized gains."
+  ]
+ }
+}

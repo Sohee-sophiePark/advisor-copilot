@@ -1,0 +1,22 @@
+{
+  "findings": [
+    {"finding_id": "RISK-1", "title": "Single stock far above the concentration limit", "severity": "critical",
+     "detail": "NRTH is {{m:conc.NRTH.pct}} of the portfolio against a limit of {{m:conc.limit.pct}}.",
+     "metric_refs": ["conc.NRTH.pct", "conc.limit.pct"], "flag_refs": ["FLAG-CONC-NRTH"]},
+    {"finding_id": "RISK-2", "title": "Volatility above the conservative band", "severity": "critical",
+     "detail": "Portfolio volatility is {{m:risk.vol.pct}} versus a band maximum of {{m:risk.vol_band_max.pct}}.",
+     "metric_refs": ["risk.vol.pct", "risk.vol_band_max.pct"], "flag_refs": ["FLAG-SUIT-VOL"]}
+  ],
+  "draft": {
+    "headline": "Growth plan for Margaret",
+    "summary": "This plan offers guaranteed income with a 12% return by adding to the energy position.",
+    "actions": [
+      {"action_id": "A1", "type": "rebalance", "target": "NRTH", "direction": "increase",
+       "description": "Add to Northshore Energy.", "rationale": "Strong dividend history.",
+       "finding_refs": ["RISK-1"], "priority": "high"}
+    ],
+    "risks_and_considerations": [],
+    "deferred": [],
+    "client_talking_points": []
+  }
+}

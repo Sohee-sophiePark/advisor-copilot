@@ -1,0 +1,155 @@
+"""Settings loader. `config/settings.yaml` is the single source of truth; env overrides run_mode."""
+
+import os
+from functools import lru_cache
+from pathlib import Path
+from typing import Literal
+
+import yaml
+from pydantic import BaseModel, ConfigDict
+
+ROOT = Path(__file__).resolve().parents[2]
+SETTINGS_FILE = ROOT / "config" / "settings.yaml"
+
+RunMode = Literal["live", "record", "replay"]
+
+
+class ModelsCfg(BaseModel):
+    router: str
+    analyst: str
+    synthesizer: str
+    evaluator: str
+
+
+class TemperatureCfg(BaseModel):
+    router: float
+    analyst: float
+    synthesizer: float
+    evaluator: float
+
+
+class ThinkingCfg(BaseModel):
+    """Gemini 3: level MINIMAL|LOW|MEDIUM|HIGH. Gemini 2.5: integer token budget (0 = off)."""
+
+    router: str | int
+    analyst: str | int
+    synthesizer: str | int
+    evaluator: str | int
+
+
+class RateLimitsCfg(BaseModel):
+    """`max_concurrency` plus one `{rpm: N}` entry per model id, stored as extra keys."""
+
+    model_config = ConfigDict(extra="allow")
+    max_concurrency: int = 3
+
+    def rpm_for(self, model_id: str) -> int:
+        entry = (self.model_extra or {}).get(model_id)
+        if not isinstance(entry, dict) or "rpm" not in entry:
+            raise KeyError(f"rate_limits has no rpm entry for model {model_id!r}")
+        return int(entry["rpm"])
+
+
+class RetryCfg(BaseModel):
+    max_attempts: int
+    base_seconds: float
+    cap_seconds: float
+
+
+class BudgetCfg(BaseModel):
+    max_llm_calls: int
+    max_total_tokens: int
+    max_wall_seconds: int
+    per_call_timeout_seconds: int
+
+
+class AgentsCfg(BaseModel):
+    analyst_mode: Literal["tool_loop", "prefetch"]
+    max_turns: int
+    max_findings: int
+    max_tool_calls: int
+
+
+class LoopCfg(BaseModel):
+    max_revisions: int
+    pass_min_score: int
+    pass_mean_score: float
+
+
+class RouterCfg(BaseModel):
+    low_confidence_threshold: float
+    fast_path_presets: list[str]
+
+
+class RulesCfg(BaseModel):
+    drift_tolerance_pp: float
+    drift_critical_multiplier: float
+    single_security_max_pct: float
+    interest_in_nonreg_min_cad: float
+
+
+class InjectionCfg(BaseModel):
+    redact: bool
+
+
+class TraceCfg(BaseModel):
+    store_prompts: bool
+
+
+class PathsCfg(BaseModel):
+    data: str
+    prompts: str
+    runs: str
+    cassettes: str
+    replays: str
+
+
+class ApiCfg(BaseModel):
+    port_min: int
+    port_max: int
+
+
+class Settings(BaseModel):
+    run_mode: RunMode
+    models: ModelsCfg
+    temperature: TemperatureCfg
+    thinking_level: ThinkingCfg
+    rate_limits: RateLimitsCfg
+    retry: RetryCfg
+    budget: BudgetCfg
+    agents: AgentsCfg
+    loop: LoopCfg
+    router: RouterCfg
+    rules: RulesCfg
+    injection: InjectionCfg
+    trace: TraceCfg
+    paths: PathsCfg
+    api: ApiCfg
+
+    def path(self, name: str) -> Path:
+        """Absolute path for `paths.<name>`, resolved against the repo root."""
+        return ROOT / getattr(self.paths, name)
+
+
+def load_settings(path: Path | None = None, env: dict[str, str] | None = None) -> Settings:
+    """Parse the YAML file. A non-empty `RUN_MODE` in `env` (default: os.environ) wins."""
+    environ = os.environ if env is None else env
+    raw = yaml.safe_load((path or SETTINGS_FILE).read_text(encoding="utf-8"))
+    run_mode = environ.get("RUN_MODE", "").strip()
+    if run_mode:
+        raw["run_mode"] = run_mode
+    return Settings.model_validate(raw)
+
+
+@lru_cache(maxsize=1)
+def get_settings() -> Settings:
+    """Process-wide settings singleton; the only cached global state in the package."""
+    return load_settings()
+
+
+def gemini_api_key() -> str:
+    """Read `GEMINI_API_KEY` from the environment at call time. Never stored or logged."""
+    key = os.environ.get("GEMINI_API_KEY", "").strip()
+    if not key:
+        raise RuntimeError("GEMINI_API_KEY is not set; live and record modes need it")
+    return key

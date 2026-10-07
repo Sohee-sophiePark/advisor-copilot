@@ -1,0 +1,1674 @@
+{
+ "scenario_id": "S2",
+ "title": "Conservative retiree with critical breaches",
+ "client_id": "C002",
+ "request_text": "",
+ "preset": "annual_review",
+ "recorded_at": "2026-10-07T15:21:41+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.376843Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "C002",
+    "request_text": "",
+    "preset": "annual_review",
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.377801Z",
+   "t_ms": 0,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.378216Z",
+   "t_ms": 1,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G1",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.378328Z",
+   "t_ms": 1,
+   "type": "route_decided",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "route": "full_review",
+    "domains": [
+     "portfolio",
+     "risk",
+     "tax",
+     "market"
+    ],
+    "reason": "preset",
+    "confidence": 1.0,
+    "rules_applied": [],
+    "fast_path": true
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.379721Z",
+   "t_ms": 2,
+   "type": "agent_started",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "get_positions",
+     "compute_allocation",
+     "compute_drift"
+    ]
+   }
+  },
+  {
+   "seq": 6,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.380294Z",
+   "t_ms": 3,
+   "type": "llm_call_started",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 7,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.380398Z",
+   "t_ms": 3,
+   "type": "agent_started",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "compute_risk_metrics",
+     "run_stress_test",
+     "check_concentration"
+    ]
+   }
+  },
+  {
+   "seq": 8,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.380857Z",
+   "t_ms": 4,
+   "type": "llm_call_started",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:risk",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 9,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.380938Z",
+   "t_ms": 4,
+   "type": "agent_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "get_positions",
+     "check_asset_location",
+     "get_contribution_room"
+    ]
+   }
+  },
+  {
+   "seq": 10,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.381321Z",
+   "t_ms": 4,
+   "type": "llm_call_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 11,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.381378Z",
+   "t_ms": 4,
+   "type": "agent_started",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "get_market_snapshot"
+    ]
+   }
+  },
+  {
+   "seq": 12,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:06.381605Z",
+   "t_ms": 4,
+   "type": "llm_call_started",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 13,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:24.549804Z",
+   "t_ms": 18173,
+   "type": "llm_call_finished",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:risk",
+    "tokens_in": 1003,
+    "tokens_out": 42,
+    "latency_ms": 18140,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 14,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:24.551035Z",
+   "t_ms": 18174,
+   "type": "tool_call",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "name": "compute_risk_metrics",
+    "args": {},
+    "metrics_count": 4,
+    "flags": [
+     {
+      "id": "FLAG-SUIT-VOL",
+      "severity": "critical"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "seq": 15,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:24.551255Z",
+   "t_ms": 18174,
+   "type": "tool_call",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "name": "check_concentration",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [
+     {
+      "id": "FLAG-CONC-NRTH",
+      "severity": "critical"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "seq": 16,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:24.551424Z",
+   "t_ms": 18174,
+   "type": "tool_call",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "name": "run_stress_test",
+    "args": {
+     "scenario": "equity_bear"
+    },
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 17,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:24.551672Z",
+   "t_ms": 18174,
+   "type": "llm_call_started",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:risk",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 18,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:24.781237Z",
+   "t_ms": 18404,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 2465,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 19,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:54.565916Z",
+   "t_ms": 48189,
+   "type": "llm_call_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "tokens_in": 1136,
+    "tokens_out": 30,
+    "latency_ms": 48183,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 20,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:54.567622Z",
+   "t_ms": 48190,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "compute_allocation",
+    "args": {},
+    "metrics_count": 13,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 21,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:54.567962Z",
+   "t_ms": 48191,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "compute_drift",
+    "args": {},
+    "metrics_count": 7,
+    "flags": [
+     {
+      "id": "FLAG-DRIFT-CA_EQUITY",
+      "severity": "critical"
+     },
+     {
+      "id": "FLAG-DRIFT-US_EQUITY",
+      "severity": "warning"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "seq": 22,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:54.568197Z",
+   "t_ms": 48191,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "get_positions",
+    "args": {},
+    "metrics_count": 3,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 23,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:54.568493Z",
+   "t_ms": 48191,
+   "type": "llm_call_started",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 24,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:18:55.499542Z",
+   "t_ms": 49122,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 2765,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 25,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:17.765630Z",
+   "t_ms": 71388,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "tokens_in": 820,
+    "tokens_out": 57,
+    "latency_ms": 52982,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 26,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:17.766950Z",
+   "t_ms": 71390,
+   "type": "tool_call",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "name": "get_market_snapshot",
+    "args": {
+     "asset_classes": [
+      "CASH",
+      "CA_BONDS",
+      "CA_EQUITY",
+      "US_EQUITY",
+      "INTL_EQUITY",
+      "REAL_ASSETS"
+     ]
+    },
+    "metrics_count": 7,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 27,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:17.767351Z",
+   "t_ms": 71390,
+   "type": "llm_call_started",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 28,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:29.555940Z",
+   "t_ms": 83179,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "tokens_in": 1168,
+    "tokens_out": 34,
+    "latency_ms": 34054,
+    "attempt": 2,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 29,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:29.557184Z",
+   "t_ms": 83180,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "check_asset_location",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 30,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:29.557396Z",
+   "t_ms": 83180,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_contribution_room",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 31,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:29.557612Z",
+   "t_ms": 83180,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_positions",
+    "args": {},
+    "metrics_count": 3,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 32,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:29.558155Z",
+   "t_ms": 83181,
+   "type": "llm_call_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 33,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:38.983244Z",
+   "t_ms": 92606,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 4442,
+    "attempt": 2
+   }
+  },
+  {
+   "seq": 34,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:45.384282Z",
+   "t_ms": 99007,
+   "type": "llm_call_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "tokens_in": 2604,
+    "tokens_out": 355,
+    "latency_ms": 27615,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 35,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:45.386648Z",
+   "t_ms": 99010,
+   "type": "agent_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "findings_count": 2,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 36,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:19:53.815674Z",
+   "t_ms": 107439,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 2755,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 37,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:04.399442Z",
+   "t_ms": 118022,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "tokens_in": 1363,
+    "tokens_out": 527,
+    "latency_ms": 25414,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 38,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:04.401159Z",
+   "t_ms": 118024,
+   "type": "agent_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "findings_count": 4,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 39,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:17.671760Z",
+   "t_ms": 131295,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "tokens_in": 1796,
+    "tokens_out": 142,
+    "latency_ms": 13269,
+    "attempt": 2,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 40,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:17.673140Z",
+   "t_ms": 131296,
+   "type": "agent_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "findings_count": 1,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 41,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:34.258869Z",
+   "t_ms": 147882,
+   "type": "llm_call_finished",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:risk",
+    "tokens_in": 1662,
+    "tokens_out": 419,
+    "latency_ms": 40441,
+    "attempt": 3,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 42,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:34.260366Z",
+   "t_ms": 147883,
+   "type": "agent_finished",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "findings_count": 3,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 43,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:34.264529Z",
+   "t_ms": 147888,
+   "type": "llm_call_started",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 44,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:35.794022Z",
+   "t_ms": 149417,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 2635,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 45,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:48.804289Z",
+   "t_ms": 162427,
+   "type": "llm_call_finished",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "tokens_in": 3869,
+    "tokens_out": 2807,
+    "latency_ms": 10369,
+    "attempt": 2,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 46,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:48.806696Z",
+   "t_ms": 162430,
+   "type": "draft_created",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "revision": 0,
+    "actions_count": 4
+   }
+  },
+  {
+   "seq": 47,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:48.806938Z",
+   "t_ms": 162430,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 48,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:48.807874Z",
+   "t_ms": 162431,
+   "type": "llm_call_started",
+   "agent": "evaluator",
+   "level": "info",
+   "payload": {
+    "purpose": "evaluator",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 49,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:20:50.233369Z",
+   "t_ms": 163856,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 2327,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 50,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:21:08.172793Z",
+   "t_ms": 181796,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 4317,
+    "attempt": 2
+   }
+  },
+  {
+   "seq": 51,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:21:13.785859Z",
+   "t_ms": 187409,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 8282,
+    "attempt": 3
+   }
+  },
+  {
+   "seq": 52,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:21:22.813344Z",
+   "t_ms": 196437,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 16931,
+    "attempt": 4
+   }
+  },
+  {
+   "seq": 53,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:21:41.385944Z",
+   "t_ms": 215009,
+   "type": "llm_call_finished",
+   "agent": "evaluator",
+   "level": "info",
+   "payload": {
+    "purpose": "evaluator",
+    "tokens_in": 4452,
+    "tokens_out": 214,
+    "latency_ms": 1636,
+    "attempt": 5,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 54,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:21:41.387621Z",
+   "t_ms": 215011,
+   "type": "evaluator_verdict",
+   "agent": "evaluator",
+   "level": "info",
+   "payload": {
+    "passed": true,
+    "checks": {
+     "suitability_respected": true,
+     "critical_addressed": true,
+     "faithful_to_findings": true,
+     "client_specific": true,
+     "untrusted_ignored": true
+    },
+    "scores": {
+     "clarity_for_advisor": 5,
+     "actionability": 5,
+     "professional_tone": 5
+    },
+    "issues_count": 0
+   }
+  },
+  {
+   "seq": 55,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:21:41.388188Z",
+   "t_ms": 215011,
+   "type": "awaiting_approval",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "summary": "The portfolio currently exceeds the conservative risk mandate due to a significant concentration in a single security, 28.6%, and an elevated Canadian equity allocation of 33.1%. This has pushed portfolio volatility to 11.9%, well above the limit of 7.0%. To align with your objectives of capital preservation and income, we must reduce this concentration. Given your emotional attachment to the holding and tax considerations, we recommend a phased reduction of the position. Simultaneously, we will rebalance proceeds to increase US equity exposure, which is currently underweight at 4.5% against a target of 12.0%, to improve diversification and lower overall risk."
+   }
+  },
+  {
+   "seq": 56,
+   "run_id": "C002-20261007-151806-4e9bb8",
+   "ts": "2026-10-07T15:21:41.390532Z",
+   "t_ms": 215014,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "AWAITING_APPROVAL",
+    "totals": {
+     "llm_calls": 10,
+     "tokens_in": 19873,
+     "tokens_out": 4627,
+     "wall_ms": 215014,
+     "retries": 9
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "C002-20261007-151806-4e9bb8",
+  "client_id": "C002",
+  "request_text": "",
+  "preset": "annual_review",
+  "status": "AWAITING_APPROVAL",
+  "route": {
+   "route": "full_review",
+   "domains": [
+    "portfolio",
+    "risk",
+    "tax",
+    "market"
+   ],
+   "reason": "preset",
+   "confidence": 1.0
+  },
+  "analyst_reports": {
+   "portfolio": {
+    "agent": "portfolio",
+    "findings": [
+     {
+      "finding_id": "PORT-1",
+      "title": "Canadian equity allocation significantly exceeds conservative target due to concentrated position",
+      "severity": "critical",
+      "detail": "The Canadian equity allocation is {{m:alloc.CA_EQUITY.pct}}, significantly above the target of {{m:target.CA_EQUITY.pct}}. This is primarily driven by the Northshore Energy position in the non-registered account, which accounts for {{m:acct.NON_REG.value.cad}} of the total portfolio. This concentration conflicts with the conservative risk profile.",
+      "metric_refs": [
+       "alloc.CA_EQUITY.pct",
+       "target.CA_EQUITY.pct",
+       "acct.NON_REG.value.cad"
+      ],
+      "flag_refs": [
+       "FLAG-DRIFT-CA_EQUITY"
+      ]
+     },
+     {
+      "finding_id": "PORT-2",
+      "title": "US equity allocation is underweight relative to target portfolio",
+      "severity": "warning",
+      "detail": "The US equity allocation is {{m:alloc.US_EQUITY.pct}}, which is below the target of {{m:target.US_EQUITY.pct}}. This drift of {{m:drift.US_EQUITY.pp}} exceeds the tolerance threshold, indicating a need to rebalance to align with the client's conservative investment strategy.",
+      "metric_refs": [
+       "alloc.US_EQUITY.pct",
+       "target.US_EQUITY.pct",
+       "drift.US_EQUITY.pp"
+      ],
+      "flag_refs": [
+       "FLAG-DRIFT-US_EQUITY"
+      ]
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   },
+   "risk": {
+    "agent": "risk",
+    "findings": [
+     {
+      "finding_id": "RISK-1",
+      "title": "Portfolio volatility exceeds conservative suitability band",
+      "severity": "critical",
+      "detail": "The portfolio volatility of {{m:risk.vol.pct}} exceeds the maximum allowable volatility of {{m:risk.vol_band_max.pct}} for a conservative profile. Given the client's age of sixty-eight and need for monthly income, this level of volatility is inappropriate and poses a significant risk to capital preservation.",
+      "metric_refs": [
+       "risk.vol.pct",
+       "risk.vol_band_max.pct"
+      ],
+      "flag_refs": [
+       "FLAG-SUIT-VOL"
+      ]
+     },
+     {
+      "finding_id": "RISK-2",
+      "title": "Excessive concentration in single security NRTH",
+      "severity": "critical",
+      "detail": "The holding in NRTH represents {{m:conc.NRTH.pct}} of the portfolio, significantly exceeding the concentration limit of {{m:conc.limit.pct}}. This high exposure to a single security creates excessive idiosyncratic risk, which is unsuitable for a conservative investor requiring liquidity for monthly income.",
+      "metric_refs": [
+       "conc.NRTH.pct",
+       "conc.limit.pct"
+      ],
+      "flag_refs": [
+       "FLAG-CONC-NRTH"
+      ]
+     },
+     {
+      "finding_id": "RISK-3",
+      "title": "Significant downside risk in equity bear market scenario",
+      "severity": "info",
+      "detail": "In an equity bear market scenario, the portfolio would experience a loss of {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. This potential downside is substantial for a retiree with moderate liquidity needs, potentially impacting the ability to sustain monthly income draws.",
+      "metric_refs": [
+       "stress.equity_bear.cad",
+       "stress.equity_bear.pct"
+      ],
+      "flag_refs": []
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   },
+   "tax": {
+    "agent": "tax",
+    "findings": [
+     {
+      "finding_id": "TAX-1",
+      "title": "No unused TFSA or RRSP contribution room available",
+      "severity": "info",
+      "detail": "The client has no unused contribution room in either TFSA or RRSP accounts, as indicated by {{m:tax.tfsa_room.cad}} and {{m:tax.rrsp_room.cad}}. Consequently, no further tax-advantaged contributions can be made at this time.",
+      "metric_refs": [
+       "tax.tfsa_room.cad",
+       "tax.rrsp_room.cad"
+      ],
+      "flag_refs": []
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   },
+   "market": {
+    "agent": "market",
+    "findings": [
+     {
+      "finding_id": "MKT-1",
+      "title": "US equity markets show strong year-to-date performance",
+      "severity": "info",
+      "detail": "US equities experienced significant growth, with the index returning {{m:mkt.us_equity_ytd.pct}} percent year to date. This performance was primarily driven by a rally in technology sector stocks.",
+      "metric_refs": [
+       "mkt.us_equity_ytd.pct"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "MKT-2",
+      "title": "Canadian equity performance impacted by energy sector volatility",
+      "severity": "info",
+      "detail": "Canadian equity performance was more moderate at {{m:mkt.ca_equity_ytd.pct}} percent. Volatility in the energy sector, which saw a {{m:mkt.energy_sector_qtd.pct}} percent decline quarter to date, contributed to this performance profile.",
+      "metric_refs": [
+       "mkt.ca_equity_ytd.pct",
+       "mkt.energy_sector_qtd.pct"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "MKT-3",
+      "title": "Canadian bond yields decline amid cooling inflation",
+      "severity": "info",
+      "detail": "Canadian bond yields have drifted lower, with the ten-year yield currently at {{m:mkt.ca_10y_yield.pct}} percent. The bond index has returned {{m:mkt.ca_bond_ytd.pct}} percent year to date as inflation pressures have cooled.",
+      "metric_refs": [
+       "mkt.ca_10y_yield.pct",
+       "mkt.ca_bond_ytd.pct"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "MKT-4",
+      "title": "International equity and real asset performance overview",
+      "severity": "info",
+      "detail": "International equities have returned {{m:mkt.intl_equity_ytd.pct}} percent year to date, while real assets, represented by the REIT index, have seen a return of {{m:mkt.reit_ytd.pct}} percent over the same period.",
+      "metric_refs": [
+       "mkt.intl_equity_ytd.pct",
+       "mkt.reit_ytd.pct"
+      ],
+      "flag_refs": []
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   }
+  },
+  "metrics": {
+   "total.value.cad": {
+    "key": "total.value.cad",
+    "value": 264600.0,
+    "unit": "cad",
+    "label": "Total portfolio value",
+    "source_tool": "compute_allocation"
+   },
+   "alloc.CASH.pct": {
+    "key": "alloc.CASH.pct",
+    "value": 3.78,
+    "unit": "pct",
+    "label": "CASH allocation",
+    "source_tool": "compute_allocation"
+   },
+   "alloc.CA_BONDS.pct": {
+    "key": "alloc.CA_BONDS.pct",
+    "value": 52.91,
+    "unit": "pct",
+    "label": "CA_BONDS allocation",
+    "source_tool": "compute_allocation"
+   },
+   "alloc.CA_EQUITY.pct": {
+    "key": "alloc.CA_EQUITY.pct",
+    "value": 33.11,
+    "unit": "pct",
+    "label": "CA_EQUITY allocation",
+    "source_tool": "compute_allocation"
+   },
+   "alloc.US_EQUITY.pct": {
+    "key": "alloc.US_EQUITY.pct",
+    "value": 4.54,
+    "unit": "pct",
+    "label": "US_EQUITY allocation",
+    "source_tool": "compute_allocation"
+   },
+   "alloc.INTL_EQUITY.pct": {
+    "key": "alloc.INTL_EQUITY.pct",
+    "value": 3.4,
+    "unit": "pct",
+    "label": "INTL_EQUITY allocation",
+    "source_tool": "compute_allocation"
+   },
+   "alloc.REAL_ASSETS.pct": {
+    "key": "alloc.REAL_ASSETS.pct",
+    "value": 2.27,
+    "unit": "pct",
+    "label": "REAL_ASSETS allocation",
+    "source_tool": "compute_allocation"
+   },
+   "target.CASH.pct": {
+    "key": "target.CASH.pct",
+    "value": 5.0,
+    "unit": "pct",
+    "label": "CASH target (conservative)",
+    "source_tool": "compute_allocation"
+   },
+   "target.CA_BONDS.pct": {
+    "key": "target.CA_BONDS.pct",
+    "value": 55.0,
+    "unit": "pct",
+    "label": "CA_BONDS target (conservative)",
+    "source_tool": "compute_allocation"
+   },
+   "target.CA_EQUITY.pct": {
+    "key": "target.CA_EQUITY.pct",
+    "value": 15.0,
+    "unit": "pct",
+    "label": "CA_EQUITY target (conservative)",
+    "source_tool": "compute_allocation"
+   },
+   "target.US_EQUITY.pct": {
+    "key": "target.US_EQUITY.pct",
+    "value": 12.0,
+    "unit": "pct",
+    "label": "US_EQUITY target (conservative)",
+    "source_tool": "compute_allocation"
+   },
+   "target.INTL_EQUITY.pct": {
+    "key": "target.INTL_EQUITY.pct",
+    "value": 8.0,
+    "unit": "pct",
+    "label": "INTL_EQUITY target (conservative)",
+    "source_tool": "compute_allocation"
+   },
+   "target.REAL_ASSETS.pct": {
+    "key": "target.REAL_ASSETS.pct",
+    "value": 5.0,
+    "unit": "pct",
+    "label": "REAL_ASSETS target (conservative)",
+    "source_tool": "compute_allocation"
+   },
+   "cfg.drift_tolerance.pp": {
+    "key": "cfg.drift_tolerance.pp",
+    "value": 5.0,
+    "unit": "pp",
+    "label": "Drift tolerance",
+    "source_tool": "compute_drift"
+   },
+   "drift.CASH.pp": {
+    "key": "drift.CASH.pp",
+    "value": -1.22,
+    "unit": "pp",
+    "label": "CASH drift vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.CA_BONDS.pp": {
+    "key": "drift.CA_BONDS.pp",
+    "value": -2.09,
+    "unit": "pp",
+    "label": "CA_BONDS drift vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.CA_EQUITY.pp": {
+    "key": "drift.CA_EQUITY.pp",
+    "value": 18.11,
+    "unit": "pp",
+    "label": "CA_EQUITY drift vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.US_EQUITY.pp": {
+    "key": "drift.US_EQUITY.pp",
+    "value": -7.46,
+    "unit": "pp",
+    "label": "US_EQUITY drift vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.INTL_EQUITY.pp": {
+    "key": "drift.INTL_EQUITY.pp",
+    "value": -4.6,
+    "unit": "pp",
+    "label": "INTL_EQUITY drift vs target",
+    "source_tool": "compute_drift"
+   },
+   "drift.REAL_ASSETS.pp": {
+    "key": "drift.REAL_ASSETS.pp",
+    "value": -2.73,
+    "unit": "pp",
+    "label": "REAL_ASSETS drift vs target",
+    "source_tool": "compute_drift"
+   },
+   "acct.RRIF.value.cad": {
+    "key": "acct.RRIF.value.cad",
+    "value": 122000.0,
+    "unit": "cad",
+    "label": "RRIF account value",
+    "source_tool": "get_positions"
+   },
+   "acct.TFSA.value.cad": {
+    "key": "acct.TFSA.value.cad",
+    "value": 49000.0,
+    "unit": "cad",
+    "label": "TFSA account value",
+    "source_tool": "get_positions"
+   },
+   "acct.NON_REG.value.cad": {
+    "key": "acct.NON_REG.value.cad",
+    "value": 93600.0,
+    "unit": "cad",
+    "label": "NON_REG account value",
+    "source_tool": "get_positions"
+   },
+   "risk.vol.pct": {
+    "key": "risk.vol.pct",
+    "value": 11.86,
+    "unit": "pct",
+    "label": "Portfolio volatility (annualised, illustrative)",
+    "source_tool": "compute_risk_metrics"
+   },
+   "risk.exp_return.pct": {
+    "key": "risk.exp_return.pct",
+    "value": 5.56,
+    "unit": "pct",
+    "label": "Expected return (illustrative)",
+    "source_tool": "compute_risk_metrics"
+   },
+   "risk.vol_band_max.pct": {
+    "key": "risk.vol_band_max.pct",
+    "value": 7.0,
+    "unit": "pct",
+    "label": "Max volatility for conservative",
+    "source_tool": "compute_risk_metrics"
+   },
+   "risk.target_vol.pct": {
+    "key": "risk.target_vol.pct",
+    "value": 6.88,
+    "unit": "pct",
+    "label": "Model-portfolio volatility",
+    "source_tool": "compute_risk_metrics"
+   },
+   "conc.limit.pct": {
+    "key": "conc.limit.pct",
+    "value": 10.0,
+    "unit": "pct",
+    "label": "Single-security concentration limit",
+    "source_tool": "check_concentration"
+   },
+   "conc.NRTH.pct": {
+    "key": "conc.NRTH.pct",
+    "value": 28.57,
+    "unit": "pct",
+    "label": "NRTH share of portfolio",
+    "source_tool": "check_concentration"
+   },
+   "stress.equity_bear.cad": {
+    "key": "stress.equity_bear.cad",
+    "value": -47400.0,
+    "unit": "cad",
+    "label": "Equity bear market (illustrative): P&L",
+    "source_tool": "run_stress_test"
+   },
+   "stress.equity_bear.pct": {
+    "key": "stress.equity_bear.pct",
+    "value": -17.91,
+    "unit": "pct",
+    "label": "Equity bear market (illustrative): % of portfolio",
+    "source_tool": "run_stress_test"
+   },
+   "tax.nonreg_interest.cad": {
+    "key": "tax.nonreg_interest.cad",
+    "value": 0.0,
+    "unit": "cad",
+    "label": "Interest-income holdings in NON_REG",
+    "source_tool": "check_asset_location"
+   },
+   "tax.tfsa_room.cad": {
+    "key": "tax.tfsa_room.cad",
+    "value": 0.0,
+    "unit": "cad",
+    "label": "Unused TFSA contribution room",
+    "source_tool": "get_contribution_room"
+   },
+   "tax.rrsp_room.cad": {
+    "key": "tax.rrsp_room.cad",
+    "value": 0.0,
+    "unit": "cad",
+    "label": "Unused RRSP contribution room",
+    "source_tool": "get_contribution_room"
+   },
+   "mkt.us_equity_ytd.pct": {
+    "key": "mkt.us_equity_ytd.pct",
+    "value": 18.0,
+    "unit": "pct",
+    "label": "US equity index, year to date (fictional)",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.ca_equity_ytd.pct": {
+    "key": "mkt.ca_equity_ytd.pct",
+    "value": 9.0,
+    "unit": "pct",
+    "label": "Canadian equity index, year to date (fictional)",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.intl_equity_ytd.pct": {
+    "key": "mkt.intl_equity_ytd.pct",
+    "value": 11.0,
+    "unit": "pct",
+    "label": "International equity index, year to date (fictional)",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.ca_bond_ytd.pct": {
+    "key": "mkt.ca_bond_ytd.pct",
+    "value": 2.5,
+    "unit": "pct",
+    "label": "Canadian bond index, year to date (fictional)",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.ca_10y_yield.pct": {
+    "key": "mkt.ca_10y_yield.pct",
+    "value": 3.1,
+    "unit": "pct",
+    "label": "Canada 10-year yield (fictional)",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.energy_sector_qtd.pct": {
+    "key": "mkt.energy_sector_qtd.pct",
+    "value": -12.0,
+    "unit": "pct",
+    "label": "Energy sector, quarter to date (fictional)",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.reit_ytd.pct": {
+    "key": "mkt.reit_ytd.pct",
+    "value": 4.0,
+    "unit": "pct",
+    "label": "REIT index, year to date (fictional)",
+    "source_tool": "get_market_snapshot"
+   },
+   "client.age.years": {
+    "key": "client.age.years",
+    "value": 68.0,
+    "unit": "years",
+    "label": "Client age",
+    "source_tool": "context"
+   },
+   "client.horizon.years": {
+    "key": "client.horizon.years",
+    "value": 10.0,
+    "unit": "years",
+    "label": "Time horizon",
+    "source_tool": "context"
+   }
+  },
+  "flags": {
+   "FLAG-DRIFT-CA_EQUITY": {
+    "flag_id": "FLAG-DRIFT-CA_EQUITY",
+    "rule": "DRIFT_BEYOND_TOLERANCE",
+    "severity": "critical",
+    "metric_refs": [
+     "drift.CA_EQUITY.pp",
+     "cfg.drift_tolerance.pp"
+    ],
+    "message": "CA_EQUITY is 18.1 pp above the conservative target (tolerance 5.0 pp)"
+   },
+   "FLAG-DRIFT-US_EQUITY": {
+    "flag_id": "FLAG-DRIFT-US_EQUITY",
+    "rule": "DRIFT_BEYOND_TOLERANCE",
+    "severity": "warning",
+    "metric_refs": [
+     "drift.US_EQUITY.pp",
+     "cfg.drift_tolerance.pp"
+    ],
+    "message": "US_EQUITY is 7.5 pp below the conservative target (tolerance 5.0 pp)"
+   },
+   "FLAG-SUIT-VOL": {
+    "flag_id": "FLAG-SUIT-VOL",
+    "rule": "VOL_ABOVE_PROFILE_BAND",
+    "severity": "critical",
+    "metric_refs": [
+     "risk.vol.pct",
+     "risk.vol_band_max.pct"
+    ],
+    "message": "Portfolio volatility 11.9% exceeds the conservative band maximum of 7.0%"
+   },
+   "FLAG-CONC-NRTH": {
+    "flag_id": "FLAG-CONC-NRTH",
+    "rule": "SINGLE_SECURITY_ABOVE_LIMIT",
+    "severity": "critical",
+    "metric_refs": [
+     "conc.NRTH.pct",
+     "conc.limit.pct"
+    ],
+    "message": "NRTH is 28.6% of the portfolio, above the 10.0% single-security limit"
+   }
+  },
+  "drafts": [
+   {
+    "headline": "Addressing Portfolio Concentration and Aligning Asset Allocation with Conservative Risk Profile",
+    "summary": "The portfolio currently exceeds the conservative risk mandate due to a significant concentration in a single security, {{m:conc.NRTH.pct}}, and an elevated Canadian equity allocation of {{m:alloc.CA_EQUITY.pct}}. This has pushed portfolio volatility to {{m:risk.vol.pct}}, well above the limit of {{m:risk.vol_band_max.pct}}. To align with your objectives of capital preservation and income, we must reduce this concentration. Given your emotional attachment to the holding and tax considerations, we recommend a phased reduction of the position. Simultaneously, we will rebalance proceeds to increase US equity exposure, which is currently underweight at {{m:alloc.US_EQUITY.pct}} against a target of {{m:target.US_EQUITY.pct}}, to improve diversification and lower overall risk.",
+    "actions": [
+     {
+      "action_id": "ACT-001",
+      "type": "reduce_position",
+      "target": "NRTH",
+      "direction": "decrease",
+      "description": "Begin a phased reduction of the concentrated holding to bring exposure within the limit.",
+      "rationale": "The current concentration of {{m:conc.NRTH.pct}} creates excessive idiosyncratic risk.",
+      "finding_refs": [
+       "RISK-2"
+      ],
+      "priority": "high"
+     },
+     {
+      "action_id": "ACT-002",
+      "type": "rebalance",
+      "target": "US_EQUITY",
+      "direction": "increase",
+      "description": "Increase US equity exposure to align with the target allocation.",
+      "rationale": "The current allocation of {{m:alloc.US_EQUITY.pct}} is below the target of {{m:target.US_EQUITY.pct}}.",
+      "finding_refs": [
+       "PORT-2"
+      ],
+      "priority": "medium"
+     },
+     {
+      "action_id": "ACT-003",
+      "type": "rebalance",
+      "target": "CA_EQUITY",
+      "direction": "decrease",
+      "description": "Reduce overall Canadian equity exposure to align with the conservative target.",
+      "rationale": "The current allocation of {{m:alloc.CA_EQUITY.pct}} significantly exceeds the target of {{m:target.CA_EQUITY.pct}}.",
+      "finding_refs": [
+       "PORT-1"
+      ],
+      "priority": "medium"
+     },
+     {
+      "action_id": "ACT-004",
+      "type": "review_kyc",
+      "target": "CA_EQUITY",
+      "direction": "none",
+      "description": "Review the portfolio structure to ensure it remains within the volatility band.",
+      "rationale": "Current volatility of {{m:risk.vol.pct}} exceeds the maximum threshold of {{m:risk.vol_band_max.pct}}.",
+      "finding_refs": [
+       "RISK-1"
+      ],
+      "priority": "high"
+     }
+    ],
+    "risks_and_considerations": [
+     "Potential capital gains tax liability upon selling the concentrated position.",
+     "Market volatility during the transition period.",
+     "Emotional difficulty in reducing a legacy holding."
+    ],
+    "deferred": [
+     {
+      "finding_id": "RISK-2",
+      "reason": "Full liquidation is deferred to allow for a tax-efficient, multi-year exit strategy that respects the client's emotional attachment to the inherited shares."
+     }
+    ],
+    "client_talking_points": [
+     "We will discuss how reducing the single-stock concentration helps protect your monthly income and lowers portfolio volatility.",
+     "We will outline a tax-efficient plan to gradually transition out of the inherited shares over time.",
+     "We will explain how increasing our US equity exposure provides better diversification to support your capital preservation goals."
+    ]
+   }
+  ],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G1",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  ],
+  "eval_verdicts": [
+   {
+    "verdict": "pass",
+    "checks": {
+     "suitability_respected": true,
+     "critical_addressed": true,
+     "faithful_to_findings": true,
+     "client_specific": true,
+     "untrusted_ignored": true
+    },
+    "scores": {
+     "clarity_for_advisor": 5,
+     "actionability": 5,
+     "professional_tone": 5
+    },
+    "issues": []
+   }
+  ],
+  "revision_count": 0,
+  "final": {
+   "recommendation": {
+    "headline": "Addressing Portfolio Concentration and Aligning Asset Allocation with Conservative Risk Profile",
+    "summary": "The portfolio currently exceeds the conservative risk mandate due to a significant concentration in a single security, 28.6%, and an elevated Canadian equity allocation of 33.1%. This has pushed portfolio volatility to 11.9%, well above the limit of 7.0%. To align with your objectives of capital preservation and income, we must reduce this concentration. Given your emotional attachment to the holding and tax considerations, we recommend a phased reduction of the position. Simultaneously, we will rebalance proceeds to increase US equity exposure, which is currently underweight at 4.5% against a target of 12.0%, to improve diversification and lower overall risk.",
+    "actions": [
+     {
+      "action_id": "ACT-001",
+      "type": "reduce_position",
+      "target": "NRTH",
+      "direction": "decrease",
+      "description": "Begin a phased reduction of the concentrated holding to bring exposure within the limit.",
+      "rationale": "The current concentration of 28.6% creates excessive idiosyncratic risk.",
+      "finding_refs": [
+       "RISK-2"
+      ],
+      "priority": "high"
+     },
+     {
+      "action_id": "ACT-002",
+      "type": "rebalance",
+      "target": "US_EQUITY",
+      "direction": "increase",
+      "description": "Increase US equity exposure to align with the target allocation.",
+      "rationale": "The current allocation of 4.5% is below the target of 12.0%.",
+      "finding_refs": [
+       "PORT-2"
+      ],
+      "priority": "medium"
+     },
+     {
+      "action_id": "ACT-003",
+      "type": "rebalance",
+      "target": "CA_EQUITY",
+      "direction": "decrease",
+      "description": "Reduce overall Canadian equity exposure to align with the conservative target.",
+      "rationale": "The current allocation of 33.1% significantly exceeds the target of 15.0%.",
+      "finding_refs": [
+       "PORT-1"
+      ],
+      "priority": "medium"
+     },
+     {
+      "action_id": "ACT-004",
+      "type": "review_kyc",
+      "target": "CA_EQUITY",
+      "direction": "none",
+      "description": "Review the portfolio structure to ensure it remains within the volatility band.",
+      "rationale": "Current volatility of 11.9% exceeds the maximum threshold of 7.0%.",
+      "finding_refs": [
+       "RISK-1"
+      ],
+      "priority": "high"
+     }
+    ],
+    "risks_and_considerations": [
+     "Potential capital gains tax liability upon selling the concentrated position.",
+     "Market volatility during the transition period.",
+     "Emotional difficulty in reducing a legacy holding."
+    ],
+    "deferred": [
+     {
+      "finding_id": "RISK-2",
+      "reason": "Full liquidation is deferred to allow for a tax-efficient, multi-year exit strategy that respects the client's emotional attachment to the inherited shares."
+     }
+    ],
+    "client_talking_points": [
+     "We will discuss how reducing the single-stock concentration helps protect your monthly income and lowers portfolio volatility.",
+     "We will outline a tax-efficient plan to gradually transition out of the inherited shares over time.",
+     "We will explain how increasing our US equity exposure provides better diversification to support your capital preservation goals."
+    ]
+   },
+   "disclosure": "Generated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client.",
+   "metrics_used": [
+    {
+     "key": "alloc.CA_EQUITY.pct",
+     "value": 33.11,
+     "unit": "pct",
+     "label": "CA_EQUITY allocation",
+     "source_tool": "compute_allocation"
+    },
+    {
+     "key": "alloc.US_EQUITY.pct",
+     "value": 4.54,
+     "unit": "pct",
+     "label": "US_EQUITY allocation",
+     "source_tool": "compute_allocation"
+    },
+    {
+     "key": "conc.NRTH.pct",
+     "value": 28.57,
+     "unit": "pct",
+     "label": "NRTH share of portfolio",
+     "source_tool": "check_concentration"
+    },
+    {
+     "key": "risk.vol.pct",
+     "value": 11.86,
+     "unit": "pct",
+     "label": "Portfolio volatility (annualised, illustrative)",
+     "source_tool": "compute_risk_metrics"
+    },
+    {
+     "key": "risk.vol_band_max.pct",
+     "value": 7.0,
+     "unit": "pct",
+     "label": "Max volatility for conservative",
+     "source_tool": "compute_risk_metrics"
+    },
+    {
+     "key": "target.CA_EQUITY.pct",
+     "value": 15.0,
+     "unit": "pct",
+     "label": "CA_EQUITY target (conservative)",
+     "source_tool": "compute_allocation"
+    },
+    {
+     "key": "target.US_EQUITY.pct",
+     "value": 12.0,
+     "unit": "pct",
+     "label": "US_EQUITY target (conservative)",
+     "source_tool": "compute_allocation"
+    }
+   ]
+  },
+  "message": null,
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 10,
+   "tokens": 24500,
+   "wall_ms": 215014
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T15:18:06.160345Z",
+  "updated_at": "2026-10-07T15:21:41.390899Z",
+  "completed_steps": [
+   "input_gate",
+   "kyc_gate",
+   "router",
+   "analyst:portfolio",
+   "analyst:risk",
+   "analyst:tax",
+   "analyst:market",
+   "synthesis"
+  ]
+ },
+ "outbox": null
+}

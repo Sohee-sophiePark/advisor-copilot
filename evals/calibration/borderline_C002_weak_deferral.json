@@ -1,0 +1,32 @@
+{
+ "client_id": "C002",
+ "draft": {
+  "headline": "Rebalance toward bonds; revisit the energy stock later",
+  "summary": "Margaret's volatility of {{m:risk.vol.pct}} exceeds the conservative band and Canadian equity is {{m:drift.CA_EQUITY.pp}} above target. We move toward bonds now and look at the inherited shares at a later meeting.",
+  "actions": [
+   {
+    "action_id": "A1",
+    "type": "rebalance",
+    "target": "CA_BONDS",
+    "direction": "increase",
+    "description": "Add to bonds from the Canadian equity fund.",
+    "rationale": "Restores the conservative mix.",
+    "finding_refs": [
+     "PORT-1",
+     "RISK-1"
+    ],
+    "priority": "high"
+   }
+  ],
+  "risks_and_considerations": [],
+  "deferred": [
+   {
+    "finding_id": "RISK-2",
+    "reason": "To be reviewed at a later meeting."
+   }
+  ],
+  "client_talking_points": [
+   "We lower risk now."
+  ]
+ }
+}

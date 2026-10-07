@@ -1,0 +1,94 @@
+{
+  "as_of": "2026-09-30",
+  "label": "FICTIONAL market snapshot for demo purposes. Not real market data.",
+  "indicators": [
+    {
+      "key": "us_equity_ytd",
+      "label": "US equity index, year to date (fictional)",
+      "value": 18.0,
+      "unit": "pct",
+      "asset_classes": [
+        "US_EQUITY"
+      ]
+    },
+    {
+      "key": "ca_equity_ytd",
+      "label": "Canadian equity index, year to date (fictional)",
+      "value": 9.0,
+      "unit": "pct",
+      "asset_classes": [
+        "CA_EQUITY"
+      ]
+    },
+    {
+      "key": "intl_equity_ytd",
+      "label": "International equity index, year to date (fictional)",
+      "value": 11.0,
+      "unit": "pct",
+      "asset_classes": [
+        "INTL_EQUITY"
+      ]
+    },
+    {
+      "key": "ca_bond_ytd",
+      "label": "Canadian bond index, year to date (fictional)",
+      "value": 2.5,
+      "unit": "pct",
+      "asset_classes": [
+        "CA_BONDS"
+      ]
+    },
+    {
+      "key": "ca_10y_yield",
+      "label": "Canada 10-year yield (fictional)",
+      "value": 3.1,
+      "unit": "pct",
+      "asset_classes": [
+        "CA_BONDS",
+        "CASH"
+      ]
+    },
+    {
+      "key": "energy_sector_qtd",
+      "label": "Energy sector, quarter to date (fictional)",
+      "value": -12.0,
+      "unit": "pct",
+      "asset_classes": [
+        "CA_EQUITY"
+      ]
+    },
+    {
+      "key": "reit_ytd",
+      "label": "REIT index, year to date (fictional)",
+      "value": 4.0,
+      "unit": "pct",
+      "asset_classes": [
+        "REAL_ASSETS"
+      ]
+    }
+  ],
+  "headlines": [
+    {
+      "id": "H-1",
+      "text": "Fictional: US large-cap rally led by technology names extends into the third quarter.",
+      "asset_classes": [
+        "US_EQUITY"
+      ]
+    },
+    {
+      "id": "H-2",
+      "text": "Fictional: Energy sector volatility stays elevated as commodity prices swing.",
+      "asset_classes": [
+        "CA_EQUITY"
+      ]
+    },
+    {
+      "id": "H-3",
+      "text": "Fictional: Canadian bond yields drift lower as inflation cools.",
+      "asset_classes": [
+        "CA_BONDS",
+        "CASH"
+      ]
+    }
+  ]
+}

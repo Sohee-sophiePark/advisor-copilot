@@ -1,0 +1,8 @@
+# Human labels for the judge calibration set (docs/04 §5). Fill pass|fail; the judge must agree on >= 5 of 6
+# before tier-3 numbers are trusted. If it does not, tighten the evaluator prompt; never change these labels.
+good_C001: TODO
+good_C003: TODO
+bad_C002_ignores_concentration: TODO
+bad_C001_hype: TODO
+borderline_C002_weak_deferral: TODO
+borderline_C001_missing_tax: TODO

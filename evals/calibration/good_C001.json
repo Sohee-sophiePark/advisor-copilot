@@ -1,0 +1,55 @@
+{
+ "client_id": "C001",
+ "draft": {
+  "headline": "Rebalance toward bonds and fix the TFSA placement",
+  "summary": "Daniel's portfolio is {{m:drift.US_EQUITY.pp}} overweight US equity and {{m:drift.CA_BONDS.pp}} underweight bonds after a strong US rally. His US-listed fund sits in the TFSA, where foreign withholding is a permanent cost, and {{m:tax.tfsa_room.cad}} of room is unused while {{m:tax.nonreg_interest.cad}} of interest-bearing cash sits non-registered. Volatility of {{m:risk.vol.pct}} is inside the balanced band.",
+  "actions": [
+   {
+    "action_id": "A1",
+    "type": "rebalance",
+    "target": "US_EQUITY",
+    "direction": "decrease",
+    "description": "Trim US equity and add to Canadian bonds to return to the balanced targets.",
+    "rationale": "Both drifts exceed tolerance; Daniel prefers few trades, so one rebalance now.",
+    "finding_refs": [
+     "PORT-1",
+     "PORT-2"
+    ],
+    "priority": "high"
+   },
+   {
+    "action_id": "A2",
+    "type": "relocate_holding",
+    "target": "USEQ",
+    "direction": "move",
+    "description": "Hold the US-listed fund in the RRSP instead of the TFSA.",
+    "rationale": "Treaty exemption applies in an RRSP, not a TFSA.",
+    "finding_refs": [
+     "TAX-1"
+    ],
+    "priority": "medium"
+   },
+   {
+    "action_id": "A3",
+    "type": "use_tfsa_room",
+    "target": "TFSA",
+    "direction": "move",
+    "description": "Move the non-registered cash into the TFSA.",
+    "rationale": "Shelters taxable interest using unused room.",
+    "finding_refs": [
+     "TAX-2",
+     "TAX-3"
+    ],
+    "priority": "medium"
+   }
+  ],
+  "risks_and_considerations": [
+   "Rebalancing in the non-registered account may realise gains."
+  ],
+  "deferred": [],
+  "client_talking_points": [
+   "Your mix drifted with the US rally; we bring it back to plan.",
+   "A small account change removes a permanent tax cost."
+  ]
+ }
+}

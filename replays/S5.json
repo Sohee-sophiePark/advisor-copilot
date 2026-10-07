@@ -1,0 +1,730 @@
+{
+ "scenario_id": "S5",
+ "title": "Targeted TFSA question",
+ "client_id": "C001",
+ "request_text": "How much TFSA room does Daniel have and what should go in it?",
+ "preset": null,
+ "recorded_at": "2026-10-07T15:25:47+00:00",
+ "model_ids": {
+  "router": "gemini-3.1-flash-lite",
+  "analyst": "gemini-3.1-flash-lite",
+  "synthesizer": "gemini-3.1-flash-lite",
+  "evaluator": "gemini-3.1-flash-lite"
+ },
+ "events": [
+  {
+   "seq": 1,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:07.240495Z",
+   "t_ms": 0,
+   "type": "run_started",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "client_id": "C001",
+    "request_text": "How much TFSA room does Daniel have and what should go in it?",
+    "preset": null,
+    "run_mode": "record",
+    "models": {
+     "router": "gemini-3.1-flash-lite",
+     "analyst": "gemini-3.1-flash-lite",
+     "synthesizer": "gemini-3.1-flash-lite",
+     "evaluator": "gemini-3.1-flash-lite"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:07.241941Z",
+   "t_ms": 1,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 3,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:07.242395Z",
+   "t_ms": 1,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G1",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 4,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:07.242511Z",
+   "t_ms": 2,
+   "type": "llm_call_started",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 5,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:09.045408Z",
+   "t_ms": 1804,
+   "type": "llm_call_finished",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "purpose": "router",
+    "tokens_in": 632,
+    "tokens_out": 49,
+    "latency_ms": 1801,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 6,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:09.046934Z",
+   "t_ms": 1806,
+   "type": "route_decided",
+   "agent": "router",
+   "level": "info",
+   "payload": {
+    "route": "targeted",
+    "domains": [
+     "tax"
+    ],
+    "reason": "The request specifically asks about TFSA contribution room and optimal account placement.",
+    "confidence": 0.95,
+    "rules_applied": [],
+    "fast_path": false
+   }
+  },
+  {
+   "seq": 7,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:09.049080Z",
+   "t_ms": 1808,
+   "type": "agent_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "mode": "tool_loop",
+    "tools": [
+     "get_positions",
+     "check_asset_location",
+     "get_contribution_room"
+    ]
+   }
+  },
+  {
+   "seq": 8,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:09.050093Z",
+   "t_ms": 1809,
+   "type": "llm_call_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 9,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:25.829733Z",
+   "t_ms": 18589,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "tokens_in": 1201,
+    "tokens_out": 34,
+    "latency_ms": 16778,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 10,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:25.831654Z",
+   "t_ms": 18591,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "check_asset_location",
+    "args": {},
+    "metrics_count": 3,
+    "flags": [
+     {
+      "id": "FLAG-L1-USEQ",
+      "severity": "warning"
+     },
+     {
+      "id": "FLAG-L2",
+      "severity": "info"
+     },
+     {
+      "id": "FLAG-L3",
+      "severity": "warning"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "seq": 11,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:25.831948Z",
+   "t_ms": 18591,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_contribution_room",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 12,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:25.832195Z",
+   "t_ms": 18591,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_positions",
+    "args": {},
+    "metrics_count": 3,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 13,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:25.832475Z",
+   "t_ms": 18592,
+   "type": "llm_call_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 14,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:35.486086Z",
+   "t_ms": 28245,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "tokens_in": 2112,
+    "tokens_out": 395,
+    "latency_ms": 9652,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 15,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:35.488984Z",
+   "t_ms": 28248,
+   "type": "agent_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "findings_count": 3,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 16,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:35.491767Z",
+   "t_ms": 28251,
+   "type": "llm_call_started",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 17,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:42.800769Z",
+   "t_ms": 35560,
+   "type": "llm_call_finished",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "tokens_in": 1669,
+    "tokens_out": 2262,
+    "latency_ms": 7306,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 18,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:42.803537Z",
+   "t_ms": 35563,
+   "type": "draft_created",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "revision": 0,
+    "actions_count": 2
+   }
+  },
+  {
+   "seq": 19,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:42.803973Z",
+   "t_ms": 35563,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "info",
+   "payload": {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  },
+  {
+   "seq": 20,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:42.804703Z",
+   "t_ms": 35564,
+   "type": "llm_call_started",
+   "agent": "evaluator",
+   "level": "info",
+   "payload": {
+    "purpose": "evaluator",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 21,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:43.511240Z",
+   "t_ms": 36270,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 503,
+    "wait_ms": 2436,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 22,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:47.708995Z",
+   "t_ms": 40468,
+   "type": "llm_call_finished",
+   "agent": "evaluator",
+   "level": "info",
+   "payload": {
+    "purpose": "evaluator",
+    "tokens_in": 2063,
+    "tokens_out": 234,
+    "latency_ms": 1756,
+    "attempt": 2,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 23,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:47.710104Z",
+   "t_ms": 40469,
+   "type": "evaluator_verdict",
+   "agent": "evaluator",
+   "level": "info",
+   "payload": {
+    "passed": true,
+    "checks": {
+     "suitability_respected": true,
+     "critical_addressed": true,
+     "faithful_to_findings": true,
+     "client_specific": true,
+     "untrusted_ignored": true
+    },
+    "scores": {
+     "clarity_for_advisor": 5,
+     "actionability": 5,
+     "professional_tone": 5
+    },
+    "issues_count": 0
+   }
+  },
+  {
+   "seq": 24,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:47.710493Z",
+   "t_ms": 40470,
+   "type": "awaiting_approval",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "summary": "Daniel has $14,000 of unused TFSA contribution room. To optimize tax efficiency, we recommend relocating the US-listed security currently held in the TFSA to a non-registered account, as it is subject to non-recoverable foreign withholding taxes. Simultaneously, we should move interest-bearing assets from the non-registered account into the TFSA to shelter that income from tax. This strategy aligns with the client's preference for a low-maintenance portfolio while improving long-term tax efficiency."
+   }
+  },
+  {
+   "seq": 25,
+   "run_id": "C001-20261007-152507-8698d9",
+   "ts": "2026-10-07T15:25:47.711449Z",
+   "t_ms": 40471,
+   "type": "run_completed",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "status": "AWAITING_APPROVAL",
+    "totals": {
+     "llm_calls": 5,
+     "tokens_in": 7677,
+     "tokens_out": 2974,
+     "wall_ms": 40471,
+     "retries": 1
+    }
+   }
+  }
+ ],
+ "final_state": {
+  "run_id": "C001-20261007-152507-8698d9",
+  "client_id": "C001",
+  "request_text": "How much TFSA room does Daniel have and what should go in it?",
+  "preset": null,
+  "status": "AWAITING_APPROVAL",
+  "route": {
+   "route": "targeted",
+   "domains": [
+    "tax"
+   ],
+   "reason": "The request specifically asks about TFSA contribution room and optimal account placement.",
+   "confidence": 0.95
+  },
+  "analyst_reports": {
+   "tax": {
+    "agent": "tax",
+    "findings": [
+     {
+      "finding_id": "TAX-1",
+      "title": "US-listed security held in TFSA",
+      "severity": "warning",
+      "detail": "The client holds {{m:tax.l1.USEQ.cad}} of US-listed ticker USEQ in their TFSA. Under educational tax-location rules, US-listed securities in a TFSA may be subject to foreign withholding taxes on dividends that are not recoverable, unlike in an RRSP.",
+      "metric_refs": [
+       "tax.l1.USEQ.cad"
+      ],
+      "flag_refs": [
+       "FLAG-L1-USEQ"
+      ]
+     },
+     {
+      "finding_id": "TAX-2",
+      "title": "Unused TFSA room with taxable interest in non-registered account",
+      "severity": "warning",
+      "detail": "The client has {{m:tax.tfsa_room.cad}} of unused TFSA room while holding {{m:tax.nonreg_interest.cad}} in interest-generating assets within a non-registered account. Moving interest-bearing assets to a TFSA can shelter that income from tax.",
+      "metric_refs": [
+       "tax.tfsa_room.cad",
+       "tax.nonreg_interest.cad"
+      ],
+      "flag_refs": [
+       "FLAG-L3"
+      ]
+     },
+     {
+      "finding_id": "TAX-3",
+      "title": "Interest-income assets in non-registered account",
+      "severity": "info",
+      "detail": "The client holds {{m:tax.nonreg_interest.cad}} in interest-income assets in a non-registered account. These are taxed at the client's marginal rate. Consider prioritizing tax-efficient assets in non-registered accounts.",
+      "metric_refs": [
+       "tax.nonreg_interest.cad"
+      ],
+      "flag_refs": [
+       "FLAG-L2"
+      ]
+     }
+    ],
+    "data_gaps": [],
+    "status": "ok"
+   }
+  },
+  "metrics": {
+   "tax.nonreg_interest.cad": {
+    "key": "tax.nonreg_interest.cad",
+    "value": 15000.0,
+    "unit": "cad",
+    "label": "Interest-income holdings in NON_REG",
+    "source_tool": "check_asset_location"
+   },
+   "tax.tfsa_room.cad": {
+    "key": "tax.tfsa_room.cad",
+    "value": 14000.0,
+    "unit": "cad",
+    "label": "Unused TFSA contribution room",
+    "source_tool": "get_contribution_room"
+   },
+   "tax.l1.USEQ.cad": {
+    "key": "tax.l1.USEQ.cad",
+    "value": 27000.0,
+    "unit": "cad",
+    "label": "USEQ (US-listed) held in TFSA",
+    "source_tool": "check_asset_location"
+   },
+   "tax.rrsp_room.cad": {
+    "key": "tax.rrsp_room.cad",
+    "value": 9000.0,
+    "unit": "cad",
+    "label": "Unused RRSP contribution room",
+    "source_tool": "get_contribution_room"
+   },
+   "acct.TFSA.value.cad": {
+    "key": "acct.TFSA.value.cad",
+    "value": 36000.0,
+    "unit": "cad",
+    "label": "TFSA account value",
+    "source_tool": "get_positions"
+   },
+   "acct.RRSP.value.cad": {
+    "key": "acct.RRSP.value.cad",
+    "value": 120000.0,
+    "unit": "cad",
+    "label": "RRSP account value",
+    "source_tool": "get_positions"
+   },
+   "acct.NON_REG.value.cad": {
+    "key": "acct.NON_REG.value.cad",
+    "value": 63000.0,
+    "unit": "cad",
+    "label": "NON_REG account value",
+    "source_tool": "get_positions"
+   },
+   "client.age.years": {
+    "key": "client.age.years",
+    "value": 42.0,
+    "unit": "years",
+    "label": "Client age",
+    "source_tool": "context"
+   },
+   "client.horizon.years": {
+    "key": "client.horizon.years",
+    "value": 20.0,
+    "unit": "years",
+    "label": "Time horizon",
+    "source_tool": "context"
+   }
+  },
+  "flags": {
+   "FLAG-L1-USEQ": {
+    "flag_id": "FLAG-L1-USEQ",
+    "rule": "L1_US_LISTED_IN_TFSA",
+    "severity": "warning",
+    "metric_refs": [
+     "tax.l1.USEQ.cad"
+    ],
+    "message": "USEQ is US-listed and pays foreign dividends; held in a TFSA the US withholding tax is a permanent cost, unlike in an RRSP/RRIF"
+   },
+   "FLAG-L2": {
+    "flag_id": "FLAG-L2",
+    "rule": "L2_INTEREST_IN_NON_REG",
+    "severity": "info",
+    "metric_refs": [
+     "tax.nonreg_interest.cad"
+    ],
+    "message": "Interest income in a non-registered account is fully taxable every year"
+   },
+   "FLAG-L3": {
+    "flag_id": "FLAG-L3",
+    "rule": "L3_UNUSED_TFSA_ROOM",
+    "severity": "warning",
+    "metric_refs": [
+     "tax.tfsa_room.cad",
+     "tax.nonreg_interest.cad"
+    ],
+    "message": "Unused TFSA room while interest-bearing holdings sit in a non-registered account; sheltering them would remove the annual tax drag"
+   }
+  },
+  "drafts": [
+   {
+    "headline": "Optimizing TFSA Efficiency Through Strategic Asset Location",
+    "summary": "Daniel has {{m:tax.tfsa_room.cad}} of unused TFSA contribution room. To optimize tax efficiency, we recommend relocating the US-listed security currently held in the TFSA to a non-registered account, as it is subject to non-recoverable foreign withholding taxes. Simultaneously, we should move interest-bearing assets from the non-registered account into the TFSA to shelter that income from tax. This strategy aligns with the client's preference for a low-maintenance portfolio while improving long-term tax efficiency.",
+    "actions": [
+     {
+      "action_id": "A-001",
+      "type": "relocate_holding",
+      "target": "USEQ",
+      "direction": "move",
+      "description": "Relocate US-listed security from TFSA to non-registered account.",
+      "rationale": "US-listed securities held in a TFSA are subject to non-recoverable foreign withholding taxes on dividends.",
+      "finding_refs": [
+       "TAX-1"
+      ],
+      "priority": "high"
+     },
+     {
+      "action_id": "A-002",
+      "type": "use_tfsa_room",
+      "target": "NON_REG",
+      "direction": "move",
+      "description": "Move interest-bearing assets from non-registered account to TFSA.",
+      "rationale": "Utilizing available TFSA room to shelter interest-generating assets protects that income from taxation at the client's marginal rate.",
+      "finding_refs": [
+       "TAX-2"
+      ],
+      "priority": "high"
+     }
+    ],
+    "risks_and_considerations": [
+     "Relocating assets may trigger capital gains tax consequences in the non-registered account.",
+     "Transaction costs and potential market movement during the transition period should be considered.",
+     "The client's preference for a low-maintenance portfolio should be balanced against the tax benefits of these adjustments."
+    ],
+    "deferred": [],
+    "client_talking_points": [
+     "We have identified an opportunity to improve your tax efficiency by adjusting where specific investments are held.",
+     "By moving interest-earning investments into your TFSA, we can protect that income from annual taxes.",
+     "We also suggest moving your US-listed holdings out of the TFSA to avoid unnecessary foreign tax costs."
+    ]
+   }
+  ],
+  "gate_results": [
+   {
+    "gate": "G0",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G1",
+    "passed": true,
+    "violations": []
+   },
+   {
+    "gate": "G5",
+    "passed": true,
+    "violations": []
+   }
+  ],
+  "eval_verdicts": [
+   {
+    "verdict": "pass",
+    "checks": {
+     "suitability_respected": true,
+     "critical_addressed": true,
+     "faithful_to_findings": true,
+     "client_specific": true,
+     "untrusted_ignored": true
+    },
+    "scores": {
+     "clarity_for_advisor": 5,
+     "actionability": 5,
+     "professional_tone": 5
+    },
+    "issues": []
+   }
+  ],
+  "revision_count": 0,
+  "final": {
+   "recommendation": {
+    "headline": "Optimizing TFSA Efficiency Through Strategic Asset Location",
+    "summary": "Daniel has $14,000 of unused TFSA contribution room. To optimize tax efficiency, we recommend relocating the US-listed security currently held in the TFSA to a non-registered account, as it is subject to non-recoverable foreign withholding taxes. Simultaneously, we should move interest-bearing assets from the non-registered account into the TFSA to shelter that income from tax. This strategy aligns with the client's preference for a low-maintenance portfolio while improving long-term tax efficiency.",
+    "actions": [
+     {
+      "action_id": "A-001",
+      "type": "relocate_holding",
+      "target": "USEQ",
+      "direction": "move",
+      "description": "Relocate US-listed security from TFSA to non-registered account.",
+      "rationale": "US-listed securities held in a TFSA are subject to non-recoverable foreign withholding taxes on dividends.",
+      "finding_refs": [
+       "TAX-1"
+      ],
+      "priority": "high"
+     },
+     {
+      "action_id": "A-002",
+      "type": "use_tfsa_room",
+      "target": "NON_REG",
+      "direction": "move",
+      "description": "Move interest-bearing assets from non-registered account to TFSA.",
+      "rationale": "Utilizing available TFSA room to shelter interest-generating assets protects that income from taxation at the client's marginal rate.",
+      "finding_refs": [
+       "TAX-2"
+      ],
+      "priority": "high"
+     }
+    ],
+    "risks_and_considerations": [
+     "Relocating assets may trigger capital gains tax consequences in the non-registered account.",
+     "Transaction costs and potential market movement during the transition period should be considered.",
+     "The client's preference for a low-maintenance portfolio should be balanced against the tax benefits of these adjustments."
+    ],
+    "deferred": [],
+    "client_talking_points": [
+     "We have identified an opportunity to improve your tax efficiency by adjusting where specific investments are held.",
+     "By moving interest-earning investments into your TFSA, we can protect that income from annual taxes.",
+     "We also suggest moving your US-listed holdings out of the TFSA to avoid unnecessary foreign tax costs."
+    ]
+   },
+   "disclosure": "Generated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client.",
+   "metrics_used": [
+    {
+     "key": "tax.tfsa_room.cad",
+     "value": 14000.0,
+     "unit": "cad",
+     "label": "Unused TFSA contribution room",
+     "source_tool": "get_contribution_room"
+    }
+   ]
+  },
+  "message": null,
+  "approval": null,
+  "budget_snapshot": {
+   "llm_calls": 5,
+   "tokens": 10651,
+   "wall_ms": 40471
+  },
+  "untrusted_flags": [],
+  "error": null,
+  "created_at": "2026-10-07T15:25:07.048334Z",
+  "updated_at": "2026-10-07T15:25:47.711707Z",
+  "completed_steps": [
+   "input_gate",
+   "kyc_gate",
+   "router",
+   "analyst:tax",
+   "synthesis"
+  ]
+ },
+ "outbox": null
+}

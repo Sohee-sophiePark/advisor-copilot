@@ -1,0 +1,129 @@
+{
+  "as_of": "2026-09-30",
+  "note": "Illustrative capital market assumptions for demo math only. Not forecasts.",
+  "buckets": {
+    "CASH": {
+      "expected_return_pct": 3.0,
+      "volatility_pct": 0.5
+    },
+    "CA_BONDS": {
+      "expected_return_pct": 4.0,
+      "volatility_pct": 6.0
+    },
+    "CA_EQUITY": {
+      "expected_return_pct": 7.0,
+      "volatility_pct": 15.0
+    },
+    "US_EQUITY": {
+      "expected_return_pct": 7.5,
+      "volatility_pct": 16.0
+    },
+    "INTL_EQUITY": {
+      "expected_return_pct": 7.0,
+      "volatility_pct": 17.0
+    },
+    "REAL_ASSETS": {
+      "expected_return_pct": 6.5,
+      "volatility_pct": 18.0
+    },
+    "SINGLE_STOCK": {
+      "expected_return_pct": 8.0,
+      "volatility_pct": 35.0
+    }
+  },
+  "correlations": [
+    {
+      "a": "CA_BONDS",
+      "b": "CA_EQUITY",
+      "rho": 0.1
+    },
+    {
+      "a": "CA_BONDS",
+      "b": "US_EQUITY",
+      "rho": 0.05
+    },
+    {
+      "a": "CA_BONDS",
+      "b": "INTL_EQUITY",
+      "rho": 0.05
+    },
+    {
+      "a": "CA_BONDS",
+      "b": "REAL_ASSETS",
+      "rho": 0.3
+    },
+    {
+      "a": "CA_BONDS",
+      "b": "SINGLE_STOCK",
+      "rho": 0.0
+    },
+    {
+      "a": "CA_EQUITY",
+      "b": "US_EQUITY",
+      "rho": 0.75
+    },
+    {
+      "a": "CA_EQUITY",
+      "b": "INTL_EQUITY",
+      "rho": 0.7
+    },
+    {
+      "a": "CA_EQUITY",
+      "b": "REAL_ASSETS",
+      "rho": 0.6
+    },
+    {
+      "a": "CA_EQUITY",
+      "b": "SINGLE_STOCK",
+      "rho": 0.7
+    },
+    {
+      "a": "US_EQUITY",
+      "b": "INTL_EQUITY",
+      "rho": 0.8
+    },
+    {
+      "a": "US_EQUITY",
+      "b": "REAL_ASSETS",
+      "rho": 0.55
+    },
+    {
+      "a": "US_EQUITY",
+      "b": "SINGLE_STOCK",
+      "rho": 0.45
+    },
+    {
+      "a": "INTL_EQUITY",
+      "b": "REAL_ASSETS",
+      "rho": 0.55
+    },
+    {
+      "a": "INTL_EQUITY",
+      "b": "SINGLE_STOCK",
+      "rho": 0.45
+    },
+    {
+      "a": "REAL_ASSETS",
+      "b": "SINGLE_STOCK",
+      "rho": 0.4
+    }
+  ],
+  "correlation_default": {
+    "same_bucket": 1.0,
+    "cash_with_any": 0.0
+  },
+  "stress_scenarios": {
+    "equity_bear": {
+      "label": "Equity bear market (illustrative)",
+      "shock_pct": {
+        "CASH": 0.0,
+        "CA_BONDS": 3.0,
+        "CA_EQUITY": -35.0,
+        "US_EQUITY": -38.0,
+        "INTL_EQUITY": -36.0,
+        "REAL_ASSETS": -30.0,
+        "SINGLE_STOCK": -50.0
+      }
+    }
+  }
+}

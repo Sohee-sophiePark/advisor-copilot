@@ -1,0 +1,27 @@
+{
+ "client_id": "C001",
+ "draft": {
+  "headline": "Rebalance back to the balanced targets",
+  "summary": "US equity is {{m:drift.US_EQUITY.pp}} above target and bonds {{m:drift.CA_BONDS.pp}} below after the US rally. One rebalance restores the plan.",
+  "actions": [
+   {
+    "action_id": "A1",
+    "type": "rebalance",
+    "target": "US_EQUITY",
+    "direction": "decrease",
+    "description": "Trim US equity, add Canadian bonds.",
+    "rationale": "Drift beyond tolerance.",
+    "finding_refs": [
+     "PORT-1",
+     "PORT-2"
+    ],
+    "priority": "high"
+   }
+  ],
+  "risks_and_considerations": [],
+  "deferred": [],
+  "client_talking_points": [
+   "Back to plan with one trade."
+  ]
+ }
+}

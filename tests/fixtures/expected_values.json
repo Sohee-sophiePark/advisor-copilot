@@ -1,0 +1,191 @@
+{
+  "C001": {
+    "total_market_value": 219000.0,
+    "allocation_pct": {
+      "CASH": 6.85,
+      "CA_BONDS": 27.4,
+      "CA_EQUITY": 21.92,
+      "US_EQUITY": 30.14,
+      "INTL_EQUITY": 9.59,
+      "REAL_ASSETS": 4.11
+    },
+    "drift_pp": {
+      "CASH": 3.85,
+      "CA_BONDS": -9.6,
+      "CA_EQUITY": 1.92,
+      "US_EQUITY": 8.14,
+      "INTL_EQUITY": -3.41,
+      "REAL_ASSETS": -0.89
+    },
+    "drift_breaches": [
+      "CA_BONDS",
+      "US_EQUITY"
+    ],
+    "portfolio_vol_pct": 9.74,
+    "expected_return_pct": 6.03,
+    "vol_band_max_pct": 11.0,
+    "suitability_vol_breach": false,
+    "target_portfolio_vol_pct": 9.07,
+    "stress_equity_bear_pnl": -50340.0,
+    "stress_equity_bear_pct": -22.99,
+    "single_security_pct": {},
+    "concentration_breaches": [],
+    "location_flags": [
+      {
+        "rule": "L1_US_LISTED_IN_TFSA",
+        "ticker": "USEQ",
+        "market_value": 27000.0
+      },
+      {
+        "rule": "L2_INTEREST_IN_NON_REG",
+        "market_value": 15000.0
+      },
+      {
+        "rule": "L3_UNUSED_TFSA_ROOM",
+        "tfsa_room": 14000,
+        "nonreg_interest_value": 15000.0
+      }
+    ],
+    "account_values": {
+      "TFSA": 36000.0,
+      "RRSP": 120000.0,
+      "NON_REG": 63000.0
+    },
+    "expected_flags": [
+      {
+        "flag_id": "FLAG-DRIFT-CA_BONDS",
+        "severity": "warning"
+      },
+      {
+        "flag_id": "FLAG-DRIFT-US_EQUITY",
+        "severity": "warning"
+      },
+      {
+        "flag_id": "FLAG-L1-USEQ",
+        "severity": "warning"
+      },
+      {
+        "flag_id": "FLAG-L2",
+        "severity": "info"
+      },
+      {
+        "flag_id": "FLAG-L3",
+        "severity": "warning"
+      }
+    ]
+  },
+  "C002": {
+    "total_market_value": 264600.0,
+    "allocation_pct": {
+      "CASH": 3.78,
+      "CA_BONDS": 52.91,
+      "CA_EQUITY": 33.11,
+      "US_EQUITY": 4.54,
+      "INTL_EQUITY": 3.4,
+      "REAL_ASSETS": 2.27
+    },
+    "drift_pp": {
+      "CASH": -1.22,
+      "CA_BONDS": -2.09,
+      "CA_EQUITY": 18.11,
+      "US_EQUITY": -7.46,
+      "INTL_EQUITY": -4.6,
+      "REAL_ASSETS": -2.73
+    },
+    "drift_breaches": [
+      "CA_EQUITY",
+      "US_EQUITY"
+    ],
+    "portfolio_vol_pct": 11.86,
+    "expected_return_pct": 5.56,
+    "vol_band_max_pct": 7.0,
+    "suitability_vol_breach": true,
+    "target_portfolio_vol_pct": 6.88,
+    "stress_equity_bear_pnl": -47400.0,
+    "stress_equity_bear_pct": -17.91,
+    "single_security_pct": {
+      "NRTH": 28.57
+    },
+    "concentration_breaches": [
+      "NRTH"
+    ],
+    "location_flags": [],
+    "account_values": {
+      "RRIF": 122000.0,
+      "TFSA": 49000.0,
+      "NON_REG": 93600.0
+    },
+    "expected_flags": [
+      {
+        "flag_id": "FLAG-DRIFT-CA_EQUITY",
+        "severity": "critical"
+      },
+      {
+        "flag_id": "FLAG-DRIFT-US_EQUITY",
+        "severity": "warning"
+      },
+      {
+        "flag_id": "FLAG-CONC-NRTH",
+        "severity": "critical"
+      },
+      {
+        "flag_id": "FLAG-SUIT-VOL",
+        "severity": "critical"
+      }
+    ]
+  },
+  "C003": {
+    "total_market_value": 59900.0,
+    "allocation_pct": {
+      "CASH": 2.0,
+      "CA_BONDS": 15.03,
+      "CA_EQUITY": 25.38,
+      "US_EQUITY": 32.55,
+      "INTL_EQUITY": 20.03,
+      "REAL_ASSETS": 5.01
+    },
+    "drift_pp": {
+      "CASH": 0.0,
+      "CA_BONDS": 0.03,
+      "CA_EQUITY": 0.38,
+      "US_EQUITY": -0.45,
+      "INTL_EQUITY": 0.03,
+      "REAL_ASSETS": 0.01
+    },
+    "drift_breaches": [],
+    "portfolio_vol_pct": 12.07,
+    "expected_return_pct": 6.61,
+    "vol_band_max_pct": 15.0,
+    "suitability_vol_breach": false,
+    "target_portfolio_vol_pct": 12.08,
+    "stress_equity_bear_pnl": -17680.0,
+    "stress_equity_bear_pct": -29.52,
+    "single_security_pct": {},
+    "concentration_breaches": [],
+    "location_flags": [],
+    "account_values": {
+      "TFSA": 31400.0,
+      "RRSP": 28500.0
+    },
+    "expected_flags": []
+  },
+  "C004": {
+    "total_market_value": 40000.0,
+    "allocation_pct": {
+      "CASH": 100.0,
+      "CA_BONDS": 0.0,
+      "CA_EQUITY": 0.0,
+      "US_EQUITY": 0.0,
+      "INTL_EQUITY": 0.0,
+      "REAL_ASSETS": 0.0
+    },
+    "kyc_complete": false,
+    "expected_flags": [],
+    "expected_gate": "G1_KYC_BLOCKED"
+  },
+  "_meta": {
+    "generated_by": "reference calculator (docs/05_MOCK_DATA.md section 4 formulas)",
+    "tolerance": 0.01,
+    "rounding": "2 decimals"
+  }
+}

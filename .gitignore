@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.uv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Secrets — never commit
+.env
+*.env.local
+
+# Runtime output (replays/ is committed on purpose for the public demo)
+outputs/
+runs/
+logs/
+*.log
+
+# Frontend
+web/node_modules/
+web/dist/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Eval reports — only latest.md is committed
+evals/reports/*
+!evals/reports/latest.md
+
+# Machine-specific preview config
+.claude/launch.json
+
+# Internal docs — public repo carries only README.md, the architecture diagram and the tech stack
+INTERNAL.md
+CLAUDE.md
+docs/*
+!docs/img/
+!docs/ARCHITECTURE.md
