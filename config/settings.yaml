@@ -49,3 +49,6 @@ fetch:                           # `make fetch`, laptop only; caps stay far unde
     XEF: {method: etf, proxy: IEFA, label: "estimate from IEFA in CAD"}
     XIC: {method: etf, proxy: EWC, label: "estimate from EWC in CAD"}
   caps: {boc: 10, sec: 20, tiingo: 50, treasury: 10, fred: 10}   # per day; free: SEC 10/s, Tiingo 1,000/day
+fees:                            # assumption for the book revenue view; marginal tiers on household assets
+  tiers: [[500000, 1.00], [1000000, 0.80], [null, 0.60]]
+  label: "Estimated with an illustrative tiered fee: 1.00% to $500k, 0.80% to $1M, 0.60% above"

@@ -143,6 +143,13 @@ class ApiCfg(BaseModel):
     port_max: int
 
 
+class FeesCfg(BaseModel):
+    """Tiered annual advisory fee on household assets: (upper bound or None, % rate), marginal."""
+
+    tiers: list[tuple[float | None, float]]
+    label: str
+
+
 class FetchCfg(BaseModel):
     """Laptop-only fetch: US-listed tickers to price, FX series, daily request caps per source."""
 
@@ -175,6 +182,7 @@ class Settings(BaseModel):
     paths: PathsCfg
     api: ApiCfg
     fetch: FetchCfg
+    fees: FeesCfg
 
     def path(self, name: str) -> Path:
         """Absolute path for `paths.<name>`, resolved against the repo root."""

@@ -14,7 +14,8 @@ Every number in the output is computed by code and traceable to the tool that pr
 What the advisor sees:
 
 - **My book** — 100 households, sorted by who needs attention first, with a one-line reason each
-  (suitability or concentration breach, drift, tax placement, KYC due, review overdue).
+  (suitability or concentration breach, drift, tax placement, KYC due, review overdue), plus estimated annual fee
+  revenue and how much of it sits with households needing attention (illustrative tiered fee schedule).
 - **Client** — the full picture: profile and life stage, goals from the client survey, holdings by
   account, drift against the target mix, volatility against the profile's limit, stress loss, notes.
 - **Review & Ask** — a chat per client; past conversations can be reopened and continued. "Prepare annual review" produces a recommendation to approve;

@@ -24,9 +24,9 @@ export interface Outbox { tasks: Record<string, string>[]; notes: Record<string,
 export interface Attention { level: Level; text: string; flag_id?: string }
 export interface Household {
   client_id: string; name: string; age: number; life_stage: string | null; risk_profile: string | null;
-  total_cad: number; aum_tier: string; review_due: string | null; attention: Attention[]; top_level: Level | null;
+  total_cad: number; aum_tier: string; fee_cad: number; review_due: string | null; attention: Attention[]; top_level: Level | null;
 }
-export interface Book { as_of: string; stats: Record<string, number>; households: Household[] }
+export interface Book { as_of: string; stats: Record<string, number>; fee_label: string; households: Household[] }
 export interface ClientDetail extends Household {
   profile: Record<string, any>; metrics: Record<string, number>;
   allocation: { asset_class: string; current_pct: number; target_pct: number | null }[];

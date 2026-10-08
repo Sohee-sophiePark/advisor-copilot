@@ -35,6 +35,16 @@ def _tools(client_id: str) -> tuple[dict, list]:
     return metrics, flags
 
 
+def annual_fee(total: float) -> float:
+    """Annual advisory fee on household assets under the tiered schedule (marginal rates)."""
+    fee, lower = 0.0, 0.0
+    for upper, rate in get_settings().fees.tiers:
+        top = total if upper is None else min(total, upper)
+        fee += max(top - lower, 0) * rate / 100
+        lower = upper if upper is not None else lower
+    return fee
+
+
 def attention(client_id: str) -> list[dict]:
     """Why this household needs the advisor, most urgent first: breaches, KYC, overdue review."""
     c, rules = get_client(client_id), get_settings().rules
@@ -71,6 +81,7 @@ def household(client_id: str) -> dict:
         "risk_profile": c.risk_profile,
         "total_cad": round(total, 2),
         "aum_tier": aum_tier(total),
+        "fee_cad": round(annual_fee(total), 2),
         "review_due": c.review_due,
         "attention": items,
         "top_level": items[0]["level"] if items else None,
@@ -92,7 +103,10 @@ def book() -> dict:
             "critical": count(lambda h: h["top_level"] == "critical"),
             "kyc_due": count(lambda h: any(i["level"] == "kyc" for i in h["attention"])),
             "review_overdue": count(lambda h: any(i["level"] == "review" for i in h["attention"])),
+            "revenue_cad": round(sum(h["fee_cad"] for h in rows), 2),
+            "revenue_attention_cad": round(sum(h["fee_cad"] for h in rows if h["top_level"]), 2),
         },
+        "fee_label": get_settings().fees.label,
         "households": rows,
     }
 

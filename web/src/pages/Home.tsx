@@ -22,13 +22,16 @@ export function Home() {
   const s = book.stats;
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Tile label="Households" value={s.households} />
         <Tile label="Assets" value={money(s.aum_cad)} />
         <Tile label="Need attention" value={s.need_attention} hint="Any critical or warning item, KYC due, or review overdue" />
         <Tile label="Critical" value={s.critical} hint="Suitability, concentration or large drift breaches" />
         <Tile label="KYC due" value={s.kyc_due} hint="KYC incomplete or older than a year" />
         <Tile label="Review overdue" value={s.review_overdue} />
+        <Tile label="Annual fees (est.)" value={money(s.revenue_cad)} hint={book.fee_label} />
+        <Tile label="Fees needing attention" value={`${money(s.revenue_attention_cad)} · ${Math.round((100 * s.revenue_attention_cad) / s.revenue_cad)}%`}
+          hint={`Estimated fees from households with something to act on. ${book.fee_label}`} /> 
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <label className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm">
@@ -64,7 +67,7 @@ export function Home() {
                 <td className="p-3 text-slate-700">{h.attention[0]?.text ?? "Nothing to act on"}
                   {h.attention.length > 1 && <span className="ml-1 text-xs text-slate-400">+{h.attention.length - 1} more</span>}</td>
                 <td className="p-3">{word(h.risk_profile)}</td>
-                <td className="p-3 text-right"><div>{money(h.total_cad)}</div><div className="text-xs text-slate-500">{h.aum_tier}</div></td>
+                <td className="p-3 text-right"><div>{money(h.total_cad)}</div><div className="whitespace-nowrap text-xs text-slate-500">{h.aum_tier} · {money(h.fee_cad)}/yr</div></td>
               </tr>
             ))}
           </tbody>

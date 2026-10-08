@@ -143,3 +143,11 @@ async def test_book_thread_api(tmp_path: Path) -> None:
         script_book(llm)
         st = await turn(c, app, th, text="Who should I call first?")
         assert st["status"] == "COMPLETED" and st["client_id"] == BOOK
+
+
+def test_fee_revenue_uses_marginal_tiers() -> None:
+    from advisor_copilot.book import annual_fee, book
+
+    assert [annual_fee(v) for v in (400_000, 2_000_000)] == [4_000, 15_000]  # 5k + 4k + 6k
+    s = book()["stats"]
+    assert 0 < s["revenue_attention_cad"] < s["revenue_cad"]
