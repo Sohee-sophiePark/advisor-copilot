@@ -21,6 +21,7 @@ COMMANDS: dict[str, str] = {
     "fetch": "laptop only: fetch free market data (BoC, SEC EDGAR, Tiingo) under daily caps",
     "snapshot": "write the public market snapshot from fetched history, then re-record",
     "proxy-check": "compare proxy moves with fund values copied by hand into data/nav_checks.csv",
+    "cleanup": "list (or with --yes delete) data and runs older than the retention settings",
 }
 
 
@@ -318,6 +319,30 @@ def _cmd_proxy_check(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_cleanup(args: argparse.Namespace) -> int:
+    import shutil
+    import time
+
+    from advisor_copilot.config import get_settings
+    from advisor_copilot.db import Store
+
+    s = get_settings()
+    r = s.retention
+    raw, hist = Store(s.path("db")).prune(r.raw_days, r.history_days, args.yes)
+    cutoff = time.time() - r.runs_days * 86400
+
+    def approved(d) -> bool:  # noqa: ANN001
+        st = d / "state.json"
+        return st.exists() and bool(json.loads(st.read_text()).get("approval"))
+
+    old = [d for d in s.path("runs").glob("*/") if d.stat().st_mtime < cutoff and not approved(d)]
+    for d in old if args.yes else []:
+        shutil.rmtree(d)
+    verb = "deleted" if args.yes else "would delete (add --yes)"
+    print(f"{verb}: {raw} raw responses, {hist} history values, {len(old)} run folders")
+    return 0
+
+
 def _cmd_export(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -347,6 +372,7 @@ HANDLERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "fetch": _cmd_fetch,
     "snapshot": _cmd_snapshot,
     "proxy-check": _cmd_proxy_check,
+    "cleanup": _cmd_cleanup,
 }
 
 
@@ -367,6 +393,7 @@ def build_parser() -> argparse.ArgumentParser:
     p["fetch"].add_argument(
         "--if-stale", action="store_true", help="skip if fetched in the last 20 hours"
     )
+    p["cleanup"].add_argument("--yes", action="store_true", help="delete instead of listing")
     p["replay"].add_argument("scenario")
     p["tools"].add_argument("client_id", help="client id, e.g. C002")
     p["export"].add_argument("path", help="output file, e.g. web/public/static-data.json")

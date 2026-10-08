@@ -187,7 +187,10 @@ class Fetcher:
         start = dt.date.today() - dt.timedelta(days=self.s.fetch.history_days)
         rows = []
         f = self.s.fetch
-        for t in [*f.us_tickers, *f.sector_etfs, *f.index_etfs]:
+        members = [
+            t for p in f.proxies.values() for t in [p.get("proxy"), *p.get("weights", {})] if t
+        ]
+        for t in dict.fromkeys([*f.us_tickers, *f.sector_etfs, *f.index_etfs, *members]):
             url = TIINGO.format(ticker=t, start=start)
             r = self.get("tiingo", url, {"Authorization": f"Token {key}"})
             self.store.put_raw("tiingo", url, LICENCE["tiingo"], r.text)

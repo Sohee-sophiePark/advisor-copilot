@@ -153,3 +153,19 @@ async def test_failed_analyst_degrades_only_that_domain(deps: Deps, tmp_path: Pa
         and state.analyst_reports["risk"].status == "ok"
     )
     assert state.status in (RunStatus.AWAITING_APPROVAL, RunStatus.NEEDS_ADVISOR_REVIEW)
+
+
+def test_run_metadata_names_what_produced_the_run() -> None:
+    from advisor_copilot.config import load_settings
+    from advisor_copilot.harness.orchestrator import run_metadata
+
+    m = run_metadata(load_settings(env={}))
+    assert set(m) >= {
+        "git_commit",
+        "models",
+        "prompts_sha",
+        "settings_sha",
+        "data_sha",
+        "data_source",
+    }
+    assert len(m["prompts_sha"]) == 12 and m["models"]["router"]

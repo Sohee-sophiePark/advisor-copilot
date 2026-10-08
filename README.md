@@ -95,8 +95,10 @@ tests compare every tool against pre-computed golden values in `tests/fixtures/e
 Three tiers: unit tests, scenario regression on
 recorded cassettes, and a live capability tier with pass^3 and a judge calibrated on human labels.
 `make eval` writes [evals/reports/latest.md](evals/reports/latest.md); the current run is 22/22
-golden cases on 183 unit tests, replaying real Gemini recordings. The data includes 15 edge-case
-households, one per rule boundary (for example a single stock at 9.9% and at 10.1%), each with a test. Tiers 1 and 2 run in CI on every push with no key.
+golden cases on 194 unit tests, replaying real Gemini recordings. The data includes 15 edge-case
+households, one per rule boundary (for example a single stock at 9.9% and at 10.1%), each with a test. Tiers 1 and 2 run
+in CI on every push with no key. A human evaluation set (`evals/human/`: rubric with pass definitions, 14 cases, scoring
+sheet) can be scored by hand; `python evals/run_evals.py --tier human` reports judge-vs-human agreement.
 
 ## Run it
 
@@ -125,8 +127,21 @@ from US-listed EWC and IEFA in CAD, CSAV held at its unit value; XRE stays illus
 | `make fetch` | laptop only: free market data (Bank of Canada, US Treasury, SEC EDGAR, Tiingo end-of-day) under daily caps |
 | `uv run advisor-copilot snapshot` | write the public market snapshot from fetched history (then re-record the scenarios) |
 | `uv run advisor-copilot proxy-check` | compare proxy estimates with fund values copied by hand into `data/nav_checks.csv` |
+| `uv run advisor-copilot cleanup` | list data and run folders past the retention settings; `--yes` deletes (approved runs are kept) |
 | `uv run advisor-copilot tools C002` | metrics and flags for a client, no LLM |
 | `make dev`, then `/dev.html` | developer console, served only by the local dev server |
+
+## Model and data card
+
+| | |
+|---|---|
+| Models | Gemini via the free API tier: router and analysts `gemini-3.1-flash-lite`, writer and evaluator configurable in `config/settings.yaml`; structured output, function calling, low temperature |
+| Role of the models | route, analyse, write and judge; never compute numbers, never execute actions |
+| Clients | 100 fictional households (`data/generate_book.py`, fixed seed), including 15 edge cases; no real person |
+| Market data | real tickers; public sources with source and date: Bank of Canada (rates, yields, USD/CAD, commodity indices, press releases), US Treasury yield curve, SEC EDGAR facts; prices on the public demo are illustrative |
+| Laptop-only data | end-of-day prices (Tiingo), VIX (FRED), labelled estimates for Canadian ETFs without a free feed; never published |
+| Provenance | every run stores the git commit, model ids, prompt, settings and data hashes |
+| Limits | simplified tax rules, illustrative capital-market assumptions, estimates can drift from real fund values; not investment advice |
 
 ## Security notes
 

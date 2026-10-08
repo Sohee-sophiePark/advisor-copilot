@@ -8,7 +8,7 @@ import pytest
 
 from advisor_copilot import fetch
 from advisor_copilot.config import load_settings
-from advisor_copilot.data_access import load_fixtures, official_prices
+from advisor_copilot.data_access import load_fixtures, official_prices, proxy_level
 from advisor_copilot.db import Store
 
 BOC = {
@@ -119,7 +119,7 @@ def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     assert out == {
         "boc": "4 new values",
         "sec": "facts for 2 tickers",
-        "tiingo": "16 new values",  # 2 holdings + 11 sector ETFs + 3 index ETFs
+        "tiingo": "19 new values",  # holdings 2 + sectors 11 + index ETFs 3 + XRE basket 3
         "treasury": "2 new values",
     }
     su = json.loads((tmp_path / "instrument_facts.json").read_text())[1]
@@ -159,7 +159,7 @@ def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     again = fetch.run(s, store, http, ENV)
     assert again["boc"] == again["tiingo"] == "0 new values"  # history never overwritten
     raw = store.conn.execute("SELECT COUNT(*) FROM market_raw").fetchone()[0]
-    assert raw == 23  # boc 2 + sec 3 + tiingo 16 + treasury 2; the second run stored nothing new
+    assert raw == 26  # boc 2 + sec 3 + tiingo 19 + treasury 2; the second run stored nothing new
 
 
 def test_caps_missing_keys_and_ci(tmp_path: Path) -> None:
@@ -257,3 +257,28 @@ def test_snapshot_from_public_series(tmp_path: Path) -> None:
     assert [h["id"] for h in snap["headlines"]] == [
         "BOC-2026-09-02"
     ]  # rate decision kept, bank note dropped
+
+
+def test_basket_proxy_weights_member_returns(tmp_path: Path) -> None:
+    store = Store(tmp_path / "t.db")
+    store.put_history("boc", [("fx.USDCAD", "2026-09-30", 1.4), ("fx.USDCAD", "2026-10-07", 1.4)])
+    store.put_history(
+        "tiingo",
+        [
+            ("px.A.usd", "2026-09-30", 10.0),
+            ("px.A.usd", "2026-10-07", 11.0),  # +10%
+            ("px.B.usd", "2026-09-30", 20.0),
+            ("px.B.usd", "2026-10-07", 19.0),
+        ],  # -5%  # fmt: skip
+    )
+    p = {"method": "basket", "weights": {"A": 3, "B": 1, "C": 1}}  # C has no data: dropped
+    assert proxy_level(store, p, "9999", "2026-09-30") == pytest.approx((3 * 1.10 + 1 * 0.95) / 4)
+
+
+def test_prune_counts_then_deletes_only_old_rows(tmp_path: Path) -> None:
+    store = Store(tmp_path / "t.db")
+    store.put_history("x", [("s", "2000-01-03", 1.0), ("s", "2999-01-01", 2.0)])
+    assert store.prune(90, 730, apply=False) == (0, 1)
+    assert len(store.series("s", "1900-01-01")) == 2  # listing only
+    store.prune(90, 730, apply=True)
+    assert store.series("s", "1900-01-01") == [("2999-01-01", 2.0)]

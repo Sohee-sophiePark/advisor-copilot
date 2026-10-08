@@ -62,6 +62,9 @@ class RetryCfg(BaseModel):
     max_attempts: int
     base_seconds: float
     cap_seconds: float
+    max_wait_seconds: float = (
+        120.0  # a longer server-requested wait (e.g. a daily quota) fails fast
+    )
 
 
 class BudgetCfg(BaseModel):
@@ -143,6 +146,14 @@ class ApiCfg(BaseModel):
     port_max: int
 
 
+class RetentionCfg(BaseModel):
+    """Days kept before `advisor-copilot cleanup`: raw responses, history values, run folders."""
+
+    raw_days: int
+    history_days: int
+    runs_days: int
+
+
 class FeesCfg(BaseModel):
     """Tiered annual advisory fee on household assets: (upper bound or None, % rate), marginal."""
 
@@ -183,6 +194,7 @@ class Settings(BaseModel):
     api: ApiCfg
     fetch: FetchCfg
     fees: FeesCfg
+    retention: RetentionCfg
 
     def path(self, name: str) -> Path:
         """Absolute path for `paths.<name>`, resolved against the repo root."""

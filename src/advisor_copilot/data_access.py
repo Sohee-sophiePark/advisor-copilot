@@ -59,13 +59,25 @@ def nav_checks(path: Path) -> list[tuple[str, str, float]]:
 
 
 def proxy_level(store: db.Store, p: dict, on: str, as_of: str) -> float | None:
-    """Proxy level on a date: flat 1, an ETF's CAD price, or a duration model on yields."""
+    """Proxy level on a date: flat 1, an ETF's CAD price, a weighted basket of member returns since
+    `as_of` (members without data are dropped and the weights renormalised), or a duration model."""
     if p["method"] == "flat":
         return 1.0
     fx = store.latest("fx.USDCAD", on)
     if p["method"] == "etf":
         px = store.latest(f"px.{p['proxy']}.usd", on)
         return px[1] * fx[1] if px and fx else None
+    if p["method"] == "basket":
+        fx0 = store.latest("fx.USDCAD", as_of)
+        parts = [
+            (w, now[1] * fx[1] / (base[1] * fx0[1]))
+            for t, w in p["weights"].items()
+            if fx
+            and fx0
+            and (now := store.latest(f"px.{t}.usd", on))
+            and (base := store.latest(f"px.{t}.usd", as_of))
+        ]
+        return sum(w * r for w, r in parts) / sum(w for w, _ in parts) if parts else None
     ya, yt = store.latest(p["series"], as_of), store.latest(p["series"], on)
     if not (ya and yt):
         return None

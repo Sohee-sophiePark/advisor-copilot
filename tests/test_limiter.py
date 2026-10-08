@@ -85,3 +85,15 @@ async def test_timeout_is_retryable() -> None:
 
     assert await limiter(ft, attempts=2, timeout_s=0.01).call("m", fn) == "late but ok"
     assert ft.sleeps == [2.0]
+
+
+async def test_quota_wait_beyond_limit_fails_fast() -> None:
+    ft = FakeTime()
+    lim = limiter(ft)
+
+    async def fn(attempt: int) -> str:
+        raise RetryableLLMError(429, retry_after_s=82_750.0)  # daily quota: about 23 hours
+
+    with pytest.raises(RetryableLLMError):
+        await lim.call("m", fn)
+    assert ft.sleeps == [] and lim.retries == 0

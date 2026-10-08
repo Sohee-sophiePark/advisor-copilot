@@ -18,7 +18,7 @@ export interface RunState {
   budget_snapshot: Record<string, number>; revision_count: number; created_at?: string;
   eval_verdicts: { verdict: string; checks: Record<string, boolean>; scores: Record<string, number>; issues: EvalIssue[] }[];
   gate_results: { gate: string; passed: boolean; violations: string[] }[];
-  untrusted_flags: Record<string, any>[]; error: string | null;
+  untrusted_flags: Record<string, any>[]; error: string | null; meta?: Record<string, any>;
 }
 export interface Outbox { tasks: Record<string, string>[]; notes: Record<string, string>[] }
 export interface Attention { level: Level; text: string; flag_id?: string }

@@ -291,6 +291,21 @@ class Store:
         with self.conn:
             self.conn.execute("INSERT OR REPLACE INTO meta VALUES ('last_fetch', datetime('now'))")
 
+    def prune(self, raw_days: int, history_days: int, apply: bool) -> tuple[int, int]:
+        """Raw responses and history values older than the limits: counted, deleted when `apply`."""
+        where = [
+            ("market_raw", "fetched_at < datetime('now', ?)", f"-{raw_days} days"),
+            ("market_history", "date < date('now', ?)", f"-{history_days} days"),
+        ]
+        counts = []
+        with self.conn:
+            for table, cond, arg in where:
+                sql = "FROM " + table + " WHERE " + cond
+                counts.append(self.conn.execute("SELECT COUNT(*) " + sql, (arg,)).fetchone()[0])
+                if apply:
+                    self.conn.execute("DELETE " + sql, (arg,))
+        return counts[0], counts[1]
+
     def raw_latest(self, url: str) -> str | None:
         row = self.conn.execute(
             "SELECT payload FROM market_raw WHERE url=? ORDER BY rowid DESC LIMIT 1", (url,)

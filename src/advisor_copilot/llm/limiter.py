@@ -76,7 +76,10 @@ class RateLimiter:
                     err.__cause__ = e
                 except RetryableLLMError as e:
                     err = e
-            if attempt == self.retry.max_attempts:
+            if (
+                attempt == self.retry.max_attempts
+                or (err.retry_after_s or 0) > self.retry.max_wait_seconds
+            ):
                 raise err
             backoff = min(self.retry.cap_seconds, self.retry.base_seconds * 2 ** (attempt - 1))
             wait = max(err.retry_after_s or 0.0, backoff) + self.jitter()

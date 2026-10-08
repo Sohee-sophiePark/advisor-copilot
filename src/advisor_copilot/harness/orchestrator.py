@@ -126,6 +126,35 @@ async def synthesize_with_review(
         feedback = Feedback(source, items, raw)
 
 
+def run_metadata(settings: Settings) -> dict:
+    """Provenance of a run: git commit, models, prompts/settings/data hashes, data source, SDK."""
+    import importlib.metadata
+    import subprocess
+
+    from advisor_copilot.db import source_hash
+
+    def digest(b: bytes) -> str:
+        return hashlib.sha256(b).hexdigest()[:12]
+
+    commit = subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"],
+        capture_output=True,
+        text=True,
+        cwd=settings.path("data"),
+    ).stdout.strip()
+    prompts = b"".join(p.read_bytes() for p in sorted(settings.path("prompts").glob("*.md")))
+    return {
+        "git_commit": commit or "unknown",
+        "models": settings.models.model_dump(),
+        "prompts_sha": digest(prompts),
+        "settings_sha": digest(settings.model_dump_json().encode()),
+        "data_sha": source_hash(settings.path("data"))[:12],
+        "data_source": settings.data_source,
+        "run_mode": settings.run_mode,
+        "google_genai": importlib.metadata.version("google-genai"),
+    }
+
+
 def new_run_id(client_id: str) -> str:
     return f"{client_id}-{dt.datetime.now(dt.UTC):%Y%m%d-%H%M%S}-{uuid.uuid4().hex[:6]}"
 
@@ -395,5 +424,6 @@ async def start_run(
         request_text=request_text,
         preset=preset,
         thread_id=thread_id,
+        meta=run_metadata(settings),
     )
     return state, make_deps(state.run_id, settings, llm, scenario)

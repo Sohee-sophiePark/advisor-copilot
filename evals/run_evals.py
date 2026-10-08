@@ -340,6 +340,56 @@ async def tier_3(k: int) -> None:
         )
 
 
+def human() -> None:
+    """Judge-vs-human agreement on the recorded recommendations scored in evals/human/scores.csv."""
+    import csv
+
+    checks = [
+        "suitability_respected",
+        "critical_addressed",
+        "faithful_to_findings",
+        "client_specific",
+        "untrusted_ignored",
+    ]
+    rows = [
+        r
+        for r in csv.DictReader((ROOT / "evals" / "human" / "scores.csv").open())
+        if r["kind"] == "recommendation" and r["pass"].strip()
+    ]
+    lines, agree, same = [], 0, {c: 0 for c in checks}
+    for r in rows:
+        verdict = json.loads((ROOT / "replays" / f"{r['scenario']}.json").read_text())[
+            "final_state"
+        ]
+        judge = verdict["eval_verdicts"][-1] if verdict["eval_verdicts"] else None
+        if not judge:
+            continue
+        judged = passes_raw(judge, get_settings().loop)
+        human_pass = r["pass"].strip().lower() in ("yes", "true", "pass", "1")
+        agree += judged == human_pass
+        for c in checks:
+            same[c] += judge["checks"].get(c) == (r[c].strip().lower() in ("yes", "true", "1"))
+        lines.append(
+            f"- {r['case_id']} ({r['scenario']}): human {human_pass}, judge {judged}. {r['notes']}"
+        )
+    n = len(lines)
+    head = f"Judge-vs-human agreement on {n} recommendation(s): {agree}/{n} pass decisions"
+    per = ", ".join(f"{c} {same[c]}/{n}" for c in checks) if n else "no scored cases yet"
+    REPORTS.mkdir(parents=True, exist_ok=True)
+    (REPORTS / "human.md").write_text("\n".join([f"# {head}", "", per, "", *lines]) + "\n")
+    print(head + "\n" + per)
+
+
+def passes_raw(v: dict, cfg) -> bool:  # noqa: ANN001
+    """The code's pass rule on a stored verdict: all checks true, min and mean score thresholds."""
+    scores = list(v["scores"].values())
+    return (
+        all(v["checks"].values())
+        and min(scores) >= cfg.pass_min_score
+        and statistics.mean(scores) >= cfg.pass_mean_score
+    )
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", default="1,2")
@@ -347,6 +397,9 @@ def main() -> int:
     args = ap.parse_args()
     tiers = {t.strip() for t in args.tier.split(",")}
     rc = 0
+    if "human" in tiers:
+        human()
+        return 0
     if "3" in tiers:
         asyncio.run(tier_3(args.k))
         return 0

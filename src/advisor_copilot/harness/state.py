@@ -70,6 +70,7 @@ class RunState(BaseModel):
     created_at: dt.datetime = Field(default_factory=_now)
     updated_at: dt.datetime = Field(default_factory=_now)
     completed_steps: list[str] = []
+    meta: dict[str, Any] = {}  # what produced the run: commit, models, prompt/settings/data hashes
 
 
 def state_path(runs_dir: Path, run_id: str) -> Path:

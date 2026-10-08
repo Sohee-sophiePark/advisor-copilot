@@ -61,6 +61,8 @@ export function DevApp() {
                   <div className="rounded-lg border border-slate-200 bg-white p-3"><b>Evaluator</b>
                     <ul>{sel.state.eval_verdicts.map((v, i) => <li key={i}>#{i + 1} {v.verdict} · {JSON.stringify(v.scores)} {v.issues.map((x) => x.criterion).join(", ")}</li>)}</ul></div>
                   <div className="rounded-lg border border-slate-200 bg-white p-3"><b>Cost</b> ${sel.cost_usd.toFixed(4)} · mode {sel.state.mode ?? "—"} · thread {sel.state.thread_id ?? "—"}</div>
+                  {sel.state.meta && Object.keys(sel.state.meta).length > 0 && <div className="rounded-lg border border-slate-200 bg-white p-3"><b>Provenance</b>
+                    <div className="font-mono text-xs text-slate-600">{Object.entries(sel.state.meta).map(([k, v]) => <div key={k}>{k}: {typeof v === "object" ? Object.values(v).join(", ") : String(v)}</div>)}</div></div>}
                   <details className="rounded-lg border border-slate-200 bg-white p-3"><summary>Raw state</summary><pre className="max-h-96 overflow-auto">{JSON.stringify(sel.state, null, 1)}</pre></details>
                 </div>
               </div>
