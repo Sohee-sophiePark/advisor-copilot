@@ -3,6 +3,10 @@ import type { Metric } from "../lib/types";
 
 const PLACEHOLDER = /\{\{([mh]):([^}]+)\}\}/g;
 
+/** Placeholders filled as plain text (household names, formatted values), e.g. for a follow-up question to send. */
+export const plainText = (text: string, metrics: Record<string, Metric>, names: Record<string, string> = {}) =>
+  text.replace(PLACEHOLDER, (_, kind, key) => (kind === "h" ? names[key] ?? key : metrics[key] ? formatValue(metrics[key].value, metrics[key].unit) : key));
+
 /** Text with every {{m:key}} shown as a number chip (hover: what it is, where it came from) and every {{h:id}} as a link to the household. */
 export function Chips({ text, metrics, names = {} }: { text: string; metrics: Record<string, Metric>; names?: Record<string, string> }) {
   const parts = text.split(PLACEHOLDER);

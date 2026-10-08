@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { source } from "../lib/source";
 import type { Outbox, PastThread, Recorded, RunState, TraceEvent } from "../lib/types";
 import { ApprovalBar } from "./ApprovalBar";
-import { Chips } from "./Chips";
+import { Chips, plainText } from "./Chips";
 import { RecommendationCard } from "./RecommendationCard";
 
 const FAQ: { label: string; preset?: string }[] = [
@@ -61,7 +61,7 @@ function Reply({ t, names, onAsk, onDecide }: { t: Turn; names: Record<string, s
       {s.mode === "recommendation" ? <RecommendationCard state={s} /> : s.answer && (
         <div className="space-y-2 text-sm">
           <p className="leading-relaxed text-slate-800"><Chips text={s.answer.answer} metrics={s.metrics} names={names} /></p>
-          <div className="flex flex-wrap gap-1">{s.answer.suggested_questions.map((q) => (
+          <div className="flex flex-wrap gap-1">{s.answer.suggested_questions.map((raw) => plainText(raw, s.metrics, names)).map((q) => (
             <button key={q} onClick={() => onAsk(q)} className="rounded-full border border-slate-200 px-2.5 py-0.5 text-xs hover:bg-slate-50">{q}</button>))}</div>
         </div>
       )}

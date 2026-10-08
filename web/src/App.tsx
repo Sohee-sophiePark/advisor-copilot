@@ -15,9 +15,12 @@ const useHash = () => {
 export default function App() {
   const hash = useHash();
   const [mode, setMode] = useState(source.live ? "" : "DEMO");
+  const [chatOpen, setChatOpen] = useState(false);  // narrow screens: the book chat opens as a full-screen sheet
+  useEffect(() => setChatOpen(false), [hash]);
   useEffect(() => { if (source.live) fetch("/api/health").then((r) => r.json()).then((h) => setMode(h.run_mode === "live" ? "LIVE" : "REPLAY")); }, []);
   const client = hash.match(/^#\/client\/([A-Za-z0-9_-]+)/)?.[1];
   const ticker = hash.match(/^#\/ticker\/([A-Za-z0-9_-]+)/)?.[1];
+  const chatTitle = hash === "#/market" ? "Ask about the market and my book" : ticker ? `Ask about ${ticker} and my book` : "Ask about my book";
   const page = client ? <Client id={client} /> : ticker ? <Ticker ticker={ticker} /> : hash === "#/market" ? <Market /> : <Home />;
   const nav = (href: string, label: string, active: boolean) => (
     <a href={href} className={`rounded-lg px-3 py-1.5 text-sm ${active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}>{label}</a>
@@ -30,13 +33,19 @@ export default function App() {
         <nav className="ml-4 flex gap-1">{nav("#/", "My book", !client && !ticker && hash !== "#/market")}{nav("#/market", "Market", hash === "#/market")}</nav>
         <span className="ml-auto rounded-md bg-amber-100 px-2 py-1 text-xs text-amber-900">Fictional clients · real tickers and market data, illustrative prices · not investment advice</span>
       </header>
-      <div className={client ? "" : "grid grid-cols-[minmax(0,1fr)_420px] items-start gap-4"}>
+      <div className={client ? "" : "lg:grid lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start lg:gap-4"}>
         {page}
         {/* stays mounted so My book and Market share one conversation */}
-        <aside className={client ? "hidden" : "sticky top-4 flex h-[calc(100vh-7rem)] flex-col gap-2"}>
-          <h2 className="text-sm font-semibold text-slate-700">{hash === "#/market" ? "Ask about the market and my book" : ticker ? `Ask about ${ticker} and my book` : "Ask about my book"}</h2>
+        <aside className={client ? "hidden" : `${chatOpen ? "flex" : "max-lg:hidden"} flex-col gap-2 max-lg:fixed max-lg:inset-0 max-lg:z-40 max-lg:bg-slate-50 max-lg:p-3 lg:sticky lg:top-4 lg:flex lg:h-[calc(100vh-7rem)]`}>
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-slate-700">{chatTitle}</h2>
+            <button onClick={() => setChatOpen(false)} className="rounded-lg border border-slate-200 bg-white px-3 py-1 text-sm lg:hidden">Close</button>
+          </div>
           <div className="min-h-0 flex-1"><Chat clientId={BOOK} /></div>
         </aside>
+        {!client && !chatOpen && (
+          <button onClick={() => setChatOpen(true)} className="fixed bottom-4 right-4 z-30 rounded-full bg-teal-700 px-4 py-3 text-sm font-medium text-white shadow-lg lg:hidden">{chatTitle}</button>
+        )}
       </div>
     </div>
   );
