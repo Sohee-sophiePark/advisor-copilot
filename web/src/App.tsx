@@ -34,7 +34,7 @@ export default function App() {
         {page}
         {/* stays mounted so My book and Market share one conversation */}
         <aside className={client ? "hidden" : "sticky top-4 flex h-[calc(100vh-7rem)] flex-col gap-2"}>
-          <h2 className="text-sm font-semibold text-slate-700">Ask about my book</h2>
+          <h2 className="text-sm font-semibold text-slate-700">{hash === "#/market" ? "Ask about the market and my book" : ticker ? `Ask about ${ticker} and my book` : "Ask about my book"}</h2>
           <div className="min-h-0 flex-1"><Chat clientId={BOOK} /></div>
         </aside>
       </div>
