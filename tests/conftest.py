@@ -26,7 +26,7 @@ def deps() -> Deps:
     """Scripted client, real prompts, unlimited rpm so tests never sleep."""
     s = load_settings(env={})
     limits = RateLimitsCfg.model_validate(
-        {m: {"rpm": 10**6} for m in s.models.model_dump().values()}
+        {m: {"rpm": 10**6} for m in [*s.models.model_dump().values(), *s.fallback_models]}
     )
     limiter = RateLimiter(limits, s.retry, 5.0, jitter=lambda: 0.0)
     return Deps(s, ScriptedClient(), limiter, RunBudget(s.budget), TraceBus("t"))

@@ -95,7 +95,7 @@ tests compare every tool against pre-computed golden values in `tests/fixtures/e
 Three tiers: unit tests, scenario regression on
 recorded cassettes, and a live capability tier with pass^3 and a judge calibrated on human labels.
 `make eval` writes [evals/reports/latest.md](evals/reports/latest.md); the current run is 22/22
-golden cases on 194 unit tests, replaying real Gemini recordings. The data includes 15 edge-case
+golden cases on 196 unit tests, replaying real Gemini recordings. The data includes 15 edge-case
 households, one per rule boundary (for example a single stock at 9.9% and at 10.1%), each with a test. Tiers 1 and 2 run
 in CI on every push with no key. A human evaluation set (`evals/human/`: rubric with pass definitions, 14 cases, scoring
 sheet) can be scored by hand; `python evals/run_evals.py --tier human` reports judge-vs-human agreement.
@@ -135,7 +135,7 @@ from US-listed EWC and IEFA in CAD, CSAV held at its unit value; XRE stays illus
 
 | | |
 |---|---|
-| Models | Gemini via the free API tier: router and analysts `gemini-3.1-flash-lite`, writer and evaluator configurable in `config/settings.yaml`; structured output, function calling, low temperature |
+| Models | Gemini via the free API tier: `gemini-3.1-flash-lite` for every role, with automatic fallback in live mode to `gemini-3.5-flash-lite` then `gemini-3.5-flash` when a model is out of quota or overloaded; structured output, function calling, low temperature |
 | Role of the models | route, analyse, write and judge; never compute numbers, never execute actions |
 | Clients | 100 fictional households (`data/generate_book.py`, fixed seed), including 15 edge cases; no real person |
 | Market data | real tickers; public sources with source and date: Bank of Canada (rates, yields, USD/CAD, commodity indices, press releases), US Treasury yield curve, SEC EDGAR facts; prices on the public demo are illustrative |

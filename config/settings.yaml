@@ -4,6 +4,7 @@ models:                          # verify current IDs in AI Studio before record
   analyst: gemini-3.1-flash-lite
   synthesizer: gemini-3.1-flash-lite
   evaluator: gemini-3.1-flash-lite
+fallback_models: [gemini-3.5-flash-lite, gemini-3.5-flash]   # live only, each has its own free quota
 temperature: {router: 0.0, analyst: 0.2, synthesizer: 0.3, evaluator: 0.0}
 max_output_tokens: {router: 512, analyst: 2048, synthesizer: 4096, evaluator: 2048}
 thinking_level: {router: MINIMAL, analyst: MINIMAL, synthesizer: LOW, evaluator: LOW}   # Gemini 2.5: token budget (0 = off); Gemini 3: MINIMAL|LOW|MEDIUM|HIGH

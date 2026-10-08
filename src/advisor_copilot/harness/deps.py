@@ -1,14 +1,14 @@
 """Per-run dependency container; `llm_call` = budget check → limiter → client → trace → charge."""
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from advisor_copilot.config import Settings
 from advisor_copilot.db import Store
 from advisor_copilot.harness.budget import BudgetExhausted, RunBudget
 from advisor_copilot.harness.trace import TraceBus
-from advisor_copilot.llm.base import LLMClient, LLMRequest, LLMResponse
+from advisor_copilot.llm.base import LLMClient, LLMRequest, LLMResponse, RetryableLLMError
 from advisor_copilot.llm.limiter import RateLimiter
 
 
@@ -21,6 +21,7 @@ class Deps:
     trace: TraceBus
     run_dir: Path | None = None
     store: Store | None = None  # live mode only: daily usage cap and caches
+    exhausted: set[str] = field(default_factory=set)  # models that ran out of quota in this run
 
     def __post_init__(self) -> None:
         self.limiter.on_retry = lambda status, wait, attempt: self.trace.emit(
@@ -31,6 +32,24 @@ class Deps:
         )
 
     async def llm_call(self, req: LLMRequest) -> LLMResponse:
+        """Live mode: on quota (429) or overload (503) after retries, use the next model in
+        `fallback_models` for the rest of the run. Record and replay never switch models."""
+        chain = (
+            [req.model, *self.settings.fallback_models] if self.settings.run_mode == "live" else []
+        )
+        models = [m for m in dict.fromkeys(chain) if m not in self.exhausted] or [req.model]
+        for i, model in enumerate(models):
+            try:
+                return await self._call(req.model_copy(update={"model": model}))
+            except RetryableLLMError as e:
+                if i == len(models) - 1 or e.status not in (429, 503):
+                    raise
+                self.exhausted.add(model)
+                payload = {"from": model, "to": models[i + 1], "status": e.status}
+                self.trace.emit("model_fallback", req.purpose.split(":")[-1], payload, "warn")
+        raise AssertionError("unreachable")
+
+    async def _call(self, req: LLMRequest) -> LLMResponse:
         if self.store and self.store.usage_today(req.model) >= self.settings.budget.daily_call_cap:
             raise BudgetExhausted("daily_call_cap")
         self.budget.check()

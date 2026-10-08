@@ -175,6 +175,9 @@ class FetchCfg(BaseModel):
 class Settings(BaseModel):
     run_mode: RunMode
     data_source: Literal["fictional", "official"] = "fictional"
+    fallback_models: list[
+        str
+    ] = []  # live only: tried in order when a model is out of quota or overloaded
     models: ModelsCfg
     temperature: TemperatureCfg
     max_output_tokens: MaxOutputCfg
