@@ -38,7 +38,7 @@ export function Market() {
       <p className="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-700">{m.label} Month-end values; these are what the copilot's market analyst reads.</p>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {m.indicators.map((i) => (
-          <Card key={i.key} title={i.label} right={<span className={`text-lg font-semibold ${i.value < 0 ? "text-red-700" : "text-slate-900"}`}>{i.unit === "pct" ? `${i.value.toFixed(2)}%` : formatValue(i.value, i.unit)}</span>}>
+          <Card key={i.key} title={i.label} right={<span className={`text-lg font-semibold ${i.value < 0 ? "text-red-700" : "text-slate-900"}`}>{formatValue(i.value, i.unit)}</span>}>
             <ResponsiveContainer width="100%" height={110}>
               <LineChart data={i.history.map((v, k) => ({ month: m.months[k], v }))} margin={{ top: 4, right: 8, left: -24, bottom: 0 }}>
                 <XAxis dataKey="month" tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} interval={2} />

@@ -13,11 +13,14 @@ const FAQ: { label: string; preset?: string }[] = [
   { label: "Are their goals on track?" },
   { label: "What should I raise in the meeting?" },
   { label: "What if we sell half of the biggest single stock into bonds?" },
+  { label: "How do today's rates and commodity prices affect this client?" },
+  { label: "What is driving the drift in this portfolio?" },
 ];
 export const BOOK = "BOOK";
 const BOOK_FAQ = [
   "Who should I call first this week?", "Which households are above their risk limit?", "Who is most exposed to energy?",
   "If energy falls another 10%, who is hit hardest?", "Who has unused TFSA room with taxable cash?", "Whose goals need more return than their profile allows?",
+  "If bond prices fall 5%, who is hit hardest?", "Who is most exposed to US stocks and the US dollar?",
 ].map((label) => ({ label, preset: undefined }));
 
 interface Turn { question: string; events: TraceEvent[]; state?: RunState; outbox?: Outbox | null; error?: string }

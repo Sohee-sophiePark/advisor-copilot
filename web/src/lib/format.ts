@@ -1,5 +1,5 @@
 export function formatValue(v: number, unit: string): string {
-  if (unit === "pct") return `${v.toFixed(1)}%`;
+  if (unit === "pct") return `${Math.abs(v) < 10 && Math.round(v * 10) !== Math.round(v * 100) / 10 ? v.toFixed(2) : v.toFixed(1)}%`;
   if (unit === "pp") return `${v >= 0 ? "+" : ""}${v.toFixed(1)} pp`;
   if (unit === "cad") return `${v < 0 ? "-" : ""}$${Math.abs(Math.round(v)).toLocaleString("en-CA")}`;
   if (unit === "years") return `${Math.round(v)} years`;
