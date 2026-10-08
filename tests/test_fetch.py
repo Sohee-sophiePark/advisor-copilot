@@ -155,6 +155,7 @@ def test_fetch_all_sources_into_layers(tmp_path: Path) -> None:
     assert any("CIK0000311337" in str(r.url) and "companyfacts" in str(r.url) for r in sec)
     assert not any("CIK0000036405" in str(r.url) and "companyfacts" in str(r.url) for r in sec)
     assert all("token" not in str(r.url).lower() for r in seen)  # key travels in a header
+    assert store.fetched_hours_ago() < 0.1  # recorded for `fetch --if-stale`
     again = fetch.run(s, store, http, ENV)
     assert again["boc"] == again["tiingo"] == "0 new values"  # history never overwritten
     raw = store.conn.execute("SELECT COUNT(*) FROM market_raw").fetchone()[0]

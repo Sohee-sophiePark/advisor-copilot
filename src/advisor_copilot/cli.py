@@ -276,9 +276,12 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
     from advisor_copilot.data_access import read_json
     from advisor_copilot.db import Store, seed
 
-    s = get_settings()
+    s, store = get_settings(), Store(get_settings().path("db"))
+    if args.if_stale and (age := store.fetched_hours_ago()) is not None and age < 20:
+        print(f"fetch skipped: last fetch {age:.1f} hours ago")
+        return 0
     with httpx.Client(timeout=30) as http:
-        for source, result in fetch.run(s, Store(s.path("db")), http, os.environ).items():
+        for source, result in fetch.run(s, store, http, os.environ).items():
             print(f"{source:<7} {result}")
     seed(read_json(s.path("data")), s.path("data"), s.path("db"))  # facts file may have changed
     return 0
@@ -361,6 +364,9 @@ def build_parser() -> argparse.ArgumentParser:
     p["approve"].add_argument("--note", default="")
     p["resume"].add_argument("run_id")
     p["record"].add_argument("--scenario", help="record one scenario only")
+    p["fetch"].add_argument(
+        "--if-stale", action="store_true", help="skip if fetched in the last 20 hours"
+    )
     p["replay"].add_argument("scenario")
     p["tools"].add_argument("client_id", help="client id, e.g. C002")
     p["export"].add_argument("path", help="output file, e.g. web/public/static-data.json")

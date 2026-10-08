@@ -280,6 +280,17 @@ class Store:
         ).fetchone()
         return (row["date"], row["value"]) if row else None
 
+    def fetched_hours_ago(self) -> float | None:
+        """Hours since the last completed fetch (None if never)."""
+        row = self.conn.execute(
+            "SELECT (julianday('now') - julianday(value)) * 24 FROM meta WHERE key='last_fetch'"
+        ).fetchone()
+        return row[0] if row else None
+
+    def mark_fetched(self) -> None:
+        with self.conn:
+            self.conn.execute("INSERT OR REPLACE INTO meta VALUES ('last_fetch', datetime('now'))")
+
     def raw_latest(self, url: str) -> str | None:
         row = self.conn.execute(
             "SELECT payload FROM market_raw WHERE url=? ORDER BY rowid DESC LIMIT 1", (url,)

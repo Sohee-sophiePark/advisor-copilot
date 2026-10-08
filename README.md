@@ -108,7 +108,8 @@ RUN_MODE=replay make dev         # API + UI from recorded cassettes, no key need
 
 Live mode needs a Gemini API key (free tier is enough): copy `.env.example` to `.env`, fill it in,
 then `set -a; . ./.env; set +a` in your shell before `make smoke`, `make dev`, `make record` or
-`make eval-live`. `DATA_SOURCE=official make dev` prices the US-listed holdings from the latest `make fetch`
+`make eval-live`. `DATA_SOURCE=official make dev` first refreshes the data if the last fetch is over 20 hours old, then prices the
+US-listed holdings from it
 (laptop only): each holding keeps its value on the data date and then moves with the real market. Canadian ETFs
 with no free price feed move by labelled estimates: XBB from the Canada 10-year yield (duration model), XIC and XEF
 from US-listed EWC and IEFA in CAD, CSAV held at its unit value; XRE stays illustrative. The API binds `127.0.0.1` on the first free port in the range configured under
@@ -122,7 +123,6 @@ from US-listed EWC and IEFA in CAD, CSAV held at its unit value; XRE stays illus
 | `make record` | run every scenario live, write `cassettes/` and `replays/` |
 | `make build-static` | replay-only web build for GitHub Pages (`VITE_STATIC=1`) |
 | `make fetch` | laptop only: free market data (Bank of Canada, US Treasury, SEC EDGAR, Tiingo end-of-day) under daily caps |
-| `make schedule` / `make unschedule` | install or remove a daily 18:30 `make fetch` on macOS (your user only) |
 | `uv run advisor-copilot snapshot` | write the public market snapshot from fetched history (then re-record the scenarios) |
 | `uv run advisor-copilot proxy-check` | compare proxy estimates with fund values copied by hand into `data/nav_checks.csv` |
 | `uv run advisor-copilot tools C002` | metrics and flags for a client, no LLM |

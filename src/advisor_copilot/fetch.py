@@ -222,6 +222,7 @@ def run(
         except httpx.HTTPError as e:
             out[name] = f"failed: {type(e).__name__}"
     write_public(settings, store)
+    store.mark_fetched()
     return out
 
 
