@@ -4,7 +4,7 @@
  "client_id": "C004",
  "request_text": "",
  "preset": "annual_review",
- "recorded_at": "2026-10-07T21:30:23+00:00",
+ "recorded_at": "2026-10-08T00:15:59+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C004-20261007-213023-f43e7f",
-   "ts": "2026-10-07T21:30:23.814431Z",
+   "run_id": "C004-20261008-001559-e52cd2",
+   "ts": "2026-10-08T00:15:59.524352Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "C004-20261007-213023-f43e7f",
-   "ts": "2026-10-07T21:30:23.833998Z",
-   "t_ms": 19,
+   "run_id": "C004-20261008-001559-e52cd2",
+   "ts": "2026-10-08T00:15:59.545562Z",
+   "t_ms": 21,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -50,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "C004-20261007-213023-f43e7f",
-   "ts": "2026-10-07T21:30:23.834561Z",
-   "t_ms": 20,
+   "run_id": "C004-20261008-001559-e52cd2",
+   "ts": "2026-10-08T00:15:59.546280Z",
+   "t_ms": 21,
    "type": "gate_result",
    "agent": "gate",
    "level": "warn",
@@ -68,9 +68,9 @@
   },
   {
    "seq": 4,
-   "run_id": "C004-20261007-213023-f43e7f",
-   "ts": "2026-10-07T21:30:23.834619Z",
-   "t_ms": 20,
+   "run_id": "C004-20261008-001559-e52cd2",
+   "ts": "2026-10-08T00:15:59.546348Z",
+   "t_ms": 22,
    "type": "kyc_blocked",
    "agent": "gate",
    "level": "warn",
@@ -89,9 +89,9 @@
   },
   {
    "seq": 5,
-   "run_id": "C004-20261007-213023-f43e7f",
-   "ts": "2026-10-07T21:30:23.834908Z",
-   "t_ms": 20,
+   "run_id": "C004-20261008-001559-e52cd2",
+   "ts": "2026-10-08T00:15:59.546675Z",
+   "t_ms": 22,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -101,14 +101,14 @@
      "llm_calls": 0,
      "tokens_in": 0,
      "tokens_out": 0,
-     "wall_ms": 20,
+     "wall_ms": 22,
      "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "C004-20261007-213023-f43e7f",
+  "run_id": "C004-20261008-001559-e52cd2",
   "client_id": "C004",
   "request_text": "",
   "preset": "annual_review",
@@ -145,12 +145,12 @@
   "budget_snapshot": {
    "llm_calls": 0,
    "tokens": 0,
-   "wall_ms": 20
+   "wall_ms": 22
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T21:30:23.573898Z",
-  "updated_at": "2026-10-07T21:30:23.834966Z",
+  "created_at": "2026-10-08T00:15:59.311944Z",
+  "updated_at": "2026-10-08T00:15:59.546733Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate"

@@ -13,7 +13,7 @@ KEY_RE = re.compile(
     r"|drift\.[A-Z_]+\.pp|cfg\.drift_tolerance\.pp"
     r"|risk\.(vol|vol_band_max|target_vol|exp_return)\.pct|stress\.equity_bear\.(pct|cad)"
     r"|conc\.[A-Z]+\.pct|conc\.limit\.pct|tax\.(tfsa_room|rrsp_room|nonreg_interest)\.cad"
-    r"|tax\.l1\.[A-Z]+\.cad|mkt\.[a-z0-9_]+\.pct|goal\.model_return\.pct|goal\.[A-Z0-9]+\.required\.pct)$"
+    r"|tax\.l1\.[A-Z]+\.cad|mkt\.[a-z0-9_]+\.(pct|pp|ratio)|goal\.model_return\.pct|goal\.[A-Z0-9]+\.required\.pct)$"
 )
 
 

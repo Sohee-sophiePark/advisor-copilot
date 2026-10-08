@@ -4,6 +4,7 @@ import csv
 import datetime as dt
 import io
 import json
+import xml.etree.ElementTree as ET  # noqa: N817
 from collections.abc import Callable, Mapping
 
 import httpx
@@ -11,12 +12,17 @@ import httpx
 from advisor_copilot.config import Settings
 from advisor_copilot.db import Store
 
-BOC = "https://www.bankofcanada.ca/valet/observations/{series}/json?recent={n}"
+BOC = "https://www.bankofcanada.ca/valet/observations/{series}/json?start_date={start}"
+BOC_RSS = "https://www.bankofcanada.ca/content_type/press-releases/feed/"
 BOC_SERIES = {
     "FXUSDCAD": "fx.USDCAD",
     "BD.CDN.2YR.DQ.YLD": "yield.CA2Y",
     "BD.CDN.10YR.DQ.YLD": "yield.CA10Y",
+    "V39079": "rate.CA_POLICY",
+    "M.BCPI": "bcpi.TOTAL",
+    "M.ENER": "bcpi.ENERGY",
 }
+SNAPSHOT_YEARS = 2  # history kept for the monthly snapshot (12-month changes need a year more)
 SEC_TICKERS = "https://www.sec.gov/files/company_tickers.json"
 SEC_FUNDS = "https://www.sec.gov/files/company_tickers_mf.json"
 SEC_DOC = "https://data.sec.gov/{kind}/CIK{cik:010d}.json"
@@ -132,23 +138,26 @@ class Fetcher:
         return r
 
     def boc(self, _: str) -> str:
-        url = BOC.format(series=",".join(BOC_SERIES), n=self.s.fetch.history_days)
+        start = dt.date.today() - dt.timedelta(days=365 * SNAPSHOT_YEARS)
+        url = BOC.format(series=",".join(BOC_SERIES), start=start)
         r = self.get("boc", url)
         self.store.put_raw("boc", url, LICENCE["boc"], r.text)
         obs = r.json()["observations"]
         rows = [
             (BOC_SERIES[k], o["d"], float(o[k]["v"])) for o in obs for k in BOC_SERIES if k in o
         ]
+        self.store.put_raw("boc", BOC_RSS, LICENCE["boc"], self.get("boc", BOC_RSS).text)
         return f"{self.store.put_history('boc', rows)} new values"
 
     def treasury(self, _: str) -> str:
-        url = TREASURY.format(year=dt.date.today().year)
-        r = self.get("treasury", url)
-        self.store.put_raw("treasury", url, LICENCE["treasury"], r.text)
         rows = []
-        for c in csv.DictReader(io.StringIO(r.text)):
-            d = dt.datetime.strptime(c["Date"], "%m/%d/%Y").date().isoformat()
-            rows += [("yield.US2Y", d, float(c["2 Yr"])), ("yield.US10Y", d, float(c["10 Yr"]))]
+        for year in range(dt.date.today().year - SNAPSHOT_YEARS + 1, dt.date.today().year + 1):
+            url = TREASURY.format(year=year)
+            r = self.get("treasury", url)
+            self.store.put_raw("treasury", url, LICENCE["treasury"], r.text)
+            for c in csv.DictReader(io.StringIO(r.text)):
+                d = dt.datetime.strptime(c["Date"], "%m/%d/%Y").date().isoformat()
+                rows += [("yield.US2Y", d, float(c["2 Yr"])), ("yield.US10Y", d, float(c["10 Yr"]))]
         return f"{self.store.put_history('treasury', rows)} new values"
 
     def sec(self, user_agent: str) -> str:
@@ -177,7 +186,8 @@ class Fetcher:
     def tiingo(self, key: str) -> str:
         start = dt.date.today() - dt.timedelta(days=self.s.fetch.history_days)
         rows = []
-        for t in [*self.s.fetch.us_tickers, *self.s.fetch.sector_etfs]:
+        f = self.s.fetch
+        for t in [*f.us_tickers, *f.sector_etfs, *f.index_etfs]:
             url = TIINGO.format(ticker=t, start=start)
             r = self.get("tiingo", url, {"Authorization": f"Token {key}"})
             self.store.put_raw("tiingo", url, LICENCE["tiingo"], r.text)
@@ -271,4 +281,89 @@ def vix(s: Settings, store: Store, http: httpx.Client, key: str) -> dict | None:
         "note": "Laptop only; personal use, never stored or published.",
         "history": hist,
         "as_of": hist[-1]["date"] if hist else "",
+    }
+
+
+INDICATORS = [  # key, label, unit, asset classes it explains; values derived in build_snapshot
+    ("ca_policy_rate", "Bank of Canada policy rate", "pct", ["CASH", "CA_BONDS"]),
+    ("ca_10y_yield", "Canada 10-year bond yield", "pct", ["CA_BONDS"]),
+    ("ca_curve", "Canada yield curve, 10-year minus 2-year", "pp", ["CA_BONDS"]),
+    ("us_10y_yield", "US 10-year Treasury yield", "pct", ["US_EQUITY"]),
+    ("usd_cad", "US dollar in Canadian dollars", "ratio", ["US_EQUITY", "INTL_EQUITY"]),
+    ("energy_commodities_12m", "Energy commodity prices, 12-month change", "pct", ["CA_EQUITY"]),
+    ("commodities_12m", "Commodity prices, 12-month change", "pct", ["CA_EQUITY", "REAL_ASSETS"]),
+]
+RELEASE_WORDS = ("rate", "monetary policy", "financial system", "economic")
+
+
+def _monthly(points: list[tuple[str, float]]) -> dict[str, float]:
+    """Last value of each month, keyed YYYY-MM."""
+    return {d[:7]: v for d, v in points}
+
+
+def build_snapshot(s: Settings, store: Store, months: int = 9) -> dict | None:
+    """MarketSnapshot from stored public series (BoC, US Treasury) and BoC press releases."""
+    since = (dt.date.today() - dt.timedelta(days=365 * SNAPSHOT_YEARS)).isoformat()
+    m = {n: _monthly(store.series(n, since)) for n in (*BOC_SERIES.values(), "yield.US10Y")}
+    if not m["yield.CA10Y"]:
+        return None
+    keys = sorted(m["yield.CA10Y"])[-months:]
+
+    def carry(series: dict[str, float], month: str) -> float:
+        return series[max(k for k in series if k <= month)]
+
+    def change(series: dict[str, float], month: str) -> float:
+        now = max(k for k in series if k <= month)
+        prev = f"{int(now[:4]) - 1}{now[4:]}"
+        return round(100 * (series[now] / series[prev] - 1), 1)
+
+    derive = {
+        "ca_policy_rate": lambda k: carry(m["rate.CA_POLICY"], k),
+        "ca_10y_yield": lambda k: carry(m["yield.CA10Y"], k),
+        "ca_curve": lambda k: round(carry(m["yield.CA10Y"], k) - carry(m["yield.CA2Y"], k), 2),
+        "us_10y_yield": lambda k: carry(m["yield.US10Y"], k),
+        "usd_cad": lambda k: carry(m["fx.USDCAD"], k),
+        "energy_commodities_12m": lambda k: change(m["bcpi.ENERGY"], k),
+        "commodities_12m": lambda k: change(m["bcpi.TOTAL"], k),
+    }
+    indicators = []
+    for key, label, unit, classes in INDICATORS:
+        hist = [derive[key](k) for k in keys]
+        indicators.append(
+            {
+                "key": key,
+                "label": label,
+                "value": hist[-1],
+                "unit": unit,
+                "asset_classes": classes,
+                "history": hist,
+            }
+        )
+    ns = {"r": "http://purl.org/rss/1.0/", "dc": "http://purl.org/dc/elements/1.1/"}
+    feed = store.raw_latest(BOC_RSS)
+    items = ET.fromstring(feed).findall("r:item", ns) if feed else []
+    releases = [
+        (
+            i.findtext("r:title", namespaces=ns) or "",
+            (i.findtext("dc:date", namespaces=ns) or "")[:10],
+        )
+        for i in items
+    ]
+    headlines = [
+        {
+            "id": f"BOC-{d}",
+            "text": f"Bank of Canada, {d}: {t}",
+            "asset_classes": ["CA_BONDS", "CASH"],
+        }
+        for t, d in releases
+        if any(w in t.lower() for w in RELEASE_WORDS)
+    ][:3]
+    dates = [store.latest(n) for n in ("yield.CA10Y", "fx.USDCAD", "yield.US10Y")]
+    as_of = max(d[0] for d in dates if d)
+    return {
+        "as_of": as_of,
+        "label": f"Real data from the Bank of Canada and the US Treasury, as of {as_of}.",
+        "history_months": keys,
+        "indicators": indicators,
+        "headlines": headlines,
     }

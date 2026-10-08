@@ -7,14 +7,18 @@ from advisor_copilot.tools import market as mk
 
 def test_single_asset_class() -> None:
     result = mk.get_market_snapshot("C001", mk.MarketArgs(asset_classes=["US_EQUITY"]))
-    assert metrics(result) == {"mkt.us_equity_ytd.pct": 18.0}
-    assert [h["id"] for h in result.data["headlines"]] == ["H-1"]
+    assert set(metrics(result)) == {"mkt.us_10y_yield.pct", "mkt.usd_cad.ratio"}
+    assert result.data["headlines"] == []  # Bank of Canada releases are tagged to bonds and cash
 
 
 def test_union_across_classes() -> None:
     result = mk.get_market_snapshot("C002", mk.MarketArgs(asset_classes=["CA_BONDS", "CASH"]))
-    assert set(metrics(result)) == {"mkt.ca_bond_ytd.pct", "mkt.ca_10y_yield.pct"}
-    assert [h["id"] for h in result.data["headlines"]] == ["H-3"]
+    assert set(metrics(result)) == {
+        "mkt.ca_policy_rate.pct",
+        "mkt.ca_10y_yield.pct",
+        "mkt.ca_curve.pp",
+    }
+    assert all(h["id"].startswith("BOC-") for h in result.data["headlines"])
 
 
 def test_empty_request_returns_nothing() -> None:

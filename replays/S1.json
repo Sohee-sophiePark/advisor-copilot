@@ -4,7 +4,7 @@
  "client_id": "C001",
  "request_text": "",
  "preset": "annual_review",
- "recorded_at": "2026-10-07T21:28:21+00:00",
+ "recorded_at": "2026-10-08T00:13:19+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.112824Z",
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.049365Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.133157Z",
-   "t_ms": 20,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.094028Z",
+   "t_ms": 44,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -50,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.133712Z",
-   "t_ms": 20,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.096028Z",
+   "t_ms": 46,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -64,9 +64,9 @@
   },
   {
    "seq": 4,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.133786Z",
-   "t_ms": 20,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.096159Z",
+   "t_ms": 46,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
@@ -86,9 +86,9 @@
   },
   {
    "seq": 5,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.134403Z",
-   "t_ms": 21,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.096894Z",
+   "t_ms": 47,
    "type": "agent_started",
    "agent": "portfolio",
    "level": "info",
@@ -104,9 +104,9 @@
   },
   {
    "seq": 6,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.135175Z",
-   "t_ms": 22,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.097667Z",
+   "t_ms": 48,
    "type": "llm_call_started",
    "agent": "portfolio",
    "level": "info",
@@ -117,9 +117,9 @@
   },
   {
    "seq": 7,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.135309Z",
-   "t_ms": 22,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.097796Z",
+   "t_ms": 48,
    "type": "agent_started",
    "agent": "risk",
    "level": "info",
@@ -134,9 +134,9 @@
   },
   {
    "seq": 8,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.136020Z",
-   "t_ms": 23,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.098527Z",
+   "t_ms": 49,
    "type": "llm_call_started",
    "agent": "risk",
    "level": "info",
@@ -147,9 +147,9 @@
   },
   {
    "seq": 9,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.136106Z",
-   "t_ms": 23,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.098626Z",
+   "t_ms": 49,
    "type": "agent_started",
    "agent": "tax",
    "level": "info",
@@ -164,9 +164,9 @@
   },
   {
    "seq": 10,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.136594Z",
-   "t_ms": 23,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.099179Z",
+   "t_ms": 49,
    "type": "llm_call_started",
    "agent": "tax",
    "level": "info",
@@ -177,9 +177,9 @@
   },
   {
    "seq": 11,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.136662Z",
-   "t_ms": 23,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.099287Z",
+   "t_ms": 50,
    "type": "agent_started",
    "agent": "market",
    "level": "info",
@@ -192,9 +192,9 @@
   },
   {
    "seq": 12,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:48.137004Z",
-   "t_ms": 24,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:31.100048Z",
+   "t_ms": 50,
    "type": "llm_call_started",
    "agent": "market",
    "level": "info",
@@ -205,9 +205,90 @@
   },
   {
    "seq": 13,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:49.111546Z",
-   "t_ms": 998,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.189952Z",
+   "t_ms": 1140,
+   "type": "llm_call_finished",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:risk",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 998,
+    "tokens_out": 42,
+    "latency_ms": 1023,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 14,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.191242Z",
+   "t_ms": 1141,
+   "type": "tool_call",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "name": "compute_risk_metrics",
+    "args": {},
+    "metrics_count": 4,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 15,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.191523Z",
+   "t_ms": 1142,
+   "type": "tool_call",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "name": "check_concentration",
+    "args": {},
+    "metrics_count": 1,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 16,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.191722Z",
+   "t_ms": 1142,
+   "type": "tool_call",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "name": "run_stress_test",
+    "args": {
+     "scenario": "equity_bear"
+    },
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 17,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.191996Z",
+   "t_ms": 1142,
+   "type": "llm_call_started",
+   "agent": "risk",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:risk",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 18,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.397978Z",
+   "t_ms": 1348,
    "type": "llm_call_finished",
    "agent": "portfolio",
    "level": "info",
@@ -216,16 +297,16 @@
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 1295,
     "tokens_out": 40,
-    "latency_ms": 973,
+    "latency_ms": 1296,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 14,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:49.112528Z",
-   "t_ms": 999,
+   "seq": 19,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.399577Z",
+   "t_ms": 1350,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -238,10 +319,10 @@
    }
   },
   {
-   "seq": 15,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:49.112799Z",
-   "t_ms": 1000,
+   "seq": 20,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.400033Z",
+   "t_ms": 1350,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -263,10 +344,10 @@
    }
   },
   {
-   "seq": 16,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:49.113001Z",
-   "t_ms": 1000,
+   "seq": 21,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.400383Z",
+   "t_ms": 1351,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -279,10 +360,10 @@
    }
   },
   {
-   "seq": 17,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:49.113233Z",
-   "t_ms": 1000,
+   "seq": 22,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.400691Z",
+   "t_ms": 1351,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -295,200 +376,41 @@
    }
   },
   {
-   "seq": 18,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:49.113470Z",
-   "t_ms": 1000,
+   "seq": 23,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:32.401141Z",
+   "t_ms": 1351,
    "type": "llm_call_started",
    "agent": "portfolio",
    "level": "info",
    "payload": {
     "purpose": "analyst:portfolio",
-    "model": "gemini-3.1-flash-lite"
-   }
-  },
-  {
-   "seq": 19,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:55.684779Z",
-   "t_ms": 7572,
-   "type": "llm_call_finished",
-   "agent": "risk",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:risk",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 998,
-    "tokens_out": 42,
-    "latency_ms": 7519,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 20,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:55.686984Z",
-   "t_ms": 7574,
-   "type": "tool_call",
-   "agent": "risk",
-   "level": "info",
-   "payload": {
-    "name": "compute_risk_metrics",
-    "args": {},
-    "metrics_count": 4,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 21,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:55.687420Z",
-   "t_ms": 7575,
-   "type": "tool_call",
-   "agent": "risk",
-   "level": "info",
-   "payload": {
-    "name": "check_concentration",
-    "args": {},
-    "metrics_count": 1,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 22,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:55.687931Z",
-   "t_ms": 7575,
-   "type": "tool_call",
-   "agent": "risk",
-   "level": "info",
-   "payload": {
-    "name": "run_stress_test",
-    "args": {
-     "scenario": "equity_bear"
-    },
-    "metrics_count": 2,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 23,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:55.688511Z",
-   "t_ms": 7576,
-   "type": "llm_call_started",
-   "agent": "risk",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:risk",
     "model": "gemini-3.1-flash-lite"
    }
   },
   {
    "seq": 24,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:55.790037Z",
-   "t_ms": 7677,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 503,
-    "wait_ms": 2699,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 25,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:57.698397Z",
-   "t_ms": 9586,
-   "type": "llm_call_finished",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:portfolio",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 2954,
-    "tokens_out": 421,
-    "latency_ms": 1906,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 26,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:57.699384Z",
-   "t_ms": 9587,
-   "type": "agent_finished",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "findings_count": 3,
-    "status": "ok",
-    "data_gaps": []
-   }
-  },
-  {
-   "seq": 27,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:59.149039Z",
-   "t_ms": 11037,
-   "type": "llm_call_finished",
-   "agent": "risk",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:risk",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1501,
-    "tokens_out": 368,
-    "latency_ms": 1448,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 28,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:27:59.150218Z",
-   "t_ms": 11038,
-   "type": "agent_finished",
-   "agent": "risk",
-   "level": "info",
-   "payload": {
-    "findings_count": 3,
-    "status": "ok",
-    "data_gaps": []
-   }
-  },
-  {
-   "seq": 29,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:00.018241Z",
-   "t_ms": 11906,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:33.073461Z",
+   "t_ms": 2024,
    "type": "llm_call_finished",
    "agent": "market",
    "level": "info",
    "payload": {
     "purpose": "analyst:market",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 848,
+    "tokens_in": 885,
     "tokens_out": 57,
-    "latency_ms": 866,
-    "attempt": 2,
+    "latency_ms": 670,
+    "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 30,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:00.020207Z",
-   "t_ms": 11908,
+   "seq": 25,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:33.075494Z",
+   "t_ms": 2026,
    "type": "tool_call",
    "agent": "market",
    "level": "info",
@@ -510,10 +432,10 @@
    }
   },
   {
-   "seq": 31,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:00.020958Z",
-   "t_ms": 11908,
+   "seq": 26,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:33.076358Z",
+   "t_ms": 2027,
    "type": "llm_call_started",
    "agent": "market",
    "level": "info",
@@ -523,42 +445,42 @@
    }
   },
   {
-   "seq": 32,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:01.970818Z",
-   "t_ms": 13858,
+   "seq": 27,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:34.507808Z",
+   "t_ms": 3458,
    "type": "llm_call_finished",
-   "agent": "market",
+   "agent": "risk",
    "level": "info",
    "payload": {
-    "purpose": "analyst:market",
+    "purpose": "analyst:risk",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1391,
-    "tokens_out": 291,
-    "latency_ms": 1948,
+    "tokens_in": 1501,
+    "tokens_out": 328,
+    "latency_ms": 1429,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 33,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:01.973230Z",
-   "t_ms": 13861,
+   "seq": 28,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:34.509904Z",
+   "t_ms": 3460,
    "type": "agent_finished",
-   "agent": "market",
+   "agent": "risk",
    "level": "info",
    "payload": {
-    "findings_count": 2,
+    "findings_count": 3,
     "status": "ok",
     "data_gaps": []
    }
   },
   {
-   "seq": 34,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:03.029669Z",
-   "t_ms": 14917,
+   "seq": 29,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:35.057794Z",
+   "t_ms": 4008,
    "type": "llm_call_finished",
    "agent": "tax",
    "level": "info",
@@ -567,16 +489,16 @@
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 1186,
     "tokens_out": 34,
-    "latency_ms": 13915,
+    "latency_ms": 2863,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 35,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:03.031059Z",
-   "t_ms": 14919,
+   "seq": 30,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:35.059669Z",
+   "t_ms": 4010,
    "type": "tool_call",
    "agent": "tax",
    "level": "info",
@@ -602,10 +524,10 @@
    }
   },
   {
-   "seq": 36,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:03.031373Z",
-   "t_ms": 14919,
+   "seq": 31,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:35.060387Z",
+   "t_ms": 4011,
    "type": "tool_call",
    "agent": "tax",
    "level": "info",
@@ -618,10 +540,10 @@
    }
   },
   {
-   "seq": 37,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:03.031637Z",
-   "t_ms": 14919,
+   "seq": 32,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:35.060919Z",
+   "t_ms": 4011,
    "type": "tool_call",
    "agent": "tax",
    "level": "info",
@@ -634,10 +556,10 @@
    }
   },
   {
-   "seq": 38,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:03.031958Z",
-   "t_ms": 14920,
+   "seq": 33,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:35.061463Z",
+   "t_ms": 4012,
    "type": "llm_call_started",
    "agent": "tax",
    "level": "info",
@@ -647,10 +569,42 @@
    }
   },
   {
-   "seq": 39,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:04.914051Z",
-   "t_ms": 16802,
+   "seq": 34,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:36.369288Z",
+   "t_ms": 5320,
+   "type": "llm_call_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2954,
+    "tokens_out": 410,
+    "latency_ms": 1856,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 35,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:36.372293Z",
+   "t_ms": 5323,
+   "type": "agent_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "findings_count": 3,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 36,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:38.273973Z",
+   "t_ms": 7224,
    "type": "llm_call_finished",
    "agent": "tax",
    "level": "info",
@@ -658,17 +612,17 @@
     "purpose": "analyst:tax",
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 2097,
-    "tokens_out": 414,
-    "latency_ms": 1880,
+    "tokens_out": 444,
+    "latency_ms": 1899,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 40,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:04.916292Z",
-   "t_ms": 16804,
+   "seq": 37,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:38.275400Z",
+   "t_ms": 7226,
    "type": "agent_finished",
    "agent": "tax",
    "level": "info",
@@ -679,10 +633,73 @@
    }
   },
   {
+   "seq": 38,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:54.940562Z",
+   "t_ms": 23891,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1515,
+    "tokens_out": 339,
+    "latency_ms": 19877,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 39,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:54.943078Z",
+   "t_ms": 23893,
+   "type": "llm_call_started",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 40,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:56.176934Z",
+   "t_ms": 25127,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1733,
+    "tokens_out": 337,
+    "latency_ms": 1232,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
    "seq": 41,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:04.919594Z",
-   "t_ms": 16807,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:56.178593Z",
+   "t_ms": 25129,
+   "type": "agent_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "findings_count": 2,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 42,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:12:56.181373Z",
+   "t_ms": 25132,
    "type": "llm_call_started",
    "agent": "synthesizer",
    "level": "info",
@@ -692,42 +709,118 @@
    }
   },
   {
-   "seq": 42,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:15.515030Z",
-   "t_ms": 27403,
+   "seq": 43,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:08.559021Z",
+   "t_ms": 37509,
    "type": "llm_call_finished",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "purpose": "synthesizer",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 4253,
-    "tokens_out": 2945,
-    "latency_ms": 10593,
+    "tokens_in": 4259,
+    "tokens_out": 3904,
+    "latency_ms": 12375,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 43,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:15.517705Z",
-   "t_ms": 27406,
+   "seq": 44,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:08.561846Z",
+   "t_ms": 37512,
    "type": "draft_created",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "revision": 0,
     "mode": "recommendation",
-    "actions_count": 5
+    "actions_count": 4
    }
   },
   {
-   "seq": 44,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:15.518082Z",
-   "t_ms": 27406,
+   "seq": 45,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:08.562384Z",
+   "t_ms": 37513,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "warn",
+   "payload": {
+    "gate": "G5",
+    "passed": false,
+    "violations": [
+     "G5.12 advisor_voice: headline, summary and actions speak about the client, not to them"
+    ]
+   }
+  },
+  {
+   "seq": 46,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:08.562608Z",
+   "t_ms": 37513,
+   "type": "revision_requested",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "source": "gates",
+    "items": [
+     "G5.12 advisor_voice: headline, summary and actions speak about the client, not to them"
+    ]
+   }
+  },
+  {
+   "seq": 47,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:08.563648Z",
+   "t_ms": 37514,
+   "type": "llm_call_started",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 48,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:16.090603Z",
+   "t_ms": 45041,
+   "type": "llm_call_finished",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 5004,
+    "tokens_out": 2407,
+    "latency_ms": 7524,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 49,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:16.093178Z",
+   "t_ms": 45043,
+   "type": "draft_created",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "revision": 1,
+    "mode": "recommendation",
+    "actions_count": 4
+   }
+  },
+  {
+   "seq": 50,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:16.093490Z",
+   "t_ms": 45044,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -738,10 +831,10 @@
    }
   },
   {
-   "seq": 45,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:15.519350Z",
-   "t_ms": 27407,
+   "seq": 51,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:16.094724Z",
+   "t_ms": 45045,
    "type": "llm_call_started",
    "agent": "evaluator",
    "level": "info",
@@ -751,28 +844,28 @@
    }
   },
   {
-   "seq": 46,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:21.418087Z",
-   "t_ms": 33306,
+   "seq": 52,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:19.515353Z",
+   "t_ms": 48465,
    "type": "llm_call_finished",
    "agent": "evaluator",
    "level": "info",
    "payload": {
     "purpose": "evaluator",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 4702,
-    "tokens_out": 720,
-    "latency_ms": 5897,
+    "tokens_in": 4649,
+    "tokens_out": 899,
+    "latency_ms": 3419,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 47,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:21.419213Z",
-   "t_ms": 33307,
+   "seq": 53,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:19.516198Z",
+   "t_ms": 48466,
    "type": "evaluator_verdict",
    "agent": "evaluator",
    "level": "info",
@@ -794,41 +887,41 @@
    }
   },
   {
-   "seq": 48,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:21.419828Z",
-   "t_ms": 33308,
+   "seq": 54,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:19.516599Z",
+   "t_ms": 48467,
    "type": "awaiting_approval",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
-    "summary": "Daniel's portfolio has drifted due to strong US equity performance, with US equities exceeding the target by +8.1 pp and Canadian bonds trailing by -9.6 pp. We should rebalance to restore the balanced allocation. Additionally, we can improve tax efficiency by relocating the US-listed fund from his TFSA and utilizing his available TFSA contribution room for interest-bearing assets currently held in his non-registered account. These steps align with his goal of a low-maintenance portfolio while supporting his retirement objectives."
+    "summary": "Daniel's portfolio remains aligned with his retirement goals, with expected returns of 5.9% exceeding the required 5.2%. However, the portfolio requires rebalancing as US equity has drifted above target by +8.1 pp and Canadian bonds are underweight by -9.6 pp. Additionally, tax efficiency can be improved by relocating US-listed holdings from the TFSA and utilizing $14,000 of unused TFSA room to shelter interest-bearing assets currently held in the non-registered account."
    }
   },
   {
-   "seq": 49,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:21.421358Z",
-   "t_ms": 33309,
+   "seq": 55,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:19.517600Z",
+   "t_ms": 48468,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
     "status": "AWAITING_APPROVAL",
     "totals": {
-     "llm_calls": 10,
-     "tokens_in": 21225,
-     "tokens_out": 5332,
-     "wall_ms": 33309,
-     "retries": 1
+     "llm_calls": 12,
+     "tokens_in": 28076,
+     "tokens_out": 9241,
+     "wall_ms": 48468,
+     "retries": 0
     }
    }
   },
   {
-   "seq": 50,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:21.423022Z",
-   "t_ms": 33311,
+   "seq": 56,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:19.519114Z",
+   "t_ms": 48469,
    "type": "approval_recorded",
    "agent": "human",
    "level": "info",
@@ -838,21 +931,21 @@
    }
   },
   {
-   "seq": 51,
-   "run_id": "C001-20261007-212747-1440dc",
-   "ts": "2026-10-07T21:28:21.500008Z",
-   "t_ms": 33388,
+   "seq": 57,
+   "run_id": "C001-20261008-001230-18030c",
+   "ts": "2026-10-08T00:13:19.519623Z",
+   "t_ms": 48470,
    "type": "crm_outbox_written",
    "agent": "human",
    "level": "info",
    "payload": {
-    "tasks_count": 5,
+    "tasks_count": 4,
     "notes_count": 1
    }
   }
  ],
  "final_state": {
-  "run_id": "C001-20261007-212747-1440dc",
+  "run_id": "C001-20261008-001230-18030c",
   "client_id": "C001",
   "request_text": "",
   "preset": "annual_review",
@@ -878,7 +971,7 @@
       "finding_id": "PORT-1",
       "title": "Portfolio drift exceeds tolerance in US equity and Canadian bonds",
       "severity": "warning",
-      "detail": "The portfolio is overweight in US equity by {{m:drift.US_EQUITY.pp}} and underweight in Canadian bonds by {{m:drift.CA_BONDS.pp}}. These deviations exceed the tolerance of {{m:cfg.drift_tolerance.pp}}, requiring rebalancing to align with the balanced risk profile.",
+      "detail": "The portfolio is overweight in US equity by {{m:drift.US_EQUITY.pp}} and underweight in Canadian bonds by {{m:drift.CA_BONDS.pp}}, both exceeding the {{m:cfg.drift_tolerance.pp}} tolerance. Rebalancing is required to align with the balanced model portfolio.",
       "metric_refs": [
        "drift.US_EQUITY.pp",
        "drift.CA_BONDS.pp",
@@ -891,20 +984,21 @@
      },
      {
       "finding_id": "PORT-2",
-      "title": "Excess cash in non-registered account awaiting investment",
+      "title": "Excess cash in non-registered account requires deployment",
       "severity": "info",
-      "detail": "Cash in the non-registered account is {{m:drift.CASH.pp}} above the target of {{m:target.CASH.pct}}. This is consistent with the note regarding the uninvested bonus. Deploying this cash can help address the underweight position in Canadian bonds.",
+      "detail": "Cash in the non-registered account is {{m:drift.CASH.pp}} above target, largely due to the uninvested bonus mentioned in CRM notes. Deploying this cash can help address the underweight position in Canadian bonds and other asset classes.",
       "metric_refs": [
        "drift.CASH.pp",
+       "alloc.CASH.pct",
        "target.CASH.pct"
       ],
       "flag_refs": []
      },
      {
       "finding_id": "PORT-3",
-      "title": "Current balanced strategy supports retirement objectives",
+      "title": "Portfolio expected return supports retirement goal",
       "severity": "info",
-      "detail": "The model portfolio's expected return of {{m:goal.model_return.pct}} is sufficient to meet the {{m:goal.G1.required.pct}} return required for the client's retirement goal, supporting the current balanced strategy despite the potential for earlier retirement.",
+      "detail": "The current model portfolio expected return of {{m:goal.model_return.pct}} is sufficient to meet the {{m:goal.G1.required.pct}} return required for the client's retirement goal.",
       "metric_refs": [
        "goal.model_return.pct",
        "goal.G1.required.pct"
@@ -922,19 +1016,18 @@
       "finding_id": "RISK-1",
       "title": "Portfolio volatility is within suitability limits",
       "severity": "info",
-      "detail": "The portfolio's current volatility of {{m:risk.vol.pct}} is within the {{m:risk.vol_band_max.pct}} limit for a balanced profile. The portfolio is slightly more volatile than the model portfolio of {{m:risk.target_vol.pct}}, but remains suitable for the client's age and long time horizon.",
+      "detail": "The portfolio's current volatility of {{m:risk.vol.pct}} is within the {{m:risk.vol_band_max.pct}} limit for a balanced risk profile. This alignment is appropriate given the client's age and long time horizon.",
       "metric_refs": [
        "risk.vol.pct",
-       "risk.vol_band_max.pct",
-       "risk.target_vol.pct"
+       "risk.vol_band_max.pct"
       ],
       "flag_refs": []
      },
      {
       "finding_id": "RISK-2",
-      "title": "Stress test indicates manageable downside risk",
+      "title": "Significant downside risk in equity bear scenario",
       "severity": "info",
-      "detail": "In an equity bear market scenario, the portfolio would experience a loss of {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. Given the client's long time horizon of twenty years and low liquidity needs, this downside is acceptable.",
+      "detail": "In an equity bear market scenario, the portfolio is projected to lose {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. This downside exposure should be reviewed against the client's risk tolerance despite the long time horizon.",
       "metric_refs": [
        "stress.equity_bear.cad",
        "stress.equity_bear.pct"
@@ -943,9 +1036,9 @@
      },
      {
       "finding_id": "RISK-3",
-      "title": "No single-security concentration issues identified",
+      "title": "No single-security concentration issues detected",
       "severity": "info",
-      "detail": "No single security exceeds the concentration limit of {{m:conc.limit.pct}}. The portfolio is well-diversified across asset classes, which supports the balanced risk profile.",
+      "detail": "No single security exceeds the {{m:conc.limit.pct}} concentration limit. The portfolio maintains adequate diversification across asset classes.",
       "metric_refs": [
        "conc.limit.pct"
       ],
@@ -962,7 +1055,7 @@
       "finding_id": "TAX-1",
       "title": "US-listed fund held in TFSA",
       "severity": "warning",
-      "detail": "The client holds {{m:tax.l1.VTI.cad}} of VTI in their TFSA. US-listed foreign-dividend funds in a TFSA are subject to a withholding tax on dividends that cannot be recovered. Moving these to an RRSP may be more tax-efficient for long-term growth.",
+      "detail": "The client holds {{m:tax.l1.VTI.cad}} of VTI in their TFSA. US-listed foreign-dividend funds in a TFSA are subject to a withholding tax on dividends that cannot be recovered. Moving these to an RRSP may be more tax-efficient. This is based on simplified educational rules regarding foreign withholding taxes.",
       "metric_refs": [
        "tax.l1.VTI.cad"
       ],
@@ -974,7 +1067,7 @@
       "finding_id": "TAX-2",
       "title": "Interest-bearing assets in non-registered account",
       "severity": "info",
-      "detail": "The client has {{m:tax.nonreg_interest.cad}} in interest-bearing assets (CSAV) within their non-registered account. Interest income is fully taxable at the client's marginal rate. Moving these to a tax-advantaged account can improve after-tax returns.",
+      "detail": "The client has {{m:tax.nonreg_interest.cad}} in interest-bearing assets (CSAV) within their non-registered account. Interest income is fully taxable at the client's marginal rate. Moving these to a tax-advantaged account is generally preferred. This is based on simplified educational rules regarding tax-efficient asset location.",
       "metric_refs": [
        "tax.nonreg_interest.cad"
       ],
@@ -984,9 +1077,9 @@
      },
      {
       "finding_id": "TAX-3",
-      "title": "Unused TFSA room available for taxable interest holdings",
+      "title": "Unused TFSA room with taxable interest holdings",
       "severity": "warning",
-      "detail": "The client has {{m:tax.tfsa_room.cad}} of unused TFSA room while holding {{m:tax.nonreg_interest.cad}} in interest-generating assets in a non-registered account. Utilizing available TFSA room for these assets can shelter the interest income from annual taxation.",
+      "detail": "The client has {{m:tax.tfsa_room.cad}} of unused TFSA room while holding {{m:tax.nonreg_interest.cad}} in interest-generating assets in a non-registered account. Utilizing available TFSA room for these assets can shelter the interest from annual taxation. This is based on simplified educational rules regarding tax-efficient account placement.",
       "metric_refs": [
        "tax.tfsa_room.cad",
        "tax.nonreg_interest.cad"
@@ -1004,22 +1097,24 @@
     "findings": [
      {
       "finding_id": "MKT-1",
-      "title": "US equity growth drives portfolio drift",
+      "title": "Bank of Canada policy rate and bond yields remain stable",
       "severity": "info",
-      "detail": "US equity markets experienced significant growth, with the index returning {{m:mkt.us_equity_ytd.pct}} percent year to date, driven by strong performance in technology sectors. This upward movement likely contributed to an overweight position in the client's US equity holdings.",
+      "detail": "The Bank of Canada has maintained the policy rate at {{m:mkt.ca_policy_rate.pct}} percent, influencing cash and bond returns. The Canada ten-year bond yield is currently {{m:mkt.ca_10y_yield.pct}} percent, reflecting current market expectations for fixed income.",
       "metric_refs": [
-       "mkt.us_equity_ytd.pct"
+       "mkt.ca_policy_rate.pct",
+       "mkt.ca_10y_yield.pct"
       ],
       "flag_refs": []
      },
      {
       "finding_id": "MKT-2",
-      "title": "Canadian bond yield environment impacts fixed income allocation",
+      "title": "Commodity price growth and currency fluctuations impact portfolio assets",
       "severity": "info",
-      "detail": "Canadian bond yields have trended lower, with the ten-year yield currently at {{m:mkt.ca_10y_yield.pct}} percent. This environment, coupled with a modest year-to-date return of {{m:mkt.ca_bond_ytd.pct}} percent for the Canadian bond index, has influenced the valuation and relative weight of the fixed income portion of the portfolio.",
+      "detail": "Energy commodity prices have risen by {{m:mkt.energy_commodities_12m.pct}} percent over the last twelve months, while broader commodity prices increased by {{m:mkt.commodities_12m.pct}} percent, impacting real assets performance. Additionally, the US dollar to Canadian dollar exchange rate is {{m:mkt.usd_cad.ratio}}, affecting international and US equity valuations.",
       "metric_refs": [
-       "mkt.ca_10y_yield.pct",
-       "mkt.ca_bond_ytd.pct"
+       "mkt.energy_commodities_12m.pct",
+       "mkt.commodities_12m.pct",
+       "mkt.usd_cad.ratio"
       ],
       "flag_refs": []
      }
@@ -1281,53 +1376,53 @@
     "label": "Unused RRSP contribution room",
     "source_tool": "get_contribution_room"
    },
-   "mkt.us_equity_ytd.pct": {
-    "key": "mkt.us_equity_ytd.pct",
-    "value": 18.0,
+   "mkt.ca_policy_rate.pct": {
+    "key": "mkt.ca_policy_rate.pct",
+    "value": 2.25,
     "unit": "pct",
-    "label": "US equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.ca_equity_ytd.pct": {
-    "key": "mkt.ca_equity_ytd.pct",
-    "value": 9.0,
-    "unit": "pct",
-    "label": "Canadian equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.intl_equity_ytd.pct": {
-    "key": "mkt.intl_equity_ytd.pct",
-    "value": 11.0,
-    "unit": "pct",
-    "label": "International equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.ca_bond_ytd.pct": {
-    "key": "mkt.ca_bond_ytd.pct",
-    "value": 2.5,
-    "unit": "pct",
-    "label": "Canadian bond index, year to date (fictional)",
+    "label": "Bank of Canada policy rate",
     "source_tool": "get_market_snapshot"
    },
    "mkt.ca_10y_yield.pct": {
     "key": "mkt.ca_10y_yield.pct",
-    "value": 3.1,
+    "value": 3.92,
     "unit": "pct",
-    "label": "Canada 10-year yield (fictional)",
+    "label": "Canada 10-year bond yield",
     "source_tool": "get_market_snapshot"
    },
-   "mkt.energy_sector_qtd.pct": {
-    "key": "mkt.energy_sector_qtd.pct",
-    "value": -12.0,
-    "unit": "pct",
-    "label": "Energy sector, quarter to date (fictional)",
+   "mkt.ca_curve.pp": {
+    "key": "mkt.ca_curve.pp",
+    "value": 0.69,
+    "unit": "pp",
+    "label": "Canada yield curve, 10-year minus 2-year",
     "source_tool": "get_market_snapshot"
    },
-   "mkt.reit_ytd.pct": {
-    "key": "mkt.reit_ytd.pct",
-    "value": 4.0,
+   "mkt.us_10y_yield.pct": {
+    "key": "mkt.us_10y_yield.pct",
+    "value": 5.28,
     "unit": "pct",
-    "label": "REIT index, year to date (fictional)",
+    "label": "US 10-year Treasury yield",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.usd_cad.ratio": {
+    "key": "mkt.usd_cad.ratio",
+    "value": 1.43,
+    "unit": "ratio",
+    "label": "US dollar in Canadian dollars",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.energy_commodities_12m.pct": {
+    "key": "mkt.energy_commodities_12m.pct",
+    "value": 38.1,
+    "unit": "pct",
+    "label": "Energy commodity prices, 12-month change",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.commodities_12m.pct": {
+    "key": "mkt.commodities_12m.pct",
+    "value": 23.3,
+    "unit": "pct",
+    "label": "Commodity prices, 12-month change",
     "source_tool": "get_market_snapshot"
    },
    "client.age.years": {
@@ -1397,80 +1492,133 @@
   },
   "drafts": [
    {
-    "headline": "Rebalancing Portfolio and Optimizing Tax Efficiency for Daniel",
-    "summary": "Daniel's portfolio has drifted due to strong US equity performance, with US equities exceeding the target by {{m:drift.US_EQUITY.pp}} and Canadian bonds trailing by {{m:drift.CA_BONDS.pp}}. We should rebalance to restore the balanced allocation. Additionally, we can improve tax efficiency by relocating the US-listed fund from his TFSA and utilizing his available TFSA contribution room for interest-bearing assets currently held in his non-registered account. These steps align with his goal of a low-maintenance portfolio while supporting his retirement objectives.",
+    "headline": "Rebalancing portfolio and optimizing tax efficiency for Daniel's long-term retirement goals",
+    "summary": "Daniel, your portfolio remains well-positioned to meet your retirement goals, with expected returns of {{m:goal.model_return.pct}} exceeding the required {{m:goal.G1.required.pct}}. However, we need to address portfolio drift and tax efficiency. Your US equity holdings have drifted above target by {{m:drift.US_EQUITY.pp}}, while Canadian bonds are underweight by {{m:drift.CA_BONDS.pp}}. Additionally, we can improve tax efficiency by relocating US-listed holdings from your TFSA and utilizing your {{m:tax.tfsa_room.cad}} of unused TFSA room to shelter interest-bearing assets currently in your non-registered account.",
     "actions": [
      {
-      "action_id": "ACT-001",
-      "type": "rebalance",
+      "action_id": "A-one",
+      "type": "reduce_position",
       "target": "US_EQUITY",
       "direction": "decrease",
-      "description": "Reduce US equity exposure to align with the balanced risk profile.",
-      "rationale": "The current allocation exceeds the drift tolerance of {{m:cfg.drift_tolerance.pp}}.",
+      "description": "Reduce US equity exposure to align with the balanced model portfolio.",
+      "rationale": "The current allocation exceeds the target by {{m:drift.US_EQUITY.pp}}, which is outside the {{m:cfg.drift_tolerance.pp}} tolerance.",
       "finding_refs": [
        "PORT-1"
       ],
       "priority": "high"
      },
      {
-      "action_id": "ACT-002",
+      "action_id": "A-two",
       "type": "rebalance",
       "target": "CA_BONDS",
       "direction": "increase",
-      "description": "Increase Canadian bond exposure to restore target allocation.",
-      "rationale": "The current allocation is underweight by {{m:drift.CA_BONDS.pp}}.",
+      "description": "Increase Canadian bond exposure to align with the balanced model portfolio.",
+      "rationale": "The current allocation is underweight by {{m:drift.CA_BONDS.pp}}, which is outside the {{m:cfg.drift_tolerance.pp}} tolerance.",
       "finding_refs": [
        "PORT-1"
       ],
       "priority": "high"
      },
      {
-      "action_id": "ACT-003",
+      "action_id": "A-three",
       "type": "relocate_holding",
       "target": "VTI",
       "direction": "move",
-      "description": "Move VTI from the TFSA to the RRSP.",
-      "rationale": "This avoids non-recoverable withholding tax on foreign dividends, improving long-term growth.",
+      "description": "Move US-listed fund from TFSA to RRSP.",
+      "rationale": "Holding US-listed assets in a TFSA incurs non-recoverable withholding taxes on dividends.",
       "finding_refs": [
        "TAX-1"
       ],
       "priority": "medium"
      },
      {
-      "action_id": "ACT-004",
+      "action_id": "A-four",
       "type": "use_tfsa_room",
-      "target": "CA_BONDS",
+      "target": "CASH",
       "direction": "increase",
-      "description": "Utilize available TFSA room to hold interest-bearing assets.",
-      "rationale": "This shelters {{m:tax.nonreg_interest.cad}} of interest income from annual taxation.",
+      "description": "Utilize remaining TFSA room to shelter interest-bearing assets.",
+      "rationale": "The client has {{m:tax.tfsa_room.cad}} of unused room, which can shelter interest income currently taxed in the non-registered account.",
       "finding_refs": [
        "TAX-3"
       ],
       "priority": "medium"
-     },
-     {
-      "action_id": "ACT-005",
-      "type": "reduce_position",
-      "target": "CASH",
-      "direction": "decrease",
-      "description": "Deploy excess cash from the non-registered account.",
-      "rationale": "Cash levels are {{m:drift.CASH.pp}} above the target of {{m:target.CASH.pct}}, providing funds to address the bond underweight.",
-      "finding_refs": [
-       "PORT-2"
-      ],
-      "priority": "low"
      }
     ],
     "risks_and_considerations": [
-     "Transaction costs associated with rebalancing the portfolio.",
-     "Potential capital gains realization when selling assets in the non-registered account.",
-     "Market timing risks during the transition of assets."
+     "Market volatility during the rebalancing process",
+     "Potential tax implications of liquidating positions in non-registered accounts",
+     "Transaction costs associated with portfolio adjustments"
     ],
     "deferred": [],
     "client_talking_points": [
-     "We are rebalancing your portfolio to ensure it remains aligned with your balanced risk profile after recent market growth.",
-     "We recommend moving your US-listed investments and interest-bearing assets to tax-advantaged accounts to keep more of your returns.",
-     "Your current strategy remains well-positioned to meet your retirement goals, even if you decide to retire earlier than planned."
+     "We are adjusting your portfolio to ensure it stays aligned with your balanced risk profile and long-term goals.",
+     "We are moving your US-listed fund to an RRSP to avoid unnecessary withholding taxes on your dividends.",
+     "We will use your available TFSA room to protect your interest income from annual taxation."
+    ]
+   },
+   {
+    "headline": "Rebalancing Daniel's portfolio to address drift and improve tax efficiency for long-term retirement goals",
+    "summary": "Daniel's portfolio remains aligned with his retirement goals, with expected returns of {{m:goal.model_return.pct}} exceeding the required {{m:goal.G1.required.pct}}. However, the portfolio requires rebalancing as US equity has drifted above target by {{m:drift.US_EQUITY.pp}} and Canadian bonds are underweight by {{m:drift.CA_BONDS.pp}}. Additionally, tax efficiency can be improved by relocating US-listed holdings from the TFSA and utilizing {{m:tax.tfsa_room.cad}} of unused TFSA room to shelter interest-bearing assets currently held in the non-registered account.",
+    "actions": [
+     {
+      "action_id": "A-one",
+      "type": "reduce_position",
+      "target": "US_EQUITY",
+      "direction": "decrease",
+      "description": "Reduce US equity exposure to align with the balanced model portfolio.",
+      "rationale": "The current allocation exceeds the target by {{m:drift.US_EQUITY.pp}}, which is outside the {{m:cfg.drift_tolerance.pp}} tolerance.",
+      "finding_refs": [
+       "PORT-1"
+      ],
+      "priority": "high"
+     },
+     {
+      "action_id": "A-two",
+      "type": "rebalance",
+      "target": "CA_BONDS",
+      "direction": "increase",
+      "description": "Increase Canadian bond exposure to align with the balanced model portfolio.",
+      "rationale": "The current allocation is underweight by {{m:drift.CA_BONDS.pp}}, which is outside the {{m:cfg.drift_tolerance.pp}} tolerance.",
+      "finding_refs": [
+       "PORT-1"
+      ],
+      "priority": "high"
+     },
+     {
+      "action_id": "A-three",
+      "type": "relocate_holding",
+      "target": "VTI",
+      "direction": "move",
+      "description": "Move US-listed fund from TFSA to RRSP.",
+      "rationale": "Holding US-listed assets in a TFSA incurs non-recoverable withholding taxes on dividends.",
+      "finding_refs": [
+       "TAX-1"
+      ],
+      "priority": "medium"
+     },
+     {
+      "action_id": "A-four",
+      "type": "use_tfsa_room",
+      "target": "CASH",
+      "direction": "increase",
+      "description": "Utilize remaining TFSA room to shelter interest-bearing assets.",
+      "rationale": "Daniel has {{m:tax.tfsa_room.cad}} of unused room, which can shelter interest income currently taxed in the non-registered account.",
+      "finding_refs": [
+       "TAX-3"
+      ],
+      "priority": "medium"
+     }
+    ],
+    "risks_and_considerations": [
+     "Market volatility during the rebalancing process",
+     "Potential tax implications of liquidating positions in non-registered accounts",
+     "Transaction costs associated with portfolio adjustments"
+    ],
+    "deferred": [],
+    "client_talking_points": [
+     "We are adjusting your portfolio to ensure it stays aligned with your balanced risk profile and long-term goals.",
+     "We are moving your US-listed fund to an RRSP to avoid unnecessary withholding taxes on your dividends.",
+     "We will use your available TFSA room to protect your interest income from annual taxation."
     ]
    }
   ],
@@ -1484,6 +1632,13 @@
     "gate": "G1",
     "passed": true,
     "violations": []
+   },
+   {
+    "gate": "G5",
+    "passed": false,
+    "violations": [
+     "G5.12 advisor_voice: headline, summary and actions speak about the client, not to them"
+    ]
    },
    {
     "gate": "G5",
@@ -1509,83 +1664,71 @@
     "issues": []
    }
   ],
-  "revision_count": 0,
+  "revision_count": 1,
   "final": {
    "recommendation": {
-    "headline": "Rebalancing Portfolio and Optimizing Tax Efficiency for Daniel",
-    "summary": "Daniel's portfolio has drifted due to strong US equity performance, with US equities exceeding the target by +8.1 pp and Canadian bonds trailing by -9.6 pp. We should rebalance to restore the balanced allocation. Additionally, we can improve tax efficiency by relocating the US-listed fund from his TFSA and utilizing his available TFSA contribution room for interest-bearing assets currently held in his non-registered account. These steps align with his goal of a low-maintenance portfolio while supporting his retirement objectives.",
+    "headline": "Rebalancing Daniel's portfolio to address drift and improve tax efficiency for long-term retirement goals",
+    "summary": "Daniel's portfolio remains aligned with his retirement goals, with expected returns of 5.9% exceeding the required 5.2%. However, the portfolio requires rebalancing as US equity has drifted above target by +8.1 pp and Canadian bonds are underweight by -9.6 pp. Additionally, tax efficiency can be improved by relocating US-listed holdings from the TFSA and utilizing $14,000 of unused TFSA room to shelter interest-bearing assets currently held in the non-registered account.",
     "actions": [
      {
-      "action_id": "ACT-001",
-      "type": "rebalance",
+      "action_id": "A-one",
+      "type": "reduce_position",
       "target": "US_EQUITY",
       "direction": "decrease",
-      "description": "Reduce US equity exposure to align with the balanced risk profile.",
-      "rationale": "The current allocation exceeds the drift tolerance of +5.0 pp.",
+      "description": "Reduce US equity exposure to align with the balanced model portfolio.",
+      "rationale": "The current allocation exceeds the target by +8.1 pp, which is outside the +5.0 pp tolerance.",
       "finding_refs": [
        "PORT-1"
       ],
       "priority": "high"
      },
      {
-      "action_id": "ACT-002",
+      "action_id": "A-two",
       "type": "rebalance",
       "target": "CA_BONDS",
       "direction": "increase",
-      "description": "Increase Canadian bond exposure to restore target allocation.",
-      "rationale": "The current allocation is underweight by -9.6 pp.",
+      "description": "Increase Canadian bond exposure to align with the balanced model portfolio.",
+      "rationale": "The current allocation is underweight by -9.6 pp, which is outside the +5.0 pp tolerance.",
       "finding_refs": [
        "PORT-1"
       ],
       "priority": "high"
      },
      {
-      "action_id": "ACT-003",
+      "action_id": "A-three",
       "type": "relocate_holding",
       "target": "VTI",
       "direction": "move",
-      "description": "Move VTI from the TFSA to the RRSP.",
-      "rationale": "This avoids non-recoverable withholding tax on foreign dividends, improving long-term growth.",
+      "description": "Move US-listed fund from TFSA to RRSP.",
+      "rationale": "Holding US-listed assets in a TFSA incurs non-recoverable withholding taxes on dividends.",
       "finding_refs": [
        "TAX-1"
       ],
       "priority": "medium"
      },
      {
-      "action_id": "ACT-004",
+      "action_id": "A-four",
       "type": "use_tfsa_room",
-      "target": "CA_BONDS",
+      "target": "CASH",
       "direction": "increase",
-      "description": "Utilize available TFSA room to hold interest-bearing assets.",
-      "rationale": "This shelters $15,000 of interest income from annual taxation.",
+      "description": "Utilize remaining TFSA room to shelter interest-bearing assets.",
+      "rationale": "Daniel has $14,000 of unused room, which can shelter interest income currently taxed in the non-registered account.",
       "finding_refs": [
        "TAX-3"
       ],
       "priority": "medium"
-     },
-     {
-      "action_id": "ACT-005",
-      "type": "reduce_position",
-      "target": "CASH",
-      "direction": "decrease",
-      "description": "Deploy excess cash from the non-registered account.",
-      "rationale": "Cash levels are +3.9 pp above the target of 3.0%, providing funds to address the bond underweight.",
-      "finding_refs": [
-       "PORT-2"
-      ],
-      "priority": "low"
      }
     ],
     "risks_and_considerations": [
-     "Transaction costs associated with rebalancing the portfolio.",
-     "Potential capital gains realization when selling assets in the non-registered account.",
-     "Market timing risks during the transition of assets."
+     "Market volatility during the rebalancing process",
+     "Potential tax implications of liquidating positions in non-registered accounts",
+     "Transaction costs associated with portfolio adjustments"
     ],
     "deferred": [],
     "client_talking_points": [
-     "We are rebalancing your portfolio to ensure it remains aligned with your balanced risk profile after recent market growth.",
-     "We recommend moving your US-listed investments and interest-bearing assets to tax-advantaged accounts to keep more of your returns.",
-     "Your current strategy remains well-positioned to meet your retirement goals, even if you decide to retire earlier than planned."
+     "We are adjusting your portfolio to ensure it stays aligned with your balanced risk profile and long-term goals.",
+     "We are moving your US-listed fund to an RRSP to avoid unnecessary withholding taxes on your dividends.",
+     "We will use your available TFSA room to protect your interest income from annual taxation."
     ]
    },
    "disclosure": "Generated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client.",
@@ -1595,13 +1738,6 @@
      "value": 5.0,
      "unit": "pp",
      "label": "Drift tolerance",
-     "source_tool": "compute_drift"
-    },
-    {
-     "key": "drift.CASH.pp",
-     "value": 3.85,
-     "unit": "pp",
-     "label": "Cash vs target",
      "source_tool": "compute_drift"
     },
     {
@@ -1619,18 +1755,25 @@
      "source_tool": "compute_drift"
     },
     {
-     "key": "target.CASH.pct",
-     "value": 3.0,
+     "key": "goal.G1.required.pct",
+     "value": 5.17,
      "unit": "pct",
-     "label": "Cash target (balanced)",
-     "source_tool": "compute_allocation"
+     "label": "Return needed for Retirement nest egg",
+     "source_tool": "check_goals"
     },
     {
-     "key": "tax.nonreg_interest.cad",
-     "value": 15000.0,
+     "key": "goal.model_return.pct",
+     "value": 5.86,
+     "unit": "pct",
+     "label": "Model-portfolio expected return",
+     "source_tool": "check_goals"
+    },
+    {
+     "key": "tax.tfsa_room.cad",
+     "value": 14000.0,
      "unit": "cad",
-     "label": "Interest-income holdings in NON_REG",
-     "source_tool": "check_asset_location"
+     "label": "Unused TFSA contribution room",
+     "source_tool": "get_contribution_room"
     }
    ]
   },
@@ -1641,14 +1784,14 @@
    "advisor_note": ""
   },
   "budget_snapshot": {
-   "llm_calls": 10,
-   "tokens": 26557,
-   "wall_ms": 33309
+   "llm_calls": 12,
+   "tokens": 37317,
+   "wall_ms": 48468
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T21:27:47.876297Z",
-  "updated_at": "2026-10-07T21:28:21.500286Z",
+  "created_at": "2026-10-08T00:12:30.747712Z",
+  "updated_at": "2026-10-08T00:13:19.519803Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate",
@@ -1664,51 +1807,43 @@
  "outbox": {
   "tasks": [
    {
-    "Subject": "Review: Reduce US equity exposure to align with the balanced risk pr",
+    "Subject": "Review: Reduce US equity exposure to align with the balanced model p",
     "WhatId": "C001",
     "Priority": "High",
     "Status": "Not Started",
-    "Description": "Reduce US equity exposure to align with the balanced risk profile. The current allocation exceeds the drift tolerance of +5.0 pp.",
-    "Source": "AdvisorCopilot/C001-20261007-212747-1440dc"
+    "Description": "Reduce US equity exposure to align with the balanced model portfolio. The current allocation exceeds the target by +8.1 pp, which is outside the +5.0 pp tolerance.",
+    "Source": "AdvisorCopilot/C001-20261008-001230-18030c"
    },
    {
-    "Subject": "Review: Increase Canadian bond exposure to restore target allocation",
+    "Subject": "Review: Increase Canadian bond exposure to align with the balanced m",
     "WhatId": "C001",
     "Priority": "High",
     "Status": "Not Started",
-    "Description": "Increase Canadian bond exposure to restore target allocation. The current allocation is underweight by -9.6 pp.",
-    "Source": "AdvisorCopilot/C001-20261007-212747-1440dc"
+    "Description": "Increase Canadian bond exposure to align with the balanced model portfolio. The current allocation is underweight by -9.6 pp, which is outside the +5.0 pp tolerance.",
+    "Source": "AdvisorCopilot/C001-20261008-001230-18030c"
    },
    {
-    "Subject": "Review: Move VTI from the TFSA to the RRSP.",
+    "Subject": "Review: Move US-listed fund from TFSA to RRSP.",
     "WhatId": "C001",
     "Priority": "Normal",
     "Status": "Not Started",
-    "Description": "Move VTI from the TFSA to the RRSP. This avoids non-recoverable withholding tax on foreign dividends, improving long-term growth.",
-    "Source": "AdvisorCopilot/C001-20261007-212747-1440dc"
+    "Description": "Move US-listed fund from TFSA to RRSP. Holding US-listed assets in a TFSA incurs non-recoverable withholding taxes on dividends.",
+    "Source": "AdvisorCopilot/C001-20261008-001230-18030c"
    },
    {
-    "Subject": "Review: Utilize available TFSA room to hold interest-bearing assets.",
+    "Subject": "Review: Utilize remaining TFSA room to shelter interest-bearing asse",
     "WhatId": "C001",
     "Priority": "Normal",
     "Status": "Not Started",
-    "Description": "Utilize available TFSA room to hold interest-bearing assets. This shelters $15,000 of interest income from annual taxation.",
-    "Source": "AdvisorCopilot/C001-20261007-212747-1440dc"
-   },
-   {
-    "Subject": "Review: Deploy excess cash from the non-registered account.",
-    "WhatId": "C001",
-    "Priority": "Low",
-    "Status": "Not Started",
-    "Description": "Deploy excess cash from the non-registered account. Cash levels are +3.9 pp above the target of 3.0%, providing funds to address the bond underweight.",
-    "Source": "AdvisorCopilot/C001-20261007-212747-1440dc"
+    "Description": "Utilize remaining TFSA room to shelter interest-bearing assets. Daniel has $14,000 of unused room, which can shelter interest income currently taxed in the non-registered account.",
+    "Source": "AdvisorCopilot/C001-20261008-001230-18030c"
    }
   ],
   "notes": [
    {
     "Title": "Advisor Copilot recommendation (approved)",
     "ParentId": "C001",
-    "Body": "Rebalancing Portfolio and Optimizing Tax Efficiency for Daniel\n\nDaniel's portfolio has drifted due to strong US equity performance, with US equities exceeding the target by +8.1 pp and Canadian bonds trailing by -9.6 pp. We should rebalance to restore the balanced allocation. Additionally, we can improve tax efficiency by relocating the US-listed fund from his TFSA and utilizing his available TFSA contribution room for interest-bearing assets currently held in his non-registered account. These steps align with his goal of a low-maintenance portfolio while supporting his retirement objectives.\n\nGenerated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client."
+    "Body": "Rebalancing Daniel's portfolio to address drift and improve tax efficiency for long-term retirement goals\n\nDaniel's portfolio remains aligned with his retirement goals, with expected returns of 5.9% exceeding the required 5.2%. However, the portfolio requires rebalancing as US equity has drifted above target by +8.1 pp and Canadian bonds are underweight by -9.6 pp. Additionally, tax efficiency can be improved by relocating US-listed holdings from the TFSA and utilizing $14,000 of unused TFSA room to shelter interest-bearing assets currently held in the non-registered account.\n\nGenerated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client."
    }
   ]
  }

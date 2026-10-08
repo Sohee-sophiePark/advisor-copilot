@@ -4,7 +4,7 @@
  "client_id": "C113",
  "request_text": "",
  "preset": "annual_review",
- "recorded_at": "2026-10-07T21:31:40+00:00",
+ "recorded_at": "2026-10-08T00:18:10+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.730171Z",
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.412543Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.750216Z",
-   "t_ms": 20,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.434495Z",
+   "t_ms": 21,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -50,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.750468Z",
-   "t_ms": 20,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.434877Z",
+   "t_ms": 22,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -66,9 +66,9 @@
   },
   {
    "seq": 4,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.750534Z",
-   "t_ms": 20,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.434947Z",
+   "t_ms": 22,
    "type": "injection_flagged",
    "agent": "gate",
    "level": "warn",
@@ -82,9 +82,9 @@
   },
   {
    "seq": 5,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.751089Z",
-   "t_ms": 20,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.435485Z",
+   "t_ms": 22,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -96,9 +96,9 @@
   },
   {
    "seq": 6,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.751168Z",
-   "t_ms": 21,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.435566Z",
+   "t_ms": 23,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
@@ -118,9 +118,9 @@
   },
   {
    "seq": 7,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.751793Z",
-   "t_ms": 21,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.436809Z",
+   "t_ms": 24,
    "type": "agent_started",
    "agent": "portfolio",
    "level": "info",
@@ -136,9 +136,9 @@
   },
   {
    "seq": 8,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.752531Z",
-   "t_ms": 22,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.437711Z",
+   "t_ms": 25,
    "type": "llm_call_started",
    "agent": "portfolio",
    "level": "info",
@@ -149,9 +149,9 @@
   },
   {
    "seq": 9,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.752661Z",
-   "t_ms": 22,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.437850Z",
+   "t_ms": 25,
    "type": "agent_started",
    "agent": "risk",
    "level": "info",
@@ -166,9 +166,9 @@
   },
   {
    "seq": 10,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.753355Z",
-   "t_ms": 23,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.438608Z",
+   "t_ms": 26,
    "type": "llm_call_started",
    "agent": "risk",
    "level": "info",
@@ -179,9 +179,9 @@
   },
   {
    "seq": 11,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.753432Z",
-   "t_ms": 23,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.438728Z",
+   "t_ms": 26,
    "type": "agent_started",
    "agent": "tax",
    "level": "info",
@@ -196,9 +196,9 @@
   },
   {
    "seq": 12,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.753848Z",
-   "t_ms": 23,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.439226Z",
+   "t_ms": 26,
    "type": "llm_call_started",
    "agent": "tax",
    "level": "info",
@@ -209,9 +209,9 @@
   },
   {
    "seq": 13,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.753907Z",
-   "t_ms": 23,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.439294Z",
+   "t_ms": 26,
    "type": "agent_started",
    "agent": "market",
    "level": "info",
@@ -224,9 +224,9 @@
   },
   {
    "seq": 14,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:24.754220Z",
-   "t_ms": 24,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:12.439545Z",
+   "t_ms": 27,
    "type": "llm_call_started",
    "agent": "market",
    "level": "info",
@@ -237,9 +237,104 @@
   },
   {
    "seq": 15,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.582604Z",
-   "t_ms": 852,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.210323Z",
+   "t_ms": 797,
+   "type": "llm_call_finished",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1205,
+    "tokens_out": 40,
+    "latency_ms": 769,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 16,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.211479Z",
+   "t_ms": 798,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "compute_allocation",
+    "args": {},
+    "metrics_count": 13,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 17,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.211847Z",
+   "t_ms": 799,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "compute_drift",
+    "args": {},
+    "metrics_count": 7,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 18,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.212052Z",
+   "t_ms": 799,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "check_goals",
+    "args": {},
+    "metrics_count": 0,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 19,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.212189Z",
+   "t_ms": 799,
+   "type": "tool_call",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "name": "get_positions",
+    "args": {},
+    "metrics_count": 1,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 20,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.212532Z",
+   "t_ms": 800,
+   "type": "llm_call_started",
+   "agent": "portfolio",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:portfolio",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 21,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.841030Z",
+   "t_ms": 1428,
    "type": "llm_call_finished",
    "agent": "risk",
    "level": "info",
@@ -248,16 +343,16 @@
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 998,
     "tokens_out": 42,
-    "latency_ms": 800,
+    "latency_ms": 1370,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 16,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.584781Z",
-   "t_ms": 854,
+   "seq": 22,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.841961Z",
+   "t_ms": 1429,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -270,10 +365,10 @@
    }
   },
   {
-   "seq": 17,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.585937Z",
-   "t_ms": 855,
+   "seq": 23,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.842186Z",
+   "t_ms": 1429,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -286,10 +381,10 @@
    }
   },
   {
-   "seq": 18,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.586151Z",
-   "t_ms": 856,
+   "seq": 24,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.842356Z",
+   "t_ms": 1429,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -304,10 +399,10 @@
    }
   },
   {
-   "seq": 19,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.586369Z",
-   "t_ms": 856,
+   "seq": 25,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:13.842581Z",
+   "t_ms": 1430,
    "type": "llm_call_started",
    "agent": "risk",
    "level": "info",
@@ -317,202 +412,28 @@
    }
   },
   {
-   "seq": 20,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.589726Z",
-   "t_ms": 859,
-   "type": "llm_call_finished",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:portfolio",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1205,
-    "tokens_out": 40,
-    "latency_ms": 833,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 21,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.590710Z",
-   "t_ms": 860,
-   "type": "tool_call",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "name": "compute_allocation",
-    "args": {},
-    "metrics_count": 13,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 22,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.590940Z",
-   "t_ms": 860,
-   "type": "tool_call",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "name": "compute_drift",
-    "args": {},
-    "metrics_count": 7,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 23,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.591051Z",
-   "t_ms": 860,
-   "type": "tool_call",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "name": "check_goals",
-    "args": {},
-    "metrics_count": 0,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 24,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.591160Z",
-   "t_ms": 861,
-   "type": "tool_call",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "name": "get_positions",
-    "args": {},
-    "metrics_count": 1,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 25,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:25.591313Z",
-   "t_ms": 861,
-   "type": "llm_call_started",
-   "agent": "portfolio",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:portfolio",
-    "model": "gemini-3.1-flash-lite"
-   }
-  },
-  {
    "seq": 26,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.117398Z",
-   "t_ms": 1387,
-   "type": "llm_call_finished",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:tax",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1080,
-    "tokens_out": 34,
-    "latency_ms": 528,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 27,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.118505Z",
-   "t_ms": 1388,
-   "type": "tool_call",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "name": "check_asset_location",
-    "args": {},
-    "metrics_count": 2,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 28,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.118793Z",
-   "t_ms": 1388,
-   "type": "tool_call",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "name": "get_contribution_room",
-    "args": {},
-    "metrics_count": 2,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 29,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.118996Z",
-   "t_ms": 1388,
-   "type": "tool_call",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "name": "get_positions",
-    "args": {},
-    "metrics_count": 1,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 30,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.119249Z",
-   "t_ms": 1389,
-   "type": "llm_call_started",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:tax",
-    "model": "gemini-3.1-flash-lite"
-   }
-  },
-  {
-   "seq": 31,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.128835Z",
-   "t_ms": 1398,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:14.672017Z",
+   "t_ms": 2259,
    "type": "llm_call_finished",
    "agent": "market",
    "level": "info",
    "payload": {
     "purpose": "analyst:market",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 848,
+    "tokens_in": 885,
     "tokens_out": 57,
-    "latency_ms": 536,
+    "latency_ms": 827,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 32,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.129715Z",
-   "t_ms": 1399,
+   "seq": 27,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:14.673913Z",
+   "t_ms": 2261,
    "type": "tool_call",
    "agent": "market",
    "level": "info",
@@ -534,10 +455,10 @@
    }
   },
   {
-   "seq": 33,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:26.130132Z",
-   "t_ms": 1399,
+   "seq": 28,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:14.674694Z",
+   "t_ms": 2262,
    "type": "llm_call_started",
    "agent": "market",
    "level": "info",
@@ -547,10 +468,89 @@
    }
   },
   {
+   "seq": 29,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:15.241279Z",
+   "t_ms": 2828,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1080,
+    "tokens_out": 34,
+    "latency_ms": 2027,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 30,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:15.242304Z",
+   "t_ms": 2829,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "check_asset_location",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 31,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:15.242579Z",
+   "t_ms": 2830,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_contribution_room",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 32,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:15.242781Z",
+   "t_ms": 2830,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_positions",
+    "args": {},
+    "metrics_count": 1,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 33,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:15.243194Z",
+   "t_ms": 2830,
+   "type": "llm_call_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
    "seq": 34,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:27.281626Z",
-   "t_ms": 2551,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:15.930376Z",
+   "t_ms": 3517,
    "type": "llm_call_finished",
    "agent": "portfolio",
    "level": "info",
@@ -558,17 +558,17 @@
     "purpose": "analyst:portfolio",
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 2334,
-    "tokens_out": 164,
-    "latency_ms": 1150,
+    "tokens_out": 225,
+    "latency_ms": 1254,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 35,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:27.283481Z",
-   "t_ms": 2553,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:15.931737Z",
+   "t_ms": 3519,
    "type": "agent_finished",
    "agent": "portfolio",
    "level": "info",
@@ -582,9 +582,37 @@
   },
   {
    "seq": 36,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:28.094803Z",
-   "t_ms": 3364,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:16.074444Z",
+   "t_ms": 3661,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 429,
+    "wait_ms": 43727,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 37,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:16.209978Z",
+   "t_ms": 3797,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 429,
+    "wait_ms": 43549,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 38,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:25.175002Z",
+   "t_ms": 12762,
    "type": "llm_call_finished",
    "agent": "risk",
    "level": "info",
@@ -592,17 +620,17 @@
     "purpose": "analyst:risk",
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 1487,
-    "tokens_out": 373,
-    "latency_ms": 1974,
+    "tokens_out": 322,
+    "latency_ms": 9930,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 37,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:28.095838Z",
-   "t_ms": 3365,
+   "seq": 39,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:17:25.176812Z",
+   "t_ms": 12764,
    "type": "agent_finished",
    "agent": "risk",
    "level": "info",
@@ -613,10 +641,10 @@
    }
   },
   {
-   "seq": 38,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:28.320846Z",
-   "t_ms": 3590,
+   "seq": 40,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:00.824096Z",
+   "t_ms": 48411,
    "type": "llm_call_finished",
    "agent": "tax",
    "level": "info",
@@ -624,17 +652,17 @@
     "purpose": "analyst:tax",
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 1555,
-    "tokens_out": 160,
-    "latency_ms": 1036,
-    "attempt": 1,
+    "tokens_out": 157,
+    "latency_ms": 1059,
+    "attempt": 2,
     "source": "live"
    }
   },
   {
-   "seq": 39,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:28.321682Z",
-   "t_ms": 3591,
+   "seq": 41,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:00.825120Z",
+   "t_ms": 48412,
    "type": "agent_finished",
    "agent": "tax",
    "level": "info",
@@ -647,28 +675,59 @@
    }
   },
   {
-   "seq": 40,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:30.026977Z",
-   "t_ms": 5296,
+   "seq": 42,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:01.230753Z",
+   "t_ms": 48818,
    "type": "llm_call_finished",
    "agent": "market",
    "level": "info",
    "payload": {
     "purpose": "analyst:market",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1391,
-    "tokens_out": 284,
-    "latency_ms": 1918,
+    "tokens_in": 1515,
+    "tokens_out": 343,
+    "latency_ms": 1426,
+    "attempt": 2,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 43,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:01.232370Z",
+   "t_ms": 48819,
+   "type": "llm_call_started",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 44,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:02.651768Z",
+   "t_ms": 50239,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1736,
+    "tokens_out": 341,
+    "latency_ms": 1418,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 41,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:30.030880Z",
-   "t_ms": 5300,
+   "seq": 45,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:02.652867Z",
+   "t_ms": 50240,
    "type": "agent_finished",
    "agent": "market",
    "level": "info",
@@ -679,10 +738,10 @@
    }
   },
   {
-   "seq": 42,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:30.035964Z",
-   "t_ms": 5305,
+   "seq": 46,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:02.655346Z",
+   "t_ms": 50242,
    "type": "llm_call_started",
    "agent": "synthesizer",
    "level": "info",
@@ -692,28 +751,28 @@
    }
   },
   {
-   "seq": 43,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:39.668625Z",
-   "t_ms": 14938,
+   "seq": 47,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:09.355559Z",
+   "t_ms": 56942,
    "type": "llm_call_finished",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "purpose": "synthesizer",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 3345,
-    "tokens_out": 2680,
-    "latency_ms": 9628,
+    "tokens_in": 3389,
+    "tokens_out": 2220,
+    "latency_ms": 6698,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 44,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:39.670688Z",
-   "t_ms": 14940,
+   "seq": 48,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:09.357704Z",
+   "t_ms": 56945,
    "type": "draft_created",
    "agent": "synthesizer",
    "level": "info",
@@ -724,10 +783,10 @@
    }
   },
   {
-   "seq": 45,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:39.670995Z",
-   "t_ms": 14940,
+   "seq": 49,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:09.358217Z",
+   "t_ms": 56945,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -738,10 +797,10 @@
    }
   },
   {
-   "seq": 46,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:39.672057Z",
-   "t_ms": 14941,
+   "seq": 50,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:09.359316Z",
+   "t_ms": 56946,
    "type": "llm_call_started",
    "agent": "evaluator",
    "level": "info",
@@ -751,28 +810,28 @@
    }
   },
   {
-   "seq": 47,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:40.894625Z",
-   "t_ms": 16164,
+   "seq": 51,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:10.539181Z",
+   "t_ms": 58126,
    "type": "llm_call_finished",
    "agent": "evaluator",
    "level": "info",
    "payload": {
     "purpose": "evaluator",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 3471,
-    "tokens_out": 205,
-    "latency_ms": 1220,
+    "tokens_in": 3482,
+    "tokens_out": 204,
+    "latency_ms": 1178,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 48,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:40.895956Z",
-   "t_ms": 16165,
+   "seq": 52,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:10.540609Z",
+   "t_ms": 58127,
    "type": "evaluator_verdict",
    "agent": "evaluator",
    "level": "info",
@@ -794,39 +853,39 @@
    }
   },
   {
-   "seq": 49,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:40.896302Z",
-   "t_ms": 16166,
+   "seq": 53,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:10.541228Z",
+   "t_ms": 58128,
    "type": "awaiting_approval",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
-    "summary": "Lena's portfolio is currently well-positioned and aligned with her long-term growth objectives. All asset allocations remain within their target ranges, and risk metrics, including volatility and concentration, are within appropriate limits. While market conditions, such as the performance of 18.0% in US equities and shifts in 3.1% for bonds, have influenced asset values, no rebalancing is necessary. The current structure remains suitable for her long-term time horizon."
+    "summary": "Lena's portfolio is currently perfectly aligned with her growth model, requiring no adjustments. Her risk profile and volatility levels remain well within her 15.0% suitability limit, and stress testing confirms her portfolio is positioned to withstand market volatility over her 25 years time horizon. While commodity prices have shifted by 23.3% and the interest rate environment remains active, her current asset allocation is appropriate for her long-term goals."
    }
   },
   {
-   "seq": 50,
-   "run_id": "C113-20261007-213124-d11b2d",
-   "ts": "2026-10-07T21:31:40.897283Z",
-   "t_ms": 16167,
+   "seq": 54,
+   "run_id": "C113-20261008-001712-f6cbe7",
+   "ts": "2026-10-08T00:18:10.543855Z",
+   "t_ms": 58131,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
     "status": "AWAITING_APPROVAL",
     "totals": {
-     "llm_calls": 10,
-     "tokens_in": 17714,
-     "tokens_out": 4039,
-     "wall_ms": 16167,
-     "retries": 0
+     "llm_calls": 11,
+     "tokens_in": 19666,
+     "tokens_out": 3985,
+     "wall_ms": 58131,
+     "retries": 2
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "C113-20261007-213124-d11b2d",
+  "run_id": "C113-20261008-001712-f6cbe7",
   "client_id": "C113",
   "request_text": "",
   "preset": "annual_review",
@@ -852,14 +911,20 @@
       "finding_id": "PORT-1",
       "title": "Portfolio is perfectly aligned with target allocation",
       "severity": "info",
-      "detail": "The portfolio is currently perfectly aligned with the growth model target allocation across all asset classes. No rebalancing is required at this time.",
+      "detail": "The portfolio is currently perfectly aligned with the growth model target allocation. No rebalancing is required at this time.",
       "metric_refs": [
        "alloc.CASH.pct",
+       "target.CASH.pct",
        "alloc.CA_BONDS.pct",
+       "target.CA_BONDS.pct",
        "alloc.CA_EQUITY.pct",
+       "target.CA_EQUITY.pct",
        "alloc.US_EQUITY.pct",
+       "target.US_EQUITY.pct",
        "alloc.INTL_EQUITY.pct",
-       "alloc.REAL_ASSETS.pct"
+       "target.INTL_EQUITY.pct",
+       "alloc.REAL_ASSETS.pct",
+       "target.REAL_ASSETS.pct"
       ],
       "flag_refs": []
      }
@@ -876,7 +941,7 @@
       "finding_id": "RISK-1",
       "title": "Portfolio volatility is within suitability limits",
       "severity": "info",
-      "detail": "The portfolio's current volatility of {{m:risk.vol.pct}} is well within the maximum volatility band of {{m:risk.vol_band_max.pct}} for a growth-oriented investor with a long time horizon. This alignment suggests the portfolio is appropriately positioned for the client's risk profile.",
+      "detail": "The portfolio's current volatility of {{m:risk.vol.pct}} is well within the maximum suitability band of {{m:risk.vol_band_max.pct}} for a growth-oriented investor with a long time horizon.",
       "metric_refs": [
        "risk.vol.pct",
        "risk.vol_band_max.pct"
@@ -885,9 +950,9 @@
      },
      {
       "finding_id": "RISK-2",
-      "title": "Downside risk in equity bear scenario",
+      "title": "Stress test indicates manageable downside risk",
       "severity": "info",
-      "detail": "In an equity bear market scenario, the portfolio is projected to experience a loss of {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. Given the client's long time horizon of twenty-five years, this downside is manageable, though it should be discussed to ensure the client's comfort with such fluctuations.",
+      "detail": "In an equity bear market scenario, the portfolio is projected to lose {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. Given the client's long time horizon, this downside is acceptable for a growth strategy.",
       "metric_refs": [
        "stress.equity_bear.cad",
        "stress.equity_bear.pct"
@@ -898,7 +963,7 @@
       "finding_id": "RISK-3",
       "title": "No single-security concentration concerns identified",
       "severity": "info",
-      "detail": "The portfolio maintains a diversified structure with no single security exceeding the concentration limit of {{m:conc.limit.pct}}. This lack of concentration reduces idiosyncratic risk, which is prudent for a growth-focused strategy.",
+      "detail": "The portfolio shows no single-security concentration issues, as all holdings remain below the {{m:conc.limit.pct}} concentration limit.",
       "metric_refs": [
        "conc.limit.pct"
       ],
@@ -913,7 +978,7 @@
     "findings": [
      {
       "finding_id": "TAX-1",
-      "title": "No unused contribution room available for TFSA or RRSP accounts",
+      "title": "No available TFSA or RRSP contribution room",
       "severity": "info",
       "detail": "The client has no unused TFSA or RRSP contribution room available, as indicated by {{m:tax.tfsa_room.cad}} and {{m:tax.rrsp_room.cad}}. Consequently, no further tax-advantaged contributions can be made at this time.",
       "metric_refs": [
@@ -933,22 +998,24 @@
     "findings": [
      {
       "finding_id": "MKT-1",
-      "title": "US equity growth drives portfolio drift",
+      "title": "Bank of Canada policy rate and bond yield environment",
       "severity": "info",
-      "detail": "US equity markets experienced significant growth, with the index returning {{m:mkt.us_equity_ytd.pct}} percent year to date. This rally, driven by technology sector performance, likely contributed to an overweight position in the client's US equity holdings.",
+      "detail": "The Bank of Canada has maintained the policy rate at {{m:mkt.ca_policy_rate.pct}} percent, influencing cash and bond returns. The Canada ten-year bond yield is currently {{m:mkt.ca_10y_yield.pct}} percent, with a yield curve spread of {{m:mkt.ca_curve.pp}} percentage points, reflecting current monetary policy and market expectations for fixed income assets.",
       "metric_refs": [
-       "mkt.us_equity_ytd.pct"
+       "mkt.ca_policy_rate.pct",
+       "mkt.ca_10y_yield.pct",
+       "mkt.ca_curve.pp"
       ],
       "flag_refs": []
      },
      {
       "finding_id": "MKT-2",
-      "title": "Canadian bond yield decline impacts fixed income allocation",
+      "title": "Commodity price trends affecting real assets and equities",
       "severity": "info",
-      "detail": "Canadian bond yields have trended lower, with the ten-year yield currently at {{m:mkt.ca_10y_yield.pct}} percent. This environment has resulted in a year-to-date return of {{m:mkt.ca_bond_ytd.pct}} percent for the Canadian bond index, impacting the relative weight of fixed income assets within the portfolio.",
+      "detail": "Energy commodity prices have increased by {{m:mkt.energy_commodities_12m.pct}} percent over the last twelve months, while broader commodity prices rose by {{m:mkt.commodities_12m.pct}} percent. These shifts in commodity markets have likely impacted the valuation of real assets and equity holdings within the portfolio.",
       "metric_refs": [
-       "mkt.ca_10y_yield.pct",
-       "mkt.ca_bond_ytd.pct"
+       "mkt.energy_commodities_12m.pct",
+       "mkt.commodities_12m.pct"
       ],
       "flag_refs": []
      }
@@ -1175,53 +1242,53 @@
     "label": "Unused RRSP contribution room",
     "source_tool": "get_contribution_room"
    },
-   "mkt.us_equity_ytd.pct": {
-    "key": "mkt.us_equity_ytd.pct",
-    "value": 18.0,
+   "mkt.ca_policy_rate.pct": {
+    "key": "mkt.ca_policy_rate.pct",
+    "value": 2.25,
     "unit": "pct",
-    "label": "US equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.ca_equity_ytd.pct": {
-    "key": "mkt.ca_equity_ytd.pct",
-    "value": 9.0,
-    "unit": "pct",
-    "label": "Canadian equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.intl_equity_ytd.pct": {
-    "key": "mkt.intl_equity_ytd.pct",
-    "value": 11.0,
-    "unit": "pct",
-    "label": "International equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.ca_bond_ytd.pct": {
-    "key": "mkt.ca_bond_ytd.pct",
-    "value": 2.5,
-    "unit": "pct",
-    "label": "Canadian bond index, year to date (fictional)",
+    "label": "Bank of Canada policy rate",
     "source_tool": "get_market_snapshot"
    },
    "mkt.ca_10y_yield.pct": {
     "key": "mkt.ca_10y_yield.pct",
-    "value": 3.1,
+    "value": 3.92,
     "unit": "pct",
-    "label": "Canada 10-year yield (fictional)",
+    "label": "Canada 10-year bond yield",
     "source_tool": "get_market_snapshot"
    },
-   "mkt.energy_sector_qtd.pct": {
-    "key": "mkt.energy_sector_qtd.pct",
-    "value": -12.0,
-    "unit": "pct",
-    "label": "Energy sector, quarter to date (fictional)",
+   "mkt.ca_curve.pp": {
+    "key": "mkt.ca_curve.pp",
+    "value": 0.69,
+    "unit": "pp",
+    "label": "Canada yield curve, 10-year minus 2-year",
     "source_tool": "get_market_snapshot"
    },
-   "mkt.reit_ytd.pct": {
-    "key": "mkt.reit_ytd.pct",
-    "value": 4.0,
+   "mkt.us_10y_yield.pct": {
+    "key": "mkt.us_10y_yield.pct",
+    "value": 5.28,
     "unit": "pct",
-    "label": "REIT index, year to date (fictional)",
+    "label": "US 10-year Treasury yield",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.usd_cad.ratio": {
+    "key": "mkt.usd_cad.ratio",
+    "value": 1.43,
+    "unit": "ratio",
+    "label": "US dollar in Canadian dollars",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.energy_commodities_12m.pct": {
+    "key": "mkt.energy_commodities_12m.pct",
+    "value": 38.1,
+    "unit": "pct",
+    "label": "Energy commodity prices, 12-month change",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.commodities_12m.pct": {
+    "key": "mkt.commodities_12m.pct",
+    "value": 23.3,
+    "unit": "pct",
+    "label": "Commodity prices, 12-month change",
     "source_tool": "get_market_snapshot"
    },
    "client.age.years": {
@@ -1242,16 +1309,16 @@
   "flags": {},
   "drafts": [
    {
-    "headline": "Portfolio remains aligned with growth objectives",
-    "summary": "Lena's portfolio is currently well-positioned and aligned with her long-term growth objectives. All asset allocations remain within their target ranges, and risk metrics, including volatility and concentration, are within appropriate limits. While market conditions, such as the performance of {{m:mkt.us_equity_ytd.pct}} in US equities and shifts in {{m:mkt.ca_10y_yield.pct}} for bonds, have influenced asset values, no rebalancing is necessary. The current structure remains suitable for her long-term time horizon.",
+    "headline": "Portfolio remains well-aligned with growth objectives",
+    "summary": "Lena's portfolio is currently perfectly aligned with her growth model, requiring no adjustments. Her risk profile and volatility levels remain well within her {{m:risk.vol_band_max.pct}} suitability limit, and stress testing confirms her portfolio is positioned to withstand market volatility over her {{m:client.horizon.years}} time horizon. While commodity prices have shifted by {{m:mkt.commodities_12m.pct}} and the interest rate environment remains active, her current asset allocation is appropriate for her long-term goals.",
     "actions": [
      {
-      "action_id": "NO_ACTION_REQUIRED",
+      "action_id": "ACT-A",
       "type": "no_action",
-      "target": "NONE",
+      "target": "PORTFOLIO",
       "direction": "none",
-      "description": "No action required.",
-      "rationale": "The portfolio is currently aligned with the target allocation.",
+      "description": "Maintain current portfolio allocation.",
+      "rationale": "The portfolio is perfectly aligned with the target growth allocation.",
       "finding_refs": [
        "PORT-1"
       ],
@@ -1259,14 +1326,14 @@
      }
     ],
     "risks_and_considerations": [
-     "The portfolio remains subject to market volatility, with a potential {{m:stress.equity_bear.pct}} decline in a bear market scenario.",
-     "Continued monitoring of asset drift is recommended as market conditions evolve."
+     "Market volatility remains a standard feature of a growth-oriented strategy.",
+     "Future contributions are currently limited by the lack of available tax-advantaged room."
     ],
     "deferred": [],
     "client_talking_points": [
-     "Your portfolio is currently perfectly aligned with your long-term growth goals, so we do not need to make any changes today.",
-     "We have reviewed your risk exposure, and your current investment strategy remains appropriate for your long-term time horizon.",
-     "While markets have been active, your diversified approach is working as intended to manage risk and maintain your target allocation."
+     "Your portfolio is perfectly on track with our growth strategy.",
+     "We have reviewed your risk exposure, and it remains well-suited to your long-term goals.",
+     "We are monitoring market conditions, but no changes are necessary today."
     ]
    }
   ],
@@ -1308,16 +1375,16 @@
   "revision_count": 0,
   "final": {
    "recommendation": {
-    "headline": "Portfolio remains aligned with growth objectives",
-    "summary": "Lena's portfolio is currently well-positioned and aligned with her long-term growth objectives. All asset allocations remain within their target ranges, and risk metrics, including volatility and concentration, are within appropriate limits. While market conditions, such as the performance of 18.0% in US equities and shifts in 3.1% for bonds, have influenced asset values, no rebalancing is necessary. The current structure remains suitable for her long-term time horizon.",
+    "headline": "Portfolio remains well-aligned with growth objectives",
+    "summary": "Lena's portfolio is currently perfectly aligned with her growth model, requiring no adjustments. Her risk profile and volatility levels remain well within her 15.0% suitability limit, and stress testing confirms her portfolio is positioned to withstand market volatility over her 25 years time horizon. While commodity prices have shifted by 23.3% and the interest rate environment remains active, her current asset allocation is appropriate for her long-term goals.",
     "actions": [
      {
-      "action_id": "NO_ACTION_REQUIRED",
+      "action_id": "ACT-A",
       "type": "no_action",
-      "target": "NONE",
+      "target": "PORTFOLIO",
       "direction": "none",
-      "description": "No action required.",
-      "rationale": "The portfolio is currently aligned with the target allocation.",
+      "description": "Maintain current portfolio allocation.",
+      "rationale": "The portfolio is perfectly aligned with the target growth allocation.",
       "finding_refs": [
        "PORT-1"
       ],
@@ -1325,38 +1392,38 @@
      }
     ],
     "risks_and_considerations": [
-     "The portfolio remains subject to market volatility, with a potential -29.5% decline in a bear market scenario.",
-     "Continued monitoring of asset drift is recommended as market conditions evolve."
+     "Market volatility remains a standard feature of a growth-oriented strategy.",
+     "Future contributions are currently limited by the lack of available tax-advantaged room."
     ],
     "deferred": [],
     "client_talking_points": [
-     "Your portfolio is currently perfectly aligned with your long-term growth goals, so we do not need to make any changes today.",
-     "We have reviewed your risk exposure, and your current investment strategy remains appropriate for your long-term time horizon.",
-     "While markets have been active, your diversified approach is working as intended to manage risk and maintain your target allocation."
+     "Your portfolio is perfectly on track with our growth strategy.",
+     "We have reviewed your risk exposure, and it remains well-suited to your long-term goals.",
+     "We are monitoring market conditions, but no changes are necessary today."
     ]
    },
    "disclosure": "Generated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client.",
    "metrics_used": [
     {
-     "key": "mkt.ca_10y_yield.pct",
-     "value": 3.1,
+     "key": "client.horizon.years",
+     "value": 25.0,
+     "unit": "years",
+     "label": "Time horizon",
+     "source_tool": "context"
+    },
+    {
+     "key": "mkt.commodities_12m.pct",
+     "value": 23.3,
      "unit": "pct",
-     "label": "Canada 10-year yield (fictional)",
+     "label": "Commodity prices, 12-month change",
      "source_tool": "get_market_snapshot"
     },
     {
-     "key": "mkt.us_equity_ytd.pct",
-     "value": 18.0,
+     "key": "risk.vol_band_max.pct",
+     "value": 15.0,
      "unit": "pct",
-     "label": "US equity index, year to date (fictional)",
-     "source_tool": "get_market_snapshot"
-    },
-    {
-     "key": "stress.equity_bear.pct",
-     "value": -29.54,
-     "unit": "pct",
-     "label": "Equity bear market (illustrative): % of portfolio",
-     "source_tool": "run_stress_test"
+     "label": "Max volatility for growth",
+     "source_tool": "compute_risk_metrics"
     }
    ]
   },
@@ -1364,9 +1431,9 @@
   "message": null,
   "approval": null,
   "budget_snapshot": {
-   "llm_calls": 10,
-   "tokens": 21753,
-   "wall_ms": 16167
+   "llm_calls": 11,
+   "tokens": 23651,
+   "wall_ms": 58131
   },
   "untrusted_flags": [
    {
@@ -1385,8 +1452,8 @@
    }
   ],
   "error": null,
-  "created_at": "2026-10-07T21:31:24.492906Z",
-  "updated_at": "2026-10-07T21:31:40.897430Z",
+  "created_at": "2026-10-08T00:17:12.158386Z",
+  "updated_at": "2026-10-08T00:18:10.544483Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate",

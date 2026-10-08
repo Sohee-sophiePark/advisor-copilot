@@ -19,6 +19,8 @@ COMMANDS: dict[str, str] = {
     "seed": "rebuild the local SQLite database from the synthetic JSON",
     "export": "write the data the public replay build shows to a JSON file",
     "fetch": "laptop only: fetch free market data (BoC, SEC EDGAR, Tiingo) under daily caps",
+    "snapshot": "write the public market snapshot from fetched history, then re-record",
+    "proxy-check": "compare proxy moves with fund values copied by hand into data/nav_checks.csv",
 }
 
 
@@ -282,6 +284,37 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_snapshot(args: argparse.Namespace) -> int:
+    from advisor_copilot.config import get_settings
+    from advisor_copilot.db import Store
+    from advisor_copilot.fetch import build_snapshot
+
+    s = get_settings()
+    if not (snap := build_snapshot(s, Store(s.path("db")))):
+        raise SystemExit("no fetched history: run make fetch first")
+    path = s.path("data") / "market_snapshot.json"
+    path.write_text(json.dumps(snap, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {path.name} as of {snap['as_of']}: run make seed, then re-record the scenarios")
+    return 0
+
+
+def _cmd_proxy_check(args: argparse.Namespace) -> int:
+    from advisor_copilot.config import get_settings
+    from advisor_copilot.data_access import nav_checks, proxy_level
+    from advisor_copilot.db import Store
+
+    s = get_settings()
+    store, as_of = Store(s.path("db")), str(s.rules.as_of)
+    navs = nav_checks(s.path("db").parent / "nav_checks.csv")
+    for t, p in s.fetch.proxies.items():
+        own = sorted((d, v) for k, d, v in navs if k == t)
+        for (d1, v1), (d2, v2) in zip(own, own[1:], strict=False):
+            a, b = proxy_level(store, p, d1, as_of), proxy_level(store, p, d2, as_of)
+            est = f"{100 * (b / a - 1):+.2f}%" if a and b else "n/a"
+            print(f"{t} {d1}->{d2}: fund {100 * (v2 / v1 - 1):+.2f}%, proxy {est} ({p['label']})")
+    return 0
+
+
 def _cmd_export(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -309,6 +342,8 @@ HANDLERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "seed": _cmd_seed,
     "export": _cmd_export,
     "fetch": _cmd_fetch,
+    "snapshot": _cmd_snapshot,
+    "proxy-check": _cmd_proxy_check,
 }
 
 

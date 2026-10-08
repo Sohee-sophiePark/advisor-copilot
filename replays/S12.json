@@ -4,7 +4,7 @@
  "client_id": "BOOK",
  "request_text": "Who should I call first this week?",
  "preset": null,
- "recorded_at": "2026-10-07T22:05:10+00:00",
+ "recorded_at": "2026-10-08T00:19:27+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:00.925765Z",
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:12.143826Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,8 +36,8 @@
   },
   {
    "seq": 2,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:00.926143Z",
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:12.144198Z",
    "t_ms": 0,
    "type": "gate_result",
    "agent": "gate",
@@ -50,8 +50,8 @@
   },
   {
    "seq": 3,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:00.945152Z",
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:12.162903Z",
    "t_ms": 19,
    "type": "llm_call_started",
    "agent": "router",
@@ -63,27 +63,27 @@
   },
   {
    "seq": 4,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:01.936245Z",
-   "t_ms": 1010,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:18.671528Z",
+   "t_ms": 6527,
    "type": "llm_call_finished",
    "agent": "router",
    "level": "info",
    "payload": {
     "purpose": "router",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 718,
+    "tokens_in": 726,
     "tokens_out": 51,
-    "latency_ms": 990,
+    "latency_ms": 6507,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 5,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:01.937331Z",
-   "t_ms": 1011,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:18.672433Z",
+   "t_ms": 6528,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
@@ -100,9 +100,9 @@
   },
   {
    "seq": 6,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:01.938741Z",
-   "t_ms": 1013,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:18.673873Z",
+   "t_ms": 6530,
    "type": "agent_started",
    "agent": "book",
    "level": "info",
@@ -123,9 +123,9 @@
   },
   {
    "seq": 7,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:01.941113Z",
-   "t_ms": 1015,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:18.752173Z",
+   "t_ms": 6608,
    "type": "llm_call_started",
    "agent": "book",
    "level": "info",
@@ -136,27 +136,27 @@
   },
   {
    "seq": 8,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:02.733901Z",
-   "t_ms": 1808,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:19.329867Z",
+   "t_ms": 7186,
    "type": "llm_call_finished",
    "agent": "book",
    "level": "info",
    "payload": {
     "purpose": "analyst:book",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 2421,
+    "tokens_in": 2431,
     "tokens_out": 21,
-    "latency_ms": 791,
+    "latency_ms": 576,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 9,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:02.771334Z",
-   "t_ms": 1845,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:19.372981Z",
+   "t_ms": 7229,
    "type": "tool_call",
    "agent": "book",
    "level": "info",
@@ -173,9 +173,9 @@
   },
   {
    "seq": 10,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:02.771869Z",
-   "t_ms": 1846,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:19.373568Z",
+   "t_ms": 7229,
    "type": "llm_call_started",
    "agent": "book",
    "level": "info",
@@ -186,41 +186,72 @@
   },
   {
    "seq": 11,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:04.452479Z",
-   "t_ms": 3526,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:21.708916Z",
+   "t_ms": 9565,
    "type": "llm_call_finished",
    "agent": "book",
    "level": "info",
    "payload": {
     "purpose": "analyst:book",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 4716,
-    "tokens_out": 427,
-    "latency_ms": 1679,
+    "tokens_in": 4726,
+    "tokens_out": 574,
+    "latency_ms": 2333,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 12,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:04.454984Z",
-   "t_ms": 3529,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:21.712707Z",
+   "t_ms": 9568,
+   "type": "llm_call_started",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 13,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:23.655515Z",
+   "t_ms": 11511,
+   "type": "llm_call_finished",
+   "agent": "book",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:book",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 4186,
+    "tokens_out": 562,
+    "latency_ms": 1940,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 14,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:23.658914Z",
+   "t_ms": 11515,
    "type": "agent_finished",
    "agent": "book",
    "level": "info",
    "payload": {
-    "findings_count": 2,
+    "findings_count": 3,
     "status": "ok",
     "data_gaps": []
    }
   },
   {
-   "seq": 13,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:04.457464Z",
-   "t_ms": 3531,
+   "seq": 15,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:23.662025Z",
+   "t_ms": 11518,
    "type": "llm_call_started",
    "agent": "synthesizer",
    "level": "info",
@@ -230,28 +261,28 @@
    }
   },
   {
-   "seq": 14,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:10.828004Z",
-   "t_ms": 9902,
+   "seq": 16,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:25.799482Z",
+   "t_ms": 13655,
    "type": "llm_call_finished",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "purpose": "synthesizer",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 2413,
-    "tokens_out": 520,
-    "latency_ms": 6368,
+    "tokens_in": 2546,
+    "tokens_out": 601,
+    "latency_ms": 2136,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 15,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:10.831280Z",
-   "t_ms": 9905,
+   "seq": 17,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:25.800675Z",
+   "t_ms": 13656,
    "type": "draft_created",
    "agent": "synthesizer",
    "level": "info",
@@ -262,10 +293,86 @@
    }
   },
   {
-   "seq": 16,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:10.832193Z",
-   "t_ms": 9906,
+   "seq": 18,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:25.800901Z",
+   "t_ms": 13657,
+   "type": "gate_result",
+   "agent": "gate",
+   "level": "warn",
+   "payload": {
+    "gate": "G5",
+    "passed": false,
+    "violations": [
+     "G5.13 counts_as_placeholders: number word 'three'; use {{m:<key>}}"
+    ]
+   }
+  },
+  {
+   "seq": 19,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:25.801047Z",
+   "t_ms": 13657,
+   "type": "revision_requested",
+   "agent": "orchestrator",
+   "level": "info",
+   "payload": {
+    "source": "gates",
+    "items": [
+     "G5.13 counts_as_placeholders: number word 'three'; use {{m:<key>}}"
+    ]
+   }
+  },
+  {
+   "seq": 20,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:25.801437Z",
+   "t_ms": 13657,
+   "type": "llm_call_started",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 21,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:27.646234Z",
+   "t_ms": 15502,
+   "type": "llm_call_finished",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "purpose": "synthesizer",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 2993,
+    "tokens_out": 520,
+    "latency_ms": 1844,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 22,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:27.647022Z",
+   "t_ms": 15503,
+   "type": "draft_created",
+   "agent": "synthesizer",
+   "level": "info",
+   "payload": {
+    "revision": 1,
+    "mode": "answer",
+    "actions_count": 0
+   }
+  },
+  {
+   "seq": 23,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:27.647133Z",
+   "t_ms": 15503,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -276,27 +383,27 @@
    }
   },
   {
-   "seq": 17,
-   "run_id": "BOOK-20261007-220500-f561cd",
-   "ts": "2026-10-07T22:05:10.833760Z",
-   "t_ms": 9907,
+   "seq": 24,
+   "run_id": "BOOK-20261008-001911-7d921a",
+   "ts": "2026-10-08T00:19:27.647623Z",
+   "t_ms": 15503,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
     "status": "COMPLETED",
     "totals": {
-     "llm_calls": 4,
-     "tokens_in": 10268,
-     "tokens_out": 1019,
-     "wall_ms": 9907,
+     "llm_calls": 6,
+     "tokens_in": 17608,
+     "tokens_out": 2329,
+     "wall_ms": 15503,
      "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "BOOK-20261007-220500-f561cd",
+  "run_id": "BOOK-20261008-001911-7d921a",
   "client_id": "BOOK",
   "request_text": "Who should I call first this week?",
   "preset": null,
@@ -317,27 +424,38 @@
     "findings": [
      {
       "finding_id": "BOOK-1",
-      "title": "Prioritize households with critical risk, tax, and review issues",
+      "title": "Multiple households require urgent attention due to risk, tax, and drift issues",
       "severity": "info",
-      "detail": "Of {{m:book.attention_all.matches.count}} households needing attention, {{m:book.attention_all.risk_limit.count}} exceed risk limits, {{m:book.attention_all.drift.count}} have significant portfolio drift, {{m:book.attention_all.tax.count}} have tax-placement issues, {{m:book.attention_all.kyc.count}} require KYC updates, and {{m:book.attention_all.review.count}} have overdue reviews. Prioritize {{h:C006}}, {{h:C028}}, and {{h:C073}} due to high assets and critical risk breaches.",
+      "detail": "Of {{m:book.attention_all.matches.count}} households needing attention, {{m:book.attention_all.risk_limit.count}} exceed risk limits, {{m:book.attention_all.tax.count}} have tax-placement issues, {{m:book.attention_all.drift.count}} have portfolio drift, and {{m:book.attention_all.kyc.count}} require KYC updates. {{h:C006}}, {{h:C028}}, {{h:C073}}, {{h:C016}}, {{h:C015}}, {{h:C109}}, {{h:C002}}, {{h:C054}}, {{h:C103}}, {{h:C105}}, {{h:C106}}, {{h:C044}}, and {{h:C107}} are critical.",
       "metric_refs": [
        "book.attention_all.matches.count",
        "book.attention_all.risk_limit.count",
-       "book.attention_all.drift.count",
        "book.attention_all.tax.count",
-       "book.attention_all.kyc.count",
-       "book.attention_all.review.count"
+       "book.attention_all.drift.count",
+       "book.attention_all.kyc.count"
       ],
       "flag_refs": []
      },
      {
       "finding_id": "BOOK-2",
-      "title": "Address concentration and portfolio drift across multiple households",
+      "title": "Households with significant drift and concentration issues require immediate review",
       "severity": "info",
-      "detail": "{{h:C002}} and {{h:C103}} have concentration issues with SU, while {{h:C109}}, {{h:C002}}, {{h:C105}}, {{h:C106}}, and {{h:C107}} show significant asset allocation drift. These require immediate rebalancing review.",
+      "detail": "{{h:C002}} has significant portfolio drift and concentration in {{ticker:SU}}, while {{h:C106}} shows extreme drift across multiple asset classes. Both are critical.",
       "metric_refs": [
-       "book.attention_all.concentration.count",
-       "book.attention_all.drift.count"
+       "book.C002.total.cad",
+       "book.C106.total.cad"
+      ],
+      "flag_refs": []
+     },
+     {
+      "finding_id": "BOOK-3",
+      "title": "Households with overdue reviews or incomplete KYC documentation",
+      "severity": "info",
+      "detail": "{{h:C028}} has an overdue review and exceeds risk limits. {{h:C101}} and {{h:C004}} have outstanding KYC requirements.",
+      "metric_refs": [
+       "book.C028.total.cad",
+       "book.C101.total.cad",
+       "book.C004.total.cad"
       ],
       "flag_refs": []
      }
@@ -561,32 +679,39 @@
    },
    {
     "gate": "G5",
+    "passed": false,
+    "violations": [
+     "G5.13 counts_as_placeholders: number word 'three'; use {{m:<key>}}"
+    ]
+   },
+   {
+    "gate": "G5",
     "passed": true,
     "violations": []
    }
   ],
   "eval_verdicts": [],
-  "revision_count": 0,
+  "revision_count": 1,
   "final": null,
   "answer": {
-   "answer": "Of {{m:book.attention_all.matches.count}} households needing attention, {{m:book.attention_all.risk_limit.count}} exceed risk limits, {{m:book.attention_all.drift.count}} have significant portfolio drift, {{m:book.attention_all.tax.count}} have tax-placement issues, {{m:book.attention_all.kyc.count}} require KYC updates, and {{m:book.attention_all.review.count}} have overdue reviews. Prioritize {{h:C006}} ({{m:book.C006.total.cad}}), {{h:C028}} ({{m:book.C028.total.cad}}), and {{h:C073}} ({{m:book.C073.total.cad}}) due to high assets and critical risk breaches. Additionally, {{h:C002}} ({{m:book.C002.total.cad}}) and {{h:C103}} ({{m:book.C103.total.cad}}) require attention for concentration issues, while {{h:C109}} ({{m:book.C109.total.cad}}), {{h:C105}} ({{m:book.C105.total.cad}}), {{h:C106}} ({{m:book.C106.total.cad}}), and {{h:C107}} ({{m:book.C107.total.cad}}) show significant drift.",
+   "answer": "Of {{m:book.attention_all.matches.count}} households needing attention, {{m:book.attention_all.risk_limit.count}} exceed risk limits, {{m:book.attention_all.tax.count}} have tax-placement issues, {{m:book.attention_all.drift.count}} have portfolio drift, and {{m:book.attention_all.kyc.count}} require KYC updates. Prioritize these critical households: {{h:C006}} ({{m:book.C006.total.cad}}), {{h:C028}} ({{m:book.C028.total.cad}}), {{h:C073}} ({{m:book.C073.total.cad}}), {{h:C016}} ({{m:book.C016.total.cad}}), {{h:C015}} ({{m:book.C015.total.cad}}), {{h:C109}} ({{m:book.C109.total.cad}}), {{h:C002}} ({{m:book.C002.total.cad}}), {{h:C054}} ({{m:book.C054.total.cad}}), {{h:C103}} ({{m:book.C103.total.cad}}), and {{h:C105}} ({{m:book.C105.total.cad}}). There are additional critical households that also require attention.",
    "suggested_questions": [
     "Which households have the largest tax-placement issues?",
-    "Can you list the households with overdue reviews?",
-    "Which households are currently exceeding their risk limits?"
+    "Can you detail the drift issues for {{h:C106}}?",
+    "Which households have overdue reviews?"
    ]
   },
   "message": null,
   "approval": null,
   "budget_snapshot": {
-   "llm_calls": 4,
-   "tokens": 11287,
-   "wall_ms": 9907
+   "llm_calls": 6,
+   "tokens": 19937,
+   "wall_ms": 15503
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T22:05:00.729245Z",
-  "updated_at": "2026-10-07T22:05:10.834150Z",
+  "created_at": "2026-10-08T00:19:11.965023Z",
+  "updated_at": "2026-10-08T00:19:27.647733Z",
   "completed_steps": [
    "input_gate",
    "router",

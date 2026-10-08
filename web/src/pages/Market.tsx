@@ -29,21 +29,21 @@ export function Market() {
       ))}
       </div>
       {m.sectors.length > 0 && (
-        <Card title="US sector ETFs · laptop only" right={<span className="text-xs text-slate-500">change {m.sectors[0].from} → {m.sectors[0].to} · Tiingo, personal use, never published</span>}>
+        <Card title="Index and US sector ETFs · laptop only" right={<span className="text-xs text-slate-500">change {m.sectors[0].from} → {m.sectors[0].to} · Tiingo, personal use, never published</span>}>
           <div className="grid gap-x-6 gap-y-1 text-sm md:grid-cols-3">{m.sectors.map((x) => (
             <div key={x.ticker} className="flex justify-between"><span>{x.sector} <span className="text-xs text-slate-400">{x.ticker}</span></span>
               <span className={x.change_pct < 0 ? "text-red-700" : "text-emerald-700"}>{x.change_pct > 0 ? "+" : ""}{x.change_pct}%</span></div>))}</div>
         </Card>
       )}
-      <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">{m.label} As of {m.as_of}.</p>
+      <p className="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-700">{m.label} Month-end values; these are what the copilot's market analyst reads.</p>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {m.indicators.map((i) => (
-          <Card key={i.key} title={i.label.replace(" (fictional)", "")} right={<span className={`text-lg font-semibold ${i.value < 0 ? "text-red-700" : "text-slate-900"}`}>{i.value > 0 && !i.key.endsWith("yield") ? "+" : ""}{i.value}%</span>}>
+          <Card key={i.key} title={i.label} right={<span className={`text-lg font-semibold ${i.value < 0 ? "text-red-700" : "text-slate-900"}`}>{i.unit === "pct" ? `${i.value.toFixed(2)}%` : formatValue(i.value, i.unit)}</span>}>
             <ResponsiveContainer width="100%" height={110}>
               <LineChart data={i.history.map((v, k) => ({ month: m.months[k], v }))} margin={{ top: 4, right: 8, left: -24, bottom: 0 }}>
                 <XAxis dataKey="month" tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} interval={2} />
-                <YAxis tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} width={40} />
-                <Tooltip formatter={(v: any) => [`${v}%`, i.key.endsWith("yield") ? "Yield" : "Year to date"]} />
+                <YAxis domain={["auto", "auto"]} tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} width={40} />
+                <Tooltip formatter={(v: any) => [formatValue(Number(v), i.unit), "Month end"]} />
                 <Line dataKey="v" stroke="#2a78d6" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
@@ -57,7 +57,7 @@ export function Market() {
         <ul className="grid gap-1 text-sm md:grid-cols-2">{m.instruments.map((i) => (
           <li key={i.ticker}><a className="text-sky-700 hover:underline" href={`#/ticker/${i.ticker}`}>{i.ticker} · {i.name}</a></li>))}</ul>
       </Card>
-      <Card title="Headlines (fictional)"><ul className="list-disc pl-5 text-sm text-slate-700">{m.headlines.map((h) => <li key={h.id}>{h.text.replace("Fictional: ", "")}</li>)}</ul></Card>
+      <Card title="Bank of Canada releases"><ul className="list-disc pl-5 text-sm text-slate-700">{m.headlines.map((h) => <li key={h.id}>{h.text}</li>)}</ul></Card>
     </div>
   );
 }

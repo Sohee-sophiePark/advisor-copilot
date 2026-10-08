@@ -148,6 +148,8 @@ class FetchCfg(BaseModel):
 
     us_tickers: list[str]
     sector_etfs: dict[str, str] = {}
+    index_etfs: dict[str, str] = {}
+    proxies: dict[str, dict] = {}
     history_days: int
     caps: dict[str, int]
 

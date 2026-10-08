@@ -280,6 +280,12 @@ class Store:
         ).fetchone()
         return (row["date"], row["value"]) if row else None
 
+    def raw_latest(self, url: str) -> str | None:
+        row = self.conn.execute(
+            "SELECT payload FROM market_raw WHERE url=? ORDER BY rowid DESC LIMIT 1", (url,)
+        ).fetchone()
+        return row["payload"] if row else None
+
     def series(self, series: str, since: str) -> list[tuple[str, float]]:
         """History of a series from `since`, oldest first."""
         sql = "SELECT date, value FROM market_history WHERE series=? AND date>=? ORDER BY date"

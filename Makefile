@@ -4,7 +4,7 @@
 
 API_PORT ?= $(shell uv run advisor-copilot port)
 
-.PHONY: fetch seed setup test lint format eval eval-live api web dev record smoke build-static env-check clean
+.PHONY: fetch schedule unschedule seed setup test lint format eval eval-live api web dev record smoke build-static env-check clean
 
 setup:
 	uv sync
@@ -12,6 +12,15 @@ setup:
 
 fetch:  # laptop only; free sources; keys from the shell env (set -a; . ./.env; set +a)
 	uv run advisor-copilot fetch
+
+schedule:  # daily 18:30 `make fetch` for your user only (macOS launchd); `make unschedule` removes it
+	mkdir -p runs ~/Library/LaunchAgents
+	sed "s|__REPO__|$(CURDIR)|g" ops/fetch.plist > ~/Library/LaunchAgents/com.advisorcopilot.fetch.plist
+	launchctl load ~/Library/LaunchAgents/com.advisorcopilot.fetch.plist
+
+unschedule:
+	launchctl unload ~/Library/LaunchAgents/com.advisorcopilot.fetch.plist
+	rm -f ~/Library/LaunchAgents/com.advisorcopilot.fetch.plist
 
 seed:
 	uv run python data/generate_book.py

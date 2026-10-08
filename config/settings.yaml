@@ -42,4 +42,10 @@ fetch:                           # `make fetch`, laptop only; caps stay far unde
   sector_etfs: {XLB: Materials, XLC: Communication services, XLE: Energy, XLF: Financials, XLI: Industrials,
     XLK: Technology, XLP: Consumer staples, XLRE: Real estate, XLU: Utilities, XLV: Health care,
     XLY: Consumer discretionary}             # US sector ETFs, Tiingo, laptop only
-  caps: {boc: 10, sec: 20, tiingo: 50, treasury: 5, fred: 10}   # per day; free: SEC 10/s, Tiingo 1,000/day
+  index_etfs: {SPY: S&P 500, EWC: Canada (MSCI), IEFA: Developed markets ex North America (MSCI EAFE)}
+  proxies:                       # laptop real-data mode: estimated returns from rules.as_of, labelled "estimate"
+    XBB: {method: duration, series: yield.CA10Y, duration: 7.0, label: "estimate from the Canada 10-year yield"}
+    CSAV: {method: flat, label: "estimate: savings ETF held at its unit value"}
+    XEF: {method: etf, proxy: IEFA, label: "estimate from IEFA in CAD"}
+    XIC: {method: etf, proxy: EWC, label: "estimate from EWC in CAD"}
+  caps: {boc: 10, sec: 20, tiingo: 50, treasury: 10, fred: 10}   # per day; free: SEC 10/s, Tiingo 1,000/day

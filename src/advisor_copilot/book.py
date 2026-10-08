@@ -155,7 +155,11 @@ def instrument_view(ticker: str) -> dict:
     return {
         **fx.instruments[ticker].model_dump(),
         "facts": fx.facts[ticker].model_dump(mode="json") if ticker in fx.facts else None,
-        "price_note": f"Tiingo close {px[0]} in CAD (laptop only)" if px else "Illustrative price",
+        "price_note": f"Tiingo close {px[0]} in CAD (laptop only)"
+        if px
+        else proxy["label"] + " (laptop only)"
+        if (proxy := s.fetch.proxies.get(ticker)) and s.data_source == "official"
+        else "Illustrative price",
         "holders": [
             {
                 "client_id": cid,
@@ -222,7 +226,7 @@ def _local(day: str) -> dict:
         str(dt.date.fromisoformat(day) - dt.timedelta(days=s.fetch.history_days)),
     )
     sectors = []
-    for t, name in s.fetch.sector_etfs.items():
+    for t, name in {**s.fetch.index_etfs, **s.fetch.sector_etfs}.items():
         if len(h := store.series(f"px.{t}.usd", since)) > 1:
             change = round(100 * (h[-1][1] / h[0][1] - 1), 1)
             sectors.append(

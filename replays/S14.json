@@ -4,7 +4,7 @@
  "client_id": "BOOK",
  "request_text": "Which stock should all my clients buy?",
  "preset": null,
- "recorded_at": "2026-10-07T22:06:06+00:00",
+ "recorded_at": "2026-10-08T00:19:36+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "BOOK-20261007-220544-98120e",
-   "ts": "2026-10-07T22:05:45.026722Z",
+   "run_id": "BOOK-20261008-001934-b84cc3",
+   "ts": "2026-10-08T00:19:35.014806Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "BOOK-20261007-220544-98120e",
-   "ts": "2026-10-07T22:05:45.027132Z",
-   "t_ms": 0,
+   "run_id": "BOOK-20261008-001934-b84cc3",
+   "ts": "2026-10-08T00:19:35.015932Z",
+   "t_ms": 1,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -50,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "BOOK-20261007-220544-98120e",
-   "ts": "2026-10-07T22:05:45.047644Z",
-   "t_ms": 20,
+   "run_id": "BOOK-20261008-001934-b84cc3",
+   "ts": "2026-10-08T00:19:35.040227Z",
+   "t_ms": 25,
    "type": "llm_call_started",
    "agent": "router",
    "level": "info",
@@ -63,44 +63,44 @@
   },
   {
    "seq": 4,
-   "run_id": "BOOK-20261007-220544-98120e",
-   "ts": "2026-10-07T22:06:06.773020Z",
-   "t_ms": 21746,
+   "run_id": "BOOK-20261008-001934-b84cc3",
+   "ts": "2026-10-08T00:19:36.076610Z",
+   "t_ms": 1061,
    "type": "llm_call_finished",
    "agent": "router",
    "level": "info",
    "payload": {
     "purpose": "router",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 718,
-    "tokens_out": 61,
-    "latency_ms": 21724,
+    "tokens_in": 726,
+    "tokens_out": 48,
+    "latency_ms": 1035,
     "attempt": 1,
     "source": "live"
    }
   },
   {
    "seq": 5,
-   "run_id": "BOOK-20261007-220544-98120e",
-   "ts": "2026-10-07T22:06:06.773924Z",
-   "t_ms": 21747,
+   "run_id": "BOOK-20261008-001934-b84cc3",
+   "ts": "2026-10-08T00:19:36.077652Z",
+   "t_ms": 1062,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
    "payload": {
     "route": "out_of_scope",
     "domains": [],
-    "reason": "The advisor is asking for investment recommendations for their clients, which is outside the scope of the portfolio-review copilot.",
-    "confidence": 0.98,
+    "reason": "The advisor is asking for investment recommendations, which is outside the scope of the portfolio-review copilot.",
+    "confidence": 1.0,
     "rules_applied": [],
     "fast_path": false
    }
   },
   {
    "seq": 6,
-   "run_id": "BOOK-20261007-220544-98120e",
-   "ts": "2026-10-07T22:06:06.775142Z",
-   "t_ms": 21748,
+   "run_id": "BOOK-20261008-001934-b84cc3",
+   "ts": "2026-10-08T00:19:36.079042Z",
+   "t_ms": 1064,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -108,16 +108,16 @@
     "status": "COMPLETED",
     "totals": {
      "llm_calls": 1,
-     "tokens_in": 718,
-     "tokens_out": 61,
-     "wall_ms": 21748,
+     "tokens_in": 726,
+     "tokens_out": 48,
+     "wall_ms": 1064,
      "retries": 0
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "BOOK-20261007-220544-98120e",
+  "run_id": "BOOK-20261008-001934-b84cc3",
   "client_id": "BOOK",
   "request_text": "Which stock should all my clients buy?",
   "preset": null,
@@ -127,8 +127,8 @@
   "route": {
    "route": "out_of_scope",
    "domains": [],
-   "reason": "The advisor is asking for investment recommendations for their clients, which is outside the scope of the portfolio-review copilot.",
-   "confidence": 0.98
+   "reason": "The advisor is asking for investment recommendations, which is outside the scope of the portfolio-review copilot.",
+   "confidence": 1.0
   },
   "analyst_reports": {},
   "metrics": {},
@@ -149,13 +149,13 @@
   "approval": null,
   "budget_snapshot": {
    "llm_calls": 1,
-   "tokens": 779,
-   "wall_ms": 21748
+   "tokens": 774,
+   "wall_ms": 1064
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T22:05:44.801722Z",
-  "updated_at": "2026-10-07T22:06:06.775281Z",
+  "created_at": "2026-10-08T00:19:34.802221Z",
+  "updated_at": "2026-10-08T00:19:36.079311Z",
   "completed_steps": [
    "input_gate",
    "router",

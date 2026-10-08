@@ -31,7 +31,8 @@ What the advisor sees:
   Every list and number comes from code; households appear as links to their page.
 
 Clients, holdings and notes are fictional. Tickers are real (Canadian ETFs, a US total-market ETF and one energy
-stock) but prices, index trends and headlines are illustrative. Nothing here is investment advice.
+stock), and the market context the copilot reads is real public data (Bank of Canada, US Treasury, SEC EDGAR) with
+source and date. Prices on the public demo are illustrative. Nothing here is investment advice.
 
 ![Advisor Copilot UI](docs/img/ui.jpg)
 
@@ -107,7 +108,9 @@ RUN_MODE=replay make dev         # API + UI from recorded cassettes, no key need
 Live mode needs a Gemini API key (free tier is enough): copy `.env.example` to `.env`, fill it in,
 then `set -a; . ./.env; set +a` in your shell before `make smoke`, `make dev`, `make record` or
 `make eval-live`. `DATA_SOURCE=official make dev` prices the US-listed holdings from the latest `make fetch`
-(laptop only): each holding keeps its value on the data date and then moves with the real market. The API binds `127.0.0.1` on the first free port in the range configured under
+(laptop only): each holding keeps its value on the data date and then moves with the real market. Canadian ETFs
+with no free price feed move by labelled estimates: XBB from the Canada 10-year yield (duration model), XIC and XEF
+from US-listed EWC and IEFA in CAD, CSAV held at its unit value; XRE stays illustrative. The API binds `127.0.0.1` on the first free port in the range configured under
 `api` in `config/settings.yaml`; the UI dev server proxies `/api` to it.
 
 | Target | What it does |
@@ -117,7 +120,10 @@ then `set -a; . ./.env; set +a` in your shell before `make smoke`, `make dev`, `
 | `make eval-live` | tier 3: live runs × k, judge calibration, report to `evals/reports/live_<date>.md` |
 | `make record` | run every scenario live, write `cassettes/` and `replays/` |
 | `make build-static` | replay-only web build for GitHub Pages (`VITE_STATIC=1`) |
-| `make fetch` | laptop only: free market data (Bank of Canada USD/CAD, SEC EDGAR, Tiingo end-of-day) under daily caps |
+| `make fetch` | laptop only: free market data (Bank of Canada, US Treasury, SEC EDGAR, Tiingo end-of-day) under daily caps |
+| `make schedule` / `make unschedule` | install or remove a daily 18:30 `make fetch` on macOS (your user only) |
+| `uv run advisor-copilot snapshot` | write the public market snapshot from fetched history (then re-record the scenarios) |
+| `uv run advisor-copilot proxy-check` | compare proxy estimates with fund values copied by hand into `data/nav_checks.csv` |
 | `uv run advisor-copilot tools C002` | metrics and flags for a client, no LLM |
 | `make dev`, then `/dev.html` | developer console, served only by the local dev server |
 

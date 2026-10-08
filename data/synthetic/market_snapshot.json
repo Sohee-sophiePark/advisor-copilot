@@ -1,175 +1,7 @@
 {
-  "as_of": "2026-09-30",
-  "label": "FICTIONAL market snapshot for demo purposes. Not real market data.",
-  "indicators": [
-    {
-      "key": "us_equity_ytd",
-      "label": "US equity index, year to date (fictional)",
-      "value": 18.0,
-      "unit": "pct",
-      "asset_classes": [
-        "US_EQUITY"
-      ],
-      "history": [
-        4.27,
-        5.06,
-        4.78,
-        6.7,
-        10.25,
-        12.88,
-        14.19,
-        15.76,
-        18.0
-      ]
-    },
-    {
-      "key": "ca_equity_ytd",
-      "label": "Canadian equity index, year to date (fictional)",
-      "value": 9.0,
-      "unit": "pct",
-      "asset_classes": [
-        "CA_EQUITY"
-      ],
-      "history": [
-        2.31,
-        2.61,
-        2.3,
-        3.25,
-        5.15,
-        6.51,
-        7.11,
-        7.86,
-        9.0
-      ]
-    },
-    {
-      "key": "intl_equity_ytd",
-      "label": "International equity index, year to date (fictional)",
-      "value": 11.0,
-      "unit": "pct",
-      "asset_classes": [
-        "INTL_EQUITY"
-      ],
-      "history": [
-        2.74,
-        3.16,
-        2.85,
-        4.02,
-        6.28,
-        7.92,
-        8.68,
-        9.61,
-        11.0
-      ]
-    },
-    {
-      "key": "ca_bond_ytd",
-      "label": "Canadian bond index, year to date (fictional)",
-      "value": 2.5,
-      "unit": "pct",
-      "asset_classes": [
-        "CA_BONDS"
-      ],
-      "history": [
-        0.89,
-        0.84,
-        0.51,
-        0.76,
-        1.46,
-        1.9,
-        1.99,
-        2.16,
-        2.5
-      ]
-    },
-    {
-      "key": "ca_10y_yield",
-      "label": "Canada 10-year yield (fictional)",
-      "value": 3.1,
-      "unit": "pct",
-      "asset_classes": [
-        "CA_BONDS",
-        "CASH"
-      ],
-      "history": [
-        3.4,
-        3.42,
-        3.31,
-        3.23,
-        3.28,
-        3.26,
-        3.13,
-        3.1,
-        3.1
-      ]
-    },
-    {
-      "key": "energy_sector_qtd",
-      "label": "Energy sector, quarter to date (fictional)",
-      "value": -12.0,
-      "unit": "pct",
-      "asset_classes": [
-        "CA_EQUITY"
-      ],
-      "history": [
-        0.29,
-        -1.9,
-        -4.87,
-        -6.27,
-        -6.49,
-        -7.37,
-        -9.2,
-        -10.84,
-        -12.0
-      ]
-    },
-    {
-      "key": "reit_ytd",
-      "label": "REIT index, year to date (fictional)",
-      "value": 4.0,
-      "unit": "pct",
-      "asset_classes": [
-        "REAL_ASSETS"
-      ],
-      "history": [
-        1.22,
-        1.25,
-        0.92,
-        1.34,
-        2.31,
-        2.97,
-        3.17,
-        3.47,
-        4.0
-      ]
-    }
-  ],
-  "headlines": [
-    {
-      "id": "H-1",
-      "text": "Fictional: US large-cap rally led by technology names extends into the third quarter.",
-      "asset_classes": [
-        "US_EQUITY"
-      ]
-    },
-    {
-      "id": "H-2",
-      "text": "Fictional: Energy sector volatility stays elevated as commodity prices swing.",
-      "asset_classes": [
-        "CA_EQUITY"
-      ]
-    },
-    {
-      "id": "H-3",
-      "text": "Fictional: Canadian bond yields drift lower as inflation cools.",
-      "asset_classes": [
-        "CA_BONDS",
-        "CASH"
-      ]
-    }
-  ],
+  "as_of": "2026-10-07",
+  "label": "Real data from the Bank of Canada and the US Treasury, as of 2026-10-07.",
   "history_months": [
-    "2026-01",
     "2026-02",
     "2026-03",
     "2026-04",
@@ -177,6 +9,178 @@
     "2026-06",
     "2026-07",
     "2026-08",
-    "2026-09"
+    "2026-09",
+    "2026-10"
+  ],
+  "indicators": [
+    {
+      "key": "ca_policy_rate",
+      "label": "Bank of Canada policy rate",
+      "value": 2.25,
+      "unit": "pct",
+      "asset_classes": [
+        "CASH",
+        "CA_BONDS"
+      ],
+      "history": [
+        2.25,
+        2.25,
+        2.25,
+        2.25,
+        2.25,
+        2.25,
+        2.25,
+        2.25,
+        2.25
+      ]
+    },
+    {
+      "key": "ca_10y_yield",
+      "label": "Canada 10-year bond yield",
+      "value": 3.92,
+      "unit": "pct",
+      "asset_classes": [
+        "CA_BONDS"
+      ],
+      "history": [
+        3.13,
+        3.46,
+        3.56,
+        3.41,
+        3.38,
+        3.65,
+        3.73,
+        3.99,
+        3.92
+      ]
+    },
+    {
+      "key": "ca_curve",
+      "label": "Canada yield curve, 10-year minus 2-year",
+      "value": 0.69,
+      "unit": "pp",
+      "asset_classes": [
+        "CA_BONDS"
+      ],
+      "history": [
+        0.74,
+        0.64,
+        0.6,
+        0.64,
+        0.64,
+        0.74,
+        0.72,
+        0.62,
+        0.69
+      ]
+    },
+    {
+      "key": "us_10y_yield",
+      "label": "US 10-year Treasury yield",
+      "value": 5.28,
+      "unit": "pct",
+      "asset_classes": [
+        "US_EQUITY"
+      ],
+      "history": [
+        3.97,
+        4.3,
+        4.4,
+        4.45,
+        4.44,
+        4.75,
+        4.75,
+        5.29,
+        5.28
+      ]
+    },
+    {
+      "key": "usd_cad",
+      "label": "US dollar in Canadian dollars",
+      "value": 1.4257,
+      "unit": "ratio",
+      "asset_classes": [
+        "US_EQUITY",
+        "INTL_EQUITY"
+      ],
+      "history": [
+        1.3642,
+        1.3939,
+        1.3624,
+        1.3798,
+        1.421,
+        1.4029,
+        1.3866,
+        1.4188,
+        1.4257
+      ]
+    },
+    {
+      "key": "energy_commodities_12m",
+      "label": "Energy commodity prices, 12-month change",
+      "value": 38.1,
+      "unit": "pct",
+      "asset_classes": [
+        "CA_EQUITY"
+      ],
+      "history": [
+        -9.8,
+        23.9,
+        37.9,
+        45.1,
+        16.1,
+        13.8,
+        24.9,
+        38.1,
+        38.1
+      ]
+    },
+    {
+      "key": "commodities_12m",
+      "label": "Commodity prices, 12-month change",
+      "value": 23.3,
+      "unit": "pct",
+      "asset_classes": [
+        "CA_EQUITY",
+        "REAL_ASSETS"
+      ],
+      "history": [
+        3.6,
+        21.1,
+        27.4,
+        29.6,
+        13.5,
+        11.8,
+        18.0,
+        23.3,
+        23.3
+      ]
+    }
+  ],
+  "headlines": [
+    {
+      "id": "BOC-2026-09-02",
+      "text": "Bank of Canada, 2026-09-02: Bank of Canada maintains the policy rate at 2\u00bc%",
+      "asset_classes": [
+        "CA_BONDS",
+        "CASH"
+      ]
+    },
+    {
+      "id": "BOC-2026-07-27",
+      "text": "Bank of Canada, 2026-07-27: Bank of Canada publishes its 2027 schedule for policy interest rate announcements and other major publications",
+      "asset_classes": [
+        "CA_BONDS",
+        "CASH"
+      ]
+    },
+    {
+      "id": "BOC-2026-07-15",
+      "text": "Bank of Canada, 2026-07-15: Bank of Canada maintains the policy rate at 2\u00bc%",
+      "asset_classes": [
+        "CA_BONDS",
+        "CASH"
+      ]
+    }
   ]
 }

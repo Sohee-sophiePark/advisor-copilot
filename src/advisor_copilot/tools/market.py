@@ -21,7 +21,7 @@ def get_market_snapshot(client_id: str, args: MarketArgs) -> ToolResult:
     wanted = set(args.asset_classes)
     indicators = [i for i in snap.indicators if wanted & set(i.asset_classes)]
     headlines = [h for h in snap.headlines if wanted & set(h.asset_classes)]
-    metrics = [c.metric(c.k_mkt(i.key), i.value, i.unit, i.label, tool) for i in indicators]
+    metrics = [c.metric(c.k_mkt(i.key, i.unit), i.value, i.unit, i.label, tool) for i in indicators]
     data = {
         "as_of": snap.as_of.isoformat(),
         "label": snap.label,

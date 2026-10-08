@@ -4,7 +4,7 @@
  "client_id": "C101",
  "request_text": "",
  "preset": "annual_review",
- "recorded_at": "2026-10-07T21:32:15+00:00",
+ "recorded_at": "2026-10-08T00:19:02+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C101-20261007-213215-a18e88",
-   "ts": "2026-10-07T21:32:15.509803Z",
+   "run_id": "C101-20261008-001902-b2788c",
+   "ts": "2026-10-08T00:19:02.642705Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,8 +36,8 @@
   },
   {
    "seq": 2,
-   "run_id": "C101-20261007-213215-a18e88",
-   "ts": "2026-10-07T21:32:15.529617Z",
+   "run_id": "C101-20261008-001902-b2788c",
+   "ts": "2026-10-08T00:19:02.662246Z",
    "t_ms": 19,
    "type": "gate_result",
    "agent": "gate",
@@ -50,8 +50,8 @@
   },
   {
    "seq": 3,
-   "run_id": "C101-20261007-213215-a18e88",
-   "ts": "2026-10-07T21:32:15.530149Z",
+   "run_id": "C101-20261008-001902-b2788c",
+   "ts": "2026-10-08T00:19:02.662738Z",
    "t_ms": 20,
    "type": "gate_result",
    "agent": "gate",
@@ -66,8 +66,8 @@
   },
   {
    "seq": 4,
-   "run_id": "C101-20261007-213215-a18e88",
-   "ts": "2026-10-07T21:32:15.530208Z",
+   "run_id": "C101-20261008-001902-b2788c",
+   "ts": "2026-10-08T00:19:02.662796Z",
    "t_ms": 20,
    "type": "kyc_blocked",
    "agent": "gate",
@@ -81,8 +81,8 @@
   },
   {
    "seq": 5,
-   "run_id": "C101-20261007-213215-a18e88",
-   "ts": "2026-10-07T21:32:15.530488Z",
+   "run_id": "C101-20261008-001902-b2788c",
+   "ts": "2026-10-08T00:19:02.663086Z",
    "t_ms": 20,
    "type": "run_completed",
    "agent": "orchestrator",
@@ -100,7 +100,7 @@
   }
  ],
  "final_state": {
-  "run_id": "C101-20261007-213215-a18e88",
+  "run_id": "C101-20261008-001902-b2788c",
   "client_id": "C101",
   "request_text": "",
   "preset": "annual_review",
@@ -139,8 +139,8 @@
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T21:32:15.273270Z",
-  "updated_at": "2026-10-07T21:32:15.530542Z",
+  "created_at": "2026-10-08T00:19:02.414231Z",
+  "updated_at": "2026-10-08T00:19:02.663142Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate"

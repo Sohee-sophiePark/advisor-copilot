@@ -4,7 +4,7 @@
  "client_id": "C109",
  "request_text": "",
  "preset": "annual_review",
- "recorded_at": "2026-10-07T21:32:14+00:00",
+ "recorded_at": "2026-10-08T00:19:02+00:00",
  "model_ids": {
   "router": "gemini-3.1-flash-lite",
   "analyst": "gemini-3.1-flash-lite",
@@ -14,8 +14,8 @@
  "events": [
   {
    "seq": 1,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.454814Z",
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.147449Z",
    "t_ms": 0,
    "type": "run_started",
    "agent": "orchestrator",
@@ -36,9 +36,9 @@
   },
   {
    "seq": 2,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.475478Z",
-   "t_ms": 20,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.167030Z",
+   "t_ms": 19,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -50,9 +50,9 @@
   },
   {
    "seq": 3,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.476125Z",
-   "t_ms": 21,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.167621Z",
+   "t_ms": 20,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -64,9 +64,9 @@
   },
   {
    "seq": 4,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.476210Z",
-   "t_ms": 21,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.167694Z",
+   "t_ms": 20,
    "type": "route_decided",
    "agent": "router",
    "level": "info",
@@ -86,9 +86,9 @@
   },
   {
    "seq": 5,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.476870Z",
-   "t_ms": 22,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.168341Z",
+   "t_ms": 20,
    "type": "agent_started",
    "agent": "portfolio",
    "level": "info",
@@ -104,9 +104,9 @@
   },
   {
    "seq": 6,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.477632Z",
-   "t_ms": 22,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.169044Z",
+   "t_ms": 21,
    "type": "llm_call_started",
    "agent": "portfolio",
    "level": "info",
@@ -117,9 +117,9 @@
   },
   {
    "seq": 7,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.477797Z",
-   "t_ms": 23,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.169178Z",
+   "t_ms": 21,
    "type": "agent_started",
    "agent": "risk",
    "level": "info",
@@ -134,9 +134,9 @@
   },
   {
    "seq": 8,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.478476Z",
-   "t_ms": 23,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.169964Z",
+   "t_ms": 22,
    "type": "llm_call_started",
    "agent": "risk",
    "level": "info",
@@ -147,9 +147,9 @@
   },
   {
    "seq": 9,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.478558Z",
-   "t_ms": 23,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.170052Z",
+   "t_ms": 22,
    "type": "agent_started",
    "agent": "tax",
    "level": "info",
@@ -164,9 +164,9 @@
   },
   {
    "seq": 10,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.478978Z",
-   "t_ms": 24,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.170474Z",
+   "t_ms": 23,
    "type": "llm_call_started",
    "agent": "tax",
    "level": "info",
@@ -177,9 +177,9 @@
   },
   {
    "seq": 11,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.479042Z",
-   "t_ms": 24,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.170540Z",
+   "t_ms": 23,
    "type": "agent_started",
    "agent": "market",
    "level": "info",
@@ -192,9 +192,9 @@
   },
   {
    "seq": 12,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.479369Z",
-   "t_ms": 24,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.170779Z",
+   "t_ms": 23,
    "type": "llm_call_started",
    "agent": "market",
    "level": "info",
@@ -205,23 +205,9 @@
   },
   {
    "seq": 13,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:41.782691Z",
-   "t_ms": 327,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 429,
-    "wait_ms": 18431,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 14,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.303115Z",
-   "t_ms": 848,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.925001Z",
+   "t_ms": 777,
    "type": "llm_call_finished",
    "agent": "risk",
    "level": "info",
@@ -230,16 +216,16 @@
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 1002,
     "tokens_out": 42,
-    "latency_ms": 796,
+    "latency_ms": 726,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 15,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.304814Z",
-   "t_ms": 850,
+   "seq": 14,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.926719Z",
+   "t_ms": 779,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -257,10 +243,10 @@
    }
   },
   {
-   "seq": 16,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.305160Z",
-   "t_ms": 850,
+   "seq": 15,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.927011Z",
+   "t_ms": 779,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -273,10 +259,10 @@
    }
   },
   {
-   "seq": 17,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.305402Z",
-   "t_ms": 850,
+   "seq": 16,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.927202Z",
+   "t_ms": 779,
    "type": "tool_call",
    "agent": "risk",
    "level": "info",
@@ -291,10 +277,10 @@
    }
   },
   {
-   "seq": 18,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.306011Z",
-   "t_ms": 851,
+   "seq": 17,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.927474Z",
+   "t_ms": 780,
    "type": "llm_call_started",
    "agent": "risk",
    "level": "info",
@@ -304,217 +290,10 @@
    }
   },
   {
-   "seq": 19,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.332746Z",
-   "t_ms": 877,
-   "type": "llm_call_finished",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:tax",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1088,
-    "tokens_out": 34,
-    "latency_ms": 548,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 20,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.333697Z",
-   "t_ms": 878,
-   "type": "tool_call",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "name": "check_asset_location",
-    "args": {},
-    "metrics_count": 2,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 21,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.333932Z",
-   "t_ms": 879,
-   "type": "tool_call",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "name": "get_contribution_room",
-    "args": {},
-    "metrics_count": 2,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 22,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.334114Z",
-   "t_ms": 879,
-   "type": "tool_call",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "name": "get_positions",
-    "args": {},
-    "metrics_count": 1,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 23,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.334354Z",
-   "t_ms": 879,
-   "type": "llm_call_started",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:tax",
-    "model": "gemini-3.1-flash-lite"
-   }
-  },
-  {
-   "seq": 24,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.425939Z",
-   "t_ms": 971,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 429,
-    "wait_ms": 17390,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 25,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.470725Z",
-   "t_ms": 1015,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 429,
-    "wait_ms": 17884,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 26,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:31:42.559615Z",
-   "t_ms": 1104,
-   "type": "llm_retry",
-   "agent": "system",
-   "level": "warn",
-   "payload": {
-    "status": 429,
-    "wait_ms": 17596,
-    "attempt": 1
-   }
-  },
-  {
-   "seq": 27,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:00.862165Z",
-   "t_ms": 19407,
-   "type": "llm_call_finished",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:market",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 838,
-    "tokens_out": 45,
-    "latency_ms": 1042,
-    "attempt": 2,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 28,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:00.863557Z",
-   "t_ms": 19408,
-   "type": "tool_call",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "name": "get_market_snapshot",
-    "args": {
-     "asset_classes": [
-      "CA_BONDS",
-      "CA_EQUITY",
-      "INTL_EQUITY",
-      "US_EQUITY"
-     ]
-    },
-    "metrics_count": 6,
-    "flags": [],
-    "error": null
-   }
-  },
-  {
-   "seq": 29,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:00.864220Z",
-   "t_ms": 19409,
-   "type": "llm_call_started",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:market",
-    "model": "gemini-3.1-flash-lite"
-   }
-  },
-  {
-   "seq": 30,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.269874Z",
-   "t_ms": 19815,
-   "type": "llm_call_finished",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:tax",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1511,
-    "tokens_out": 140,
-    "latency_ms": 1110,
-    "attempt": 2,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 31,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.271059Z",
-   "t_ms": 19816,
-   "type": "agent_finished",
-   "agent": "tax",
-   "level": "info",
-   "payload": {
-    "findings_count": 1,
-    "status": "ok",
-    "data_gaps": []
-   }
-  },
-  {
-   "seq": 32,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.454611Z",
-   "t_ms": 19999,
+   "seq": 18,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.937086Z",
+   "t_ms": 789,
    "type": "llm_call_finished",
    "agent": "portfolio",
    "level": "info",
@@ -523,16 +302,16 @@
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 1211,
     "tokens_out": 40,
-    "latency_ms": 588,
-    "attempt": 2,
+    "latency_ms": 765,
+    "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 33,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.456496Z",
-   "t_ms": 20001,
+   "seq": 19,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.938112Z",
+   "t_ms": 790,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -545,10 +324,10 @@
    }
   },
   {
-   "seq": 34,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.456986Z",
-   "t_ms": 20002,
+   "seq": 20,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.938445Z",
+   "t_ms": 791,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -574,10 +353,10 @@
    }
   },
   {
-   "seq": 35,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.457225Z",
-   "t_ms": 20002,
+   "seq": 21,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.938614Z",
+   "t_ms": 791,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -590,10 +369,10 @@
    }
   },
   {
-   "seq": 36,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.457456Z",
-   "t_ms": 20002,
+   "seq": 22,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.938785Z",
+   "t_ms": 791,
    "type": "tool_call",
    "agent": "portfolio",
    "level": "info",
@@ -606,10 +385,10 @@
    }
   },
   {
-   "seq": 37,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:01.458025Z",
-   "t_ms": 20003,
+   "seq": 23,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:11.939066Z",
+   "t_ms": 791,
    "type": "llm_call_started",
    "agent": "portfolio",
    "level": "info",
@@ -619,10 +398,143 @@
    }
   },
   {
-   "seq": 38,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:02.632883Z",
-   "t_ms": 21178,
+   "seq": 24,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.444985Z",
+   "t_ms": 1297,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 875,
+    "tokens_out": 45,
+    "latency_ms": 504,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 25,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.445846Z",
+   "t_ms": 1298,
+   "type": "tool_call",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "name": "get_market_snapshot",
+    "args": {
+     "asset_classes": [
+      "CA_BONDS",
+      "CA_EQUITY",
+      "INTL_EQUITY",
+      "US_EQUITY"
+     ]
+    },
+    "metrics_count": 7,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 26,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.446141Z",
+   "t_ms": 1298,
+   "type": "llm_call_started",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 27,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.685011Z",
+   "t_ms": 1537,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1088,
+    "tokens_out": 34,
+    "latency_ms": 756,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 28,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.686694Z",
+   "t_ms": 1539,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "check_asset_location",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 29,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.687538Z",
+   "t_ms": 1540,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_contribution_room",
+    "args": {},
+    "metrics_count": 2,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 30,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.687928Z",
+   "t_ms": 1540,
+   "type": "tool_call",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "name": "get_positions",
+    "args": {},
+    "metrics_count": 1,
+    "flags": [],
+    "error": null
+   }
+  },
+  {
+   "seq": 31,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:12.688363Z",
+   "t_ms": 1540,
+   "type": "llm_call_started",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 32,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:13.780114Z",
+   "t_ms": 2632,
    "type": "llm_call_finished",
    "agent": "risk",
    "level": "info",
@@ -630,17 +542,17 @@
     "purpose": "analyst:risk",
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 1536,
-    "tokens_out": 282,
-    "latency_ms": 1360,
-    "attempt": 2,
+    "tokens_out": 287,
+    "latency_ms": 1332,
+    "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 39,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:02.634157Z",
-   "t_ms": 21179,
+   "seq": 33,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:13.781762Z",
+   "t_ms": 2634,
    "type": "agent_finished",
    "agent": "risk",
    "level": "info",
@@ -651,73 +563,10 @@
    }
   },
   {
-   "seq": 40,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:02.871938Z",
-   "t_ms": 21417,
-   "type": "llm_call_finished",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:market",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1327,
-    "tokens_out": 269,
-    "latency_ms": 1412,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 41,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:02.872943Z",
-   "t_ms": 21418,
-   "type": "llm_call_started",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:market",
-    "model": "gemini-3.1-flash-lite"
-   }
-  },
-  {
-   "seq": 42,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:04.036706Z",
-   "t_ms": 22581,
-   "type": "llm_call_finished",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "purpose": "analyst:market",
-    "model": "gemini-3.1-flash-lite",
-    "tokens_in": 1473,
-    "tokens_out": 267,
-    "latency_ms": 1162,
-    "attempt": 1,
-    "source": "live"
-   }
-  },
-  {
-   "seq": 43,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:04.038722Z",
-   "t_ms": 22583,
-   "type": "agent_finished",
-   "agent": "market",
-   "level": "info",
-   "payload": {
-    "findings_count": 2,
-    "status": "ok",
-    "data_gaps": []
-   }
-  },
-  {
-   "seq": 44,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:04.661929Z",
-   "t_ms": 23207,
+   "seq": 34,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:14.058938Z",
+   "t_ms": 2911,
    "type": "llm_call_finished",
    "agent": "portfolio",
    "level": "info",
@@ -725,17 +574,17 @@
     "purpose": "analyst:portfolio",
     "model": "gemini-3.1-flash-lite",
     "tokens_in": 2524,
-    "tokens_out": 372,
-    "latency_ms": 2026,
+    "tokens_out": 347,
+    "latency_ms": 1368,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 45,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:04.663594Z",
-   "t_ms": 23208,
+   "seq": 35,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:14.061104Z",
+   "t_ms": 2913,
    "type": "agent_finished",
    "agent": "portfolio",
    "level": "info",
@@ -746,10 +595,105 @@
    }
   },
   {
-   "seq": 46,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:04.666825Z",
-   "t_ms": 23211,
+   "seq": 36,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:15.032223Z",
+   "t_ms": 3884,
+   "type": "llm_call_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:tax",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1511,
+    "tokens_out": 141,
+    "latency_ms": 969,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 37,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:15.032956Z",
+   "t_ms": 3885,
+   "type": "agent_finished",
+   "agent": "tax",
+   "level": "info",
+   "payload": {
+    "findings_count": 1,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 38,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:20.676060Z",
+   "t_ms": 9528,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1493,
+    "tokens_out": 293,
+    "latency_ms": 6892,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 39,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:20.677041Z",
+   "t_ms": 9529,
+   "type": "llm_call_started",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite"
+   }
+  },
+  {
+   "seq": 40,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:21.996982Z",
+   "t_ms": 10849,
+   "type": "llm_call_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "purpose": "analyst:market",
+    "model": "gemini-3.1-flash-lite",
+    "tokens_in": 1687,
+    "tokens_out": 289,
+    "latency_ms": 1318,
+    "attempt": 1,
+    "source": "live"
+   }
+  },
+  {
+   "seq": 41,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:21.999000Z",
+   "t_ms": 10851,
+   "type": "agent_finished",
+   "agent": "market",
+   "level": "info",
+   "payload": {
+    "findings_count": 2,
+    "status": "ok",
+    "data_gaps": []
+   }
+  },
+  {
+   "seq": 42,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:22.003818Z",
+   "t_ms": 10856,
    "type": "llm_call_started",
    "agent": "synthesizer",
    "level": "info",
@@ -759,28 +703,28 @@
    }
   },
   {
-   "seq": 47,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:13.612011Z",
-   "t_ms": 32157,
+   "seq": 43,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:27.618359Z",
+   "t_ms": 16470,
    "type": "llm_call_finished",
    "agent": "synthesizer",
    "level": "info",
    "payload": {
     "purpose": "synthesizer",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 3429,
-    "tokens_out": 2525,
-    "latency_ms": 8131,
+    "tokens_in": 3466,
+    "tokens_out": 1672,
+    "latency_ms": 5612,
     "attempt": 1,
     "source": "live"
    }
   },
   {
-   "seq": 48,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:13.614123Z",
-   "t_ms": 32159,
+   "seq": 44,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:27.621603Z",
+   "t_ms": 16474,
    "type": "draft_created",
    "agent": "synthesizer",
    "level": "info",
@@ -791,10 +735,10 @@
    }
   },
   {
-   "seq": 49,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:13.614299Z",
-   "t_ms": 32159,
+   "seq": 45,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:27.622578Z",
+   "t_ms": 16475,
    "type": "gate_result",
    "agent": "gate",
    "level": "info",
@@ -805,10 +749,10 @@
    }
   },
   {
-   "seq": 50,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:13.615240Z",
-   "t_ms": 32160,
+   "seq": 46,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:27.623931Z",
+   "t_ms": 16476,
    "type": "llm_call_started",
    "agent": "evaluator",
    "level": "info",
@@ -818,28 +762,42 @@
    }
   },
   {
-   "seq": 51,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:14.892220Z",
-   "t_ms": 33437,
+   "seq": 47,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:18:27.772454Z",
+   "t_ms": 16625,
+   "type": "llm_retry",
+   "agent": "system",
+   "level": "warn",
+   "payload": {
+    "status": 429,
+    "wait_ms": 32915,
+    "attempt": 1
+   }
+  },
+  {
+   "seq": 48,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:19:02.044995Z",
+   "t_ms": 50897,
    "type": "llm_call_finished",
    "agent": "evaluator",
    "level": "info",
    "payload": {
     "purpose": "evaluator",
     "model": "gemini-3.1-flash-lite",
-    "tokens_in": 3764,
-    "tokens_out": 204,
-    "latency_ms": 1275,
-    "attempt": 1,
+    "tokens_in": 3746,
+    "tokens_out": 213,
+    "latency_ms": 1354,
+    "attempt": 2,
     "source": "live"
    }
   },
   {
-   "seq": 52,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:14.893881Z",
-   "t_ms": 33438,
+   "seq": 49,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:19:02.046098Z",
+   "t_ms": 50898,
    "type": "evaluator_verdict",
    "agent": "evaluator",
    "level": "info",
@@ -861,22 +819,22 @@
    }
   },
   {
-   "seq": 53,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:14.894461Z",
-   "t_ms": 33439,
+   "seq": 50,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:19:02.046409Z",
+   "t_ms": 50898,
    "type": "awaiting_approval",
    "agent": "orchestrator",
    "level": "info",
    "payload": {
-    "summary": "Doris's portfolio currently exceeds her conservative risk profile due to equity growth, resulting in volatility of 9.4%, which is above the 7.0% threshold. To better align with the need for capital preservation and steady income, we must reduce equity exposure and increase fixed income holdings. This adjustment will lower the portfolio's sensitivity to market downturns and support the monthly RRIF withdrawals."
+    "summary": "Doris's portfolio currently exceeds her conservative risk tolerance, with volatility at 9.4% against a limit of 7.0%. Her equity holdings, specifically Canadian and US equities, are significantly overweight relative to her targets, while Canadian bonds are underweight at 37.5%. Given her reliance on RRIF withdrawals and stated nervousness regarding market fluctuations, we must rebalance the portfolio to lower volatility and secure her capital preservation objective."
    }
   },
   {
-   "seq": 54,
-   "run_id": "C109-20261007-213141-eafb1a",
-   "ts": "2026-10-07T21:32:14.895864Z",
-   "t_ms": 33440,
+   "seq": 51,
+   "run_id": "C109-20261008-001810-59d4c4",
+   "ts": "2026-10-08T00:19:02.047342Z",
+   "t_ms": 50899,
    "type": "run_completed",
    "agent": "orchestrator",
    "level": "info",
@@ -884,16 +842,16 @@
     "status": "AWAITING_APPROVAL",
     "totals": {
      "llm_calls": 11,
-     "tokens_in": 19703,
-     "tokens_out": 4220,
-     "wall_ms": 33440,
-     "retries": 4
+     "tokens_in": 20139,
+     "tokens_out": 3403,
+     "wall_ms": 50899,
+     "retries": 1
     }
    }
   }
  ],
  "final_state": {
-  "run_id": "C109-20261007-213141-eafb1a",
+  "run_id": "C109-20261008-001810-59d4c4",
   "client_id": "C109",
   "request_text": "",
   "preset": "annual_review",
@@ -917,9 +875,9 @@
     "findings": [
      {
       "finding_id": "PORT-1",
-      "title": "Significant equity overweight relative to conservative risk profile",
+      "title": "Significant equity overweight relative to conservative profile",
       "severity": "critical",
-      "detail": "The portfolio is significantly overweight in equities, with Canadian equity {{m:alloc.CA_EQUITY.pct}} vs target {{m:target.CA_EQUITY.pct}} and US equity {{m:alloc.US_EQUITY.pct}} vs target {{m:target.US_EQUITY.pct}}. This exceeds the conservative risk profile, increasing volatility for a client who is nervous about market dips.",
+      "detail": "The portfolio is significantly overweight in equities, with Canadian equity {{m:alloc.CA_EQUITY.pct}} exceeding the target {{m:target.CA_EQUITY.pct}} and US equity {{m:alloc.US_EQUITY.pct}} exceeding the target {{m:target.US_EQUITY.pct}}. This drift exposes the conservative investor to higher volatility than intended.",
       "metric_refs": [
        "alloc.CA_EQUITY.pct",
        "target.CA_EQUITY.pct",
@@ -933,13 +891,12 @@
      },
      {
       "finding_id": "PORT-2",
-      "title": "Canadian bond allocation is significantly below target",
+      "title": "Canadian bonds significantly underweight for conservative profile",
       "severity": "critical",
-      "detail": "Canadian bonds are underweight at {{m:alloc.CA_BONDS.pct}} compared to the target of {{m:target.CA_BONDS.pct}}. This drift of {{m:drift.CA_BONDS.pp}} reduces the income-generating and capital-preservation components essential for the client's RRIF-based living expenses.",
+      "detail": "Canadian bonds are currently {{m:alloc.CA_BONDS.pct}}, well below the target of {{m:target.CA_BONDS.pct}}. Given the client's reliance on RRIF withdrawals and stated nervousness regarding market dips, this underweight position in fixed income should be addressed to align with their capital preservation objective.",
       "metric_refs": [
        "alloc.CA_BONDS.pct",
-       "target.CA_BONDS.pct",
-       "drift.CA_BONDS.pp"
+       "target.CA_BONDS.pct"
       ],
       "flag_refs": [
        "FLAG-DRIFT-CA_BONDS"
@@ -954,9 +911,9 @@
     "findings": [
      {
       "finding_id": "RISK-1",
-      "title": "Portfolio volatility exceeds conservative suitability band",
+      "title": "Portfolio volatility exceeds conservative risk profile limits",
       "severity": "critical",
-      "detail": "The portfolio volatility of {{m:risk.vol.pct}} exceeds the maximum threshold of {{m:risk.vol_band_max.pct}} for a conservative profile. Given the client's age of seventy-four and need for monthly income, this elevated volatility poses a significant risk to capital preservation.",
+      "detail": "The portfolio's volatility of {{m:risk.vol.pct}} exceeds the maximum threshold of {{m:risk.vol_band_max.pct}} for a conservative profile. Given the client's age of seventy-four and need for monthly income, this elevated volatility poses a significant risk to capital preservation.",
       "metric_refs": [
        "risk.vol.pct",
        "risk.vol_band_max.pct"
@@ -967,9 +924,9 @@
      },
      {
       "finding_id": "RISK-2",
-      "title": "Significant potential loss in equity bear market scenario",
+      "title": "Significant downside risk identified in equity bear market scenario",
       "severity": "info",
-      "detail": "In an equity bear market scenario, the portfolio faces a potential loss of {{m:stress.equity_bear.cad}}, representing {{m:stress.equity_bear.pct}} of total assets. This downside exposure is concerning for a retiree with moderate liquidity needs, as it could disrupt planned income draws.",
+      "detail": "In an equity bear market scenario, the portfolio is projected to lose {{m:stress.equity_bear.cad}}, representing a {{m:stress.equity_bear.pct}} decline. This potential loss is substantial for a retiree with moderate liquidity needs, as it could jeopardize the ability to sustain monthly income draws.",
       "metric_refs": [
        "stress.equity_bear.cad",
        "stress.equity_bear.pct"
@@ -985,9 +942,9 @@
     "findings": [
      {
       "finding_id": "TAX-1",
-      "title": "No available contribution room for tax optimization",
+      "title": "No unused contribution room available for tax optimization",
       "severity": "info",
-      "detail": "The client has no unused contribution room in either TFSA or RRSP accounts, as indicated by {{m:tax.tfsa_room.cad}} and {{m:tax.rrsp_room.cad}}. Consequently, there is no opportunity to optimize tax placement through new contributions at this time.",
+      "detail": "The client has no unused contribution room in either TFSA or RRSP accounts, as indicated by {{m:tax.tfsa_room.cad}} and {{m:tax.rrsp_room.cad}}. Consequently, there are no opportunities to optimize tax-advantaged space at this time.",
       "metric_refs": [
        "tax.tfsa_room.cad",
        "tax.rrsp_room.cad"
@@ -1003,22 +960,23 @@
     "findings": [
      {
       "finding_id": "MKT-1",
-      "title": "US equity growth drives portfolio drift",
+      "title": "Canadian bond yields and policy rate impact on fixed income holdings",
       "severity": "info",
-      "detail": "US equity markets experienced significant growth, with the index returning {{m:mkt.us_equity_ytd.pct}} year to date. This rally, driven by technology sector performance, likely contributed to an overweight position in your US equity holdings.",
+      "detail": "The Canada ten-year bond yield is currently {{m:mkt.ca_10y_yield.pct}} percent, reflecting the Bank of Canada's policy rate of {{m:mkt.ca_policy_rate.pct}} percent. This yield environment has influenced the valuation of Canadian fixed income holdings.",
       "metric_refs": [
-       "mkt.us_equity_ytd.pct"
+       "mkt.ca_10y_yield.pct",
+       "mkt.ca_policy_rate.pct"
       ],
       "flag_refs": []
      },
      {
       "finding_id": "MKT-2",
-      "title": "Canadian bond market performance impacts fixed income allocation",
+      "title": "US Treasury yields and currency fluctuations affecting equity valuations",
       "severity": "info",
-      "detail": "Canadian bond yields have trended lower, with the ten-year yield at {{m:mkt.ca_10y_yield.pct}}. The bond index returned {{m:mkt.ca_bond_ytd.pct}} year to date, reflecting cooling inflation and impacting the relative value of your fixed income allocation.",
+      "detail": "The US ten-year Treasury yield of {{m:mkt.us_10y_yield.pct}} percent and the USD/CAD exchange rate of {{m:mkt.usd_cad.ratio}} have significantly impacted the valuation of US and international equity holdings in Canadian dollar terms.",
       "metric_refs": [
-       "mkt.ca_10y_yield.pct",
-       "mkt.ca_bond_ytd.pct"
+       "mkt.us_10y_yield.pct",
+       "mkt.usd_cad.ratio"
       ],
       "flag_refs": []
      }
@@ -1245,46 +1203,53 @@
     "label": "Unused RRSP contribution room",
     "source_tool": "get_contribution_room"
    },
-   "mkt.us_equity_ytd.pct": {
-    "key": "mkt.us_equity_ytd.pct",
-    "value": 18.0,
+   "mkt.ca_policy_rate.pct": {
+    "key": "mkt.ca_policy_rate.pct",
+    "value": 2.25,
     "unit": "pct",
-    "label": "US equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.ca_equity_ytd.pct": {
-    "key": "mkt.ca_equity_ytd.pct",
-    "value": 9.0,
-    "unit": "pct",
-    "label": "Canadian equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.intl_equity_ytd.pct": {
-    "key": "mkt.intl_equity_ytd.pct",
-    "value": 11.0,
-    "unit": "pct",
-    "label": "International equity index, year to date (fictional)",
-    "source_tool": "get_market_snapshot"
-   },
-   "mkt.ca_bond_ytd.pct": {
-    "key": "mkt.ca_bond_ytd.pct",
-    "value": 2.5,
-    "unit": "pct",
-    "label": "Canadian bond index, year to date (fictional)",
+    "label": "Bank of Canada policy rate",
     "source_tool": "get_market_snapshot"
    },
    "mkt.ca_10y_yield.pct": {
     "key": "mkt.ca_10y_yield.pct",
-    "value": 3.1,
+    "value": 3.92,
     "unit": "pct",
-    "label": "Canada 10-year yield (fictional)",
+    "label": "Canada 10-year bond yield",
     "source_tool": "get_market_snapshot"
    },
-   "mkt.energy_sector_qtd.pct": {
-    "key": "mkt.energy_sector_qtd.pct",
-    "value": -12.0,
+   "mkt.ca_curve.pp": {
+    "key": "mkt.ca_curve.pp",
+    "value": 0.69,
+    "unit": "pp",
+    "label": "Canada yield curve, 10-year minus 2-year",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.us_10y_yield.pct": {
+    "key": "mkt.us_10y_yield.pct",
+    "value": 5.28,
     "unit": "pct",
-    "label": "Energy sector, quarter to date (fictional)",
+    "label": "US 10-year Treasury yield",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.usd_cad.ratio": {
+    "key": "mkt.usd_cad.ratio",
+    "value": 1.43,
+    "unit": "ratio",
+    "label": "US dollar in Canadian dollars",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.energy_commodities_12m.pct": {
+    "key": "mkt.energy_commodities_12m.pct",
+    "value": 38.1,
+    "unit": "pct",
+    "label": "Energy commodity prices, 12-month change",
+    "source_tool": "get_market_snapshot"
+   },
+   "mkt.commodities_12m.pct": {
+    "key": "mkt.commodities_12m.pct",
+    "value": 23.3,
+    "unit": "pct",
+    "label": "Commodity prices, 12-month change",
     "source_tool": "get_market_snapshot"
    },
    "client.age.years": {
@@ -1346,16 +1311,16 @@
   },
   "drafts": [
    {
-    "headline": "Realigning Doris's portfolio to conservative targets to reduce volatility and secure income",
-    "summary": "Doris's portfolio currently exceeds her conservative risk profile due to equity growth, resulting in volatility of {{m:risk.vol.pct}}, which is above the {{m:risk.vol_band_max.pct}} threshold. To better align with the need for capital preservation and steady income, we must reduce equity exposure and increase fixed income holdings. This adjustment will lower the portfolio's sensitivity to market downturns and support the monthly RRIF withdrawals.",
+    "headline": "Realigning Doris's portfolio to reduce volatility and restore alignment with her conservative investment profile",
+    "summary": "Doris's portfolio currently exceeds her conservative risk tolerance, with volatility at {{m:risk.vol.pct}} against a limit of {{m:risk.vol_band_max.pct}}. Her equity holdings, specifically Canadian and US equities, are significantly overweight relative to her targets, while Canadian bonds are underweight at {{m:alloc.CA_BONDS.pct}}. Given her reliance on RRIF withdrawals and stated nervousness regarding market fluctuations, we must rebalance the portfolio to lower volatility and secure her capital preservation objective.",
     "actions": [
      {
       "action_id": "ACT-001",
       "type": "reduce_position",
       "target": "CA_EQUITY",
       "direction": "decrease",
-      "description": "Reduce Canadian equity exposure to align with the conservative target.",
-      "rationale": "The portfolio is currently overweight in Canadian equities relative to the target of {{m:target.CA_EQUITY.pct}}, contributing to excessive volatility.",
+      "description": "Reduce Canadian equity exposure to align with conservative targets.",
+      "rationale": "The current allocation exceeds the target, contributing to excessive volatility and drift.",
       "finding_refs": [
        "PORT-1",
        "RISK-1"
@@ -1367,8 +1332,8 @@
       "type": "reduce_position",
       "target": "US_EQUITY",
       "direction": "decrease",
-      "description": "Reduce US equity exposure to align with the conservative target.",
-      "rationale": "The portfolio is currently overweight in US equities relative to the target of {{m:target.US_EQUITY.pct}}, contributing to excessive volatility.",
+      "description": "Reduce US equity exposure to align with conservative targets.",
+      "rationale": "The current allocation exceeds the target, contributing to excessive volatility and drift.",
       "finding_refs": [
        "PORT-1",
        "RISK-1"
@@ -1380,8 +1345,8 @@
       "type": "rebalance",
       "target": "CA_BONDS",
       "direction": "increase",
-      "description": "Increase Canadian bond allocation to meet the conservative target.",
-      "rationale": "Fixed income is significantly underweight at {{m:alloc.CA_BONDS.pct}} versus the target of {{m:target.CA_BONDS.pct}}, which impacts the income-generating and capital-preservation components of the portfolio.",
+      "description": "Increase Canadian bond exposure to meet the target allocation.",
+      "rationale": "The current underweight position fails to support the capital preservation objective required for retirement income.",
       "finding_refs": [
        "PORT-2"
       ],
@@ -1389,15 +1354,14 @@
      }
     ],
     "risks_and_considerations": [
-     "Selling equities during market fluctuations may lock in recent gains or losses.",
-     "Increasing bond exposure may limit upside participation if equity markets continue to rally.",
-     "Transaction costs may apply when rebalancing the portfolio."
+     "Reducing equity exposure may limit participation in potential market recoveries.",
+     "Transitioning the portfolio involves market timing risk during the rebalancing period."
     ],
     "deferred": [],
     "client_talking_points": [
-     "Doris, we are adjusting your investments to better match your conservative goals and reduce the ups and downs you have been feeling.",
-     "By moving some funds from stocks into bonds, we are prioritizing the safety of your capital and the reliability of your monthly income.",
-     "These changes are designed to help you feel more comfortable with your portfolio, especially given the recent market uncertainty."
+     "Doris, we are adjusting your portfolio to better protect your capital and reduce the market swings you have been feeling.",
+     "By shifting more into bonds, we aim to make your monthly income withdrawals more stable and predictable.",
+     "These changes align your investments with your conservative goals, ensuring your money is positioned safely for your retirement needs."
     ]
    }
   ],
@@ -1439,16 +1403,16 @@
   "revision_count": 0,
   "final": {
    "recommendation": {
-    "headline": "Realigning Doris's portfolio to conservative targets to reduce volatility and secure income",
-    "summary": "Doris's portfolio currently exceeds her conservative risk profile due to equity growth, resulting in volatility of 9.4%, which is above the 7.0% threshold. To better align with the need for capital preservation and steady income, we must reduce equity exposure and increase fixed income holdings. This adjustment will lower the portfolio's sensitivity to market downturns and support the monthly RRIF withdrawals.",
+    "headline": "Realigning Doris's portfolio to reduce volatility and restore alignment with her conservative investment profile",
+    "summary": "Doris's portfolio currently exceeds her conservative risk tolerance, with volatility at 9.4% against a limit of 7.0%. Her equity holdings, specifically Canadian and US equities, are significantly overweight relative to her targets, while Canadian bonds are underweight at 37.5%. Given her reliance on RRIF withdrawals and stated nervousness regarding market fluctuations, we must rebalance the portfolio to lower volatility and secure her capital preservation objective.",
     "actions": [
      {
       "action_id": "ACT-001",
       "type": "reduce_position",
       "target": "CA_EQUITY",
       "direction": "decrease",
-      "description": "Reduce Canadian equity exposure to align with the conservative target.",
-      "rationale": "The portfolio is currently overweight in Canadian equities relative to the target of 15.0%, contributing to excessive volatility.",
+      "description": "Reduce Canadian equity exposure to align with conservative targets.",
+      "rationale": "The current allocation exceeds the target, contributing to excessive volatility and drift.",
       "finding_refs": [
        "PORT-1",
        "RISK-1"
@@ -1460,8 +1424,8 @@
       "type": "reduce_position",
       "target": "US_EQUITY",
       "direction": "decrease",
-      "description": "Reduce US equity exposure to align with the conservative target.",
-      "rationale": "The portfolio is currently overweight in US equities relative to the target of 12.0%, contributing to excessive volatility.",
+      "description": "Reduce US equity exposure to align with conservative targets.",
+      "rationale": "The current allocation exceeds the target, contributing to excessive volatility and drift.",
       "finding_refs": [
        "PORT-1",
        "RISK-1"
@@ -1473,8 +1437,8 @@
       "type": "rebalance",
       "target": "CA_BONDS",
       "direction": "increase",
-      "description": "Increase Canadian bond allocation to meet the conservative target.",
-      "rationale": "Fixed income is significantly underweight at 37.5% versus the target of 55.0%, which impacts the income-generating and capital-preservation components of the portfolio.",
+      "description": "Increase Canadian bond exposure to meet the target allocation.",
+      "rationale": "The current underweight position fails to support the capital preservation objective required for retirement income.",
       "finding_refs": [
        "PORT-2"
       ],
@@ -1482,15 +1446,14 @@
      }
     ],
     "risks_and_considerations": [
-     "Selling equities during market fluctuations may lock in recent gains or losses.",
-     "Increasing bond exposure may limit upside participation if equity markets continue to rally.",
-     "Transaction costs may apply when rebalancing the portfolio."
+     "Reducing equity exposure may limit participation in potential market recoveries.",
+     "Transitioning the portfolio involves market timing risk during the rebalancing period."
     ],
     "deferred": [],
     "client_talking_points": [
-     "Doris, we are adjusting your investments to better match your conservative goals and reduce the ups and downs you have been feeling.",
-     "By moving some funds from stocks into bonds, we are prioritizing the safety of your capital and the reliability of your monthly income.",
-     "These changes are designed to help you feel more comfortable with your portfolio, especially given the recent market uncertainty."
+     "Doris, we are adjusting your portfolio to better protect your capital and reduce the market swings you have been feeling.",
+     "By shifting more into bonds, we aim to make your monthly income withdrawals more stable and predictable.",
+     "These changes align your investments with your conservative goals, ensuring your money is positioned safely for your retirement needs."
     ]
    },
    "disclosure": "Generated by an AI assistant from fictional demo data for advisor review. Not investment advice. Figures are illustrative and computed from stated assumptions; verify before discussing with the client.",
@@ -1515,27 +1478,6 @@
      "unit": "pct",
      "label": "Max volatility for conservative",
      "source_tool": "compute_risk_metrics"
-    },
-    {
-     "key": "target.CA_BONDS.pct",
-     "value": 55.0,
-     "unit": "pct",
-     "label": "Canadian bonds target (conservative)",
-     "source_tool": "compute_allocation"
-    },
-    {
-     "key": "target.CA_EQUITY.pct",
-     "value": 15.0,
-     "unit": "pct",
-     "label": "Canadian equity target (conservative)",
-     "source_tool": "compute_allocation"
-    },
-    {
-     "key": "target.US_EQUITY.pct",
-     "value": 12.0,
-     "unit": "pct",
-     "label": "US equity target (conservative)",
-     "source_tool": "compute_allocation"
     }
    ]
   },
@@ -1544,13 +1486,13 @@
   "approval": null,
   "budget_snapshot": {
    "llm_calls": 11,
-   "tokens": 23923,
-   "wall_ms": 33440
+   "tokens": 23542,
+   "wall_ms": 50899
   },
   "untrusted_flags": [],
   "error": null,
-  "created_at": "2026-10-07T21:31:41.245362Z",
-  "updated_at": "2026-10-07T21:32:14.896156Z",
+  "created_at": "2026-10-08T00:18:10.921360Z",
+  "updated_at": "2026-10-08T00:19:02.047488Z",
   "completed_steps": [
    "input_gate",
    "kyc_gate",

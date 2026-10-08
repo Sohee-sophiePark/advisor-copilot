@@ -148,5 +148,5 @@ def k_goal(goal_id: str) -> str:
     return f"goal.{goal_id}.required.pct"
 
 
-def k_mkt(indicator: str) -> str:
-    return f"mkt.{indicator}.pct"
+def k_mkt(indicator: str, unit: str) -> str:
+    return f"mkt.{indicator}.{unit}"
